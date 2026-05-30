@@ -1,0 +1,106 @@
+/* ─── Reset ─────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* ─── Tokens ─────────────────────────────────────────────── */
+:root {
+  /* Background scale */
+  --bg:         #09090e;
+  --bg-lift:    #0d0d17;
+  --bg-card:    #111119;
+  --surface:    #16161f;
+
+  /* Brand — neon broadcast layer */
+  --cyan:       #00c4ff;
+  --cyan-dim:   #004d63;
+  --cyan-faint: rgba(0,196,255,0.08);
+  --magenta:    #cc2299;
+
+  /* Dossier layer — individual operator identity */
+  --gold:       #c9a84c;
+  --gold-dim:   #6b5120;
+  --crimson:    #8b1e1e;
+
+  /* Text */
+  --body:       #d2d0c5;
+  --dim:        #7e7c74;
+  --dimmer:     #5a5855;
+  --white:      #f0efe9;
+
+  /* Typography */
+  --font-display: 'Bebas Neue', 'Arial Narrow', sans-serif;
+  --font-inter:   'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono:    'Courier New', Courier, monospace;
+
+  /* Faction colors */
+  --f-architecture:  #00c4ff;
+  --f-ritual:        #b87aff;
+  --f-southbloc:     #6bdf5a;
+  --f-ironnorth:     #ff9a5a;
+  --f-ghost:         #8ab4d4;
+  --f-forbidden:     #ff6060;
+  --f-velocity:      #40e0d0;
+  --f-unaligned:     #c9a84c;
+
+  /* Nav */
+  --nav-h: 56px;
+}
+
+/* ─── Base ───────────────────────────────────────────────── */
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg);
+  background-image:
+    linear-gradient(rgba(0,196,255,0.022) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,196,255,0.022) 1px, transparent 1px),
+    radial-gradient(ellipse 120% 60% at 50% 0%, rgba(0,55,130,0.16) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 35% at 8% 100%, rgba(100,20,20,0.08) 0%, transparent 70%);
+  background-size: 52px 52px, 52px 52px, 100% 100%, 100% 100%;
+  color: var(--body);
+  font-family: var(--font-inter);
+  min-height: 100vh;
+  overflow-x: hidden;
+  padding-top: var(--nav-h); /* offset for fixed nav */
+}
+
+/* scanlines overlay */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0,0,0,0.025) 2px,
+    rgba(0,0,0,0.025) 4px
+  );
+  pointer-events: none;
+  z-index: 9000;
+}
+
+/* ─── HUD monospace elements ─────────────────────────────── */
+.mono {
+  font-family: var(--font-mono);
+}
+
+/* ─── Focus ring ─────────────────────────────────────────── */
+:focus-visible {
+  outline: 2px solid var(--cyan);
+  outline-offset: 2px;
+}
+
+/* ─── Typography utilities ───────────────────────────────── */
+.display {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+/* ─── Scrollbar ──────────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: rgba(0,196,255,0.25); border-radius: 3px; }

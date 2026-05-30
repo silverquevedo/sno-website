@@ -1,0 +1,477 @@
+---
+import type { Operator } from '../data/operators';
+import { FACTION_COLORS, artUrl, loreUrl } from '../data/operators';
+
+export interface Props {
+  op: Operator;
+  index?: number;
+}
+
+const { op, index = 0 } = Astro.props;
+
+const factionColor = FACTION_COLORS[op.faction] ?? '#7e7c74';
+const art          = artUrl(op);
+const dossierUrl   = loreUrl(op);
+const delay        = (index % 12) * 35;
+const num          = String(op.id).padStart(2, '0');
+
+// Card states
+// 1. LOCKED    — released=false                              → CLASSIFIED badge
+// 2. RELEASED  — released=true, no dossier yet              → full art, no link
+// 3. SCHEDULED — released=true, slug+lore+unlocksAt         → countdown (client-side unlock)
+// 4. UNLOCKED  — released=true, slug+lore, no unlocksAt     → full card with dossier link
+const isScheduled = !!(op.released && op.slug && op.lore && op.unlocksAt);
+const isUnlocked  = !!(op.released && op.slug && op.lore && !op.unlocksAt);
+const isReleased  = !!(op.released && !op.slug && !op.lore);
+const isLocked    = !op.released;
+---
+
+{isLocked && (
+  <div
+    class="card locked"
+    data-faction={op.faction}
+    style={`animation-delay: ${delay}ms`}
+  >
+    <img class="card-art" src={art} alt={op.name} loading="lazy" />
+    <div class="card-overlay"></div>
+    <div class="card-inner-glow"></div>
+    <div class="card-corners">
+      <span class="c-tl"></span><span class="c-tr"></span>
+      <span class="c-bl"></span><span class="c-br"></span>
+    </div>
+    <span class="card-num">{num}</span>
+    <span class="card-faction-dot" style={`background: ${factionColor}; color: ${factionColor}`}></span>
+    <div class="card-body">
+      <div class="card-name">{op.name}</div>
+      <span class="card-faction-label" style={`color: ${factionColor}`}>{op.faction}</span>
+    </div>
+    <div class="card-locked-badge">
+      <div class="card-locked-inner">
+        <svg class="lock-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.2">
+          <rect x="3" y="7" width="10" height="8" rx="1"/>
+          <path d="M5 7V5a3 3 0 016 0v2"/>
+        </svg>
+        <span class="lock-label">Classified</span>
+      </div>
+    </div>
+  </div>
+)}
+
+{isReleased && (
+  <div
+    class="card released"
+    data-faction={op.faction}
+    style={`animation-delay: ${delay}ms`}
+    aria-label={op.name}
+  >
+    <img class="card-art" src={art} alt={op.name} loading="lazy" />
+    <div class="card-overlay"></div>
+    <div class="card-inner-glow"></div>
+    <div class="card-corners">
+      <span class="c-tl"></span><span class="c-tr"></span>
+      <span class="c-bl"></span><span class="c-br"></span>
+    </div>
+    <span class="card-num">{num}</span>
+    <span class="card-faction-dot" style={`background: ${factionColor}; color: ${factionColor}`}></span>
+    <div class="card-body">
+      <div class="card-name">{op.name}</div>
+      <span class="card-faction-label" style={`color: ${factionColor}`}>{op.faction}</span>
+    </div>
+  </div>
+)}
+
+{isScheduled && (
+  <a
+    class="card scheduled"
+    data-faction={op.faction}
+    href={dossierUrl ?? '#'}
+    data-unlocks-at={op.unlocksAt}
+    style={`animation-delay: ${delay}ms`}
+    aria-label={`${op.name} — unlocks soon`}
+  >
+    <img class="card-art" src={art} alt={op.name} loading="lazy" />
+    <div class="card-overlay"></div>
+    <div class="card-inner-glow"></div>
+    <div class="card-corners">
+      <span class="c-tl"></span><span class="c-tr"></span>
+      <span class="c-bl"></span><span class="c-br"></span>
+    </div>
+    <span class="card-num">{num}</span>
+    <span class="card-faction-dot" style={`background: ${factionColor}; color: ${factionColor}`}></span>
+    <div class="card-body">
+      <div class="card-name">{op.name}</div>
+      <span class="card-faction-label" style={`color: ${factionColor}`}>{op.faction}</span>
+      <div class="card-cta"><span class="card-cta-btn">View Operator</span></div>
+    </div>
+    <!-- Countdown overlay — hidden once unlocked -->
+    <div class="card-countdown">
+      <span class="countdown-label">Unlocks In</span>
+      <span class="countdown-timer" data-target={op.unlocksAt}>--d --h --m --s</span>
+    </div>
+  </a>
+)}
+
+{isUnlocked && (
+  <a
+    class="card"
+    data-faction={op.faction}
+    href={dossierUrl ?? '#'}
+    style={`animation-delay: ${delay}ms`}
+  >
+    <img class="card-art" src={art} alt={op.name} loading="lazy" />
+    <div class="card-overlay"></div>
+    <div class="card-inner-glow"></div>
+    <div class="card-corners">
+      <span class="c-tl"></span><span class="c-tr"></span>
+      <span class="c-bl"></span><span class="c-br"></span>
+    </div>
+    <span class="card-num">{num}</span>
+    <span class="card-faction-dot" style={`background: ${factionColor}; color: ${factionColor}`}></span>
+    <div class="card-body">
+      <div class="card-name">{op.name}</div>
+      <span class="card-faction-label" style={`color: ${factionColor}`}>{op.faction}</span>
+      <div class="card-cta"><span class="card-cta-btn">View Operator</span></div>
+    </div>
+  </a>
+)}
+
+<style>
+/* ─── Skeleton shimmer ───────────────────────────────────── */
+@keyframes skeleton-shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+.card::before {
+  content: '';
+  position: absolute; inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    90deg,
+    rgba(255,255,255,0)    0%,
+    rgba(255,255,255,0.04) 40%,
+    rgba(255,255,255,0.08) 50%,
+    rgba(255,255,255,0.04) 60%,
+    rgba(255,255,255,0)    100%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.6s ease-in-out infinite;
+  transition: opacity 0.4s;
+}
+.card.img-loaded::before { opacity: 0; pointer-events: none; }
+
+/* ─── Card base ──────────────────────────────────────────── */
+.card {
+  position: relative;
+  aspect-ratio: 4/5;
+  overflow: hidden;
+  cursor: pointer;
+  text-decoration: none;
+  display: block;
+  background: var(--bg-card);
+  border: 1px solid rgba(255,255,255,0.05);
+  opacity: 0;
+  animation: card-up 0.4s cubic-bezier(0.22,1,0.36,1) forwards;
+  transition: border-color 0.22s, box-shadow 0.22s, transform 0.22s;
+}
+
+@keyframes card-up {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Unlocked hover (not locked, not scheduled, not released-only) */
+.card:not(.locked):not(.scheduled):not(.released):hover {
+  transform: translateY(-3px) scale(1.015);
+}
+
+/* Released — clickable feel removed, but still alive */
+.card.released { cursor: default; }
+
+/* ─── Art ────────────────────────────────────────────────── */
+.card-art {
+  position: absolute;
+  inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s cubic-bezier(0.22,1,0.36,1);
+}
+.card:not(.locked):not(.scheduled):not(.released):hover .card-art { transform: scale(1.06); }
+
+/* ─── Overlay layers ─────────────────────────────────────── */
+.card-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(9,9,14,0.92) 0%, rgba(9,9,14,0.3) 50%, rgba(9,9,14,0.1) 100%);
+}
+
+.card-inner-glow {
+  position: absolute; inset: 0;
+  opacity: 0;
+  transition: opacity 0.3s;
+  background: radial-gradient(ellipse at 50% 50%, rgba(0,196,255,0.08) 0%, transparent 70%);
+}
+.card:not(.locked):not(.scheduled):not(.released):hover .card-inner-glow { opacity: 1; }
+
+/* ─── Corner brackets ────────────────────────────────────── */
+.card-corners { position: absolute; inset: 0; pointer-events: none; }
+
+.c-tl, .c-tr, .c-bl, .c-br {
+  position: absolute;
+  width: 10px; height: 10px;
+  opacity: 0;
+  transition: opacity 0.22s;
+}
+.c-tl { top: 8px; left: 8px;    border-top: 1px solid; border-left: 1px solid; }
+.c-tr { top: 8px; right: 8px;   border-top: 1px solid; border-right: 1px solid; }
+.c-bl { bottom: 8px; left: 8px;  border-bottom: 1px solid; border-left: 1px solid; }
+.c-br { bottom: 8px; right: 8px; border-bottom: 1px solid; border-right: 1px solid; }
+
+.card:not(.locked):not(.scheduled):hover .c-tl,
+.card:not(.locked):not(.scheduled):hover .c-tr,
+.card:not(.locked):not(.scheduled):hover .c-bl,
+.card:not(.locked):not(.scheduled):hover .c-br { opacity: 0.7; }
+
+/* ─── Number ─────────────────────────────────────────────── */
+.card-num {
+  position: absolute; top: 0.9rem; left: 0.9rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: rgba(255,255,255,0.6);
+  z-index: 2;
+}
+
+/* ─── Faction dot ────────────────────────────────────────── */
+.card-faction-dot {
+  position: absolute; top: 0.95rem; right: 0.9rem;
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  box-shadow: 0 0 6px currentColor;
+  z-index: 2;
+}
+
+/* ─── Body text ──────────────────────────────────────────── */
+.card-body {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  padding: 1rem 1rem 0.9rem;
+  z-index: 2;
+}
+
+.card-name {
+  font-family: var(--font-display);
+  font-size: clamp(1.3rem, 2.5vw, 1.7rem);
+  letter-spacing: 0.04em;
+  color: var(--white);
+  line-height: 1;
+  margin-bottom: 0.35rem;
+}
+
+.card-faction-label {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+/* ─── CTA (unlocked + scheduled post-unlock) ─────────────── */
+.card-cta {
+  margin-top: 0.55rem;
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity 0.22s, transform 0.22s;
+}
+.card:not(.locked):not(.scheduled):hover .card-cta {
+  opacity: 1;
+  transform: translateY(0);
+}
+/* Show CTA on scheduled cards after unlock (JS removes .scheduled) */
+.card:not(.locked):not(.scheduled) .card-cta {
+  /* inherited by JS-unlocked cards */
+}
+
+.card-cta-btn {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--cyan);
+  border: 1px solid rgba(0,196,255,0.4);
+  padding: 0.35rem 0.7rem;
+  background: rgba(0,196,255,0.08);
+}
+
+/* ─── Locked state ───────────────────────────────────────── */
+.card.locked { cursor: default; }
+
+.card-locked-badge {
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 3;
+}
+.card-locked-inner {
+  display: flex; flex-direction: column; align-items: center; gap: 0.3rem;
+  animation: pulse-lock 3s ease-in-out infinite;
+}
+@keyframes pulse-lock {
+  0%, 100% { opacity: 0.35; }
+  50%       { opacity: 0.65; }
+}
+.lock-icon { width: 20px; height: 20px; color: rgba(255,255,255,0.35); }
+.lock-label {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.3);
+}
+
+/* ─── Scheduled state ────────────────────────────────────── */
+.card.scheduled {
+  cursor: default;
+  pointer-events: none; /* re-enabled by JS on unlock */
+}
+
+/* Dimmed art overlay on scheduled cards */
+.card.scheduled .card-overlay {
+  background: linear-gradient(
+    to top,
+    rgba(9,9,14,0.96) 0%,
+    rgba(9,9,14,0.55) 50%,
+    rgba(9,9,14,0.25) 100%
+  );
+}
+
+/* Countdown badge */
+.card-countdown {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  text-align: center;
+  transition: opacity 0.4s;
+}
+.card.scheduled.unlocking .card-countdown { opacity: 0; }
+
+.countdown-label {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.4);
+}
+
+.countdown-timer {
+  font-family: var(--font-mono);
+  font-size: clamp(0.8rem, 1.8vw, 1rem);
+  letter-spacing: 0.1em;
+  color: var(--cyan);
+  text-shadow: 0 0 12px rgba(0,196,255,0.5);
+  animation: pulse-lock 2s ease-in-out infinite;
+}
+
+/* ─── Unlock flash animation ─────────────────────────────── */
+@keyframes unlock-flash {
+  0%   { box-shadow: 0 0 0 0 rgba(0,196,255,0); }
+  30%  { box-shadow: 0 0 0 6px rgba(0,196,255,0.5); }
+  100% { box-shadow: 0 0 32px rgba(0,196,255,0.18), 0 0 0 1px rgba(0,196,255,0.3); }
+}
+.card.just-unlocked { animation: unlock-flash 0.8s ease-out forwards; }
+
+/* ─── Hidden (filter) ────────────────────────────────────── */
+.card.hidden { display: none; }
+
+/* ─── Faction hover shadows ──────────────────────────────── */
+.card[data-faction="The Architecture"]:not(.locked):not(.scheduled):hover  { box-shadow: 0 8px 32px rgba(0,196,255,0.18),   0 0 0 1px rgba(0,196,255,0.3); }
+.card[data-faction="The Ritual Network"]:not(.locked):not(.scheduled):hover{ box-shadow: 0 8px 32px rgba(184,122,255,0.18), 0 0 0 1px rgba(184,122,255,0.3); }
+.card[data-faction="South Bloc"]:not(.locked):not(.scheduled):hover        { box-shadow: 0 8px 32px rgba(107,223,90,0.18),  0 0 0 1px rgba(107,223,90,0.3); }
+.card[data-faction="Iron North"]:not(.locked):not(.scheduled):hover        { box-shadow: 0 8px 32px rgba(255,154,90,0.18),  0 0 0 1px rgba(255,154,90,0.3); }
+.card[data-faction="The Ghost Layer"]:not(.locked):not(.scheduled):hover   { box-shadow: 0 8px 32px rgba(138,180,212,0.18), 0 0 0 1px rgba(138,180,212,0.3); }
+.card[data-faction="Forbidden Zone"]:not(.locked):not(.scheduled):hover    { box-shadow: 0 8px 32px rgba(255,96,96,0.18),   0 0 0 1px rgba(255,96,96,0.3); }
+.card[data-faction="The Velocity"]:not(.locked):not(.scheduled):hover      { box-shadow: 0 8px 32px rgba(64,224,208,0.18),  0 0 0 1px rgba(64,224,208,0.3); }
+.card[data-faction="Unaligned"]:not(.locked):not(.scheduled):hover         { box-shadow: 0 8px 32px rgba(201,168,76,0.18),  0 0 0 1px rgba(201,168,76,0.3); }
+</style>
+
+<script>
+// ── Skeleton shimmer removal ─────────────────────────────
+document.querySelectorAll<HTMLElement>('.card').forEach(card => {
+  const img = card.querySelector<HTMLImageElement>('.card-art');
+  if (!img) return;
+  if (img.complete && img.naturalWidth > 0) {
+    card.classList.add('img-loaded');
+  } else {
+    img.addEventListener('load',  () => card.classList.add('img-loaded'));
+    img.addEventListener('error', () => card.classList.add('img-loaded'));
+  }
+});
+
+// ── Scheduled unlock countdown ───────────────────────────
+function pad(n: number) { return String(Math.floor(n)).padStart(2, '0'); }
+
+function formatCountdown(ms: number): string {
+  if (ms <= 0) return '00d 00h 00m 00s';
+  const s   = ms / 1000;
+  const d   = Math.floor(s / 86400);
+  const h   = Math.floor((s % 86400) / 3600);
+  const m   = Math.floor((s % 3600) / 60);
+  const sec = Math.floor(s % 60);
+  return `${pad(d)}d ${pad(h)}h ${pad(m)}m ${pad(sec)}s`;
+}
+
+function unlockCard(card: HTMLElement) {
+  card.classList.add('unlocking');
+
+  setTimeout(() => {
+    // Remove scheduled state
+    card.classList.remove('scheduled', 'unlocking');
+    card.classList.add('just-unlocked');
+    card.removeAttribute('data-unlocks-at');
+
+    // Re-enable pointer events and cursor
+    (card as HTMLAnchorElement).style.pointerEvents = '';
+    card.style.cursor = '';
+
+    // Clean up flash animation class after it plays
+    setTimeout(() => card.classList.remove('just-unlocked'), 900);
+  }, 400); // matches countdown opacity transition
+}
+
+document.querySelectorAll<HTMLElement>('.card.scheduled[data-unlocks-at]').forEach(card => {
+  const target    = new Date(card.dataset.unlocksAt!).getTime();
+  const timerEl   = card.querySelector<HTMLElement>('.countdown-timer');
+  if (!timerEl) return;
+
+  function tick() {
+    const remaining = target - Date.now();
+
+    if (remaining <= 0) {
+      clearInterval(interval);
+      unlockCard(card);
+      return;
+    }
+
+    timerEl!.textContent = formatCountdown(remaining);
+  }
+
+  // Check immediately — card might unlock while page was closed
+  const remaining = target - Date.now();
+  if (remaining <= 0) {
+    unlockCard(card);
+    return;
+  }
+
+  tick();
+  const interval = setInterval(tick, 1000);
+
+  // Also set a precise setTimeout for the exact unlock moment
+  setTimeout(() => {
+    clearInterval(interval);
+    unlockCard(card);
+  }, remaining);
+});
+</script>

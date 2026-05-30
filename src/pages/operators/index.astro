@@ -1,0 +1,195 @@
+---
+import Base from '../../layouts/Base.astro';
+import OperatorCard from '../../components/OperatorCard.astro';
+import { OPERATORS, FACTION_COLORS, FACTION_ORDER } from '../../data/operators';
+---
+
+<Base title="Operators — Silver Night Operator" description="28 Operators. 8 Factions. One Megacity.">
+
+  <!-- ── Page header ───────────────────────────────────── -->
+  <div class="ops-header">
+    <div class="ops-header-inner">
+      <h1 class="ops-title">Operators</h1>
+      <span class="ops-count" id="ops-count">{OPERATORS.length}</span>
+    </div>
+  </div>
+
+  <!-- ── Faction chip bar ──────────────────────────────── -->
+  <div class="chip-bar" id="chip-bar">
+    <div class="chip-bar-inner">
+      <button class="chip is-active" data-faction="all">All</button>
+      {FACTION_ORDER.map(faction => (
+        <button
+          class="chip"
+          data-faction={faction}
+          style={`--fc: ${FACTION_COLORS[faction]}`}
+        >
+          <span class="chip-dot"></span>
+          {faction}
+        </button>
+      ))}
+    </div>
+  </div>
+
+  <!-- ── Operator grid ─────────────────────────────────── -->
+  <main class="operator-main">
+    <div class="operator-grid" id="operator-grid">
+      {OPERATORS.map((op, i) => (
+        <OperatorCard op={op} index={i} />
+      ))}
+    </div>
+  </main>
+
+</Base>
+
+<script>
+let activeFaction: string | null = null;
+
+function filterCards(faction: string | null) {
+  const cards = document.querySelectorAll<HTMLElement>('#operator-grid .card');
+  let visible = 0;
+  cards.forEach(card => {
+    const match = !faction || card.dataset.faction === faction;
+    card.classList.toggle('hidden', !match);
+    if (match) visible++;
+  });
+  const countEl = document.getElementById('ops-count');
+  if (countEl) countEl.textContent = String(visible);
+}
+
+function setActiveChip(faction: string | null) {
+  document.querySelectorAll<HTMLElement>('#chip-bar .chip').forEach(chip => {
+    const cf = chip.dataset.faction;
+    chip.classList.toggle('is-active', faction === null ? cf === 'all' : cf === faction);
+  });
+}
+
+document.querySelectorAll<HTMLElement>('#chip-bar .chip').forEach(chip => {
+  chip.addEventListener('click', () => {
+    const f = chip.dataset.faction ?? 'all';
+    if (f === 'all') {
+      activeFaction = null;
+    } else {
+      activeFaction = activeFaction === f ? null : f;
+    }
+    filterCards(activeFaction);
+    setActiveChip(activeFaction);
+  });
+});
+</script>
+
+<style>
+/* ─── Page header ────────────────────────────────────── */
+.ops-header {
+  padding: 2.5rem clamp(1rem, 4vw, 3rem) 0;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.ops-header-inner {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  border-bottom: 1px solid rgba(0,196,255,0.12);
+  padding-bottom: 1.25rem;
+}
+
+.ops-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  letter-spacing: 0.04em;
+  color: var(--white);
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+.ops-count {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.18em;
+  color: var(--cyan);
+  background: rgba(0,196,255,0.08);
+  border: 1px solid rgba(0,196,255,0.2);
+  padding: 0.2rem 0.55rem;
+}
+
+/* ─── Chip bar ───────────────────────────────────────── */
+.chip-bar {
+  position: sticky;
+  top: var(--nav-h);
+  z-index: 100;
+  background: rgba(9,9,14,0.94);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  padding: 0.65rem 0;
+}
+
+.chip-bar-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 clamp(1rem, 4vw, 3rem);
+  display: flex;
+  gap: 0.35rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.chip {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--dim);
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.09);
+  padding: 0.32rem 0.8rem;
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s, background 0.15s;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  white-space: nowrap;
+}
+
+.chip-dot {
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: var(--fc, #7e7c74);
+  box-shadow: 0 0 5px var(--fc, transparent);
+  flex-shrink: 0;
+}
+
+.chip:hover {
+  color: var(--white);
+  border-color: rgba(255,255,255,0.22);
+}
+
+.chip.is-active {
+  color: var(--fc, var(--cyan));
+  border-color: var(--fc, var(--cyan));
+  background: color-mix(in srgb, var(--fc, var(--cyan)) 10%, transparent);
+}
+
+.chip[data-faction="all"] .chip-dot { display: none; }
+.chip[data-faction="all"].is-active {
+  color: var(--cyan);
+  border-color: var(--cyan);
+  background: rgba(0,196,255,0.08);
+}
+
+/* ─── Grid ───────────────────────────────────────────── */
+.operator-main {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 1.5rem clamp(1rem, 4vw, 3rem) 5rem;
+}
+
+.operator-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+  gap: 1px;
+}
+
+.operator-grid .card.hidden { display: none; }
+</style>

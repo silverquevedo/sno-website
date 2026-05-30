@@ -1,0 +1,464 @@
+---
+import Base from '../layouts/Base.astro';
+import OperatorCard from '../components/OperatorCard.astro';
+import { OPERATORS, FACTION_COLORS } from '../data/operators';
+
+// Featured: most recent 3 operators (Velvet Marquee + 2 around it)
+const featured = [OPERATORS[26], OPERATORS[27], OPERATORS[24]]; // 27, 28, 25
+---
+
+<Base
+  title="Silver Night Operator"
+  description="28 Operators. 8 Factions. One Megacity."
+>
+
+  <!-- ── Hero ─────────────────────────────────────────── -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-inner">
+      <div class="hero-eyebrow">CLASSIFIED BROADCAST · FREQUENCY SNO-001</div>
+      <h1 class="hero-title">
+        <span class="t1">Silver Night</span>
+        <span class="t2">Operator</span>
+      </h1>
+      <p class="hero-tagline">28 Operators · 8 Factions · One Megacity</p>
+      <div class="hero-cta">
+        <a href="/operators" class="cta-btn cta-primary">Enter the Grid</a>
+        <a href="https://silvernightoperator.bandcamp.com" target="_blank" rel="noopener" class="cta-btn cta-secondary">Bandcamp</a>
+      </div>
+    </div>
+    <div class="hero-scan"></div>
+  </section>
+
+  <!-- ── Info strip ────────────────────────────────────── -->
+  <section class="info-strip">
+    <div class="info-inner">
+      <div class="info-block">
+        <div class="info-num">28</div>
+        <div class="info-label">OPERATORS</div>
+        <p class="info-body">
+          Each a codename. Each a 1-hour story told through music. From ghost-layer infiltrators to iron-north war architects.
+        </p>
+      </div>
+      <div class="info-divider"></div>
+      <div class="info-block">
+        <div class="info-num">8</div>
+        <div class="info-label">FACTIONS</div>
+        <p class="info-body">
+          The Architecture. The Ritual Network. South Bloc. Iron North. The Ghost Layer. Forbidden Zone. The Velocity. Unaligned.
+        </p>
+      </div>
+      <div class="info-divider"></div>
+      <div class="info-block">
+        <div class="info-num">1</div>
+        <div class="info-label">MEGACITY</div>
+        <p class="info-body">
+          A dense urban labyrinth where every faction holds territory, every signal is monitored, and every hour of music is a field report.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Featured operators ────────────────────────────── -->
+  <section class="featured">
+    <div class="featured-inner">
+      <header class="section-hdr">
+        <span class="section-label">FEATURED OPERATORS</span>
+        <div class="section-line"></div>
+        <a href="/operators" class="section-link">View All →</a>
+      </header>
+      <div class="featured-grid">
+        {featured.map((op, i) => (
+          <OperatorCard op={op} index={i} />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Links ─────────────────────────────────────────── -->
+  <section class="links-section">
+    <div class="links-inner">
+      <header class="section-hdr">
+        <span class="section-label">BROADCAST CHANNELS</span>
+        <div class="section-line"></div>
+      </header>
+      <div class="links-grid">
+        <a href="https://silvernightoperator.bandcamp.com" target="_blank" rel="noopener" class="link-tile">
+          <div class="link-tile-inner">
+            <span class="link-icon">◈</span>
+            <span class="link-name">Bandcamp</span>
+            <span class="link-desc">High-quality downloads · Full discography</span>
+          </div>
+        </a>
+        <a href="https://www.youtube.com/@silvernightoperator" target="_blank" rel="noopener" class="link-tile">
+          <div class="link-tile-inner">
+            <span class="link-icon">▷</span>
+            <span class="link-name">YouTube</span>
+            <span class="link-desc">1-hour mixes · Operator videos · 24/7 stream</span>
+          </div>
+        </a>
+        <a href="https://ko-fi.com/silvernightoperator" target="_blank" rel="noopener" class="link-tile">
+          <div class="link-tile-inner">
+            <span class="link-icon">◉</span>
+            <span class="link-name">Ko-fi</span>
+            <span class="link-desc">Support the broadcast · Wallpacks</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+</Base>
+
+<style>
+/* ─── Hero ───────────────────────────────────────────── */
+.hero {
+  position: relative;
+  min-height: calc(100vh - var(--nav-h));
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.hero-bg {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 100% 55% at 50% 40%, rgba(0,90,170,0.28) 0%, transparent 65%),
+    radial-gradient(ellipse 60% 40% at 20% 80%, rgba(0,50,100,0.18) 0%, transparent 70%),
+    radial-gradient(ellipse 50% 30% at 85% 20%, rgba(80,0,160,0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.hero-scan {
+  position: absolute; inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 3px,
+    rgba(0,196,255,0.012) 3px,
+    rgba(0,196,255,0.012) 4px
+  );
+  pointer-events: none;
+}
+
+.hero-inner {
+  position: relative;
+  z-index: 1;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 5rem clamp(1rem, 6vw, 5rem);
+  text-align: center;
+}
+
+.hero-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  color: var(--dim);
+  margin-bottom: 1.5rem;
+  animation: fade-in 0.6s ease both;
+}
+
+/* ── Neon title ─ */
+.hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(3.8rem, 13vw, 10rem);
+  line-height: 1;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  margin-bottom: 1.75rem;
+  animation: fade-in 0.6s ease 0.1s both;
+}
+
+/* Both lines are block, stacked tight */
+.t1,
+.t2 {
+  display: block;
+}
+
+.t1 {
+  /* White neon tube — bright white core, tight blue-white glow */
+  color: #fff;
+  margin-bottom: -0.05em;
+  text-shadow:
+    0 0 2px #fff,
+    0 0 6px #fff,
+    0 0 14px #fff,
+    0 0 26px #a8e8ff,
+    0 0 48px #5ad4ff,
+    0 0 70px rgba(0,196,255,0.55);
+  animation: neon-flicker-t1 9s ease-in-out 3s infinite;
+  will-change: opacity, text-shadow;
+}
+
+.t2 {
+  /* Cyan neon tube — saturated cyan core, focused glow */
+  color: #00d0ff;
+  text-shadow:
+    0 0 2px #b8f0ff,
+    0 0 6px #00d0ff,
+    0 0 14px #00c4ff,
+    0 0 28px #00b0ee,
+    0 0 52px rgba(0,180,255,0.6),
+    0 0 75px rgba(0,150,220,0.3);
+  animation: neon-flicker-t2 12s ease-in-out 6s infinite;
+  will-change: opacity, text-shadow;
+}
+
+/* ── Flicker — brief tube-buzz, not a fade ─────────────── */
+@keyframes neon-flicker-t1 {
+  0%,  19%,  21%,  23%,  25%, 100% {
+    opacity: 1;
+    text-shadow: 0 0 2px #fff, 0 0 6px #fff, 0 0 14px #fff, 0 0 26px #a8e8ff, 0 0 48px #5ad4ff, 0 0 70px rgba(0,196,255,0.55);
+  }
+  20%, 22%, 24% { opacity: 0.12; text-shadow: none; }
+  60%           { opacity: 0.88; }
+}
+
+@keyframes neon-flicker-t2 {
+  0%,  34%,  36%,  75%, 100% {
+    opacity: 1;
+    text-shadow: 0 0 2px #b8f0ff, 0 0 6px #00d0ff, 0 0 14px #00c4ff, 0 0 28px #00b0ee, 0 0 52px rgba(0,180,255,0.6), 0 0 75px rgba(0,150,220,0.3);
+  }
+  35%  { opacity: 0.08; text-shadow: none; }
+  74%  { opacity: 0.82; }
+}
+
+.hero-tagline {
+  font-family: var(--font-mono);
+  font-size: clamp(0.85rem, 1.8vw, 1.05rem);
+  letter-spacing: 0.18em;
+  color: var(--dim);
+  margin-bottom: 2.5rem;
+  animation: fade-in 0.6s ease 0.2s both;
+}
+
+.hero-cta {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  animation: fade-in 0.6s ease 0.3s both;
+}
+
+.cta-btn {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 0.7rem 1.8rem;
+  border: 1px solid;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+}
+
+.cta-primary {
+  color: var(--bg);
+  background: var(--cyan);
+  border-color: var(--cyan);
+}
+.cta-primary:hover {
+  background: #33d1ff;
+  box-shadow: 0 0 24px rgba(0,196,255,0.5);
+}
+
+.cta-secondary {
+  color: var(--dim);
+  background: transparent;
+  border-color: rgba(255,255,255,0.15);
+}
+.cta-secondary:hover {
+  color: var(--white);
+  border-color: rgba(255,255,255,0.35);
+}
+
+/* ─── Info strip ─────────────────────────────────────── */
+.info-strip {
+  border-top: 1px solid rgba(0,196,255,0.08);
+  border-bottom: 1px solid rgba(0,196,255,0.08);
+  background: rgba(13,13,23,0.7);
+}
+
+.info-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 3rem clamp(1rem, 4vw, 3rem);
+  display: grid;
+  grid-template-columns: 1fr auto 1fr auto 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+@media (max-width: 700px) {
+  .info-inner {
+    grid-template-columns: 1fr;
+  }
+  .info-divider { display: none; }
+}
+
+.info-divider {
+  width: 1px;
+  align-self: stretch;
+  background: linear-gradient(to bottom, transparent, rgba(0,196,255,0.2), transparent);
+}
+
+.info-block {
+  text-align: center;
+}
+
+.info-num {
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 6vw, 5rem);
+  color: var(--cyan);
+  line-height: 1;
+  margin-bottom: 0.2rem;
+  text-shadow: 0 0 30px rgba(0,196,255,0.4);
+}
+
+.info-label {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.24em;
+  color: var(--dim);
+  margin-bottom: 0.75rem;
+}
+
+.info-body {
+  font-size: 0.9rem;
+  color: var(--dimmer);
+  line-height: 1.65;
+  max-width: 28ch;
+  margin: 0 auto;
+}
+
+/* ─── Section header ──────────────────────────────────── */
+.section-hdr {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.section-label {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  color: var(--dim);
+  flex-shrink: 0;
+}
+
+.section-line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to right, rgba(0,196,255,0.25), transparent);
+}
+
+.section-link {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  color: var(--cyan);
+  text-decoration: none;
+  flex-shrink: 0;
+  opacity: 0.7;
+  transition: opacity 0.15s;
+}
+.section-link:hover { opacity: 1; }
+
+/* ─── Featured ────────────────────────────────────────── */
+.featured {
+  padding: 3rem 0 4rem;
+}
+
+.featured-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 clamp(1rem, 4vw, 3rem);
+}
+
+.featured-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+}
+
+@media (max-width: 640px) {
+  .featured-grid { grid-template-columns: 1fr; }
+}
+
+/* ─── Links section ───────────────────────────────────── */
+.links-section {
+  border-top: 1px solid rgba(255,255,255,0.05);
+  padding: 3rem 0 5rem;
+  background: rgba(9,9,14,0.6);
+}
+
+.links-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 clamp(1rem, 4vw, 3rem);
+}
+
+.links-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1px;
+}
+
+.link-tile {
+  display: block;
+  text-decoration: none;
+  background: var(--bg-card);
+  border: 1px solid rgba(255,255,255,0.05);
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.link-tile:hover {
+  background: var(--surface);
+  border-color: rgba(0,196,255,0.2);
+}
+
+.link-tile-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 2.5rem 1.5rem;
+  gap: 0.6rem;
+}
+
+.link-icon {
+  font-size: 1.5rem;
+  color: var(--cyan);
+  opacity: 0.6;
+  margin-bottom: 0.25rem;
+}
+
+.link-name {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  letter-spacing: 0.06em;
+  color: var(--white);
+  text-transform: uppercase;
+}
+
+.link-desc {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  color: var(--dimmer);
+  line-height: 1.5;
+}
+
+/* ─── Animations ─────────────────────────────────────── */
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ─── Reduced motion ─────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .t1, .t2 { animation: none; }
+  .hero-eyebrow, .hero-title, .hero-tagline, .hero-cta { animation: none; }
+}
+</style>
