@@ -45,7 +45,7 @@ export const FACTION_ORDER = [
 ] as const;
 
 export const OPERATORS: Operator[] = [
-  { id:  1, folder: '1-Machine Control',         name: 'Machine Control',      faction: 'The Architecture',   art: 'album.png',                      released: true,  lore: null,                        slug: null,               unlocksAt: null },
+  { id:  1, folder: '1-Machine Control',         name: 'Machine Control',      faction: 'The Architecture',   art: 'album.png',                      released: true,  lore: 'Lore/01-machine-control.html', slug: '01-machine-control', unlocksAt: null },
   { id:  2, folder: '2-Carbon Chamber',          name: 'Carbon Chamber',       faction: 'The Velocity',       art: 'album.png',                      released: true,  lore: null,                        slug: null,               unlocksAt: null },
   { id:  3, folder: '3-Neural Sands',            name: 'Neural Sands',         faction: 'The Ghost Layer',    art: 'album.png',                      released: true,  lore: null,                        slug: null,               unlocksAt: null },
   { id:  4, folder: '4-NightControl',            name: 'NightControl',         faction: 'The Ghost Layer',    art: 'album.png',                      released: true,  lore: null,                        slug: null,               unlocksAt: null },
@@ -71,7 +71,7 @@ export const OPERATORS: Operator[] = [
   { id: 24, folder: '24 - VEX',                  name: 'VEX',                  faction: 'Forbidden Zone',     art: 'album.png',                      released: true,  lore: null,                        slug: null,               unlocksAt: null },
   { id: 25, folder: '25 - Ferro Reign',          name: 'Ferro Reign',          faction: 'Iron North',         art: 'album.png',                      released: true,  lore: null,                        slug: null,               unlocksAt: null },
   { id: 26, folder: '26 - Chrome Hazard',        name: 'Chrome Hazard',        faction: 'The Architecture',   art: 'album.png',                      released: true,  lore: null,                        slug: null,               unlocksAt: null },
-  { id: 27, folder: '27 - Velvet Marquee',       name: 'Velvet Marquee',       faction: 'Unaligned',          art: 'KoFi/velvet-marquee-square.png', released: true,  lore: 'Lore/27-velvet-marquee.html', slug: '27-velvet-marquee', unlocksAt: null },
+  { id: 27, folder: '27 - Velvet Marquee',       name: 'Velvet Marquee',       faction: 'Unaligned',          art: 'KoFi/velvet-marquee-square.png', released: false, lore: 'Lore/27-velvet-marquee.html', slug: '27-velvet-marquee', unlocksAt: null },
   { id: 28, folder: '28 - Static Bloom',         name: 'Static Bloom',         faction: 'The Ghost Layer',    art: 'album.png',                      released: false, lore: null,                        slug: null,               unlocksAt: null },
 ];
 

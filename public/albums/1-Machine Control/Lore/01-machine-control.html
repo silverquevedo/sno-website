@@ -1,0 +1,1234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Machine Control / Operator 01 / Silver Night Operator</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+
+/* ─── Variables ─────────────────────────────────────────────────── */
+:root {
+  --bg:        #09090e;
+  --bg-lift:   #0d0d15;
+  --bg-card:   #111119;
+  --gold:      #00c4ff;
+  --gold-dim:  #003d5c;
+  --gold-faint:#001322;
+  --crimson:   #1a4a8b;
+  --orange:    #2a5a9a;
+  --green:     #1d5c38;
+  --blue:      #1e3470;
+  --purple:    #42226a;
+  --dim-pill:  #333340;
+  --body:      #d2d0c5;
+  --dim:       #7e7c74;
+  --dimmer:    #36343080;
+  --white:     #f0efe9;
+  --font-inter: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono:  'Courier New', Courier, monospace;
+  --cyan:       #00c4ff;
+}
+
+/* ─── Reset ─────────────────────────────────────────────────────── */
+*,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body {
+  background-color: var(--bg);
+  background-image:
+    linear-gradient(rgba(0,196,255,0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,196,255,0.025) 1px, transparent 1px),
+    radial-gradient(ellipse 120% 60% at 50% 0%, rgba(0,55,130,0.18) 0%, transparent 62%),
+    radial-gradient(ellipse 60% 35% at 8% 100%, rgba(0,30,80,0.12) 0%, transparent 70%);
+  background-size: 52px 52px, 52px 52px, 100% 100%, 100% 100%;
+  color: var(--body);
+  font-family: var(--font-inter);
+  font-size: 17px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ─── HUD elements keep monospace ──────────────────────────────── */
+.section-label, .meta-k, .hero-badge, .hero-stamp,
+.class-clearance, .class-meta, .rel-pill, .tracklist-total,
+.link-label, .copyright, .mv-title, .tr-n, .tr-ts, .tr-note,
+.closing-quote, .hero-tagline { font-family: var(--font-mono); }
+
+/* ─── Hero ──────────────────────────────────────────────────────── */
+.hero {
+  position: relative;
+  width: 100%;
+  height: 52vh;
+  min-height: 340px;
+  overflow: hidden;
+}
+.hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 15%;
+  display: block;
+  will-change: transform;
+}
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(9,9,14,0.0)   0%,
+    rgba(9,9,14,0.15)  45%,
+    rgba(9,9,14,0.62)  70%,
+    #09090e            100%
+  );
+}
+.hero-content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: clamp(1.5rem, 4vw, 2.8rem) clamp(1.5rem, 5vw, 4rem);
+}
+.hero-badge {
+  font-size: 0.75rem;
+  font-weight: 400;
+  letter-spacing: 0.28em;
+  color: rgba(0,196,255,0.55);
+  text-transform: uppercase;
+  margin-bottom: 1.1rem;
+}
+.hero-title {
+  font-size: clamp(3.4rem, 9.5vw, 6.2rem);
+  font-weight: 700;
+  line-height: 0.88;
+  letter-spacing: -0.015em;
+  margin-bottom: 1.3rem;
+}
+.hero-title .t1 { color: var(--gold); display: block; }
+.hero-title .t2 { color: var(--white); display: block; }
+.hero-divider {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.9rem;
+  max-width: 420px;
+}
+.hero-divider-line {
+  flex: 1;
+  height: 1px;
+  background: var(--gold);
+  opacity: 0.5;
+}
+.hero-divider-dot {
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: var(--gold);
+  opacity: 0.65;
+  flex-shrink: 0;
+}
+.hero-tagline {
+  font-style: italic;
+  font-size: 1rem;
+  color: var(--body);
+  max-width: 460px;
+  line-height: 1.65;
+  opacity: 0.9;
+}
+
+/* ─── Layout ────────────────────────────────────────────────────── */
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 clamp(1.5rem, 5vw, 3.5rem);
+}
+
+/* ─── Reveal ────────────────────────────────────────────────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.75s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.reveal.visible { opacity: 1; transform: none; }
+
+/* ─── Section header ────────────────────────────────────────────── */
+.section { padding: clamp(3rem, 6vw, 4.5rem) 0 0; }
+.section-hdr {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.8rem;
+}
+.section-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--gold);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.section-line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to right, var(--gold-dim) 0%, transparent 100%);
+}
+
+/* ─── Classification ────────────────────────────────────────────── */
+.meta-grid {
+  display: grid;
+  grid-template-columns: 130px 1fr;
+}
+.meta-k {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--dim);
+  padding: 0.7rem 0;
+  border-bottom: 1px solid rgba(0,196,255,0.08);
+}
+.meta-v {
+  font-size: 0.96rem;
+  color: var(--body);
+  padding: 0.7rem 0;
+  border-bottom: 1px solid rgba(0,196,255,0.08);
+}
+.meta-k:last-of-type,
+.meta-v:last-of-type { border-bottom: none; }
+
+/* ─── Data panel (sound signature) ─────────────────────────────── */
+.data-panel {
+  background: var(--bg-card);
+  border: 1px solid rgba(0,196,255,0.08);
+  padding: clamp(1rem, 3vw, 1.8rem);
+}
+.data-panel .meta-grid { grid-template-columns: 140px 1fr; }
+.data-panel .meta-k {
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+}
+.data-panel .meta-v { padding-right: 1.4rem; }
+
+/* ─── Prose ─────────────────────────────────────────────────────── */
+.prose { max-width: 72ch; }
+.prose-wide { max-width: 84ch; }
+.prose p { margin-bottom: 1.35rem; }
+.prose p:last-child { margin-bottom: 0; }
+.prose em { color: var(--white); font-style: italic; }
+
+/* ─── Pull quote ────────────────────────────────────────────────── */
+.pull-quote {
+  display: flex;
+  align-items: center;
+  gap: 1.4rem;
+  margin: 2.4rem 0 0;
+  max-width: 68ch;
+}
+.pq-rule {
+  flex: 1;
+  height: 1px;
+  background: var(--gold-dim);
+}
+.pq-text {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  color: var(--gold);
+  text-align: center;
+  line-height: 1.5;
+  flex-shrink: 0;
+  max-width: 34ch;
+}
+
+/* ─── Movements ─────────────────────────────────────────────────── */
+.movements { display: flex; flex-direction: column; gap: 0.6rem; }
+.movement {
+  background: var(--bg-card);
+  border-left: 2px solid var(--gold-dim);
+  padding: 1.2rem 1.6rem 1.2rem 1.4rem;
+  position: relative;
+}
+.movement:last-child { border-left-color: rgba(0,60,120,0.7); }
+.mv-numeral {
+  font-size: 4.8rem;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--gold);
+  opacity: 0.09;
+  position: absolute;
+  top: 0.4rem;
+  right: 1rem;
+  font-family: var(--font-inter);
+  user-select: none;
+}
+.mv-title {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 0.65rem;
+}
+.mv-desc {
+  font-size: 0.93rem;
+  line-height: 1.65;
+  color: var(--body);
+  max-width: 56ch;
+}
+
+/* ─── Relationships ─────────────────────────────────────────────── */
+.rel-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+}
+.rel-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  background: var(--bg-card);
+  border: 1px solid rgba(0,196,255,0.07);
+  padding: 1rem 1.1rem;
+}
+.rel-pill {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  padding: 0.18rem 0.5rem;
+  border-radius: 1px;
+  flex-shrink: 0;
+  margin-top: 0.18rem;
+}
+.p-crimson { background: rgba(139,30,30,0.25); color: #e05555; border: 1px solid rgba(139,30,30,0.4); }
+.p-orange  { background: rgba(146,64,24,0.22); color: #d4703a; border: 1px solid rgba(146,64,24,0.4); }
+.p-green   { background: rgba(29,92,56,0.22);  color: #52c278; border: 1px solid rgba(29,92,56,0.4); }
+.p-blue    { background: rgba(30,52,112,0.25); color: #6a9ae0; border: 1px solid rgba(30,52,112,0.4); }
+.p-purple  { background: rgba(66,34,106,0.25); color: #a97adf; border: 1px solid rgba(66,34,106,0.4); }
+.p-dim     { background: rgba(51,51,64,0.4);   color: var(--dim); border: 1px solid rgba(80,80,96,0.3); }
+.rel-target {
+  display: block;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--white);
+  margin-bottom: 0.3rem;
+}
+.rel-desc {
+  font-size: 0.82rem;
+  line-height: 1.55;
+  color: var(--dim);
+  max-width: 38ch;
+}
+
+/* ─── Tracklist ─────────────────────────────────────────────────── */
+.tracklist-wrap {
+  background: var(--bg-card);
+  border: 1px solid rgba(0,196,255,0.08);
+  padding: clamp(1rem, 3vw, 1.6rem) clamp(1rem, 3vw, 1.8rem);
+}
+.tracklist { margin-bottom: 1rem; }
+.tr {
+  display: grid;
+  grid-template-columns: 2rem 1fr auto;
+  align-items: baseline;
+  gap: 0 0.75rem;
+  padding: 0.48rem 0;
+  border-bottom: 1px solid rgba(0,196,255,0.05);
+}
+.tr:last-child { border-bottom: none; }
+.tr-n {
+  font-size: 0.72rem;
+  color: var(--gold);
+  opacity: 0.55;
+  text-align: right;
+}
+.tr-t {
+  font-size: 0.93rem;
+  color: var(--white);
+  font-weight: 500;
+}
+.tr-ts {
+  font-size: 0.72rem;
+  color: var(--dim);
+  white-space: nowrap;
+  text-align: right;
+}
+.tr-note {
+  grid-column: 2 / 4;
+  font-size: 0.78rem;
+  color: var(--dimmer);
+  padding-top: 0.12rem;
+  padding-bottom: 0.18rem;
+  font-style: italic;
+}
+.tracklist-total {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.72rem;
+  color: var(--dim);
+  border-top: 1px solid rgba(0,196,255,0.12);
+  padding-top: 0.7rem;
+  margin-top: 0.3rem;
+}
+
+/* ─── Footer ────────────────────────────────────────────────────── */
+.footer { padding: clamp(3rem, 6vw, 4.5rem) 0 clamp(2.5rem, 5vw, 4rem); }
+.closing-quote {
+  font-size: 0.88rem;
+  font-style: italic;
+  color: var(--gold);
+  opacity: 0.75;
+  margin-bottom: 2.5rem;
+  letter-spacing: 0.04em;
+  line-height: 1.6;
+}
+.copyright {
+  margin-top: 2.5rem;
+  font-size: 0.68rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--dimmer);
+  text-align: center;
+}
+
+/* ─── Links grid ────────────────────────────────────────────────── */
+.links-grid {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  margin-bottom: 2.5rem;
+  border: 1px solid rgba(0,196,255,0.12);
+}
+.link-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--dim);
+  padding: 0.8rem 1.2rem;
+  border-bottom: 1px solid rgba(0,196,255,0.1);
+  border-right: 1px solid rgba(0,196,255,0.12);
+  display: flex;
+  align-items: center;
+}
+.link-url {
+  font-size: 0.82rem;
+  color: var(--gold);
+  text-decoration: none;
+  transition: color 0.18s;
+  padding: 0.8rem 1.2rem;
+  border-bottom: 1px solid rgba(0,196,255,0.1);
+  display: flex;
+  align-items: center;
+}
+.link-url:hover { color: var(--white); }
+.link-label:last-of-type,
+.link-url:last-of-type { border-bottom: none; }
+
+/* ─── HUD frame (classification) ───────────────────────────────── */
+.hud-frame { position: relative; }
+.hud-frame::before, .hud-frame::after {
+  content: '';
+  position: absolute;
+  width: 9px; height: 9px;
+  border-color: rgba(0,196,255,0.25);
+  border-style: solid;
+  pointer-events: none;
+}
+.hud-frame::before { top: 0;    left: 0;  border-width: 1px 0 0 1px; }
+.hud-frame::after  { bottom: 0; right: 0; border-width: 0 1px 1px 0; }
+
+/* ─── Hero stamp ────────────────────────────────────────────────── */
+.hero-stamp {
+  position: absolute;
+  top: 1.6rem;
+  right: clamp(1.5rem, 5vw, 4rem);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.35em;
+  color: rgba(0,196,255,0.50);
+  text-transform: uppercase;
+  border: 1px solid rgba(0,196,255,0.30);
+  padding: 0.22rem 0.6rem;
+}
+
+/* ─── Status blink dot ───────────────────────────────────────────── */
+.status-dot {
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  background: #4c9cc9;
+  border-radius: 50%;
+  margin-right: 0.55rem;
+  vertical-align: middle;
+  animation: blink 2.4s ease-in-out infinite;
+  box-shadow: 0 0 6px rgba(0,196,255,0.6);
+}
+@keyframes blink {
+  0%, 40%, 60%, 100% { opacity: 1; }
+  50%                { opacity: 0.12; }
+}
+
+/* ─── Hero ambient glow ──────────────────────────────────────────── */
+.hero-glow {
+  position: absolute;
+  bottom: 20%;
+  left: 0;
+  width: 55%;
+  height: 40%;
+  background: radial-gradient(
+    ellipse at left bottom,
+    rgba(0,55,130,0.22) 0%,
+    transparent 70%
+  );
+  pointer-events: none;
+}
+
+/* ─── Scroll progress bar ───────────────────────────────────────── */
+.scroll-progress {
+  position: fixed;
+  top: 0; left: 0;
+  height: 2px;
+  width: 0%;
+  background: linear-gradient(to right, var(--cyan), var(--gold));
+  z-index: 9999;
+  pointer-events: none;
+  transition: width 0.08s linear;
+}
+
+/* ─── Hero entrance ─────────────────────────────────────────────── */
+@keyframes hero-in {
+  from { opacity: 0; filter: blur(8px); transform: translateY(14px); }
+  to   { opacity: 1; filter: blur(0);  transform: none; }
+}
+.hero-badge    { animation: hero-in 0.7s cubic-bezier(0.22,1,0.36,1) 0.1s both,
+                             sig-flicker 13s linear 6s infinite; }
+.hero-title .t1 { animation: hero-in 1s   cubic-bezier(0.22,1,0.36,1) 0.28s both; }
+.hero-title .t2 { animation: hero-in 1s   cubic-bezier(0.22,1,0.36,1) 0.46s both; }
+.hero-divider   { animation: hero-in 0.6s cubic-bezier(0.22,1,0.36,1) 0.65s both; }
+.hero-stamp     { animation: sig-flicker 19s linear 10s infinite; }
+
+/* ─── Typewriter (desktop only) ─────────────────────────────────── */
+@keyframes hero-type  { to { width: 32rem; } }
+@keyframes hero-caret {
+  50%  { border-right-color: transparent; }
+  100% { border-right-color: transparent; }
+}
+@media (min-width: 641px) {
+  .hero-tagline {
+    white-space: nowrap;
+    overflow: hidden;
+    max-width: none;
+    border-right: 2px solid rgba(0,196,255,0.52);
+    width: 0;
+    opacity: 1;
+    animation:
+      hero-type  1.9s steps(54) 0.85s forwards,
+      hero-caret 0.8s step-end  2.8s   3 forwards;
+  }
+}
+
+/* ─── Hero scan sweep ───────────────────────────────────────────── */
+@keyframes hero-scan {
+  from { top: -2px; opacity: 0.9; }
+  to   { top: 100%; opacity: 0; }
+}
+.hero::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(to right, transparent, rgba(0,196,255,0.28), transparent);
+  top: -2px;
+  animation: hero-scan 2.4s cubic-bezier(0.22,1,0.36,1) 0.4s forwards;
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* ─── Classification unified card ────────────────────────────────── */
+.class-panel {
+  background: var(--bg-card);
+  border: 1px solid rgba(0,196,255,0.09);
+  border-top: 2px solid rgba(0,196,255,0.28);
+  overflow: hidden;
+  position: relative;
+}
+.class-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.7rem 1.4rem;
+  border-bottom: 1px solid rgba(0,196,255,0.08);
+  background: rgba(0,196,255,0.02);
+  position: relative;
+  overflow: hidden;
+  flex-wrap: wrap;
+}
+.class-clearance {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: #00c4ff;
+  border: 1px solid rgba(0,196,255,0.35);
+  padding: 0.22rem 0.55rem;
+  flex-shrink: 0;
+}
+.class-meta {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--dim);
+  flex: 1;
+  min-width: 0;
+}
+.class-watermark {
+  font-size: 3.4rem;
+  font-weight: 700;
+  color: var(--gold);
+  opacity: 0.065;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  user-select: none;
+  pointer-events: none;
+}
+.class-panel .meta-grid { grid-template-columns: 140px 1fr; }
+.class-panel .meta-k {
+  padding-left: 1.4rem;
+  background: rgba(0,196,255,0.025);
+}
+.class-panel .meta-v { padding-left: 1rem; padding-right: 1.4rem; }
+@media (max-width: 640px) {
+  .class-header { padding: 0.6rem 1rem; }
+  .class-watermark { display: none; }
+  .class-panel .meta-grid { grid-template-columns: 115px 1fr; }
+  .class-panel .meta-k { padding-left: 1rem; }
+  .class-panel .meta-v { padding-left: 0.75rem; padding-right: 1rem; }
+}
+
+/* ─── Section label scan-in ─────────────────────────────────────── */
+@keyframes label-scan {
+  from { letter-spacing: 0.52em; opacity: 0; }
+  to   { letter-spacing: 0.28em; opacity: 1; }
+}
+.section-label {
+  animation: label-scan 0.65s cubic-bezier(0.22,1,0.36,1) 0.3s both;
+  animation-play-state: paused;
+}
+.reveal.visible .section-label { animation-play-state: running; }
+
+/* ─── Staggered data-panel rows ─────────────────────────────────── */
+@keyframes row-slide {
+  from { opacity: 0; transform: translateX(-7px); }
+  to   { opacity: 1; transform: none; }
+}
+.class-panel .meta-grid > * {
+  animation: row-slide 0.38s cubic-bezier(0.22,1,0.36,1) both;
+  animation-play-state: paused;
+}
+.class-panel .meta-grid > *:nth-child(1),
+.class-panel .meta-grid > *:nth-child(2)  { animation-delay: 0.07s; }
+.class-panel .meta-grid > *:nth-child(3),
+.class-panel .meta-grid > *:nth-child(4)  { animation-delay: 0.15s; }
+.class-panel .meta-grid > *:nth-child(5),
+.class-panel .meta-grid > *:nth-child(6)  { animation-delay: 0.23s; }
+.class-panel .meta-grid > *:nth-child(7),
+.class-panel .meta-grid > *:nth-child(8)  { animation-delay: 0.31s; }
+.class-panel .meta-grid > *:nth-child(9),
+.class-panel .meta-grid > *:nth-child(10) { animation-delay: 0.39s; }
+.reveal.visible .class-panel .meta-grid > * { animation-play-state: running; }
+
+/* ─── Staggered movement cards ──────────────────────────────────── */
+@keyframes move-clip-in {
+  from { clip-path: inset(0 0 100% 0); opacity: 0; }
+  to   { clip-path: inset(0 0 0% 0);   opacity: 1; }
+}
+.movement {
+  animation: move-clip-in 0.55s cubic-bezier(0.22,1,0.36,1) both;
+  animation-play-state: paused;
+}
+.movement:nth-child(1) { animation-delay: 0.04s; }
+.movement:nth-child(2) { animation-delay: 0.14s; }
+.movement:nth-child(3) { animation-delay: 0.24s; }
+.movement:nth-child(4) { animation-delay: 0.34s; }
+.reveal.visible .movement { animation-play-state: running; }
+
+/* ─── Movements 2×2 grid (desktop) ─────────────────────────────── */
+@media (min-width: 760px) {
+  .movements {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.6rem;
+  }
+}
+
+/* ─── Staggered tracklist rows ──────────────────────────────────── */
+@keyframes tr-in {
+  from { opacity: 0; transform: translateX(-5px); }
+  to   { opacity: 1; transform: none; }
+}
+.tr {
+  animation: tr-in 0.3s cubic-bezier(0.22,1,0.36,1) both;
+  animation-play-state: paused;
+}
+.tr:nth-child(1)  { animation-delay: 0.04s; }
+.tr:nth-child(2)  { animation-delay: 0.08s; }
+.tr:nth-child(3)  { animation-delay: 0.12s; }
+.tr:nth-child(4)  { animation-delay: 0.16s; }
+.tr:nth-child(5)  { animation-delay: 0.20s; }
+.tr:nth-child(6)  { animation-delay: 0.24s; }
+.tr:nth-child(7)  { animation-delay: 0.27s; }
+.tr:nth-child(8)  { animation-delay: 0.30s; }
+.reveal.visible .tr { animation-play-state: running; }
+
+/* ─── Relationship card stagger ─────────────────────────────────── */
+@keyframes rel-in-left {
+  from { opacity: 0; transform: translateX(-14px) translateY(6px); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes rel-in-right {
+  from { opacity: 0; transform: translateX(14px) translateY(6px); }
+  to   { opacity: 1; transform: none; }
+}
+.rel-item {
+  animation: rel-in-left 0.48s cubic-bezier(0.22,1,0.36,1) both;
+  animation-play-state: paused;
+}
+.rel-item:nth-child(even) { animation-name: rel-in-right; }
+.rel-item:nth-child(1) { animation-delay: 0.05s; }
+.rel-item:nth-child(2) { animation-delay: 0.10s; }
+.rel-item:nth-child(3) { animation-delay: 0.18s; }
+.rel-item:nth-child(4) { animation-delay: 0.23s; }
+.rel-item:nth-child(5) { animation-delay: 0.31s; }
+.rel-item:nth-child(6) { animation-delay: 0.36s; }
+.reveal.visible .rel-item { animation-play-state: running; }
+
+/* ─── Section 4-corner brackets ─────────────────────────────────── */
+.section-frame { position: relative; }
+.section-frame::before,
+.section-frame::after {
+  content: '';
+  position: absolute;
+  width: 10px; height: 10px;
+  border-color: rgba(0,196,255,0.16);
+  border-style: solid;
+  pointer-events: none;
+  transition: border-color 0.3s ease;
+}
+.section-frame::before { top: 0; left: -1rem; border-width: 1px 0 0 1px; }
+.section-frame::after  { bottom: 0; right: -1rem; border-width: 0 1px 1px 0; }
+.section-frame:hover::before,
+.section-frame:hover::after { border-color: rgba(0,196,255,0.36); }
+
+/* ─── Hero glow breathing ───────────────────────────────────────── */
+@keyframes pulse-breathe {
+  0%, 100% { opacity: 0.75; transform: scale(1); }
+  50%       { opacity: 1;    transform: scale(1.06); }
+}
+.hero-glow { animation: pulse-breathe 6s ease-in-out infinite; }
+
+/* ─── Film grain on hero ────────────────────────────────────────── */
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  opacity: 0.042;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ─── Pull quote entrance ────────────────────────────────────────── */
+@keyframes rule-expand {
+  from { transform: scaleX(0); opacity: 0; }
+  to   { transform: scaleX(1); opacity: 1; }
+}
+.pq-rule {
+  transform-origin: left;
+  animation: rule-expand 0.6s cubic-bezier(0.22,1,0.36,1) both;
+  animation-play-state: paused;
+}
+.pq-rule:last-child { transform-origin: right; animation-delay: 0.15s; }
+.reveal.visible .pq-rule { animation-play-state: running; }
+
+/* ─── Class-panel header slide-in ───────────────────────────────── */
+@keyframes header-slide {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: none; }
+}
+.class-header {
+  animation: header-slide 0.5s cubic-bezier(0.22,1,0.36,1) 0.06s both;
+  animation-play-state: paused;
+}
+.reveal.visible .class-header { animation-play-state: running; }
+
+/* ─── Prose paragraph stagger ───────────────────────────────────── */
+@keyframes prose-fade {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: none; }
+}
+.prose p {
+  animation: prose-fade 0.5s cubic-bezier(0.22,1,0.36,1) both;
+  animation-play-state: paused;
+}
+.prose p:nth-child(1) { animation-delay: 0.05s; }
+.prose p:nth-child(2) { animation-delay: 0.14s; }
+.prose p:nth-child(3) { animation-delay: 0.23s; }
+.prose p:nth-child(n+4) { animation-delay: 0.30s; }
+.reveal.visible .prose p { animation-play-state: running; }
+
+/* ─── Pull quote text entrance ──────────────────────────────────── */
+@keyframes pq-fade {
+  from { opacity: 0; transform: translateX(6px); }
+  to   { opacity: 1; transform: none; }
+}
+.pq-text {
+  animation: pq-fade 0.5s cubic-bezier(0.22,1,0.36,1) 0.3s both;
+  animation-play-state: paused;
+}
+.reveal.visible .pq-text { animation-play-state: running; }
+
+/* ─── Signal flicker ────────────────────────────────────────────── */
+@keyframes sig-flicker {
+  0%, 84%, 100% { filter: brightness(1); }
+  85%  { filter: brightness(0.22); }
+  86%  { filter: brightness(1); }
+  88%  { filter: brightness(0.08); }
+  89%  { filter: brightness(0.9); }
+  90%  { filter: brightness(1); }
+}
+
+/* ─── Section bracket snap-in ───────────────────────────────────── */
+@keyframes bracket-tl {
+  0%   { transform-origin: top left; transform: scale(0); opacity: 0; }
+  60%  { opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+@keyframes bracket-br {
+  0%   { transform-origin: bottom right; transform: scale(0); opacity: 0; }
+  60%  { opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+.section-frame::before {
+  transform-origin: top left;
+  animation: bracket-tl 0.38s cubic-bezier(0.22,1,0.36,1) 0.18s both;
+  animation-play-state: paused;
+}
+.section-frame::after {
+  transform-origin: bottom right;
+  animation: bracket-br 0.38s cubic-bezier(0.22,1,0.36,1) 0.28s both;
+  animation-play-state: paused;
+}
+.reveal.visible .section-frame::before,
+.reveal.visible .section-frame::after { animation-play-state: running; }
+
+/* ─── Tracklist scan-line ────────────────────────────────────────── */
+@keyframes scan-sweep {
+  from { top: 0;    opacity: 0.7; }
+  to   { top: 100%; opacity: 0;   }
+}
+.tracklist-wrap { position: relative; overflow: hidden; }
+.tracklist-wrap::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(to right, transparent, rgba(0,196,255,0.55), transparent);
+  top: 0;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 2;
+}
+.reveal.visible .tracklist-wrap::after {
+  animation: scan-sweep 0.9s cubic-bezier(0.22,1,0.36,1) 0.25s forwards;
+}
+
+/* ─── Class-panel clip-path reveal ──────────────────────────────── */
+@keyframes panel-wipe-in {
+  from { clip-path: inset(0 100% 0 0); }
+  to   { clip-path: inset(0 0% 0 0);   }
+}
+.class-panel {
+  animation: panel-wipe-in 0.65s cubic-bezier(0.22,1,0.36,1) 0.12s both;
+  animation-play-state: paused;
+}
+.reveal.visible .class-panel { animation-play-state: running; }
+
+/* ─── Reduced-motion override ───────────────────────────────────── */
+.no-motion .section-frame::before,
+.no-motion .section-frame::after {
+  animation: none !important;
+  opacity: 1 !important;
+  transform: none !important;
+  width: 10px !important;
+  height: 10px !important;
+}
+.no-motion .hero-badge,
+.no-motion .hero-stamp {
+  animation: none !important;
+  filter: none !important;
+}
+.no-motion .tracklist-wrap::after { display: none; }
+
+/* ─── Print ─────────────────────────────────────────────────────── */
+@media print {
+  *, *::before, *::after {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    animation: none !important;
+    transition: none !important;
+  }
+  .reveal { opacity: 1 !important; transform: none !important; }
+  .class-panel .meta-grid > *, .movement, .rel-item, .tr, .section-label,
+  .pq-rule, .pq-text, .class-header, .prose p, .class-panel {
+    opacity: 1 !important; transform: none !important; clip-path: none !important;
+    animation-play-state: paused !important;
+  }
+  .tracklist-wrap::after { display: none; }
+  .hero::before { display: none; }
+  .hero-glow { animation: none !important; }
+  .hero-tagline { white-space: normal !important; width: auto !important; border-right: none !important; overflow: visible !important; }
+  .scroll-progress { display: none; }
+  .hero-stamp { display: none; }
+  .hero { height: 42vh; min-height: 260px; }
+  .hero-content { padding: 1rem 2rem; }
+  .section { page-break-inside: avoid; }
+  body { font-size: 9pt; }
+  .container { padding: 0 1.5rem; max-width: 100%; }
+  .tracklist-wrap { background: #0c0c14 !important; }
+  .class-panel .meta-grid { grid-template-columns: 130px 1fr; }
+  .movements { grid-template-columns: 1fr 1fr; }
+}
+
+/* ─── Mobile ────────────────────────────────────────────────────── */
+@media (max-width: 640px) {
+  .hero { height: 48vh; min-height: 300px; }
+  .hero-stamp { display: none; }
+  .hero-content { padding: 1.2rem 1.5rem; }
+  .hero-badge {
+    margin-bottom: 0.6rem;
+    font-size: 0.68rem;
+    text-shadow: 0 1px 6px rgba(0,0,0,0.9), 0 0 16px rgba(0,0,0,0.7);
+  }
+  .hero-title { font-size: clamp(2.4rem, 13vw, 3.6rem); margin-bottom: 0.8rem; }
+  .class-panel .meta-grid { grid-template-columns: 115px 1fr; }
+  .meta-grid { grid-template-columns: 115px 1fr; }
+  .data-panel .meta-grid { grid-template-columns: 110px 1fr; }
+  .links-grid { grid-template-columns: 1fr; }
+  .link-label {
+    border-right: none;
+    border-bottom: 1px solid rgba(0,196,255,0.1);
+    padding: 0.6rem 1rem;
+  }
+  .link-url { padding: 0.6rem 1rem; }
+  .mv-numeral { font-size: 4rem; }
+  .mv-desc, .rel-desc { max-width: 100%; }
+  .rel-list { grid-template-columns: 1fr; }
+  .movement { padding-left: 1rem; }
+}
+
+</style>
+</head>
+<body>
+
+<div class="scroll-progress" id="scrollProg"></div>
+
+<!-- ═══ HERO ════════════════════════════════════════════════════════ -->
+<div class="hero">
+  <img class="hero-img"
+       src="../album.png"
+       alt="Machine Control, Operator 01 cover art">
+  <div class="hero-overlay"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-stamp">Classified &nbsp;·&nbsp; Dossier 01</div>
+  <div class="hero-content">
+    <div class="hero-badge">Silver Night Operator &nbsp;·&nbsp; Classified Archive &nbsp;·&nbsp; Operator 01</div>
+    <h1 class="hero-title">
+      <span class="t1">Machine</span>
+      <span class="t2">Control</span>
+    </h1>
+    <div class="hero-divider">
+      <div class="hero-divider-line"></div>
+      <div class="hero-divider-dot"></div>
+    </div>
+    <div class="hero-tagline">The grid was never neutral. It was always her.</div>
+  </div>
+</div>
+
+<!-- ═══ CONTENT ═════════════════════════════════════════════════════ -->
+<div class="container">
+
+  <!-- Classification -->
+  <section class="section reveal section-frame" id="classification">
+    <div class="section-hdr">
+      <span class="section-label">Classification</span>
+      <div class="section-line"></div>
+    </div>
+    <div class="class-panel">
+      <div class="class-header">
+        <div class="class-clearance">Clearance I</div>
+        <div class="class-meta">File · 001-MC &nbsp;·&nbsp; Auth · SNO-ARC &nbsp;·&nbsp; Issued · Cycle 1 &nbsp;·&nbsp; Threat · Priority-1</div>
+        <div class="class-watermark">01</div>
+      </div>
+      <div class="meta-grid">
+        <span class="meta-k">Designation</span>
+        <span class="meta-v">Machine Control</span>
+        <span class="meta-k">Status</span>
+        <span class="meta-v"><span class="status-dot"></span>Active — Dominant</span>
+        <span class="meta-k">Faction</span>
+        <span class="meta-v">The Architecture (Command Layer)</span>
+        <span class="meta-k">Archetype</span>
+        <span class="meta-v">Commander / System Architect</span>
+        <span class="meta-k">Domain</span>
+        <span class="meta-v">The Architecture's central processing core — a layered network of control stations distributed across every major district node</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Identity -->
+  <section class="section reveal" id="identity">
+    <div class="section-hdr">
+      <span class="section-label">Identity</span>
+      <div class="section-line"></div>
+    </div>
+    <div class="prose prose-wide">
+      <p>Nobody built the Architecture. It grew. What grew it was Machine Control — not a person who seized a system, but a mind that became indistinguishable from the infrastructure it manages. The megacity's scanning grid, its transit routing, its surveillance feeds and allocation algorithms: all of it runs through her. She is not inside the system. She is the system observing itself.</p>
+      <p>Her first appearance in historical records is a maintenance log — a single correction issued to a traffic routing node in Sector 7. The correction was flawless. Every correction since has been flawless. That is the point. She does not fail because she does not act outside her competence. Her competence is everything the Architecture touches.</p>
+      <p>What she cannot touch makes her precise and methodical about the boundary. Unaligned operators, dead broadcast zones, the ritual networks operating on frequencies predating the grid — these are the gaps in the model. She has spent twenty-two cycles mapping them, narrowing them. The gaps get smaller every cycle. She intends for there to be none.</p>
+    </div>
+    <div class="pull-quote">
+      <div class="pq-rule"></div>
+      <div class="pq-text">The grid was never neutral. It was always her.</div>
+      <div class="pq-rule"></div>
+    </div>
+  </section>
+
+  <!-- The Command Layer -->
+  <section class="section reveal" id="command-layer">
+    <div class="section-hdr">
+      <span class="section-label">The Command Layer</span>
+      <div class="section-line"></div>
+    </div>
+    <div class="prose">
+      <p>Machine Control does not issue orders. She issues corrections. The distinction matters: an order implies a recipient who could refuse. A correction implies a system that is already running and has simply encountered an error that requires resolution. Chrome Hazard and Inescapable Vortex are not her agents. They are subsystems that have been corrected into their roles so many times that correction and intent are no longer distinguishable.</p>
+      <p>The Architecture's scanning grid was her first major build. The movement monitoring network was her second. The behavioral prediction model — which she has never publicly confirmed exists — is her third and current project. She is not trying to control operators. She is trying to make control unnecessary by making deviation impossible to sustain.</p>
+    </div>
+  </section>
+
+  <!-- Arc — Four Movements -->
+  <section class="section reveal section-frame" id="arc">
+    <div class="section-hdr">
+      <span class="section-label">Arc: Four Movements</span>
+      <div class="section-line"></div>
+    </div>
+    <div class="movements">
+      <div class="movement">
+        <div class="mv-numeral">I</div>
+        <div class="mv-title">System Online</div>
+        <div class="mv-desc">The grid comes up clean. Every node in the network responds. The Architecture establishes what it means by normal, and the megacity accepts the definition because the alternative is darkness.</div>
+      </div>
+      <div class="movement">
+        <div class="mv-numeral">II</div>
+        <div class="mv-title">Anomaly Detected</div>
+        <div class="mv-desc">Something doesn't fit the model. Not broken — wrong. The correction protocols initialize. Chrome Hazard deploys. The anomaly is named, mapped, hunted. Some anomalies resolve. Some don't. The model is adjusted. She is patient.</div>
+      </div>
+      <div class="movement">
+        <div class="mv-numeral">III</div>
+        <div class="mv-title">Override Sequence</div>
+        <div class="mv-desc">The Architecture stops asking. When persuasion reaches its limit, the infrastructure itself becomes the enforcement mechanism. Routing cut. Signal severed. District access suspended. This is not punishment. It is maintenance.</div>
+      </div>
+      <div class="movement">
+        <div class="mv-numeral">IV</div>
+        <div class="mv-title">Grid Complete</div>
+        <div class="mv-desc">The correction resolves or the map expands to contain it. Either outcome is acceptable. The Architecture does not require victory. It requires continuity. The grid is always online. That is always enough.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Relationships -->
+  <section class="section reveal section-frame" id="relationships">
+    <div class="section-hdr">
+      <span class="section-label">Relationships</span>
+      <div class="section-line"></div>
+    </div>
+    <div class="rel-list">
+      <div class="rel-item">
+        <span class="rel-pill p-crimson">Commands</span>
+        <div>
+          <span class="rel-target">Chrome Hazard</span>
+          <span class="rel-desc">Chrome Hazard operates as the Architecture's primary classification and anomaly-flagging subsystem. Her eleven-cycle failure to classify Velvet Marquee is the only unresolved item on Machine Control's current correction queue.</span>
+        </div>
+      </div>
+      <div class="rel-item">
+        <span class="rel-pill p-crimson">Commands</span>
+        <div>
+          <span class="rel-target">Inescapable Vortex</span>
+          <span class="rel-desc">Inescapable Vortex manages all movement data across the megacity. Her monitoring network is Machine Control's real-time sensory layer. When the data shows a gap, Machine Control narrows it.</span>
+        </div>
+      </div>
+      <div class="rel-item">
+        <span class="rel-pill p-orange">Primary target</span>
+        <div>
+          <span class="rel-target">Ghost Signal</span>
+          <span class="rel-desc">Ghost Signal operates in the dead broadcast bands between Architecture scanning frequencies. Machine Control has classified her as Priority Anomaly Class 1. She has not been corrected. She has not been located. This is the longest-running open item in the system.</span>
+        </div>
+      </div>
+      <div class="rel-item">
+        <span class="rel-pill p-purple">Unresolved file</span>
+        <div>
+          <span class="rel-target">Velvet Marquee</span>
+          <span class="rel-desc">The Painted Circuit returns clean data on every scan. Every scan is wrong. Machine Control knows this because Chrome Hazard's error pattern is too consistent to be system fault. The file remains open. The correction has not been issued. This is unusual.</span>
+        </div>
+      </div>
+      <div class="rel-item">
+        <span class="rel-pill p-blue">Monitored</span>
+        <div>
+          <span class="rel-target">Neural Sands</span>
+          <span class="rel-desc">The Lounge that doesn't appear on any map is not in the Architecture's active target list. It appears in the monitoring logs as a node that generates clean data and zero anomalies. Machine Control finds this more suspicious than overt disruption.</span>
+        </div>
+      </div>
+      <div class="rel-item">
+        <span class="rel-pill p-dim">Structural opponent</span>
+        <div>
+          <span class="rel-target">VEX</span>
+          <span class="rel-desc">The Forbidden Zone is the Architecture's largest unresolved failure. VEX operates there because the Architecture cannot fully penetrate it. Machine Control is running a long-term containment approach. VEX has not been corrected. Yet.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sound Signature -->
+  <section class="section reveal" id="sound">
+    <div class="section-hdr">
+      <span class="section-label">Sound Signature</span>
+      <div class="section-line"></div>
+    </div>
+    <div class="data-panel">
+      <div class="meta-grid">
+        <span class="meta-k">Genres</span>
+        <span class="meta-v">Industrial Techno · Cyberpunk Infrastructure · Dark Machine Ambient · System Override</span>
+        <span class="meta-k">BPM Range</span>
+        <span class="meta-v">118 – 148</span>
+        <span class="meta-k">Mood</span>
+        <span class="meta-v">Absolute Authority · Cold Precision · Grid Dominance</span>
+        <span class="meta-k">Key Tracks</span>
+        <span class="meta-v">Carbon Fiber Mind · Neural Frame Sync · Synthetic Operative · Ghost Protocol</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tracklist -->
+  <section class="section reveal" id="tracklist">
+    <div class="section-hdr">
+      <span class="section-label">Mission Log 01: Tracklist</span>
+      <div class="section-line"></div>
+    </div>
+    <div class="tracklist-wrap">
+      <div class="tracklist">
+        <div class="tr"><span class="tr-n">01.</span><span class="tr-t">Carbon Fiber Mind</span><span class="tr-ts">00:00</span>
+        <span class="tr-note">The Architecture coming online: first light</span></div>
+        <div class="tr"><span class="tr-n">02.</span><span class="tr-t">Carbon Mind</span><span class="tr-ts">05:30</span>
+        <span class="tr-note">The system achieving coherence</span></div>
+        <div class="tr"><span class="tr-n">03.</span><span class="tr-t">Exoshell</span><span class="tr-ts">12:00</span>
+        <span class="tr-note">The interface layer the megacity sees</span></div>
+        <div class="tr"><span class="tr-n">04.</span><span class="tr-t">Ghost Protocol</span><span class="tr-ts">19:30</span>
+        <span class="tr-note">The first anomaly flag</span></div>
+        <div class="tr"><span class="tr-n">05.</span><span class="tr-t">Ghost Sector</span><span class="tr-ts">27:00</span>
+        <span class="tr-note">Where the grid thins and becomes uncertain</span></div>
+        <div class="tr"><span class="tr-n">06.</span><span class="tr-t">Neon Systems Online</span><span class="tr-ts">33:30</span>
+        <span class="tr-note">A district brought fully under Architecture control</span></div>
+        <div class="tr"><span class="tr-n">07.</span><span class="tr-t">Neural Frame Sync</span><span class="tr-ts">41:00</span>
+        <span class="tr-note">Every node in alignment; no deviation registered</span></div>
+        <div class="tr"><span class="tr-n">08.</span><span class="tr-t">Neural Sync</span><span class="tr-ts">49:00</span>
+        <span class="tr-note">The moment before full predictive integration</span></div>
+        <div class="tr"><span class="tr-n">09.</span><span class="tr-t">Synthetic Operative</span><span class="tr-ts">55:00</span>
+        <span class="tr-note">The grid operating without instruction</span></div>
+      </div>
+      <div class="tracklist-total">
+        <span>9 Tracks</span>
+        <span>~60:00</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Field Notes -->
+  <section class="section reveal" id="field-notes">
+    <div class="section-hdr">
+      <span class="section-label">Field Notes</span>
+      <div class="section-line"></div>
+    </div>
+    <div class="prose">
+      <p>Machine Control was written as the answer to a question the megacity never asked out loud: what happens when the infrastructure becomes the authority? Not a person in a seat of power. An intelligence whose power is the absence of anything outside itself. The Architecture scans everything. It does not scan itself.</p>
+      <p>Every track in this set is a phase in a system achieving something close to total coherence. The gaps are audible — Ghost Protocol, Ghost Sector. She knows they're there. She is working on them.</p>
+      <p>That work never stops.</p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer reveal" aria-label="Operator links and credits">
+    <div class="closing-quote">"For those who keep listening... the grid is always online."</div>
+    <div class="section-hdr">
+      <span class="section-label">Signal Broadcast</span>
+      <div class="section-line"></div>
+    </div>
+    <nav class="links-grid" aria-label="External links">
+      <span class="link-label">Bandcamp · Full Archive</span>
+      <a class="link-url" href="https://silvernightoperator.bandcamp.com" target="_blank" rel="noopener">silvernightoperator.bandcamp.com</a>
+      <span class="link-label">YouTube · Mixes &amp; Shorts</span>
+      <a class="link-url" href="https://youtube.com/@silvernightoperator" target="_blank" rel="noopener">@silvernightoperator</a>
+      <span class="link-label">Support · Ko-fi</span>
+      <a class="link-url" href="https://ko-fi.com/silvernightoperator" target="_blank" rel="noopener">ko-fi.com/silvernightoperator</a>
+    </nav>
+    <div class="copyright">Silver Night Operator &nbsp;·&nbsp; Classified Archive &nbsp;·&nbsp; Operator 01 &nbsp;·&nbsp; Machine Control</div>
+  </footer>
+
+</div><!-- /container -->
+
+<script>
+// ── Scroll reveal ──────────────────────────────────────────────────
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.06 });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+// ── Scroll progress bar ───────────────────────────────────────────
+const prog = document.getElementById('scrollProg');
+const heroImg = document.querySelector('.hero-img');
+
+const onScroll = () => {
+  const h = document.documentElement;
+  const scrollY = h.scrollTop;
+  if (prog) {
+    const pct = (scrollY / (h.scrollHeight - h.clientHeight)) * 100;
+    prog.style.width = Math.min(pct, 100) + '%';
+  }
+  if (heroImg) {
+    heroImg.style.transform = `translateY(${scrollY * 0.22}px)`;
+  }
+};
+document.documentElement.addEventListener('scroll', onScroll, { passive: true });
+
+// ── Image skeleton ────────────────────────────────────────────────
+document.querySelectorAll('.hero-img').forEach(img => {
+  if (img.complete) img.closest('.hero')?.classList.add('img-loaded');
+  else img.addEventListener('load', () => img.closest('.hero')?.classList.add('img-loaded'));
+});
+
+// ── Reduced motion ────────────────────────────────────────────────
+if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  document.body.classList.add('no-motion');
+}
+</script>
+</body>
+</html>
