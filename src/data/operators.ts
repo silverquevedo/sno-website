@@ -46,7 +46,7 @@ export const FACTION_ORDER = [
 
 export const OPERATORS: Operator[] = [
   { id:  1, folder: '1-Machine Control',         name: 'Machine Control',      faction: 'The Architecture',   art: 'album.png',                      released: true,  lore: 'Lore/01-machine-control.html', slug: '01-machine-control', unlocksAt: null },
-  { id:  2, folder: '2-Carbon Chamber',          name: 'Carbon Chamber',       faction: 'The Velocity',       art: 'album.png',                      released: true,  lore: null,                        slug: null,               unlocksAt: null },
+  { id:  2, folder: '2-Carbon Chamber',          name: 'Carbon Chamber',       faction: 'The Velocity',       art: 'album.png',                      released: true,  lore: 'Lore/02-carbon-chamber.html', slug: '02-carbon-chamber', unlocksAt: null },
   { id:  3, folder: '3-Neural Sands',            name: 'Neural Sands',         faction: 'The Ghost Layer',    art: 'album.png',                      released: true,  lore: null,                        slug: null,               unlocksAt: null },
   { id:  4, folder: '4-NightControl',            name: 'NightControl',         faction: 'The Ghost Layer',    art: 'album.png',                      released: true,  lore: null,                        slug: null,               unlocksAt: null },
   { id:  5, folder: '5-Midnight Runes',          name: 'Midnight Runes',       faction: 'The Ritual Network', art: 'album.png',                      released: true,  lore: null,                        slug: null,               unlocksAt: null },
