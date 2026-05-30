@@ -688,13 +688,13 @@ body::after {
   padding-left: 1.4rem;
   background: rgba(201,168,76,0.025);
 }
-.class-panel .meta-v { padding-right: 1.4rem; }
+.class-panel .meta-v { padding-left: 1rem; padding-right: 1.4rem; }
 @media (max-width: 640px) {
   .class-header { padding: 0.6rem 1rem; }
   .class-watermark { display: none; }
-  .class-panel .meta-grid { grid-template-columns: 100px 1fr; }
+  .class-panel .meta-grid { grid-template-columns: 115px 1fr; }
   .class-panel .meta-k { padding-left: 1rem; }
-  .class-panel .meta-v { padding-right: 1rem; }
+  .class-panel .meta-v { padding-left: 0.75rem; padding-right: 1rem; }
 }
 
 /* ─── Section label scan-in ─────────────────────────────────────── */
@@ -1004,12 +1004,33 @@ body::after {
 
 /* ─── Mobile ────────────────────────────────────────────────────── */
 @media (max-width: 640px) {
-  .hero { height: 44vh; min-height: 280px; }
-  .hero-title { font-size: clamp(2.6rem, 14vw, 4rem); }
-  .meta-grid { grid-template-columns: 105px 1fr; }
-  .data-panel .meta-grid { grid-template-columns: 100px 1fr; }
+  /* Hero */
+  .hero { height: 48vh; min-height: 300px; }
+  .hero-stamp { display: none; }
+  .hero-content { padding: 1.2rem 1.5rem; }
+  .hero-badge {
+    margin-bottom: 0.6rem;
+    font-size: 0.68rem;
+    text-shadow: 0 1px 6px rgba(0,0,0,0.9), 0 0 16px rgba(0,0,0,0.7);
+  }
+  .hero-title { font-size: clamp(2.4rem, 13vw, 3.6rem); margin-bottom: 0.8rem; }
+
+  /* Classification panel — widen key column so DESIGNATION doesn't bleed */
+  .class-panel .meta-grid { grid-template-columns: 115px 1fr; }
+  .meta-grid { grid-template-columns: 115px 1fr; }
+  .data-panel .meta-grid { grid-template-columns: 110px 1fr; }
+
+  /* Links grid — stack label above URL so nothing overflows */
+  .links-grid { grid-template-columns: 1fr; }
+  .link-label {
+    border-right: none;
+    border-bottom: 1px solid rgba(201,168,76,0.1);
+    padding: 0.6rem 1rem;
+  }
+  .link-url { padding: 0.6rem 1rem; }
+
+  /* Movements & relationships */
   .mv-numeral { font-size: 4rem; }
-  .links-grid { grid-template-columns: 120px 1fr; }
   .mv-desc, .rel-desc { max-width: 100%; }
   .rel-list { grid-template-columns: 1fr; }
   .movement { padding-left: 1rem; }
