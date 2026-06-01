@@ -132,6 +132,29 @@ body {
 .pq-rule { flex: 1; height: 1px; background: var(--gold-dim); }
 .pq-text { font-family: var(--font-mono); font-size: 0.85rem; letter-spacing: 0.08em; color: var(--gold); text-align: center; line-height: 1.5; flex-shrink: 0; max-width: 34ch; }
 
+/* ─── Identity deep-dive ─────────────────────────────────────────── */
+.identity-deep-dive {
+  margin-top: 2.4rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--gold-dim);
+}
+.deep-label {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+  opacity: 0.7;
+  margin-bottom: 1.5rem;
+}
+.identity-deep-dive p {
+  margin-bottom: 1.35rem;
+}
+.identity-deep-dive p:last-child {
+  margin-bottom: 0;
+}
+
 /* ─── Movements ─────────────────────────────────────────────────── */
 .movements { display: flex; flex-direction: column; gap: 0.6rem; }
 .movement { background: var(--bg-card); border-left: 2px solid var(--gold-dim); padding: 1.2rem 1.6rem 1.2rem 1.4rem; position: relative; }
@@ -417,43 +440,38 @@ body {
       <p>Tribal Circuits is not a person who built something. She is the person who made sure what was already built stayed standing when the Architecture tried to absorb it. Her work is not technical: it is the negotiation of cultural persistence. Every time the Architecture's routing network tried to route through South Bloc infrastructure, she found a way to make that routing contingent on leaving the community's own signal systems untouched. The Architecture got its routing. South Bloc kept its frequency bands.</p>
       <p>She is the most-connected operator in the megacity in a specific sense: she has direct relationships with more community nodes, neighborhood networks, and grassroots signal operators than any single faction architecture. Not because she sought connections, but because South Bloc's infrastructure was the original mesh network, and she is its anchor point.</p>
     </div>
+    <div class="identity-deep-dive">
+      <div class="deep-label">The South Bloc Mesh</div>
+      <p>South Bloc's signal infrastructure predates the megacity by decades. The original network was built to connect communities across a territory that had no centralized authority: a mesh of nodes, each community maintaining its own segment, the whole greater than any part. When the megacity grew over it, the mesh adapted. When the Architecture arrived, it found a network that didn't have a central node to attack.</p>
+      <p>Tribal Circuits maintains the cultural knowledge of how the mesh works: not just technically, but socially. Every node in the mesh is a community. Every community has relationships with other communities that are older than the megacity. She navigates those relationships, maintains the trust that keeps the mesh coherent, and ensures that the Architecture's expansion doesn't sever the connections that the mesh depends on. The Architecture has never fully mapped South Bloc's network. It cannot, because the mesh reconfigures dynamically when probed.</p>
+    </div>
     <div class="pull-quote">
       <div class="pq-rule"></div>
       <div class="pq-text">The current was never cut. They just told you it was.</div>
       <div class="pq-rule"></div>
     </div>
-  </section>
-
-  <section class="section reveal" id="south-bloc-mesh">
-    <div class="section-hdr"><span class="section-label">The South Bloc Mesh</span><div class="section-line"></div></div>
-    <div class="prose">
-      <p>South Bloc's signal infrastructure predates the megacity by decades. The original network was built to connect communities across a territory that had no centralized authority: a mesh of nodes, each community maintaining its own segment, the whole greater than any part. When the megacity grew over it, the mesh adapted. When the Architecture arrived, it found a network that didn't have a central node to attack.</p>
-      <p>Tribal Circuits maintains the cultural knowledge of how the mesh works: not just technically, but socially. Every node in the mesh is a community. Every community has relationships with other communities that are older than the megacity. She navigates those relationships, maintains the trust that keeps the mesh coherent, and ensures that the Architecture's expansion doesn't sever the connections that the mesh depends on. The Architecture has never fully mapped South Bloc's network. It cannot, because the mesh reconfigures dynamically when probed.</p>
-    </div>
-  </section>
-
-  <section class="section reveal section-frame" id="arc">
+  </section><section class="section reveal section-frame" id="arc">
     <div class="section-hdr"><span class="section-label">Arc: Four Movements</span><div class="section-line"></div></div>
     <div class="movements">
       <div class="movement">
         <div class="mv-numeral">I</div>
         <div class="mv-title">The Current Was Always There</div>
-        <div class="mv-desc">The megacity didn't build over nothing. She knows what was underneath. Every code reload is the roots reminding the concrete who was there first.</div>
+        <div class="mv-desc"><p>The megacity didn't build over nothing. She knows what was underneath. Every code reload is the roots reminding the concrete who was there first.</p></div>
       </div>
       <div class="movement">
         <div class="mv-numeral">II</div>
         <div class="mv-title">The Forbidden Zones</div>
-        <div class="mv-desc">They mapped the city and called certain frequencies off-limits. She broadcasts from there anyway. She always has.</div>
+        <div class="mv-desc"><p>They mapped the city and called certain frequencies off-limits. She broadcasts from there anyway. She always has.</p></div>
       </div>
       <div class="movement">
         <div class="mv-numeral">III</div>
         <div class="mv-title">South City Memory</div>
-        <div class="mv-desc">The south city didn't disappear. It became the basement of everything above it. She moves through it like she never left, because she never did.</div>
+        <div class="mv-desc"><p>The south city didn't disappear. It became the basement of everything above it. She moves through it like she never left, because she never did.</p></div>
       </div>
       <div class="movement">
         <div class="mv-numeral">IV</div>
         <div class="mv-title">The Root Frequency</div>
-        <div class="mv-desc">The soundclash was never entertainment. It was documentation. The ritual roots remember what the history books erased.</div>
+        <div class="mv-desc"><p>The soundclash was never entertainment. It was documentation. The ritual roots remember what the history books erased.</p></div>
       </div>
     </div>
   </section>

@@ -132,6 +132,29 @@ body {
 .pq-rule { flex: 1; height: 1px; background: var(--gold-dim); }
 .pq-text { font-family: var(--font-mono); font-size: 0.85rem; letter-spacing: 0.08em; color: var(--gold); text-align: center; line-height: 1.5; flex-shrink: 0; max-width: 34ch; }
 
+/* ─── Identity deep-dive ─────────────────────────────────────────── */
+.identity-deep-dive {
+  margin-top: 2.4rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--gold-dim);
+}
+.deep-label {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+  opacity: 0.7;
+  margin-bottom: 1.5rem;
+}
+.identity-deep-dive p {
+  margin-bottom: 1.35rem;
+}
+.identity-deep-dive p:last-child {
+  margin-bottom: 0;
+}
+
 /* ─── Movements ─────────────────────────────────────────────────── */
 .movements { display: flex; flex-direction: column; gap: 0.6rem; }
 .movement { background: var(--bg-card); border-left: 2px solid var(--gold-dim); padding: 1.2rem 1.6rem 1.2rem 1.4rem; position: relative; }
@@ -417,44 +440,39 @@ body {
       <p>Her augmentations are not visible in the way most operators' modifications are visible. She does not have exposed components or visible infrastructure. Everything is internal, layered, reconfigured at the biological level so completely that the boundary between original tissue and engineered system no longer exists. She is not a person with augmentations. She is an augmented system that retained its personhood through the process.</p>
       <p>The court she runs is genuinely hierarchical: rank determines access to augmentation resources, which determines rank. She maintains this feedback loop deliberately because a hierarchy that perpetuates itself through augmentation is a hierarchy that defines her at its apex by definition. She is not sentimental about this. It is engineering.</p>
     </div>
+    <div class="identity-deep-dive">
+      <div class="deep-label">The Gilt Mandate</div>
+      <p>Iron North's economy is augmentation: the acquisition, modification, and distribution of biological and mechanical enhancement technologies. The Gilt Mandate is the legal framework of that economy: the set of rules that govern who can possess what augmentation, what rank each modification confers, and what obligations each rank carries.</p>
+      <p>Ferro Reign wrote the Gilt Mandate. She revises it periodically to maintain her position at the top and to close loopholes that subordinates have found. The Mandate is the constitution of Iron North, and she is its author and its primary interpreter. No appeal exists that reaches above her. No revision is possible without her authorization.</p>
+      <p>Iron North provides augmentation resources to the Architecture in exchange for routing infrastructure access. This arrangement makes Iron North nominally Architecture-adjacent without making Ferro Reign Architecture-subordinate. She has maintained this distinction carefully for nine cycles.</p>
+    </div>
     <div class="pull-quote">
       <div class="pq-rule"></div>
       <div class="pq-text">For those who keep listening… the iron never forgets.</div>
       <div class="pq-rule"></div>
     </div>
-  </section>
-
-  <section class="section reveal" id="gilt-mandate">
-    <div class="section-hdr"><span class="section-label">The Gilt Mandate</span><div class="section-line"></div></div>
-    <div class="prose">
-      <p>Iron North's economy is augmentation: the acquisition, modification, and distribution of biological and mechanical enhancement technologies. The Gilt Mandate is the legal framework of that economy: the set of rules that govern who can possess what augmentation, what rank each modification confers, and what obligations each rank carries.</p>
-      <p>Ferro Reign wrote the Gilt Mandate. She revises it periodically to maintain her position at the top and to close loopholes that subordinates have found. The Mandate is the constitution of Iron North, and she is its author and its primary interpreter. No appeal exists that reaches above her. No revision is possible without her authorization.</p>
-      <p>Iron North provides augmentation resources to the Architecture in exchange for routing infrastructure access. This arrangement makes Iron North nominally Architecture-adjacent without making Ferro Reign Architecture-subordinate. She has maintained this distinction carefully for nine cycles.</p>
-    </div>
-  </section>
-
-  <section class="section reveal section-frame" id="arc">
+  </section><section class="section reveal section-frame" id="arc">
     <div class="section-hdr"><span class="section-label">Arc: Four Movements</span><div class="section-line"></div></div>
     <div class="movements">
       <div class="movement">
         <div class="mv-numeral">I</div>
         <div class="mv-title">The Binding</div>
-        <div class="mv-desc">Iron meets flesh for the first time. She stops being human. She doesn't look back.</div>
+        <div class="mv-desc"><p>Iron meets flesh for the first time. She stops being human. She doesn't look back.</p></div>
       </div>
       <div class="movement">
         <div class="mv-numeral">II</div>
         <div class="mv-title">The Weight of Rule</div>
-        <div class="mv-desc">She moves through the city and the city bends. Every step leaves a mark in the pavement.</div>
+        <div class="mv-desc"><p>She moves through the city and the city bends. Every step leaves a mark in the pavement.</p></div>
       </div>
       <div class="movement">
         <div class="mv-numeral">III</div>
         <div class="mv-title">Contested Metal</div>
-        <div class="mv-desc">Resistance rises. She answers without mercy. The iron doesn't negotiate.</div>
+        <div class="mv-desc"><p>Resistance rises. She answers without mercy. The iron doesn't negotiate.</p></div>
       </div>
       <div class="movement">
         <div class="mv-numeral">IV</div>
         <div class="mv-title">Total Dominion</div>
-        <div class="mv-desc">Machine and flesh become one throne. There is no boundary left. There never was.</div>
+        <div class="mv-desc"><p>Machine and flesh become one throne. There is no boundary left. There never was.</p></div>
       </div>
     </div>
   </section>

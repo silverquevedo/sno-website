@@ -132,6 +132,29 @@ body {
 .pq-rule { flex: 1; height: 1px; background: var(--gold-dim); }
 .pq-text { font-family: var(--font-mono); font-size: 0.85rem; letter-spacing: 0.08em; color: var(--gold); text-align: center; line-height: 1.5; flex-shrink: 0; max-width: 34ch; }
 
+/* ─── Identity deep-dive ─────────────────────────────────────────── */
+.identity-deep-dive {
+  margin-top: 2.4rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--gold-dim);
+}
+.deep-label {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+  opacity: 0.7;
+  margin-bottom: 1.5rem;
+}
+.identity-deep-dive p {
+  margin-bottom: 1.35rem;
+}
+.identity-deep-dive p:last-child {
+  margin-bottom: 0;
+}
+
 /* ─── Movements ─────────────────────────────────────────────────── */
 .movements { display: flex; flex-direction: column; gap: 0.6rem; }
 .movement { background: var(--bg-card); border-left: 2px solid var(--gold-dim); padding: 1.2rem 1.6rem 1.2rem 1.4rem; position: relative; }
@@ -417,44 +440,41 @@ body {
       <p>She does not have a visible agenda. She has targets. The targets change. The method is consistent: she moves through the megacity using routes that don't exist in Architecture data, reaches her target before anyone knows she was in the district, and leaves before the scanning grid has processed what happened. What does not vary is that the target is resolved.</p>
       <p>VEX entered the Velvet Marquee's circus once looking for a target. She did not find the target. The Marquee watched the whole search from the center ring, greasepaint unbroken, and said nothing. VEX left empty-handed. They both understand that something was demonstrated, but neither has stated what it was.</p>
     </div>
+    <div class="identity-deep-dive">
+      <div class="deep-label">The Forbidden Zone Operating Doctrine</div>
+      <p>The Forbidden Zone's collapsed infrastructure is not a disadvantage. It is the condition of VEX's operation. The Architecture cannot surveil the Zone because the Zone's nodes failed before the scanning grid was fully installed. The routing network avoids the Zone because the routing protocols cannot guarantee delivery through its damaged infrastructure. The behavioral prediction model cannot predict Zone behavior because there is insufficient Zone data.</p>
+      <p>VEX has turned this absence of data into a complete operational environment. She has mapped the Zone's actual infrastructure: not as the Architecture's data represents it (failed and empty) but as it actually functions (degraded but operational, if you know how to use it). She routes through the Zone, uses its shadow to approach targets in other districts, and returns to it before the Architecture's response assets can redeploy.</p>
+      <p>The Zone is not safe. It is familiar. The distinction matters.</p>
+    </div>
     <div class="pull-quote">
       <div class="pq-rule"></div>
       <div class="pq-text">When you hear the violin, it's already too late.</div>
       <div class="pq-rule"></div>
     </div>
-  </section>
-
-  <section class="section reveal" id="doctrine">
-    <div class="section-hdr"><span class="section-label">The Forbidden Zone Operating Doctrine</span><div class="section-line"></div></div>
-    <div class="prose">
-      <p>The Forbidden Zone's collapsed infrastructure is not a disadvantage. It is the condition of VEX's operation. The Architecture cannot surveil the Zone because the Zone's nodes failed before the scanning grid was fully installed. The routing network avoids the Zone because the routing protocols cannot guarantee delivery through its damaged infrastructure. The behavioral prediction model cannot predict Zone behavior because there is insufficient Zone data.</p>
-      <p>VEX has turned this absence of data into a complete operational environment. She has mapped the Zone's actual infrastructure: not as the Architecture's data represents it (failed and empty) but as it actually functions (degraded but operational, if you know how to use it). She routes through the Zone, uses its shadow to approach targets in other districts, and returns to it before the Architecture's response assets can redeploy.</p>
-      <p>The Zone is not safe. It is familiar. The distinction matters.</p>
-    </div>
-  </section>
-
-  <section class="section reveal section-frame" id="arc">
+  </section><section class="section reveal section-frame" id="arc">
     <div class="section-hdr"><span class="section-label">Arc: Four Movements</span><div class="section-line"></div></div>
     <div class="movements">
       <div class="movement">
         <div class="mv-numeral">I</div>
         <div class="mv-title">Cold Entry</div>
-        <div class="mv-desc">She drops into the district, invisible, scanning every wire. The city doesn't know it's already being hunted.</div>
+        <div class="mv-desc"><p>She drops into the district, invisible, scanning every wire. The city doesn't know it's already being hunted.</p></div>
       </div>
       <div class="movement">
         <div class="mv-numeral">II</div>
         <div class="mv-title">Violin in the Wire</div>
-        <div class="mv-desc">The signature plays. The target hears it, doesn't know what it means yet. By the time they recognize it, the window is closed.</div>
+        <div class="mv-desc"><p>The signature plays. The target hears it, doesn't know what it means yet. By the time they recognize it, the window is closed.</p></div>
       </div>
       <div class="movement">
         <div class="mv-numeral">III</div>
         <div class="mv-title">Kill Circuit</div>
-        <div class="mv-desc">Neon alley combat. Cybernetic precision. No hesitation. She doesn't miss.</div>
+        <div class="mv-desc"><p>Neon alley combat. Cybernetic precision.</p>
+
+        <p>No hesitation. She doesn't miss.</p></div>
       </div>
       <div class="movement">
         <div class="mv-numeral">IV</div>
         <div class="mv-title">No Signal</div>
-        <div class="mv-desc">Contract closed. She steps back into the static. Only the violin frequency remains, for exactly three seconds.</div>
+        <div class="mv-desc"><p>Contract closed. She steps back into the static. Only the violin frequency remains, for exactly three seconds.</p></div>
       </div>
     </div>
   </section>

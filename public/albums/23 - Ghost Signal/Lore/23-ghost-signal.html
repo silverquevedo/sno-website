@@ -132,6 +132,29 @@ body {
 .pq-rule { flex: 1; height: 1px; background: var(--gold-dim); }
 .pq-text { font-family: var(--font-mono); font-size: 0.85rem; letter-spacing: 0.08em; color: var(--gold); text-align: center; line-height: 1.5; flex-shrink: 0; max-width: 34ch; }
 
+/* ─── Identity deep-dive ─────────────────────────────────────────── */
+.identity-deep-dive {
+  margin-top: 2.4rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--gold-dim);
+}
+.deep-label {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+  opacity: 0.7;
+  margin-bottom: 1.5rem;
+}
+.identity-deep-dive p {
+  margin-bottom: 1.35rem;
+}
+.identity-deep-dive p:last-child {
+  margin-bottom: 0;
+}
+
 /* ─── Movements ─────────────────────────────────────────────────── */
 .movements { display: flex; flex-direction: column; gap: 0.6rem; }
 .movement { background: var(--bg-card); border-left: 2px solid var(--gold-dim); padding: 1.2rem 1.6rem 1.2rem 1.4rem; position: relative; }
@@ -417,44 +440,39 @@ body {
       <p>She is the megacity's most accomplished counter-surveillance operative not because she jams or deceives Architecture systems, but because she understands their blind spots better than the people who built them. The Architecture's scanning grid was designed to detect signals that operators produce. Ghost Signal operates in the spaces between those signals: the dead air between scanning pulses, the frequency margins the grid's filters cut out to avoid noise. She lives in the noise. She has made the noise her home.</p>
       <p>Nobody is certain what she is looking for. She moves through the megacity continuously, gathering something: information, probably, but the architecture of what she knows and what she does with it is opaque. She has left evidence of her presence in places that suggest either a comprehensive research project or something more personal. She has not explained.</p>
     </div>
+    <div class="identity-deep-dive">
+      <div class="deep-label">The Ghost Layer</div>
+      <p>The Architecture's scanning grid operates in specific frequency ranges, optimized for detecting modern signals. Between those ranges are dead bands: frequencies the grid actively filters out because they produce noise that interferes with the scanning protocols. Ghost Signal has mapped all of them. She operates exclusively in those bands.</p>
+      <p>The Ghost Layer is what she calls the totality of those dead bands: a three-dimensional frequency space that overlays the entire megacity and is invisible to the Architecture. She has built infrastructure in that space: relay nodes hidden inside Architecture equipment housing, using power drawn from the grid without appearing on the power monitoring logs, routing communications through the gaps between scanning pulses.</p>
+      <p>The Ghost Layer cannot be used without her knowledge of it. The map is in her head. She has not written it down.</p>
+    </div>
     <div class="pull-quote">
       <div class="pq-rule"></div>
       <div class="pq-text">The Ghost Signal was never caught. Because the Ghost Signal was never there.</div>
       <div class="pq-rule"></div>
     </div>
-  </section>
-
-  <section class="section reveal" id="ghost-layer">
-    <div class="section-hdr"><span class="section-label">The Ghost Layer</span><div class="section-line"></div></div>
-    <div class="prose">
-      <p>The Architecture's scanning grid operates in specific frequency ranges, optimized for detecting modern signals. Between those ranges are dead bands: frequencies the grid actively filters out because they produce noise that interferes with the scanning protocols. Ghost Signal has mapped all of them. She operates exclusively in those bands.</p>
-      <p>The Ghost Layer is what she calls the totality of those dead bands: a three-dimensional frequency space that overlays the entire megacity and is invisible to the Architecture. She has built infrastructure in that space: relay nodes hidden inside Architecture equipment housing, using power drawn from the grid without appearing on the power monitoring logs, routing communications through the gaps between scanning pulses.</p>
-      <p>The Ghost Layer cannot be used without her knowledge of it. The map is in her head. She has not written it down.</p>
-    </div>
-  </section>
-
-  <section class="section reveal section-frame" id="arc">
+  </section><section class="section reveal section-frame" id="arc">
     <div class="section-hdr"><span class="section-label">Arc: Four Movements</span><div class="section-line"></div></div>
     <div class="movements">
       <div class="movement">
         <div class="mv-numeral">I</div>
         <div class="mv-title">Dead Drop</div>
-        <div class="mv-desc">The package changes hands in the cold. She doesn't ask what's inside. She never does.</div>
+        <div class="mv-desc"><p>The package changes hands in the cold. She doesn't ask what's inside. She never does.</p></div>
       </div>
       <div class="movement">
         <div class="mv-numeral">II</div>
         <div class="mv-title">Grid Walk</div>
-        <div class="mv-desc">She moves through the city like a dead signal, present everywhere, visible nowhere.</div>
+        <div class="mv-desc"><p>She moves through the city like a dead signal, present everywhere, visible nowhere.</p></div>
       </div>
       <div class="movement">
         <div class="mv-numeral">III</div>
         <div class="mv-title">Hot Zone</div>
-        <div class="mv-desc">Containment protocols activate. The city wakes up. She doesn't stop.</div>
+        <div class="mv-desc"><p>Containment protocols activate. The city wakes up. She doesn't stop.</p></div>
       </div>
       <div class="movement">
         <div class="mv-numeral">IV</div>
         <div class="mv-title">Last Transmission</div>
-        <div class="mv-desc">One frequency. One window. She broadcasts and steps into the static.</div>
+        <div class="mv-desc"><p>One frequency. One window. She broadcasts and steps into the static.</p></div>
       </div>
     </div>
   </section>

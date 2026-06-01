@@ -132,6 +132,29 @@ body {
 .pq-rule { flex: 1; height: 1px; background: var(--gold-dim); }
 .pq-text { font-family: var(--font-mono); font-size: 0.85rem; letter-spacing: 0.08em; color: var(--gold); text-align: center; line-height: 1.5; flex-shrink: 0; max-width: 34ch; }
 
+/* ─── Identity deep-dive ─────────────────────────────────────────── */
+.identity-deep-dive {
+  margin-top: 2.4rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--gold-dim);
+}
+.deep-label {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+  opacity: 0.7;
+  margin-bottom: 1.5rem;
+}
+.identity-deep-dive p {
+  margin-bottom: 1.35rem;
+}
+.identity-deep-dive p:last-child {
+  margin-bottom: 0;
+}
+
 /* ─── Movements ─────────────────────────────────────────────────── */
 .movements { display: flex; flex-direction: column; gap: 0.6rem; }
 .movement { background: var(--bg-card); border-left: 2px solid var(--gold-dim); padding: 1.2rem 1.6rem 1.2rem 1.4rem; position: relative; }
@@ -417,44 +440,43 @@ body {
       <p>The throne is the street. Not a metaphor: Asphalt Crown built her authority in the Forbidden Zone by owning every surface the megacity's official infrastructure ignores. The drainage network beneath Sector 12. The decommissioned surface roads the Architecture rerouted above-grade and stopped maintaining. The service corridors connecting megabuilding foundations. The megacity's official map ends at the curb. Below the curb is hers.</p>
       <p>She did not inherit this. There was no authority structure to inherit. The Forbidden Zone's street layer was ungoverned because the Architecture considered it ungovernable: too complex, too degraded, too deeply layered under the official city to map and control. Asphalt Crown mapped it herself. Block by block, drain by drain, access point by access point, over fourteen cycles of continuous ground-level presence.</p>
     </div>
+    <div class="identity-deep-dive">
+      <div class="deep-label">The Street Floor Doctrine</div>
+      <p>Governance from below means something specific in the Forbidden Zone. It means that every alliance, every conflict, every negotiation happens on the ground, in person, in a location that Asphalt Crown selected because she knows exactly how many exits it has. It means that Urban Alliances are not strategic alignments between distant powers but physical agreements made by operators who are standing in the same corridor.</p>
+      <p>The Architecture's governance model is aerial: scanning grids, overhead surveillance, signal networks that watch from above and process from a distance. Asphalt Crown's governance model is contact: she knows the zone because she is in it. Her operators know their blocks because they walk them. The control the Architecture cannot achieve through remote surveillance, she achieves through being there.</p>
+      <p>The rage in the catalog name is not performance. It is what happens when a system designed to integrate everything encounters something that refuses integration because it understands what integration costs. The Forbidden Zone's street layer refused. Asphalt Crown is the form that refusal took when it decided to be organized.</p>
+    </div>
     <div class="pull-quote">
       <div class="pq-rule"></div>
       <div class="pq-text">The city above has records. The undercity has her name on every surface she's ever crossed.</div>
       <div class="pq-rule"></div>
     </div>
-  </section>
-
-  <section class="section reveal" id="street-floor">
-    <div class="section-hdr"><span class="section-label">The Street Floor Doctrine</span><div class="section-line"></div></div>
-    <div class="prose">
-      <p>Governance from below means something specific in the Forbidden Zone. It means that every alliance, every conflict, every negotiation happens on the ground, in person, in a location that Asphalt Crown selected because she knows exactly how many exits it has. It means that Urban Alliances are not strategic alignments between distant powers but physical agreements made by operators who are standing in the same corridor.</p>
-      <p>The Architecture's governance model is aerial: scanning grids, overhead surveillance, signal networks that watch from above and process from a distance. Asphalt Crown's governance model is contact: she knows the zone because she is in it. Her operators know their blocks because they walk them. The control the Architecture cannot achieve through remote surveillance, she achieves through being there.</p>
-      <p>The rage in the catalog name is not performance. It is what happens when a system designed to integrate everything encounters something that refuses integration because it understands what integration costs. The Forbidden Zone's street layer refused. Asphalt Crown is the form that refusal took when it decided to be organized.</p>
-    </div>
-  </section>
-
-  <section class="section reveal section-frame" id="arc">
+  </section><section class="section reveal section-frame" id="arc">
     <div class="section-hdr"><span class="section-label">Arc: Four Movements</span><div class="section-line"></div></div>
     <div class="movements">
       <div class="movement">
         <div class="mv-numeral">I</div>
         <div class="mv-title">Where the Street Begins</div>
-        <div class="mv-desc">She doesn't look up. The towers are background noise. The asphalt is her sky and she's already moving through it.</div>
+        <div class="mv-desc"><p>She doesn't look up. The towers are background noise. The asphalt is her sky and she's already moving through it.</p></div>
       </div>
       <div class="movement">
         <div class="mv-numeral">II</div>
         <div class="mv-title">Protocol Chase</div>
-        <div class="mv-desc">Something locked a target on her. She was already past the first checkpoint. Every system gets one chance to fire. One.</div>
+        <div class="mv-desc"><p>Something locked a target on her. She was already past the first checkpoint.</p>
+
+        <p>Every system gets one chance to fire. One.</p></div>
       </div>
       <div class="movement">
         <div class="mv-numeral">III</div>
         <div class="mv-title">The Undercity Has No Maps</div>
-        <div class="mv-desc">Above the gutter line, the city logs everything. Down here, she's the only route that matters.</div>
+        <div class="mv-desc"><p>Above the gutter line, the city logs everything. Down here, she's the only route that matters.</p></div>
       </div>
       <div class="movement">
         <div class="mv-numeral">IV</div>
         <div class="mv-title">Concrete Authority</div>
-        <div class="mv-desc">The city runs low. She runs deep. The crown was never declared. It was recognized.</div>
+        <div class="mv-desc"><p>The city runs low. She runs deep.</p>
+
+        <p>The crown was never declared. It was recognized.</p></div>
       </div>
     </div>
   </section>

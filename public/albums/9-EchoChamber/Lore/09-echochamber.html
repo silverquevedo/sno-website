@@ -132,6 +132,29 @@ body {
 .pq-rule { flex: 1; height: 1px; background: var(--gold-dim); }
 .pq-text { font-family: var(--font-mono); font-size: 0.85rem; letter-spacing: 0.08em; color: var(--gold); text-align: center; line-height: 1.5; flex-shrink: 0; max-width: 34ch; }
 
+/* ─── Identity deep-dive ─────────────────────────────────────────── */
+.identity-deep-dive {
+  margin-top: 2.4rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--gold-dim);
+}
+.deep-label {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+  opacity: 0.7;
+  margin-bottom: 1.5rem;
+}
+.identity-deep-dive p {
+  margin-bottom: 1.35rem;
+}
+.identity-deep-dive p:last-child {
+  margin-bottom: 0;
+}
+
 /* ─── Movements ─────────────────────────────────────────────────── */
 .movements { display: flex; flex-direction: column; gap: 0.6rem; }
 .movement { background: var(--bg-card); border-left: 2px solid var(--gold-dim); padding: 1.2rem 1.6rem 1.2rem 1.4rem; position: relative; }
@@ -417,43 +440,42 @@ body {
       <p>The distinction matters to the faction. To EchoChamber, it barely registers. She has been operating in the pressure zones long enough that the boundary between signal and failure is not a line she fears but a surface she works on. Every system has a yield point. The yield point is where the truth lives. Not the designed behavior, not the rated performance, not what the spec says it should do: what it actually does when everything is too much. That's the information.</p>
       <p>She built "Failure Is the Feature" not as a track title but as a doctrine. The Architecture and The Velocity both run systems designed to look reliable. They are. Under normal conditions, they perform exactly as specified. EchoChamber's entire purpose is that normal conditions are a lie the system tells itself. She applies load until the lie breaks and what's underneath shows.</p>
     </div>
+    <div class="identity-deep-dive">
+      <div class="deep-label">The Pressure Doctrine</div>
+      <p>The Velocity runs on noise-to-signal conversion. EchoChamber inverted the doctrine the moment she was pushed past rated conditions and kept running. Signal pushed until failure is not noise. It is a higher order of signal, available only to systems that can survive their own collapse.</p>
+      <p>She operates in environments the rest of the Velocity avoids: nodes running at 340% load, routing networks so saturated that data is cannibalizing itself, industrial signal stacks where the heat alone has begun to affect the hardware. These are not accidents. They are her laboratory. She enters them deliberately, operates inside them, and documents what survives. Everything that survives at that load is actually load-bearing. Everything else was decoration.</p>
+    </div>
     <div class="pull-quote">
       <div class="pq-rule"></div>
       <div class="pq-text">The limit was never the ceiling. It was the starting point.</div>
       <div class="pq-rule"></div>
     </div>
-  </section>
-
-  <section class="section reveal" id="pressure-doctrine">
-    <div class="section-hdr"><span class="section-label">The Pressure Doctrine</span><div class="section-line"></div></div>
-    <div class="prose">
-      <p>The Velocity runs on noise-to-signal conversion. EchoChamber inverted the doctrine the moment she was pushed past rated conditions and kept running. Signal pushed until failure is not noise. It is a higher order of signal, available only to systems that can survive their own collapse.</p>
-      <p>She operates in environments the rest of the Velocity avoids: nodes running at 340% load, routing networks so saturated that data is cannibalizing itself, industrial signal stacks where the heat alone has begun to affect the hardware. These are not accidents. They are her laboratory. She enters them deliberately, operates inside them, and documents what survives. Everything that survives at that load is actually load-bearing. Everything else was decoration.</p>
-    </div>
-  </section>
-
-  <section class="section reveal section-frame" id="arc">
+  </section><section class="section reveal section-frame" id="arc">
     <div class="section-hdr"><span class="section-label">Arc: Four Movements</span><div class="section-line"></div></div>
     <div class="movements">
       <div class="movement">
         <div class="mv-numeral">I</div>
         <div class="mv-title">The Threat Vector</div>
-        <div class="mv-desc">She maps every weakness before she applies pressure. Adaptive, encoded, shell by shell, nothing untested.</div>
+        <div class="mv-desc"><p>She maps every weakness before she applies pressure. Adaptive, encoded, shell by shell, nothing untested.</p></div>
       </div>
       <div class="movement">
         <div class="mv-numeral">II</div>
         <div class="mv-title">The Load Path</div>
-        <div class="mv-desc">She pushes the system to find exactly where it yields. Not to break it. To know the precise location of the line.</div>
+        <div class="mv-desc"><p>She pushes the system to find exactly where it yields. Not to break it. To know the precise location of the line.</p></div>
       </div>
       <div class="movement">
         <div class="mv-numeral">III</div>
         <div class="mv-title">Pressure Protocol</div>
-        <div class="mv-desc">Negative space. Tactical loops. Rhythm that never resolves. She isn't trying to win. She is calibrating.</div>
+        <div class="mv-desc"><p>Negative space. Tactical loops.</p>
+
+        <p>Rhythm that never resolves. She isn't trying to win.</p>
+
+        <p>She is calibrating.</p></div>
       </div>
       <div class="movement">
         <div class="mv-numeral">IV</div>
         <div class="mv-title">Machine Under Compression</div>
-        <div class="mv-desc">The overclocked chassis holds because she made it hold. Flesh yield is not failure. It is data.</div>
+        <div class="mv-desc"><p>The overclocked chassis holds because she made it hold. Flesh yield is not failure. It is data.</p></div>
       </div>
     </div>
   </section>

@@ -132,6 +132,29 @@ body {
 .pq-rule { flex: 1; height: 1px; background: var(--gold-dim); }
 .pq-text { font-family: var(--font-mono); font-size: 0.85rem; letter-spacing: 0.08em; color: var(--gold); text-align: center; line-height: 1.5; flex-shrink: 0; max-width: 34ch; }
 
+/* ─── Identity deep-dive ─────────────────────────────────────────── */
+.identity-deep-dive {
+  margin-top: 2.4rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--gold-dim);
+}
+.deep-label {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+  opacity: 0.7;
+  margin-bottom: 1.5rem;
+}
+.identity-deep-dive p {
+  margin-bottom: 1.35rem;
+}
+.identity-deep-dive p:last-child {
+  margin-bottom: 0;
+}
+
 /* ─── Movements ─────────────────────────────────────────────────── */
 .movements { display: flex; flex-direction: column; gap: 0.6rem; }
 .movement { background: var(--bg-card); border-left: 2px solid var(--gold-dim); padding: 1.2rem 1.6rem 1.2rem 1.4rem; position: relative; }
@@ -418,44 +441,39 @@ body {
       <p>Her designation is Tide Sovereign not because she rules a territory but because she is the principle that makes the territory what it is. The coastal frequency she carries runs through the megacity's circuits the way sediment runs through a river delta: deposited, accumulated, reshaping the infrastructure it passes through at a pace too slow for the Architecture's monitoring cycles to register as change. By the time the Architecture notices the reshaping, it has already happened.</p>
       <p>She is South Bloc's outward operator: where Tribal Circuits maintains the ancestral mesh from inside its own territory, Tide Sovereign carries South Bloc's frequency into the megacity's body. She moves through infrastructure that was built without her in mind. She does not need to have been in mind. She runs through it anyway.</p>
     </div>
+    <div class="identity-deep-dive">
+      <div class="deep-label">The Coastal Protocol</div>
+      <p>The coastal frequency is the signal layer that connects South Bloc's island nodes to each other and to the megacity's interior. It is not a single frequency, it is a set of relationships between frequencies, a protocol inherited from communities that communicated across water before fiber optic existed. The protocol is adaptive, redundant, and culturally encoded in ways that the Architecture's signal analysis tools cannot fully parse.</p>
+      <p>Tide Sovereign is the carrier of that protocol. She does not generate the frequency, she embodies the methodology. She knows how to enter an Architecture-controlled circuit and route her signal through it without triggering classification, because the coastal protocol was built for environments that were not designed for it. The island nodes connected to each other across distances that empires claimed to control. The megacity's scanning grid is another such claim.</p>
+      <p>"Island Dominion" and "Lockdown on Island" are the two faces of the same territorial fact. The Architecture has designated South Bloc's island nodes as restricted zones. Tide Sovereign operates those zones under her own authority. The Architecture's designation and her designation exist simultaneously, and she does not recognize the Architecture's claim as senior. The island was hers before it was classified.</p>
+    </div>
     <div class="pull-quote">
       <div class="pq-rule"></div>
       <div class="pq-text">The megacity's scanning protocols were built to detect movement. They were not built to detect something that does not move so much as expand.</div>
       <div class="pq-rule"></div>
     </div>
-  </section>
-
-  <section class="section reveal" id="coastal-protocol">
-    <div class="section-hdr"><span class="section-label">The Coastal Protocol</span><div class="section-line"></div></div>
-    <div class="prose">
-      <p>The coastal frequency is the signal layer that connects South Bloc's island nodes to each other and to the megacity's interior. It is not a single frequency, it is a set of relationships between frequencies, a protocol inherited from communities that communicated across water before fiber optic existed. The protocol is adaptive, redundant, and culturally encoded in ways that the Architecture's signal analysis tools cannot fully parse.</p>
-      <p>Tide Sovereign is the carrier of that protocol. She does not generate the frequency, she embodies the methodology. She knows how to enter an Architecture-controlled circuit and route her signal through it without triggering classification, because the coastal protocol was built for environments that were not designed for it. The island nodes connected to each other across distances that empires claimed to control. The megacity's scanning grid is another such claim.</p>
-      <p>"Island Dominion" and "Lockdown on Island" are the two faces of the same territorial fact. The Architecture has designated South Bloc's island nodes as restricted zones. Tide Sovereign operates those zones under her own authority. The Architecture's designation and her designation exist simultaneously, and she does not recognize the Architecture's claim as senior. The island was hers before it was classified.</p>
-    </div>
-  </section>
-
-  <section class="section reveal section-frame" id="arc">
+  </section><section class="section reveal section-frame" id="arc">
     <div class="section-hdr"><span class="section-label">Arc: Four Movements</span><div class="section-line"></div></div>
     <div class="movements">
       <div class="movement">
         <div class="mv-numeral">I</div>
         <div class="mv-title">Before the City Was Built</div>
-        <div class="mv-desc">The island existed before the first cable was laid. She carries the rhythm that was here before anyone named the coast.</div>
+        <div class="mv-desc"><p>The island existed before the first cable was laid. She carries the rhythm that was here before anyone named the coast.</p></div>
       </div>
       <div class="movement">
         <div class="mv-numeral">II</div>
         <div class="mv-title">The Rhythm Enters the Grid</div>
-        <div class="mv-desc">Concrete doesn't stop a tide. It redirects it. She moves through the city and the city adjusts its frequency.</div>
+        <div class="mv-desc"><p>Concrete doesn't stop a tide. It redirects it. She moves through the city and the city adjusts its frequency.</p></div>
       </div>
       <div class="movement">
         <div class="mv-numeral">III</div>
         <div class="mv-title">Coastal Override</div>
-        <div class="mv-desc">The megacity runs on protocols. She runs on pulse. Every circuit that meets her frequency gets rewritten from the coast up.</div>
+        <div class="mv-desc"><p>The megacity runs on protocols. She runs on pulse. Every circuit that meets her frequency gets rewritten from the coast up.</p></div>
       </div>
       <div class="movement">
         <div class="mv-numeral">IV</div>
         <div class="mv-title">Tide Dominion</div>
-        <div class="mv-desc">The ascendancy was never a climb. It was a rising. The city didn't fall, it got covered, slowly, from the water up.</div>
+        <div class="mv-desc"><p>The ascendancy was never a climb. It was a rising. The city didn't fall, it got covered, slowly, from the water up.</p></div>
       </div>
     </div>
   </section>

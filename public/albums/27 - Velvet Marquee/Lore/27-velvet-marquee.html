@@ -241,6 +241,29 @@ body {
   padding-left: 0.2rem;
 }
 
+/* ─── Identity deep-dive ─────────────────────────────────────────── */
+.identity-deep-dive {
+  margin-top: 2.4rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--gold-dim);
+}
+.deep-label {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+  opacity: 0.7;
+  margin-bottom: 1.5rem;
+}
+.identity-deep-dive p {
+  margin-bottom: 1.35rem;
+}
+.identity-deep-dive p:last-child {
+  margin-bottom: 0;
+}
+
 /* ─── Movements ─────────────────────────────────────────────────── */
 .movements { display: flex; flex-direction: column; gap: 0.6rem; }
 .movement {
@@ -1123,23 +1146,16 @@ body::after {
       <p>She does not run the circus from backstage. She <em>is</em> the ring, painted, armored, cracking at the edges. Her face has never been seen without greasepaint. The performers are augmented beings, some voluntary, most bound by contract debt that compounds faster than they can pay it. The circus is their world. They do not leave.</p>
       <p>What looks like entertainment is a precision operation. The Marquee moves through districts that no operator dares cross: contested zones, faction buffer lines, the no-man's-land between South Bloc and Forbidden Territory. She passes through because she doesn't represent any of them. She represents the show. Nobody shuts down the show.</p>
     </div>
+    <div class="identity-deep-dive">
+      <div class="deep-label">The Painted Circuit</div>
+      <p>The Marquee generates a localized electromagnetic field tuned to the exact frequency of The Architecture's scanning protocols, not to block them, but to satisfy them. Every scan returns clean data. The tent is already open by the time the scan resolves.</p>
+      <p>This is not a hack. It is a performance. The scanners are not broken. They are being told exactly what they want to hear.</p>
+      <p>Chrome Hazard has known something is wrong for eleven cycles. Every scan comes back clear. Every scan is wrong. She cannot prove it. The Marquee moves before she gets close enough to cross-reference.</p>
+    </div>
     <div class="pull-quote">
       <div class="pq-rule"></div>
       <div class="pq-text">Velvet on the surface. Iron all the way down.</div>
       <div class="pq-rule"></div>
-    </div>
-  </section>
-
-  <!-- The Painted Circuit -->
-  <section class="section reveal" id="painted-circuit">
-    <div class="section-hdr">
-      <span class="section-label">The Painted Circuit</span>
-      <div class="section-line"></div>
-    </div>
-    <div class="prose">
-      <p>The Marquee generates a localized electromagnetic field tuned to the exact frequency of The Architecture's scanning protocols, not to block them, but to satisfy them. Every scan returns clean data. The tent is already open by the time the scan resolves.</p>
-      <p>This is not a hack. It is a performance. The scanners are not broken. They are being told exactly what they want to hear.</p>
-      <p>Chrome Hazard has known something is wrong for eleven cycles. Every scan comes back clear. Every scan is wrong. She cannot prove it. The Marquee moves before she gets close enough to cross-reference.</p>
     </div>
   </section>
 

@@ -132,6 +132,29 @@ body {
 .pq-rule { flex: 1; height: 1px; background: var(--gold-dim); }
 .pq-text { font-family: var(--font-mono); font-size: 0.85rem; letter-spacing: 0.08em; color: var(--gold); text-align: center; line-height: 1.5; flex-shrink: 0; max-width: 34ch; }
 
+/* ─── Identity deep-dive ─────────────────────────────────────────── */
+.identity-deep-dive {
+  margin-top: 2.4rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--gold-dim);
+}
+.deep-label {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+  opacity: 0.7;
+  margin-bottom: 1.5rem;
+}
+.identity-deep-dive p {
+  margin-bottom: 1.35rem;
+}
+.identity-deep-dive p:last-child {
+  margin-bottom: 0;
+}
+
 /* ─── Movements ─────────────────────────────────────────────────── */
 .movements { display: flex; flex-direction: column; gap: 0.6rem; }
 .movement { background: var(--bg-card); border-left: 2px solid var(--gold-dim); padding: 1.2rem 1.6rem 1.2rem 1.4rem; position: relative; }
@@ -417,44 +440,41 @@ body {
       <p>She carries the warrior dimension without theater. The neon katana is not a symbol. It is the instrument she uses when something attempts to force the gate. The shogun circuit runs beneath her augmentations, a layered command architecture that predates the megacity's own operating protocols by centuries, translated into code by hands that understood ceremony as infrastructure. She is not nostalgic for the old world. She is its current implementation.</p>
       <p>What she protects on the other side of the gate is not territory. It is frequency range, the specific band on which the Ritual Network's sacred transmissions operate, invisible to the Architecture's scanning protocols because they were encoded before those protocols were written. Synthetic Shrine is not a location. It is a signal state. She keeps it signal-pure by holding the gate.</p>
     </div>
+    <div class="identity-deep-dive">
+      <div class="deep-label">The Gate Frequency</div>
+      <p>The Architecture cannot classify a torii. It recognizes gates as either open or closed, as either permitting passage or denying it. Chrome Torii's gate is neither. It is a threshold that requires the approaching signal to resolve into something legible on both sides simultaneously. Most Architecture systems do not resolve. They are turned back not by force but by category failure: they do not know what kind of object they are encountering.</p>
+      <p>This is why the Ritual Network trusts the gate to her and not to a weapon. A weapon can be matched. A classification failure cannot be escalated. The Architecture's grid is designed to flag anomalies, quarantine unknowns, and call for reinforcement. Chrome Torii is not an anomaly. She is a stable entity that the system simply cannot process. She times out every scanner that approaches. She returns a null.</p>
+      <p>The warrior dimension activates only when something comes through that has already decided to force the threshold. Those encounters are brief. She is efficient in a way that suggests deep practice. The shogun circuit does not require conscious command. She is not slow.</p>
+    </div>
     <div class="pull-quote">
       <div class="pq-rule"></div>
       <div class="pq-text">The sacred protocol was never written in the city's language. It was held.</div>
       <div class="pq-rule"></div>
     </div>
-  </section>
-
-  <section class="section reveal" id="gate-frequency">
-    <div class="section-hdr"><span class="section-label">The Gate Frequency</span><div class="section-line"></div></div>
-    <div class="prose">
-      <p>The Architecture cannot classify a torii. It recognizes gates as either open or closed, as either permitting passage or denying it. Chrome Torii's gate is neither. It is a threshold that requires the approaching signal to resolve into something legible on both sides simultaneously. Most Architecture systems do not resolve. They are turned back not by force but by category failure: they do not know what kind of object they are encountering.</p>
-      <p>This is why the Ritual Network trusts the gate to her and not to a weapon. A weapon can be matched. A classification failure cannot be escalated. The Architecture's grid is designed to flag anomalies, quarantine unknowns, and call for reinforcement. Chrome Torii is not an anomaly. She is a stable entity that the system simply cannot process. She times out every scanner that approaches. She returns a null.</p>
-      <p>The warrior dimension activates only when something comes through that has already decided to force the threshold. Those encounters are brief. She is efficient in a way that suggests deep practice. The shogun circuit does not require conscious command. She is not slow.</p>
-    </div>
-  </section>
-
-  <section class="section reveal section-frame" id="arc">
+  </section><section class="section reveal section-frame" id="arc">
     <div class="section-hdr"><span class="section-label">Arc: Four Movements</span><div class="section-line"></div></div>
     <div class="movements">
       <div class="movement">
         <div class="mv-numeral">I</div>
         <div class="mv-title">The Gate Holds</div>
-        <div class="mv-desc">She doesn't open the passage for the city's data. She decides what crosses. The ritual impact marks the frequency. The taiko pulse marks the threshold.</div>
+        <div class="mv-desc"><p>She doesn't open the passage for the city's data. She decides what crosses.</p>
+
+        <p>The ritual impact marks the frequency. The taiko pulse marks the threshold.</p></div>
       </div>
       <div class="movement">
         <div class="mv-numeral">II</div>
         <div class="mv-title">Through the Sacred Circuit</div>
-        <div class="mv-desc">Inside the shrine, the old order still runs its protocol. She maps every corridor, reads every ghost signal the grid stopped transmitting.</div>
+        <div class="mv-desc"><p>Inside the shrine, the old order still runs its protocol. She maps every corridor, reads every ghost signal the grid stopped transmitting.</p></div>
       </div>
       <div class="movement">
         <div class="mv-numeral">III</div>
         <div class="mv-title">Protocol Override</div>
-        <div class="mv-desc">Synthetic shrine, blade override, resonant strike. The city's protocol didn't survive contact with the one she holds at the gate.</div>
+        <div class="mv-desc"><p>Synthetic shrine, blade override, resonant strike. The city's protocol didn't survive contact with the one she holds at the gate.</p></div>
       </div>
       <div class="movement">
         <div class="mv-numeral">IV</div>
         <div class="mv-title">The Ronin Frequency</div>
-        <div class="mv-desc">Phantom core, ronin uprising, steel ronin. She walked out of the shogun's circuit. The gate frequency followed.</div>
+        <div class="mv-desc"><p>Phantom core, ronin uprising, steel ronin. She walked out of the shogun's circuit. The gate frequency followed.</p></div>
       </div>
     </div>
   </section>

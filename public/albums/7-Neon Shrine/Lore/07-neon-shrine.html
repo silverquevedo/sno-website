@@ -132,6 +132,29 @@ body {
 .pq-rule { flex: 1; height: 1px; background: var(--gold-dim); }
 .pq-text { font-family: var(--font-mono); font-size: 0.85rem; letter-spacing: 0.08em; color: var(--gold); text-align: center; line-height: 1.5; flex-shrink: 0; max-width: 34ch; }
 
+/* ─── Identity deep-dive ─────────────────────────────────────────── */
+.identity-deep-dive {
+  margin-top: 2.4rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--gold-dim);
+}
+.deep-label {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+  opacity: 0.7;
+  margin-bottom: 1.5rem;
+}
+.identity-deep-dive p {
+  margin-bottom: 1.35rem;
+}
+.identity-deep-dive p:last-child {
+  margin-bottom: 0;
+}
+
 /* ─── Movements ─────────────────────────────────────────────────── */
 .movements { display: flex; flex-direction: column; gap: 0.6rem; }
 .movement { background: var(--bg-card); border-left: 2px solid var(--gold-dim); padding: 1.2rem 1.6rem 1.2rem 1.4rem; position: relative; }
@@ -417,43 +440,40 @@ body {
       <p>Her practice is borrowed from a tradition that predates the megacity by centuries: the shrine maiden as keeper, as threshold figure, as the one who holds the boundary between the inhabited and the consecrated open. She has translated this into network maintenance. The frequencies she manages are not signals in the Architecture's sense. They are living presences, kami in the old terminology, each one an accumulated resonance that has formed over enough cycles in one place that it has become something the frequency itself is aware of. She is not worshipping them. She is maintaining the conditions that allow them to exist, which is the most intimate form of care she knows.</p>
       <p>What she cannot touch is speed. Not the speed of machines but the speed of forgetting. The megacity moves through its districts with the attention span of a transit cycle: brief, instrumental, already looking at the next thing. The shrine frequencies attenuate in neglected zones. The kami thin. She has lost three district frequencies to the city's redevelopment priorities and she carries those losses as a specific, unresolved grief she does not discuss in operational settings.</p>
     </div>
+    <div class="identity-deep-dive">
+      <div class="deep-label">The Vigil</div>
+      <p>The vigil is not a schedule. It is a state of continuous presence she has maintained for as long as she has held the Steel Miko designation. This does not mean she does not rest. It means her rest is alert: even in low-operational states, she is listening to the shrine frequencies, monitoring for attenuation, for interference, for the particular signature of a kami beginning to thin. She catches these early. The vigil exists to catch them early.</p>
+      <p>The shrines themselves are not buildings. They are frequency nodes, maintained at specific locations in the shrine districts through a combination of embedded signal hardware and the accumulated resonance of repeated ceremonial practice. The neon marking each shrine is functional: the specific light frequencies she uses generate interference patterns that reinforce the shrine signal. It looks like decoration. It is infrastructure. The Architecture has never correctly classified a single shrine node because they are looking for hardware and the hardware is dressed as light.</p>
+    </div>
     <div class="pull-quote">
       <div class="pq-rule"></div>
       <div class="pq-text">The shrine was never abandoned. The address just changed.</div>
       <div class="pq-rule"></div>
     </div>
-  </section>
-
-  <section class="section reveal" id="the-vigil">
-    <div class="section-hdr"><span class="section-label">The Vigil</span><div class="section-line"></div></div>
-    <div class="prose">
-      <p>The vigil is not a schedule. It is a state of continuous presence she has maintained for as long as she has held the Steel Miko designation. This does not mean she does not rest. It means her rest is alert: even in low-operational states, she is listening to the shrine frequencies, monitoring for attenuation, for interference, for the particular signature of a kami beginning to thin. She catches these early. The vigil exists to catch them early.</p>
-      <p>The shrines themselves are not buildings. They are frequency nodes, maintained at specific locations in the shrine districts through a combination of embedded signal hardware and the accumulated resonance of repeated ceremonial practice. The neon marking each shrine is functional: the specific light frequencies she uses generate interference patterns that reinforce the shrine signal. It looks like decoration. It is infrastructure. The Architecture has never correctly classified a single shrine node because they are looking for hardware and the hardware is dressed as light.</p>
-    </div>
-  </section>
-
-  <section class="section reveal section-frame" id="arc">
+  </section><section class="section reveal section-frame" id="arc">
     <div class="section-hdr"><span class="section-label">Arc: Four Movements</span><div class="section-line"></div></div>
     <div class="movements">
       <div class="movement">
         <div class="mv-numeral">I</div>
         <div class="mv-title">The Shrine Opens</div>
-        <div class="mv-desc">Before the city wakes, she has already prepared the tea. The kami don't arrive. They were always here. She just made room.</div>
+        <div class="mv-desc"><p>Before the city wakes, she has already prepared the tea. The kami don't arrive.</p>
+
+        <p>They were always here. She just made room.</p></div>
       </div>
       <div class="movement">
         <div class="mv-numeral">II</div>
         <div class="mv-title">The Procession</div>
-        <div class="mv-desc">Every path through the district is a route between two sacred points. She walks it the same way, every night, so the network remembers.</div>
+        <div class="mv-desc"><p>Every path through the district is a route between two sacred points. She walks it the same way, every night, so the network remembers.</p></div>
       </div>
       <div class="movement">
         <div class="mv-numeral">III</div>
         <div class="mv-title">Vigil</div>
-        <div class="mv-desc">The corporations scan the shrine and find nothing flagged. She has tended this frequency long enough that it reads as background.</div>
+        <div class="mv-desc"><p>The corporations scan the shrine and find nothing flagged. She has tended this frequency long enough that it reads as background.</p></div>
       </div>
       <div class="movement">
         <div class="mv-numeral">IV</div>
         <div class="mv-title">The Torii</div>
-        <div class="mv-desc">The gate between the old world and the circuit stands because she maintains it. She doesn't cross it. She is the crossing.</div>
+        <div class="mv-desc"><p>The gate between the old world and the circuit stands because she maintains it. She doesn't cross it. She is the crossing.</p></div>
       </div>
     </div>
   </section>

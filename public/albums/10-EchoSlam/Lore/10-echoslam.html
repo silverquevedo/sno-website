@@ -132,6 +132,29 @@ body {
 .pq-rule { flex: 1; height: 1px; background: var(--gold-dim); }
 .pq-text { font-family: var(--font-mono); font-size: 0.85rem; letter-spacing: 0.08em; color: var(--gold); text-align: center; line-height: 1.5; flex-shrink: 0; max-width: 34ch; }
 
+/* ─── Identity deep-dive ─────────────────────────────────────────── */
+.identity-deep-dive {
+  margin-top: 2.4rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--gold-dim);
+}
+.deep-label {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+  opacity: 0.7;
+  margin-bottom: 1.5rem;
+}
+.identity-deep-dive p {
+  margin-bottom: 1.35rem;
+}
+.identity-deep-dive p:last-child {
+  margin-bottom: 0;
+}
+
 /* ─── Movements ─────────────────────────────────────────────────── */
 .movements { display: flex; flex-direction: column; gap: 0.6rem; }
 .movement { background: var(--bg-card); border-left: 2px solid var(--gold-dim); padding: 1.2rem 1.6rem 1.2rem 1.4rem; position: relative; }
@@ -417,43 +440,40 @@ body {
       <p>She drives the hyperlanes. Not routes: the hyperlanes, the megacity's highest-grade transit corridors, built for freight tonnage and velocity loads that the surface city cannot sustain. The lanes run beneath the grid, above the undercity, through the structural spine of the megacity at speeds that the transit authority monitors but does not control. EchoSlam controls them. She knows every merge, every grade change, every gap in the overhead sensor net where a second can be recovered. The Architecture has her marked as a persistent transit anomaly. She is consistently twelve seconds ahead of any response asset it deploys.</p>
       <p>She doesn't second-guess corners. She drives. The analysis is done before the entry. What looks like instinct to every observer is preparation compressed into reaction time so fast it is indistinguishable from instinct. This is what separates EchoSlam from the other high-velocity operators who have tried the hyperlanes and left them in smaller pieces than they entered.</p>
     </div>
+    <div class="identity-deep-dive">
+      <div class="deep-label">The Hyperlane Operating Principle</div>
+      <p>Speed at the hyperlane scale is not about going faster. It is about being right sooner. The operator who enters a corridor with a complete picture of the next eighteen seconds of geometry arrives at the exit without a single wasted motion. EchoSlam built that picture in eleven years of lane time. She does not look at a hyperlane junction and see a decision point. She sees a conclusion she arrived at before she got there.</p>
+      <p>The megacity's transit infrastructure was designed for freight. EchoSlam uses it as a weapon, a route, a getaway, a diagnostic tool. She does not carry cargo. She carries information, personnel who need to be somewhere before anyone knows they left, objects the Architecture would very much like to intercept. The Architecture never intercepts them.</p>
+    </div>
     <div class="pull-quote">
       <div class="pq-rule"></div>
       <div class="pq-text">The route was never on the map. She put it there herself.</div>
       <div class="pq-rule"></div>
     </div>
-  </section>
-
-  <section class="section reveal" id="hyperlane-principle">
-    <div class="section-hdr"><span class="section-label">The Hyperlane Operating Principle</span><div class="section-line"></div></div>
-    <div class="prose">
-      <p>Speed at the hyperlane scale is not about going faster. It is about being right sooner. The operator who enters a corridor with a complete picture of the next eighteen seconds of geometry arrives at the exit without a single wasted motion. EchoSlam built that picture in eleven years of lane time. She does not look at a hyperlane junction and see a decision point. She sees a conclusion she arrived at before she got there.</p>
-      <p>The megacity's transit infrastructure was designed for freight. EchoSlam uses it as a weapon, a route, a getaway, a diagnostic tool. She does not carry cargo. She carries information, personnel who need to be somewhere before anyone knows they left, objects the Architecture would very much like to intercept. The Architecture never intercepts them.</p>
-    </div>
-  </section>
-
-  <section class="section reveal section-frame" id="arc">
+  </section><section class="section reveal section-frame" id="arc">
     <div class="section-hdr"><span class="section-label">Arc: Four Movements</span><div class="section-line"></div></div>
     <div class="movements">
       <div class="movement">
         <div class="mv-numeral">I</div>
         <div class="mv-title">Entry Point</div>
-        <div class="mv-desc">The city grid appears on the display. She doesn't study it. She's already moving before the route loads.</div>
+        <div class="mv-desc"><p>The city grid appears on the display. She doesn't study it. She's already moving before the route loads.</p></div>
       </div>
       <div class="movement">
         <div class="mv-numeral">II</div>
         <div class="mv-title">Overtake Protocol</div>
-        <div class="mv-desc">Three sectors. Four signal cuts. Two systems that tried to flag her. None of them were fast enough to finish the sentence.</div>
+        <div class="mv-desc"><p>Three sectors. Four signal cuts.</p>
+
+        <p>Two systems that tried to flag her. None of them were fast enough to finish the sentence.</p></div>
       </div>
       <div class="movement">
         <div class="mv-numeral">III</div>
         <div class="mv-title">Redline</div>
-        <div class="mv-desc">The chassis wasn't built for this speed. She knows that. She also knows exactly how much past the limit it will hold.</div>
+        <div class="mv-desc"><p>The chassis wasn't built for this speed. She knows that. She also knows exactly how much past the limit it will hold.</p></div>
       </div>
       <div class="movement">
         <div class="mv-numeral">IV</div>
         <div class="mv-title">Ghost Sector</div>
-        <div class="mv-desc">The final stretch doesn't appear on any official map. She's the only one who knows the way out, because she built it at 180.</div>
+        <div class="mv-desc"><p>The final stretch doesn't appear on any official map. She's the only one who knows the way out, because she built it at 180.</p></div>
       </div>
     </div>
   </section>

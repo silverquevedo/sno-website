@@ -132,6 +132,29 @@ body {
 .pq-rule { flex: 1; height: 1px; background: var(--gold-dim); }
 .pq-text { font-family: var(--font-mono); font-size: 0.85rem; letter-spacing: 0.08em; color: var(--gold); text-align: center; line-height: 1.5; flex-shrink: 0; max-width: 34ch; }
 
+/* ─── Identity deep-dive ─────────────────────────────────────────── */
+.identity-deep-dive {
+  margin-top: 2.4rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--gold-dim);
+}
+.deep-label {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+  opacity: 0.7;
+  margin-bottom: 1.5rem;
+}
+.identity-deep-dive p {
+  margin-bottom: 1.35rem;
+}
+.identity-deep-dive p:last-child {
+  margin-bottom: 0;
+}
+
 /* ─── Movements ─────────────────────────────────────────────────── */
 .movements { display: flex; flex-direction: column; gap: 0.6rem; }
 .movement { background: var(--bg-card); border-left: 2px solid var(--gold-dim); padding: 1.2rem 1.6rem 1.2rem 1.4rem; position: relative; }
@@ -417,43 +440,38 @@ body {
       <p>Her method is not preservation. It is not nostalgia. The ceremony she runs is living: it consumes what the city produces, processes it through a sacred framework that is entirely her own, and returns it as something the city did not know it needed. The industrial infrastructure around her ceremony grounds is not backdrop. It is altar. The blast furnaces, the cooling towers, the slag heaps: she works with all of it, has consecrated all of it, considers all of it part of the ongoing rite.</p>
       <p>The Ashen Rite is not a name she chose. It is what you call something built from the residue of fire that keeps burning. The augments don't make her more than human. They make her the ceremony.</p>
     </div>
+    <div class="identity-deep-dive">
+      <div class="deep-label">The Ashen Rite</div>
+      <p>The rite does not have a schedule. It does not have a beginning or an end. It has states: active, recessive, threshold, peak. Ritual Circuits moves between these states over cycles that no outside observer has successfully predicted. The rite runs on its own calendar, which is not arbitrary but is entirely illegible to anyone who did not build it.</p>
+      <p>What happens during a peak is difficult to describe in operational terms. The ceremony grounds reach a coherence where the encoded signal Ritual Circuits broadcasts aligns with the industrial output of the surrounding infrastructure in a frequency pattern the entire Ritual Network can receive. The Architecture has logged these events seventeen times as anomalous electromagnetic events. They have never been classified correctly. Ritual Circuits considers this confirmation that the rite is working.</p>
+    </div>
     <div class="pull-quote">
       <div class="pq-rule"></div>
       <div class="pq-text">The augments don't make her more than human. They make her the ceremony.</div>
       <div class="pq-rule"></div>
     </div>
-  </section>
-
-  <section class="section reveal" id="ashen-rite">
-    <div class="section-hdr"><span class="section-label">The Ashen Rite</span><div class="section-line"></div></div>
-    <div class="prose">
-      <p>The rite does not have a schedule. It does not have a beginning or an end. It has states: active, recessive, threshold, peak. Ritual Circuits moves between these states over cycles that no outside observer has successfully predicted. The rite runs on its own calendar, which is not arbitrary but is entirely illegible to anyone who did not build it.</p>
-      <p>What happens during a peak is difficult to describe in operational terms. The ceremony grounds reach a coherence where the encoded signal Ritual Circuits broadcasts aligns with the industrial output of the surrounding infrastructure in a frequency pattern the entire Ritual Network can receive. The Architecture has logged these events seventeen times as anomalous electromagnetic events. They have never been classified correctly. Ritual Circuits considers this confirmation that the rite is working.</p>
-    </div>
-  </section>
-
-  <section class="section reveal section-frame" id="arc">
+  </section><section class="section reveal section-frame" id="arc">
     <div class="section-hdr"><span class="section-label">Arc: Four Movements</span><div class="section-line"></div></div>
     <div class="movements">
       <div class="movement">
         <div class="mv-numeral">I</div>
         <div class="mv-title">First Contact with Steel</div>
-        <div class="mv-desc">The augments weren't installed. They were accepted. The moment the circuit closed, the ritual had already begun.</div>
+        <div class="mv-desc"><p>The augments weren't installed. They were accepted. The moment the circuit closed, the ritual had already begun.</p></div>
       </div>
       <div class="movement">
         <div class="mv-numeral">II</div>
         <div class="mv-title">The City as Altar</div>
-        <div class="mv-desc">She moves through infrastructure the way others move through prayer. Every hydraulic pulse, every data node, an offering she already made.</div>
+        <div class="mv-desc"><p>She moves through infrastructure the way others move through prayer. Every hydraulic pulse, every data node, an offering she already made.</p></div>
       </div>
       <div class="movement">
         <div class="mv-numeral">III</div>
         <div class="mv-title">Ashen Command</div>
-        <div class="mv-desc">She doesn't perform the rite. She enforces it. The network holds still because she told it to.</div>
+        <div class="mv-desc"><p>She doesn't perform the rite. She enforces it. The network holds still because she told it to.</p></div>
       </div>
       <div class="movement">
         <div class="mv-numeral">IV</div>
         <div class="mv-title">The Last Chant</div>
-        <div class="mv-desc">When the ceremony ends, nothing goes back to silence. The circuit remembers everything she put into it.</div>
+        <div class="mv-desc"><p>When the ceremony ends, nothing goes back to silence. The circuit remembers everything she put into it.</p></div>
       </div>
     </div>
   </section>
