@@ -358,6 +358,22 @@ body {
 .no-motion .hero-badge, .no-motion .hero-stamp { animation: none !important; filter: none !important; }
 .no-motion .tracklist-wrap::after { display: none; }
 
+/* ─── The Encounter ─────────────────────────────────────────────── */
+.encounter-text p {
+  font-family: var(--font-mono);
+  font-size: 0.88rem;
+  line-height: 1.8;
+  color: var(--body);
+  margin-bottom: 1.35rem;
+  letter-spacing: 0.02em;
+}
+.encounter-text p:last-child { margin-bottom: 0; }
+.encounter-text p:first-child::first-line {
+  color: var(--gold);
+  letter-spacing: 0.06em;
+}
+
+
 /* ─── Print ─────────────────────────────────────────────────────── */
 @media print {
   *, *::before, *::after { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; animation: none !important; transition: none !important; }
@@ -577,7 +593,7 @@ body {
   </section>
 
   <section class="section reveal" id="field-notes">
-    <div class="section-hdr"><span class="section-label">Field Notes</span><div class="section-line"></div></div>
+    <div class="section-hdr"><span class="section-label">The Encounter</span><div class="section-line"></div></div>
     <div class="prose">
       <p>VEX was written as the consequence of the Architecture's failure to integrate the Forbidden Zone. The Zone exists because the Architecture's expansion was never complete. VEX exists because the Zone needed someone who could operate in it effectively. The Architecture created the conditions that produced her.</p>
       <p>Every track in this set is a moment in a single operation: from the Zone approach to the conclusion to the silence after. The grid shows nothing. VEX does not leave traces. She leaves conclusions.</p>

@@ -358,6 +358,22 @@ body {
 .no-motion .hero-badge, .no-motion .hero-stamp { animation: none !important; filter: none !important; }
 .no-motion .tracklist-wrap::after { display: none; }
 
+/* ─── The Encounter ─────────────────────────────────────────────── */
+.encounter-text p {
+  font-family: var(--font-mono);
+  font-size: 0.88rem;
+  line-height: 1.8;
+  color: var(--body);
+  margin-bottom: 1.35rem;
+  letter-spacing: 0.02em;
+}
+.encounter-text p:last-child { margin-bottom: 0; }
+.encounter-text p:first-child::first-line {
+  color: var(--gold);
+  letter-spacing: 0.06em;
+}
+
+
 /* ─── Print ─────────────────────────────────────────────────────── */
 @media print {
   *, *::before, *::after { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; animation: none !important; transition: none !important; }
@@ -578,7 +594,7 @@ body {
   </section>
 
   <section class="section reveal" id="field-notes">
-    <div class="section-hdr"><span class="section-label">Field Notes</span><div class="section-line"></div></div>
+    <div class="section-hdr"><span class="section-label">The Encounter</span><div class="section-line"></div></div>
     <div class="prose">
       <p>Tide Sovereign was written as a study in what power looks like when it does not need to announce itself. The coastal frequency does not ask the megacity's permission. It does not need to, because the methodology it carries was built for exactly this kind of environment: a space that officially belongs to something else, that has scanning infrastructure and classification systems and routing protocols, and that cannot stop water from finding its level.</p>
       <p>The Architecture's error is categorical: it treats the coastal frequency as a signal to be classified, contained, and rerouted. The coastal frequency is not a signal. It is a property of the infrastructure. By the time the Architecture builds a containment protocol, the frequency has already moved through the infrastructure the protocol is built from.</p>

@@ -358,6 +358,22 @@ body {
 .no-motion .hero-badge, .no-motion .hero-stamp { animation: none !important; filter: none !important; }
 .no-motion .tracklist-wrap::after { display: none; }
 
+/* ─── The Encounter ─────────────────────────────────────────────── */
+.encounter-text p {
+  font-family: var(--font-mono);
+  font-size: 0.88rem;
+  line-height: 1.8;
+  color: var(--body);
+  margin-bottom: 1.35rem;
+  letter-spacing: 0.02em;
+}
+.encounter-text p:last-child { margin-bottom: 0; }
+.encounter-text p:first-child::first-line {
+  color: var(--gold);
+  letter-spacing: 0.06em;
+}
+
+
 /* ─── Print ─────────────────────────────────────────────────────── */
 @media print {
   *, *::before, *::after { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; animation: none !important; transition: none !important; }
@@ -582,7 +598,7 @@ body {
   </section>
 
   <section class="section reveal" id="field-notes">
-    <div class="section-hdr"><span class="section-label">Field Notes</span><div class="section-line"></div></div>
+    <div class="section-hdr"><span class="section-label">The Encounter</span><div class="section-line"></div></div>
     <div class="prose">
       <p>Sable Ascent is built on the distinction between a ceiling and a destination. The dojo was designed with the assumption that the top tier is a destination. For most operators who enter the tier structure, it is. For Sable Ascent, the top tier was a ceiling, and when she reached it the ceiling fractured. The question the character poses is whether that fracture is a failure of the dojo or a revelation of something the dojo was always pointing toward without knowing it.</p>
       <p>The martial traditions she carries are not decorative. Imphal Strike and Siam Pulse represent the encoded legacy of specific fighting cultures that the Ritual Network preserved as operational code. These are not aesthetic choices. They are techniques with histories, and those histories run in her augmentations alongside the Japanese budo structures the dojo was primarily built on. She is a convergence of martial traditions that were never designed to exist in the same body.</p>

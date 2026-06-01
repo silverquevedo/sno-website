@@ -358,6 +358,22 @@ body {
 .no-motion .hero-badge, .no-motion .hero-stamp { animation: none !important; filter: none !important; }
 .no-motion .tracklist-wrap::after { display: none; }
 
+/* ─── The Encounter ─────────────────────────────────────────────── */
+.encounter-text p {
+  font-family: var(--font-mono);
+  font-size: 0.88rem;
+  line-height: 1.8;
+  color: var(--body);
+  margin-bottom: 1.35rem;
+  letter-spacing: 0.02em;
+}
+.encounter-text p:last-child { margin-bottom: 0; }
+.encounter-text p:first-child::first-line {
+  color: var(--gold);
+  letter-spacing: 0.06em;
+}
+
+
 /* ─── Print ─────────────────────────────────────────────────────── */
 @media print {
   *, *::before, *::after { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; animation: none !important; transition: none !important; }
@@ -572,7 +588,7 @@ body {
   </section>
 
   <section class="section reveal" id="field-notes">
-    <div class="section-hdr"><span class="section-label">Field Notes</span><div class="section-line"></div></div>
+    <div class="section-hdr"><span class="section-label">The Encounter</span><div class="section-line"></div></div>
     <div class="prose">
       <p>Ritual Circuits was built to answer a question about permanence: what does it look like when something ancient integrates fully into something modern without becoming lesser? The Ashen Rite is not adapted. It is not updated. It has expanded to include the megacity the way a root system expands to include new soil.</p>
       <p>The sound of this album is industrial and cold and deeply intentional in a way that feels pre-technological even when it is maximally synthetic. The heavy frequencies and the choir and the long decay of Steel Hymns: these are not choices. They are what the rite sounds like when it reaches threshold. The ceremony is not about anyone. That is why it has lasted this long.</p>

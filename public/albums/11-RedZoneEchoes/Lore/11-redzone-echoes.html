@@ -358,6 +358,22 @@ body {
 .no-motion .hero-badge, .no-motion .hero-stamp { animation: none !important; filter: none !important; }
 .no-motion .tracklist-wrap::after { display: none; }
 
+/* ─── The Encounter ─────────────────────────────────────────────── */
+.encounter-text p {
+  font-family: var(--font-mono);
+  font-size: 0.88rem;
+  line-height: 1.8;
+  color: var(--body);
+  margin-bottom: 1.35rem;
+  letter-spacing: 0.02em;
+}
+.encounter-text p:last-child { margin-bottom: 0; }
+.encounter-text p:first-child::first-line {
+  color: var(--gold);
+  letter-spacing: 0.06em;
+}
+
+
 /* ─── Print ─────────────────────────────────────────────────────── */
 @media print {
   *, *::before, *::after { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; animation: none !important; transition: none !important; }
@@ -572,7 +588,7 @@ body {
   </section>
 
   <section class="section reveal" id="field-notes">
-    <div class="section-hdr"><span class="section-label">Field Notes</span><div class="section-line"></div></div>
+    <div class="section-hdr"><span class="section-label">The Encounter</span><div class="section-line"></div></div>
     <div class="prose">
       <p>RedZoneEchoes was written as the historical ground beneath the Forbidden Zone's current conflicts. VEX and Asphalt Crown are the zone's present. RedZoneEchoes is its past, still active, still running on the frequencies nobody else has thought to look for. The zone exists partly because of what the Architecture failed to integrate. It exists more fundamentally because of what was already there when the Architecture tried.</p>
       <p>The tracks in this set do not follow a single operation. They follow a continuous presence: the zone as it was, as it is, as it has been designated and relabeled and fought over and settled by newer arrivals who think they understand the territory. RedZoneEchoes understands it the way you understand a place you have never left.</p>

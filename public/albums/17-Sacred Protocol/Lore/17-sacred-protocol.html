@@ -358,6 +358,22 @@ body {
 .no-motion .hero-badge, .no-motion .hero-stamp { animation: none !important; filter: none !important; }
 .no-motion .tracklist-wrap::after { display: none; }
 
+/* ─── The Encounter ─────────────────────────────────────────────── */
+.encounter-text p {
+  font-family: var(--font-mono);
+  font-size: 0.88rem;
+  line-height: 1.8;
+  color: var(--body);
+  margin-bottom: 1.35rem;
+  letter-spacing: 0.02em;
+}
+.encounter-text p:last-child { margin-bottom: 0; }
+.encounter-text p:first-child::first-line {
+  color: var(--gold);
+  letter-spacing: 0.06em;
+}
+
+
 /* ─── Print ─────────────────────────────────────────────────────── */
 @media print {
   *, *::before, *::after { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; animation: none !important; transition: none !important; }
@@ -573,7 +589,7 @@ body {
   </section>
 
   <section class="section reveal" id="field-notes">
-    <div class="section-hdr"><span class="section-label">Field Notes</span><div class="section-line"></div></div>
+    <div class="section-hdr"><span class="section-label">The Encounter</span><div class="section-line"></div></div>
     <div class="prose">
       <p>Chrome Torii is built around a single question the Architecture cannot answer: what does a scanner do when the entity it encounters is not a threat, not a target, and not classifiable as either? The answer is that the scanner times out. The gate uses that timeout as its mechanism. She doesn't jam frequencies. She doesn't hack protocols. She simply is not something the system knows how to process.</p>
       <p>The warrior dimension is not the primary story but it is essential to the character. A gate that cannot defend itself is eventually forced. The shogun circuit gives her the capacity to respond when something decides to test the threshold with mass rather than signal. The neon katana is efficient and does not perform. The encounter ends and the gate returns to stillness.</p>

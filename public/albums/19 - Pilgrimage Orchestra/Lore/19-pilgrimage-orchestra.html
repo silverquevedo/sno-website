@@ -358,6 +358,22 @@ body {
 .no-motion .hero-badge, .no-motion .hero-stamp { animation: none !important; filter: none !important; }
 .no-motion .tracklist-wrap::after { display: none; }
 
+/* ─── The Encounter ─────────────────────────────────────────────── */
+.encounter-text p {
+  font-family: var(--font-mono);
+  font-size: 0.88rem;
+  line-height: 1.8;
+  color: var(--body);
+  margin-bottom: 1.35rem;
+  letter-spacing: 0.02em;
+}
+.encounter-text p:last-child { margin-bottom: 0; }
+.encounter-text p:first-child::first-line {
+  color: var(--gold);
+  letter-spacing: 0.06em;
+}
+
+
 /* ─── Print ─────────────────────────────────────────────────────── */
 @media print {
   *, *::before, *::after { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; animation: none !important; transition: none !important; }
@@ -580,7 +596,7 @@ body {
   </section>
 
   <section class="section reveal" id="field-notes">
-    <div class="section-hdr"><span class="section-label">Field Notes</span><div class="section-line"></div></div>
+    <div class="section-hdr"><span class="section-label">The Encounter</span><div class="section-line"></div></div>
     <div class="prose">
       <p>Vega Conductor is built on the Ghost Layer's most counterintuitive premise: the most invisible thing in the megacity is not the hidden operator but the one who is so visible in so many simultaneous contexts that no single context can contain her. The Architecture's classification system requires a fixed source and a classifiable destination. A signal that is everywhere at once and belongs nowhere at once exhausts the classification protocol. She returns null not by hiding but by refusing to resolve into a single location.</p>
       <p>The dual-broadcast architecture is the technical core of the character. It is not a lie told to two audiences. It is one truth transmitted simultaneously to two receivers who interpret it differently because of who they are. The signal does not change. Vega Conductor does not consider this manipulation. She considers it honest operation at scale.</p>

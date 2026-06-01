@@ -358,6 +358,22 @@ body {
 .no-motion .hero-badge, .no-motion .hero-stamp { animation: none !important; filter: none !important; }
 .no-motion .tracklist-wrap::after { display: none; }
 
+/* ─── The Encounter ─────────────────────────────────────────────── */
+.encounter-text p {
+  font-family: var(--font-mono);
+  font-size: 0.88rem;
+  line-height: 1.8;
+  color: var(--body);
+  margin-bottom: 1.35rem;
+  letter-spacing: 0.02em;
+}
+.encounter-text p:last-child { margin-bottom: 0; }
+.encounter-text p:first-child::first-line {
+  color: var(--gold);
+  letter-spacing: 0.06em;
+}
+
+
 /* ─── Print ─────────────────────────────────────────────────────── */
 @media print {
   *, *::before, *::after { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; animation: none !important; transition: none !important; }
@@ -585,7 +601,7 @@ body {
   </section>
 
   <section class="section reveal" id="field-notes">
-    <div class="section-hdr"><span class="section-label">Field Notes</span><div class="section-line"></div></div>
+    <div class="section-hdr"><span class="section-label">The Encounter</span><div class="section-line"></div></div>
     <div class="prose">
       <p>Cosmic Requiem is the catalog's terminus in one specific sense: she is the only operator who has left. Every other operator, regardless of faction, regardless of alignment, is still inside the megacity's frequency range. She is past it. This makes her lore function different from every other character in the archive. She is not a force acting on the megacity's systems. She is evidence that the megacity's systems have a boundary.</p>
       <p>The departure log format is essential to understanding the album. It is not a narrative about leaving. It is a log filed during departure, which means it was recorded from the inside of the experience, not from before or after it. She is not describing what departure will feel like. She is filing log entries in real time as she crosses each threshold. This gives the album a present-tense quality that most departure narratives do not have.</p>

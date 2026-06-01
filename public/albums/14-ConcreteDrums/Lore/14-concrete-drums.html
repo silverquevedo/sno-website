@@ -358,6 +358,22 @@ body {
 .no-motion .hero-badge, .no-motion .hero-stamp { animation: none !important; filter: none !important; }
 .no-motion .tracklist-wrap::after { display: none; }
 
+/* ─── The Encounter ─────────────────────────────────────────────── */
+.encounter-text p {
+  font-family: var(--font-mono);
+  font-size: 0.88rem;
+  line-height: 1.8;
+  color: var(--body);
+  margin-bottom: 1.35rem;
+  letter-spacing: 0.02em;
+}
+.encounter-text p:last-child { margin-bottom: 0; }
+.encounter-text p:first-child::first-line {
+  color: var(--gold);
+  letter-spacing: 0.06em;
+}
+
+
 /* ─── Print ─────────────────────────────────────────────────────── */
 @media print {
   *, *::before, *::after { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; animation: none !important; transition: none !important; }
@@ -574,7 +590,7 @@ body {
   </section>
 
   <section class="section reveal" id="field-notes">
-    <div class="section-hdr"><span class="section-label">Field Notes</span><div class="section-line"></div></div>
+    <div class="section-hdr"><span class="section-label">The Encounter</span><div class="section-line"></div></div>
     <div class="prose">
       <p>Pulse Doctrine was written as a study in what infrastructure capture looks like when it is performed from the inside, at a layer too fundamental to audit without shutting the system down. The Architecture's megacity depends on a synchronized timing signal. That signal is the city's heartbeat. Pulse Doctrine's frequency is running in that heartbeat at a depth the Architecture's monitoring stack was not built to inspect.</p>
       <p>The city's tempo is hers. Not because she took it, but because South Bloc's rhythm traditions are older than any city, and when the megacity built its timing infrastructure, it built on top of a world that already had its own pulse. She found the sub-harmonic where the old pulse was still echoing and she ran her frequency into it. The old frequency and her frequency are the same frequency.</p>
