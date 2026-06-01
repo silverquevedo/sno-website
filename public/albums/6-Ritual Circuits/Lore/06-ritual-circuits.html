@@ -66,6 +66,8 @@ body {
 }
 .hero-left {
   flex: 0 0 55%;
+  overflow: hidden;
+  min-width: 0;
   display: flex;
   flex-direction: column;
   background: #09090e;
@@ -357,7 +359,7 @@ body {
   .hero-tagline { white-space: normal !important; width: auto !important; border-right: none !important; overflow: visible !important; }
   .scroll-progress { display: none; } .hero-stamp { display: none; }
   .hero { height: 42vh; min-height: 260px; flex-direction: row; }
-  .hero-left { flex: 0 0 55%; padding: 1rem 2rem; }
+  .hero-left { flex: 0 0 55%; overflow: hidden; min-width: 0; padding: 1rem 2rem; }
   .hero-right { flex: 1; }
   .hero-content { padding: 0; }
   .section { page-break-inside: avoid; } body { font-size: 9pt; }
