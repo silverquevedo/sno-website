@@ -123,12 +123,12 @@ body {
 .data-panel .meta-v { padding-right: 1.4rem; }
 
 /* ─── Prose ─────────────────────────────────────────────────────── */
-.prose { max-width: none; }
-.prose-wide { max-width: none; }
+.prose { max-width: 100%; }
+.prose-wide { max-width: 100%; }
 .prose p { margin-bottom: 1.35rem; }
 .prose p:last-child { margin-bottom: 0; }
 .prose em { color: var(--white); font-style: italic; }
-.pull-quote { display: flex; align-items: center; gap: 1.4rem; margin: 2.4rem auto 0; max-width: none; }
+.pull-quote { display: flex; align-items: center; gap: 1.4rem; margin: 2.4rem auto 0; max-width: 100%; }
 .pq-rule { flex: 1; height: 1px; background: var(--gold-dim); }
 .pq-text { font-family: var(--font-mono); font-size: 0.85rem; letter-spacing: 0.08em; color: var(--gold); text-align: center; line-height: 1.5; flex-shrink: 0; max-width: 34ch; }
 
@@ -162,7 +162,7 @@ body {
 .movement:last-child { border-left-color: var(--crimson); }
 .mv-numeral { font-size: 4.8rem; font-weight: 700; line-height: 1; color: var(--gold); opacity: 0.09; position: absolute; top: 0.4rem; right: 1rem; font-family: var(--font-inter); user-select: none; }
 .mv-title { font-size: 0.78rem; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.65rem; }
-.mv-desc { font-size: 0.93rem; line-height: 1.65; color: var(--body); max-width: none; }
+.mv-desc { font-size: 0.93rem; line-height: 1.65; color: var(--body); max-width: 100%; }
 
 /* ─── Relationships ─────────────────────────────────────────────── */
 .rel-list { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
@@ -251,7 +251,7 @@ body {
 @keyframes hero-type  { to { width: 57ch; } }
 @keyframes hero-caret { 50% { border-right-color: transparent; } 100% { border-right-color: transparent; } }
 @media (min-width: 641px) {
-  .hero-tagline { white-space: nowrap; overflow: hidden; max-width: none; border-right: 2px solid rgba(184,122,255,0.52); width: 0; opacity: 1;
+  .hero-tagline { white-space: nowrap; overflow: hidden; max-width: 100%; border-right: 2px solid rgba(184,122,255,0.52); width: 0; opacity: 1;
     animation: hero-type 1.9s steps(57) 0.85s forwards, hero-caret 0.8s step-end 2.8s 3 forwards; }
 }
 
