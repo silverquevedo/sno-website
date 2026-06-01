@@ -44,16 +44,20 @@ Op 27 (Velvet Marquee) y op 28 (Static Bloom) ya tienen dossier HTML listo.
 
 ## 🔴 Alta prioridad (continuación)
 
-### 4. Expandir descripciones de movimientos — dossiers 03–26
-Los agentes que crearon los 24 dossiers copiaron las descripciones del YouTube verbatim (2 líneas cada una). El dossier debe expandir cada movimiento a 4-6 oraciones de prosa narrativa.
+### 4. Auditar y expandir dossiers 03–26 desde el YouTube description
+Los agentes crearon los 24 dossiers sin necesariamente leer el `description.txt`. Pueden tener narrativas desconectadas de lo publicado.
 
 **Regla (documentada en DOSSIER-SPEC + skill v5.1):**
-- Título del movimiento = del YouTube (exacto)
-- Descripción en el dossier = expansión propia (nunca copiar del YouTube)
-- Machine Control (01) ya está expandido como referencia
+El YouTube description.txt es la semilla. El dossier es el árbol.
+- Identity opening = alias + primeras oraciones del YouTube → expandido
+- Identity paragraphs = crecen del párrafo narrativo del YouTube
+- Movimiento títulos = exactos del YouTube
+- Movimiento descripciones = 4-6 oraciones expandidas (nunca copiar)
+- Closing quote = del YouTube o variación directa
 
-**Alcance:** 24 HTML files × 4 movimientos = 96 expansiones
-**Approach sugerido:** lanzar 6 agentes paralelos de 4 operadoras cada uno, pasando el HTML actual + descripción del YouTube para que expandan los movimientos.
+**Alcance:** auditar 24 dossiers contra sus respectivos description.txt
+**Machine Control (01) + Carbon Chamber (02) = referencia de cómo debe quedar**
+**Approach:** 6 agentes paralelos de 4 ops cada uno — leer description.txt, leer HTML actual, reescribir lo que no coordina.
 
 ---
 
