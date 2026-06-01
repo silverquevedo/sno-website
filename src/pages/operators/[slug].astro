@@ -1,6 +1,6 @@
 ---
 import Base from '../../layouts/Base.astro';
-import { OPERATORS, loreHtmlPath } from '../../data/operators';
+import { OPERATORS, loreHtmlPath, FACTION_COLORS } from '../../data/operators';
 
 export function getStaticPaths() {
   return OPERATORS
@@ -10,18 +10,55 @@ export function getStaticPaths() {
 
 const { op } = Astro.props;
 const htmlPath = loreHtmlPath(op)!;
+
+// Build ordered list of operators that have dossiers
+const dossierOps = OPERATORS.filter(o => o.slug && o.lore);
+const idx = dossierOps.findIndex(o => o.slug === op.slug);
+const prev = idx > 0 ? dossierOps[idx - 1] : null;
+const next = idx < dossierOps.length - 1 ? dossierOps[idx + 1] : null;
+
+const paddedId = String(op.id).padStart(2, '0');
+const factionColor = FACTION_COLORS[op.faction] ?? 'var(--dim)';
 ---
 
-<Base title={`${op.name} — Silver Night Operator`} description={`Operator ${String(op.id).padStart(2,'0')} · ${op.faction}`}>
+<Base title={`${op.name} — Silver Night Operator`} description={`Operator ${paddedId} · ${op.faction}`}>
 
   <!-- back bar -->
   <div class="dossier-back">
     <a href="/operators" class="back-link">
       <span class="back-arrow">←</span> Operators
     </a>
-    <span class="dossier-meta">
-      {String(op.id).padStart(2,'0')} · {op.faction}
-    </span>
+
+    <!-- prev/next navigation -->
+    <div class="dossier-nav">
+      {prev ? (
+        <a href={`/operators/${prev.slug}`} class="nav-chip nav-chip--prev" title={prev.name}>
+          <span class="nav-arr">←</span>
+          <span class="nav-id">{String(prev.id).padStart(2,'0')}</span>
+        </a>
+      ) : (
+        <span class="nav-chip nav-chip--disabled" aria-hidden="true">
+          <span class="nav-arr">←</span>
+          <span class="nav-id">--</span>
+        </span>
+      )}
+
+      <span class="dossier-meta" style={`color: ${factionColor};`}>
+        {paddedId} · {op.faction}
+      </span>
+
+      {next ? (
+        <a href={`/operators/${next.slug}`} class="nav-chip nav-chip--next" title={next.name}>
+          <span class="nav-id">{String(next.id).padStart(2,'0')}</span>
+          <span class="nav-arr">→</span>
+        </a>
+      ) : (
+        <span class="nav-chip nav-chip--disabled" aria-hidden="true">
+          <span class="nav-id">--</span>
+          <span class="nav-arr">→</span>
+        </span>
+      )}
+    </div>
   </div>
 
   <!-- dossier embedded -->
@@ -35,13 +72,18 @@ const htmlPath = loreHtmlPath(op)!;
 </Base>
 
 <style>
+/* ─── Back bar ──────────────────────────────────────── */
 .dossier-back {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0.6rem clamp(1rem, 4vw, 3rem);
+  padding: 0 clamp(1rem, 4vw, 3rem);
+  height: 41px;
   border-bottom: 1px solid rgba(0,196,255,0.1);
-  background: rgba(9,9,14,0.7);
+  background: rgba(9,9,14,0.85);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  gap: 1rem;
 }
 
 .back-link {
@@ -54,25 +96,73 @@ const htmlPath = loreHtmlPath(op)!;
   display: flex;
   align-items: center;
   gap: 0.4rem;
+  flex-shrink: 0;
   transition: color 0.15s;
 }
 .back-link:hover { color: var(--cyan); }
-
 .back-arrow { font-size: 0.9rem; }
+
+/* ─── Centre nav cluster ────────────────────────────── */
+.dossier-nav {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  min-width: 0;
+}
 
 .dossier-meta {
   font-family: var(--font-mono);
   font-size: 0.65rem;
   letter-spacing: 0.18em;
-  color: var(--dimmer);
   text-transform: uppercase;
+  white-space: nowrap;
+  opacity: 0.85;
 }
 
+/* ─── Prev / Next chips ─────────────────────────────── */
+.nav-chip {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 0.18rem 0.55rem;
+  border: 1px solid rgba(0,196,255,0.15);
+  color: var(--dim);
+  text-decoration: none;
+  transition: color 0.15s, border-color 0.15s, background 0.15s;
+  white-space: nowrap;
+}
+.nav-chip:not(.nav-chip--disabled):hover {
+  color: var(--cyan);
+  border-color: rgba(0,196,255,0.45);
+  background: rgba(0,196,255,0.06);
+}
+.nav-chip--disabled {
+  opacity: 0.25;
+  cursor: default;
+  pointer-events: none;
+}
+.nav-arr {
+  font-size: 0.8rem;
+  line-height: 1;
+}
+
+/* ─── Iframe ────────────────────────────────────────── */
 .dossier-frame {
   display: block;
   width: 100%;
-  height: calc(100vh - var(--nav-h) - 41px); /* full screen minus nav + back bar */
+  height: calc(100vh - var(--nav-h) - 41px);
   border: none;
   background: #09090e;
+}
+
+/* ─── Mobile: hide faction detail, keep arrows ──────── */
+@media (max-width: 640px) {
+  .dossier-meta { display: none; }
+  .dossier-back { justify-content: space-between; }
+  .dossier-nav { gap: 0.4rem; }
 }
 </style>
