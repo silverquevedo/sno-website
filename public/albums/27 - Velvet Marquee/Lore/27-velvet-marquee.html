@@ -91,9 +91,7 @@ body {
 .hero-overlay {
   position: absolute;
   inset: 0;
-  background:
-    linear-gradient(to left, rgba(9,9,14,0) 25%, #09090e 80%),
-    linear-gradient(to bottom, transparent 55%, #09090e 100%);
+  background: linear-gradient(to bottom, transparent 40%, rgba(9,9,14,0.4) 60%, rgba(9,9,14,0.75) 80%, #09090e 100%);
 }
 .hero-content {
   margin-top: auto;
@@ -625,7 +623,7 @@ body::after {
 .hero-stamp     { animation: sig-flicker 19s linear 10s infinite; }
 
 /* ─── Typewriter (desktop only) ─────────────────────────────────── */
-@keyframes hero-type  { to { width: 32rem; } }
+@keyframes hero-type  { to { width: 54ch; } }
 @keyframes hero-caret {
   50%  { border-right-color: transparent; }
   100% { border-right-color: transparent; }
@@ -1044,7 +1042,7 @@ body::after {
   .hero-left { flex: none; padding: 1.5rem; }
   .hero-stamp { display: none; }
   .hero-content { margin-top: 0; padding: 0; }
-  .hero-overlay { background: linear-gradient(to bottom, transparent 30%, rgba(9,9,14,0.85) 100%); }
+  .hero-overlay { background: linear-gradient(to bottom, transparent 25%, rgba(9,9,14,0.7) 60%, #09090e 100%);
   .hero-badge {
     margin-bottom: 0.6rem;
     font-size: 0.68rem;

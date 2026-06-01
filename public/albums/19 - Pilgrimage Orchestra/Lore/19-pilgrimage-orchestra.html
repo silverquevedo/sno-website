@@ -88,7 +88,7 @@ body {
 .hero-overlay {
   position: absolute;
   inset: 0;
-  background:
+  background: linear-gradient(to bottom, transparent 40%, rgba(9,9,14,0.4) 60%, rgba(9,9,14,0.75) 80%, #09090e 100%);
     linear-gradient(to left, rgba(9,9,14,0) 25%, #09090e 80%),
     linear-gradient(to bottom, transparent 55%, #09090e 100%);
 }
@@ -247,11 +247,11 @@ body {
 .hero-divider   { animation: hero-in 0.6s cubic-bezier(0.22,1,0.36,1) 0.65s both; }
 .hero-stamp     { animation: sig-flicker 19s linear 10s infinite; }
 
-@keyframes hero-type  { to { width: 32rem; } }
+@keyframes hero-type  { to { width: 70ch; } }
 @keyframes hero-caret { 50% { border-right-color: transparent; } 100% { border-right-color: transparent; } }
 @media (min-width: 641px) {
   .hero-tagline { white-space: nowrap; overflow: hidden; max-width: none; border-right: 2px solid rgba(138,180,212,0.52); width: 0; opacity: 1;
-    animation: hero-type 1.9s steps(59) 0.85s forwards, hero-caret 0.8s step-end 2.8s 3 forwards; }
+    animation: hero-type 1.9s steps(70) 0.85s forwards, hero-caret 0.8s step-end 2.8s 3 forwards; }
 }
 
 @keyframes hero-scan { from { top: -2px; opacity: 0.9; } to { top: 100%; opacity: 0; } }
@@ -372,7 +372,7 @@ body {
   .hero-left { flex: none; padding: 1.5rem; }
   .hero-stamp { display: none; }
   .hero-content { margin-top: 0; padding: 0; }
-  .hero-overlay { background: linear-gradient(to bottom, transparent 30%, rgba(9,9,14,0.85) 100%); }
+  .hero-overlay { background: linear-gradient(to bottom, transparent 25%, rgba(9,9,14,0.7) 60%, #09090e 100%);
   .hero-badge { margin-bottom: 0.6rem; font-size: 0.68rem; text-shadow: 0 1px 6px rgba(0,0,0,0.9), 0 0 16px rgba(0,0,0,0.7); }
   .hero-title { font-size: clamp(2.4rem, 13vw, 3.6rem); margin-bottom: 0.8rem; }
   .class-panel .meta-grid { grid-template-columns: 115px 1fr; }
