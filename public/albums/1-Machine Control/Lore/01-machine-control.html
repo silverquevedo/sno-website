@@ -80,6 +80,20 @@ body {
   position: relative;
   overflow: hidden;
 }
+.hero-left {
+  flex: 0 0 55%;
+  display: flex;
+  flex-direction: column;
+  background: #09090e;
+  padding: 1.6rem clamp(1.5rem, 5vw, 4rem) clamp(1.5rem, 4vw, 2.8rem);
+  position: relative;
+  z-index: 2;
+}
+.hero-right {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+}
 .hero-img {
   width: 100%;
   height: 100%;
@@ -987,17 +1001,17 @@ body {
   <div class="hero-left">
     <div class="hero-stamp">Classified &nbsp;·&nbsp; Dossier 01</div>
     <div class="hero-content">
-        <div class="hero-badge">Silver Night Operator &nbsp;·&nbsp; Classified Archive &nbsp;·&nbsp; Operator 01</div>
-        <h1 class="hero-title">
-          <span class="t1">Machine</span>
-          <span class="t2">Control</span>
-        </h1>
-        <div class="hero-divider">
-          <div class="hero-divider-line"></div>
-          <div class="hero-divider-dot"></div>
-        </div>
-        <div class="hero-tagline">The grid was never neutral. It was always her.</div>
-      </div>
+            <div class="hero-badge">Silver Night Operator &nbsp;·&nbsp; Classified Archive &nbsp;·&nbsp; Operator 01</div>
+            <h1 class="hero-title">
+              <span class="t1">Machine</span>
+              <span class="t2">Control</span>
+            </h1>
+            <div class="hero-divider">
+              <div class="hero-divider-line"></div>
+              <div class="hero-divider-dot"></div>
+            </div>
+            <div class="hero-tagline">The grid was never neutral. It was always her.</div>
+          </div>
   </div>
   <div class="hero-right">
     <img class="hero-img"
