@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sable Ascent · Operator 18 · Silver Night Operator</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+
+/* ─── Variables — Ritual Network ─────────────────────────────────── */
+:root {
+  --bg:        #09090e;
+  --bg-lift:   #0d0d15;
+  --bg-card:   #111119;
+  --gold:      #b87aff;
+  --gold-dim:  #4a2a7a;
+  --gold-faint:#1a0d2e;
+  --crimson:   #6a2a8b;
+  --orange:    #924018;
+  --green:     #1d5c38;
+  --blue:      #1e3470;
+  --purple:    #42226a;
+  --dim-pill:  #333340;
+  --body:      #d2d0c5;
+  --dim:       #7e7c74;
+  --dimmer:    #36343080;
+  --white:     #f0efe9;
+  --font-inter: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono:  'Courier New', Courier, monospace;
+  --cyan:       #00c4ff;
+}
+
+*,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body {
+  background-color: var(--bg);
+  background-image:
+    linear-gradient(rgba(184,122,255,0.018) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(184,122,255,0.018) 1px, transparent 1px),
+    radial-gradient(ellipse 120% 60% at 50% 0%, rgba(60,0,100,0.22) 0%, transparent 62%),
+    radial-gradient(ellipse 60% 35% at 8% 100%, rgba(40,0,70,0.12) 0%, transparent 70%);
+  background-size: 52px 52px, 52px 52px, 100% 100%, 100% 100%;
+  color: var(--body);
+  font-family: var(--font-inter);
+  font-size: 17px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.section-label, .meta-k, .hero-badge, .hero-stamp,
+.class-clearance, .class-meta, .rel-pill, .tracklist-total,
+.link-label, .copyright, .mv-title, .tr-n, .tr-ts, .tr-note,
+.closing-quote, .hero-tagline { font-family: var(--font-mono); }
+
+/* ─── Hero ──────────────────────────────────────────────────────── */
+.hero { position: relative; width: 100%; height: 52vh; min-height: 340px; overflow: hidden; }
+.hero-img { width: 100%; height: 100%; object-fit: cover; object-position: center 15%; display: block; will-change: transform; }
+.hero-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(9,9,14,0.0) 0%, rgba(9,9,14,0.15) 45%, rgba(9,9,14,0.62) 70%, #09090e 100%); }
+.hero-content { position: absolute; bottom: 0; left: 0; right: 0; padding: clamp(1.5rem, 4vw, 2.8rem) clamp(1.5rem, 5vw, 4rem); }
+.hero-badge { font-size: 0.75rem; font-weight: 400; letter-spacing: 0.28em; color: rgba(184,122,255,0.55); text-transform: uppercase; margin-bottom: 1.1rem; }
+.hero-title { font-size: clamp(3.4rem, 9.5vw, 6.2rem); font-weight: 700; line-height: 0.88; letter-spacing: -0.015em; margin-bottom: 1.3rem; }
+.hero-title .t1 { color: var(--gold); display: block; }
+.hero-title .t2 { color: var(--white); display: block; }
+.hero-divider { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.9rem; max-width: 420px; }
+.hero-divider-line { flex: 1; height: 1px; background: var(--gold); opacity: 0.5; }
+.hero-divider-dot { width: 3px; height: 3px; border-radius: 50%; background: var(--gold); opacity: 0.65; flex-shrink: 0; }
+.hero-tagline { font-style: italic; font-size: 1rem; color: var(--body); max-width: 460px; line-height: 1.65; opacity: 0.9; }
+
+/* ─── Layout ────────────────────────────────────────────────────── */
+.container { max-width: 1100px; margin: 0 auto; padding: 0 clamp(1.5rem, 5vw, 3.5rem); }
+.reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.75s cubic-bezier(0.22,1,0.36,1), transform 0.75s cubic-bezier(0.22,1,0.36,1); }
+.reveal.visible { opacity: 1; transform: none; }
+.section { padding: clamp(3rem, 6vw, 4.5rem) 0 0; }
+.section-hdr { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.8rem; }
+.section-label { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.28em; text-transform: uppercase; color: var(--gold); white-space: nowrap; flex-shrink: 0; }
+.section-line { flex: 1; height: 1px; background: linear-gradient(to right, var(--gold-dim) 0%, transparent 100%); }
+
+/* ─── Classification ────────────────────────────────────────────── */
+.meta-grid { display: grid; grid-template-columns: 130px 1fr; }
+.meta-k { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--dim); padding: 0.7rem 0; border-bottom: 1px solid rgba(184,122,255,0.08); }
+.meta-v { font-size: 0.96rem; color: var(--body); padding: 0.7rem 0; border-bottom: 1px solid rgba(184,122,255,0.08); }
+.meta-k:last-of-type, .meta-v:last-of-type { border-bottom: none; }
+.data-panel { background: var(--bg-card); border: 1px solid rgba(184,122,255,0.08); padding: clamp(1rem, 3vw, 1.8rem); }
+.data-panel .meta-grid { grid-template-columns: 140px 1fr; }
+.data-panel .meta-v { padding-right: 1.4rem; }
+
+/* ─── Prose ─────────────────────────────────────────────────────── */
+.prose { max-width: 72ch; }
+.prose-wide { max-width: 84ch; }
+.prose p { margin-bottom: 1.35rem; }
+.prose p:last-child { margin-bottom: 0; }
+.prose em { color: var(--white); font-style: italic; }
+.pull-quote { display: flex; align-items: center; gap: 1.4rem; margin: 2.4rem 0 0; max-width: 68ch; }
+.pq-rule { flex: 1; height: 1px; background: var(--gold-dim); }
+.pq-text { font-family: var(--font-mono); font-size: 0.85rem; letter-spacing: 0.08em; color: var(--gold); text-align: center; line-height: 1.5; flex-shrink: 0; max-width: 34ch; }
+
+/* ─── Movements ─────────────────────────────────────────────────── */
+.movements { display: flex; flex-direction: column; gap: 0.6rem; }
+.movement { background: var(--bg-card); border-left: 2px solid var(--gold-dim); padding: 1.2rem 1.6rem 1.2rem 1.4rem; position: relative; }
+.movement:last-child { border-left-color: var(--crimson); }
+.mv-numeral { font-size: 4.8rem; font-weight: 700; line-height: 1; color: var(--gold); opacity: 0.09; position: absolute; top: 0.4rem; right: 1rem; font-family: var(--font-inter); user-select: none; }
+.mv-title { font-size: 0.78rem; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.65rem; }
+.mv-desc { font-size: 0.93rem; line-height: 1.65; color: var(--body); max-width: 56ch; }
+
+/* ─── Relationships ─────────────────────────────────────────────── */
+.rel-list { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+.rel-item { display: flex; align-items: flex-start; gap: 0.75rem; background: var(--bg-card); border: 1px solid rgba(184,122,255,0.07); padding: 1rem 1.1rem; }
+.rel-pill { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; padding: 0.18rem 0.5rem; border-radius: 1px; flex-shrink: 0; margin-top: 0.18rem; }
+.p-crimson { background: rgba(139,30,30,0.25); color: #e05555; border: 1px solid rgba(139,30,30,0.4); }
+.p-orange  { background: rgba(146,64,24,0.22); color: #d4703a; border: 1px solid rgba(146,64,24,0.4); }
+.p-green   { background: rgba(29,92,56,0.22);  color: #52c278; border: 1px solid rgba(29,92,56,0.4); }
+.p-blue    { background: rgba(30,52,112,0.25); color: #6a9ae0; border: 1px solid rgba(30,52,112,0.4); }
+.p-purple  { background: rgba(66,34,106,0.25); color: #a97adf; border: 1px solid rgba(66,34,106,0.4); }
+.p-dim     { background: rgba(51,51,64,0.4);   color: var(--dim); border: 1px solid rgba(80,80,96,0.3); }
+.rel-target { display: block; font-size: 0.88rem; font-weight: 600; color: var(--white); margin-bottom: 0.3rem; }
+.rel-desc { font-size: 0.82rem; line-height: 1.55; color: var(--dim); max-width: 38ch; }
+
+/* ─── Tracklist ─────────────────────────────────────────────────── */
+.tracklist-wrap { background: var(--bg-card); border: 1px solid rgba(184,122,255,0.08); padding: clamp(1rem, 3vw, 1.6rem) clamp(1rem, 3vw, 1.8rem); }
+.tracklist { margin-bottom: 1rem; }
+.tr { display: grid; grid-template-columns: 2rem 1fr auto; align-items: baseline; gap: 0 0.75rem; padding: 0.48rem 0; border-bottom: 1px solid rgba(184,122,255,0.05); }
+.tr:last-child { border-bottom: none; }
+.tr-n { font-size: 0.72rem; color: var(--gold); opacity: 0.55; text-align: right; }
+.tr-t { font-size: 0.93rem; color: var(--white); font-weight: 500; }
+.tr-ts { font-size: 0.72rem; color: var(--dim); white-space: nowrap; text-align: right; }
+.tr-note { grid-column: 2 / 4; font-size: 0.78rem; color: var(--dimmer); padding-top: 0.12rem; padding-bottom: 0.18rem; font-style: italic; }
+.tracklist-total { display: flex; justify-content: space-between; font-size: 0.72rem; color: var(--dim); border-top: 1px solid rgba(184,122,255,0.12); padding-top: 0.7rem; margin-top: 0.3rem; }
+
+/* ─── Footer ────────────────────────────────────────────────────── */
+.footer { padding: clamp(3rem, 6vw, 4.5rem) 0 clamp(2.5rem, 5vw, 4rem); }
+.closing-quote { font-size: 0.88rem; font-style: italic; color: var(--gold); opacity: 0.75; margin-bottom: 2.5rem; letter-spacing: 0.04em; line-height: 1.6; }
+.copyright { margin-top: 2.5rem; font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--dimmer); text-align: center; }
+.links-grid { display: grid; grid-template-columns: 200px 1fr; margin-bottom: 2.5rem; border: 1px solid rgba(184,122,255,0.12); }
+.link-label { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: var(--dim); padding: 0.8rem 1.2rem; border-bottom: 1px solid rgba(184,122,255,0.1); border-right: 1px solid rgba(184,122,255,0.12); display: flex; align-items: center; }
+.link-url { font-size: 0.82rem; color: var(--gold); text-decoration: none; transition: color 0.18s; padding: 0.8rem 1.2rem; border-bottom: 1px solid rgba(184,122,255,0.1); display: flex; align-items: center; }
+.link-url:hover { color: var(--white); }
+.link-label:last-of-type, .link-url:last-of-type { border-bottom: none; }
+
+/* ─── Classification card ───────────────────────────────────────── */
+.class-panel { background: var(--bg-card); border: 1px solid rgba(184,122,255,0.09); border-top: 2px solid rgba(184,122,255,0.28); overflow: hidden; position: relative; }
+.class-header { display: flex; align-items: center; gap: 1rem; padding: 0.7rem 1.4rem; border-bottom: 1px solid rgba(184,122,255,0.08); background: rgba(184,122,255,0.02); position: relative; overflow: hidden; flex-wrap: wrap; }
+.class-clearance { font-family: var(--font-mono); font-size: 0.72rem; font-weight: 700; letter-spacing: 0.24em; text-transform: uppercase; color: #b87aff; border: 1px solid rgba(184,122,255,0.35); padding: 0.22rem 0.55rem; flex-shrink: 0; }
+.class-meta { font-family: var(--font-mono); font-size: 0.72rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--dim); flex: 1; min-width: 0; }
+.class-watermark { font-size: 3.4rem; font-weight: 700; color: var(--gold); opacity: 0.065; line-height: 1; letter-spacing: -0.04em; position: absolute; right: 1rem; top: 50%; transform: translateY(-50%); user-select: none; pointer-events: none; }
+.class-panel .meta-grid { grid-template-columns: 140px 1fr; }
+.class-panel .meta-k { padding-left: 1.4rem; background: rgba(184,122,255,0.025); }
+.class-panel .meta-v { padding-left: 1rem; padding-right: 1.4rem; }
+@media (max-width: 640px) {
+  .class-header { padding: 0.6rem 1rem; }
+  .class-watermark { display: none; }
+  .class-panel .meta-grid { grid-template-columns: 115px 1fr; }
+  .class-panel .meta-k { padding-left: 1rem; }
+  .class-panel .meta-v { padding-left: 0.75rem; padding-right: 1rem; }
+}
+
+/* ─── Status dot ────────────────────────────────────────────────── */
+.status-dot { display: inline-block; width: 5px; height: 5px; background: #b87aff; border-radius: 50%; margin-right: 0.55rem; vertical-align: middle; animation: blink 2.4s ease-in-out infinite; box-shadow: 0 0 6px rgba(184,122,255,0.6); }
+@keyframes blink { 0%, 40%, 60%, 100% { opacity: 1; } 50% { opacity: 0.12; } }
+
+/* ─── Hero glow ─────────────────────────────────────────────────── */
+.hero-glow { position: absolute; bottom: 20%; left: 0; width: 55%; height: 40%; background: radial-gradient(ellipse at left bottom, rgba(60,0,100,0.22) 0%, transparent 70%); pointer-events: none; }
+.scroll-progress { position: fixed; top: 0; left: 0; height: 2px; width: 0%; background: linear-gradient(to right, var(--gold), var(--cyan)); z-index: 9999; pointer-events: none; transition: width 0.08s linear; }
+
+/* ─── Hero stamp ────────────────────────────────────────────────── */
+.hero-stamp { position: absolute; top: 1.6rem; right: clamp(1.5rem, 5vw, 4rem); font-size: 0.72rem; font-weight: 700; letter-spacing: 0.35em; color: rgba(184,122,255,0.50); text-transform: uppercase; border: 1px solid rgba(184,122,255,0.30); padding: 0.22rem 0.6rem; }
+
+/* ─── Animations ────────────────────────────────────────────────── */
+@keyframes hero-in { from { opacity: 0; filter: blur(8px); transform: translateY(14px); } to { opacity: 1; filter: blur(0); transform: none; } }
+.hero-badge    { animation: hero-in 0.7s cubic-bezier(0.22,1,0.36,1) 0.1s both, sig-flicker 13s linear 6s infinite; }
+.hero-title .t1 { animation: hero-in 1s cubic-bezier(0.22,1,0.36,1) 0.28s both; }
+.hero-title .t2 { animation: hero-in 1s cubic-bezier(0.22,1,0.36,1) 0.46s both; }
+.hero-divider   { animation: hero-in 0.6s cubic-bezier(0.22,1,0.36,1) 0.65s both; }
+.hero-stamp     { animation: sig-flicker 19s linear 10s infinite; }
+
+@keyframes hero-type  { to { width: 79ch; } }
+@keyframes hero-caret { 50% { border-right-color: transparent; } 100% { border-right-color: transparent; } }
+@media (min-width: 641px) {
+  .hero-tagline { white-space: nowrap; overflow: hidden; max-width: none; border-right: 2px solid rgba(184,122,255,0.52); width: 0; opacity: 1;
+    animation: hero-type 1.9s steps(79) 0.85s forwards, hero-caret 0.8s step-end 2.8s 3 forwards; }
+}
+
+@keyframes hero-scan { from { top: -2px; opacity: 0.9; } to { top: 100%; opacity: 0; } }
+.hero::after { content: ''; position: absolute; left: 0; right: 0; height: 2px; background: linear-gradient(to right, transparent, rgba(184,122,255,0.28), transparent); top: -2px; animation: hero-scan 2.4s cubic-bezier(0.22,1,0.36,1) 0.4s forwards; pointer-events: none; z-index: 2; }
+
+@keyframes sig-flicker { 0%, 84%, 100% { filter: brightness(1); } 85% { filter: brightness(0.22); } 86% { filter: brightness(1); } 88% { filter: brightness(0.08); } 89% { filter: brightness(0.9); } 90% { filter: brightness(1); } }
+@keyframes pulse-breathe { 0%, 100% { opacity: 0.75; transform: scale(1); } 50% { opacity: 1; transform: scale(1.06); } }
+.hero-glow { animation: pulse-breathe 6s ease-in-out infinite; }
+
+.hero::before { content: ''; position: absolute; inset: 0; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E"); opacity: 0.042; mix-blend-mode: overlay; pointer-events: none; z-index: 1; }
+
+/* ─── Section frame brackets ────────────────────────────────────── */
+.section-frame { position: relative; }
+.section-frame::before, .section-frame::after { content: ''; position: absolute; width: 10px; height: 10px; border-color: rgba(184,122,255,0.16); border-style: solid; pointer-events: none; transition: border-color 0.3s ease; }
+.section-frame::before { top: 0; left: -1rem; border-width: 1px 0 0 1px; }
+.section-frame::after  { bottom: 0; right: -1rem; border-width: 0 1px 1px 0; }
+.section-frame:hover::before, .section-frame:hover::after { border-color: rgba(184,122,255,0.36); }
+
+/* ─── Stagger animations ────────────────────────────────────────── */
+@keyframes label-scan { from { letter-spacing: 0.52em; opacity: 0; } to { letter-spacing: 0.28em; opacity: 1; } }
+.section-label { animation: label-scan 0.65s cubic-bezier(0.22,1,0.36,1) 0.3s both; animation-play-state: paused; }
+.reveal.visible .section-label { animation-play-state: running; }
+
+@keyframes row-slide { from { opacity: 0; transform: translateX(-7px); } to { opacity: 1; transform: none; } }
+.class-panel .meta-grid > * { animation: row-slide 0.38s cubic-bezier(0.22,1,0.36,1) both; animation-play-state: paused; }
+.class-panel .meta-grid > *:nth-child(1), .class-panel .meta-grid > *:nth-child(2)  { animation-delay: 0.07s; }
+.class-panel .meta-grid > *:nth-child(3), .class-panel .meta-grid > *:nth-child(4)  { animation-delay: 0.15s; }
+.class-panel .meta-grid > *:nth-child(5), .class-panel .meta-grid > *:nth-child(6)  { animation-delay: 0.23s; }
+.class-panel .meta-grid > *:nth-child(7), .class-panel .meta-grid > *:nth-child(8)  { animation-delay: 0.31s; }
+.class-panel .meta-grid > *:nth-child(9), .class-panel .meta-grid > *:nth-child(10) { animation-delay: 0.39s; }
+.reveal.visible .class-panel .meta-grid > * { animation-play-state: running; }
+
+@keyframes move-clip-in { from { clip-path: inset(0 0 100% 0); opacity: 0; } to { clip-path: inset(0 0 0% 0); opacity: 1; } }
+.movement { animation: move-clip-in 0.55s cubic-bezier(0.22,1,0.36,1) both; animation-play-state: paused; }
+.movement:nth-child(1) { animation-delay: 0.04s; } .movement:nth-child(2) { animation-delay: 0.14s; }
+.movement:nth-child(3) { animation-delay: 0.24s; } .movement:nth-child(4) { animation-delay: 0.34s; }
+.reveal.visible .movement { animation-play-state: running; }
+
+@media (min-width: 760px) { .movements { display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; } }
+
+@keyframes tr-in { from { opacity: 0; transform: translateX(-5px); } to { opacity: 1; transform: none; } }
+.tr { animation: tr-in 0.3s cubic-bezier(0.22,1,0.36,1) both; animation-play-state: paused; }
+.tr:nth-child(1) { animation-delay: 0.04s; } .tr:nth-child(2) { animation-delay: 0.08s; }
+.tr:nth-child(3) { animation-delay: 0.12s; } .tr:nth-child(4) { animation-delay: 0.16s; }
+.tr:nth-child(5) { animation-delay: 0.20s; } .tr:nth-child(6) { animation-delay: 0.24s; }
+.tr:nth-child(7) { animation-delay: 0.27s; } .tr:nth-child(8) { animation-delay: 0.30s; }
+.reveal.visible .tr { animation-play-state: running; }
+
+@keyframes rel-in-left  { from { opacity: 0; transform: translateX(-14px) translateY(6px); } to { opacity: 1; transform: none; } }
+@keyframes rel-in-right { from { opacity: 0; transform: translateX(14px) translateY(6px); }  to { opacity: 1; transform: none; } }
+.rel-item { animation: rel-in-left 0.48s cubic-bezier(0.22,1,0.36,1) both; animation-play-state: paused; }
+.rel-item:nth-child(even) { animation-name: rel-in-right; }
+.rel-item:nth-child(1) { animation-delay: 0.05s; } .rel-item:nth-child(2) { animation-delay: 0.10s; }
+.rel-item:nth-child(3) { animation-delay: 0.18s; } .rel-item:nth-child(4) { animation-delay: 0.23s; }
+.rel-item:nth-child(5) { animation-delay: 0.31s; } .rel-item:nth-child(6) { animation-delay: 0.36s; }
+.reveal.visible .rel-item { animation-play-state: running; }
+
+@keyframes panel-wipe-in { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0% 0 0); } }
+.class-panel { animation: panel-wipe-in 0.65s cubic-bezier(0.22,1,0.36,1) 0.12s both; animation-play-state: paused; }
+.reveal.visible .class-panel { animation-play-state: running; }
+
+@keyframes rule-expand { from { transform: scaleX(0); opacity: 0; } to { transform: scaleX(1); opacity: 1; } }
+.pq-rule { transform-origin: left; animation: rule-expand 0.6s cubic-bezier(0.22,1,0.36,1) both; animation-play-state: paused; }
+.pq-rule:last-child { transform-origin: right; animation-delay: 0.15s; }
+.reveal.visible .pq-rule { animation-play-state: running; }
+
+@keyframes header-slide { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: none; } }
+.class-header { animation: header-slide 0.5s cubic-bezier(0.22,1,0.36,1) 0.06s both; animation-play-state: paused; }
+.reveal.visible .class-header { animation-play-state: running; }
+
+@keyframes prose-fade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+.prose p { animation: prose-fade 0.5s cubic-bezier(0.22,1,0.36,1) both; animation-play-state: paused; }
+.prose p:nth-child(1) { animation-delay: 0.05s; } .prose p:nth-child(2) { animation-delay: 0.14s; }
+.prose p:nth-child(3) { animation-delay: 0.23s; } .prose p:nth-child(n+4) { animation-delay: 0.30s; }
+.reveal.visible .prose p { animation-play-state: running; }
+
+@keyframes pq-fade { from { opacity: 0; transform: translateX(6px); } to { opacity: 1; transform: none; } }
+.pq-text { animation: pq-fade 0.5s cubic-bezier(0.22,1,0.36,1) 0.3s both; animation-play-state: paused; }
+.reveal.visible .pq-text { animation-play-state: running; }
+
+@keyframes bracket-tl { 0% { transform-origin: top left; transform: scale(0); opacity: 0; } 60% { opacity: 1; } 100% { transform: scale(1); opacity: 1; } }
+@keyframes bracket-br { 0% { transform-origin: bottom right; transform: scale(0); opacity: 0; } 60% { opacity: 1; } 100% { transform: scale(1); opacity: 1; } }
+.section-frame::before { transform-origin: top left; animation: bracket-tl 0.38s cubic-bezier(0.22,1,0.36,1) 0.18s both; animation-play-state: paused; }
+.section-frame::after  { transform-origin: bottom right; animation: bracket-br 0.38s cubic-bezier(0.22,1,0.36,1) 0.28s both; animation-play-state: paused; }
+.reveal.visible .section-frame::before, .reveal.visible .section-frame::after { animation-play-state: running; }
+
+@keyframes scan-sweep { from { top: 0; opacity: 0.7; } to { top: 100%; opacity: 0; } }
+.tracklist-wrap { position: relative; overflow: hidden; }
+.tracklist-wrap::after { content: ''; position: absolute; left: 0; right: 0; height: 2px; background: linear-gradient(to right, transparent, rgba(184,122,255,0.55), transparent); top: 0; opacity: 0; pointer-events: none; z-index: 2; }
+.reveal.visible .tracklist-wrap::after { animation: scan-sweep 0.9s cubic-bezier(0.22,1,0.36,1) 0.25s forwards; }
+
+/* ─── Reduced motion ────────────────────────────────────────────── */
+.no-motion .section-frame::before, .no-motion .section-frame::after { animation: none !important; opacity: 1 !important; transform: none !important; }
+.no-motion .hero-badge, .no-motion .hero-stamp { animation: none !important; filter: none !important; }
+.no-motion .tracklist-wrap::after { display: none; }
+
+/* ─── Print ─────────────────────────────────────────────────────── */
+@media print {
+  *, *::before, *::after { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; animation: none !important; transition: none !important; }
+  .reveal { opacity: 1 !important; transform: none !important; }
+  .class-panel .meta-grid > *, .movement, .rel-item, .tr, .section-label, .pq-rule, .pq-text, .class-header, .prose p, .class-panel { opacity: 1 !important; transform: none !important; clip-path: none !important; animation-play-state: paused !important; }
+  .tracklist-wrap::after { display: none; } .hero::before { display: none; } .hero-glow { animation: none !important; }
+  .hero-tagline { white-space: normal !important; width: auto !important; border-right: none !important; overflow: visible !important; }
+  .scroll-progress { display: none; } .hero-stamp { display: none; }
+  .hero { height: 42vh; min-height: 260px; } .hero-content { padding: 1rem 2rem; }
+  .section { page-break-inside: avoid; } body { font-size: 9pt; }
+  .container { padding: 0 1.5rem; max-width: 100%; }
+  .class-panel .meta-grid { grid-template-columns: 130px 1fr; } .movements { grid-template-columns: 1fr 1fr; }
+}
+
+/* ─── Mobile ────────────────────────────────────────────────────── */
+@media (max-width: 640px) {
+  .hero { height: 48vh; min-height: 300px; } .hero-stamp { display: none; }
+  .hero-content { padding: 1.2rem 1.5rem; }
+  .hero-badge { margin-bottom: 0.6rem; font-size: 0.68rem; text-shadow: 0 1px 6px rgba(0,0,0,0.9), 0 0 16px rgba(0,0,0,0.7); }
+  .hero-title { font-size: clamp(2.4rem, 13vw, 3.6rem); margin-bottom: 0.8rem; }
+  .class-panel .meta-grid { grid-template-columns: 115px 1fr; }
+  .meta-grid { grid-template-columns: 115px 1fr; }
+  .data-panel .meta-grid { grid-template-columns: 110px 1fr; }
+  .links-grid { grid-template-columns: 1fr; }
+  .link-label { border-right: none; border-bottom: 1px solid rgba(184,122,255,0.1); padding: 0.6rem 1rem; }
+  .link-url { padding: 0.6rem 1rem; }
+  .mv-numeral { font-size: 4rem; } .mv-desc, .rel-desc { max-width: 100%; }
+  .rel-list { grid-template-columns: 1fr; } .movement { padding-left: 1rem; }
+}
+
+</style>
+</head>
+<body>
+
+<div class="scroll-progress" id="scrollProg"></div>
+
+<!-- ═══ HERO ════════════════════════════════════════════════════════ -->
+<div class="hero">
+  <img class="hero-img" src="../album.png" alt="Dojo Ascendance, Operator 18 cover art">
+  <div class="hero-overlay"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-stamp">Classified &nbsp;·&nbsp; Dossier 18</div>
+  <div class="hero-content">
+    <div class="hero-badge">Silver Night Operator &nbsp;·&nbsp; Classified Archive &nbsp;·&nbsp; Operator 18</div>
+    <h1 class="hero-title">
+      <span class="t1">Sable</span>
+      <span class="t2">Ascent</span>
+    </h1>
+    <div class="hero-divider"><div class="hero-divider-line"></div><div class="hero-divider-dot"></div></div>
+    <div class="hero-tagline">Every tier was a test. The fracture was the only exit that actually meant something</div>
+  </div>
+</div>
+
+<!-- ═══ CONTENT ═════════════════════════════════════════════════════ -->
+<div class="container">
+
+  <section class="section reveal section-frame" id="classification">
+    <div class="section-hdr"><span class="section-label">Classification</span><div class="section-line"></div></div>
+    <div class="class-panel">
+      <div class="class-header">
+        <div class="class-clearance">Clearance III</div>
+        <div class="class-meta">File · 018-DA &nbsp;·&nbsp; Auth · SNO-ARC &nbsp;·&nbsp; Issued · Cycle 18 &nbsp;·&nbsp; Threat · Post-fracture</div>
+        <div class="class-watermark">18</div>
+      </div>
+      <div class="meta-grid">
+        <span class="meta-k">Designation</span><span class="meta-v">Sable Ascent</span>
+        <span class="meta-k">Status</span><span class="meta-v"><span class="status-dot"></span>Active · Post-fracture, unreachable by the dojo she surpassed</span>
+        <span class="meta-k">Faction</span><span class="meta-v">The Ritual Network</span>
+        <span class="meta-k">Archetype</span><span class="meta-v">Martial ascendant</span>
+        <span class="meta-k">Domain</span><span class="meta-v">The stratified discipline architecture of the Ritual Network, tiers built from ancient martial tradition, each one a threshold requiring something beyond technique to cross</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="section reveal" id="identity">
+    <div class="section-hdr"><span class="section-label">Identity</span><div class="section-line"></div></div>
+    <div class="prose prose-wide">
+      <p>She calls herself Sable Ascent. Dark purple hair pulled high, magenta augment-eyes examining the glowing blade she holds at face level with the focus of someone who has passed through every tier the ranking system ever built and considers none of them her ceiling. She didn't train under the dojo's masters. She trained against them, fracture by fracture, until the only protocol running was hers. Siam pulse in her rhythm. Imphal in her strike. The ascendance was never about rank. It was the only direction she moves.</p>
+      <p>She carries the martial traditions with precision: Imphal Strike encoded from northeastern Indian guerrilla warfare doctrine, Siam Pulse drawn from Muay Thai's structural logic of clinch and elbow, both running alongside the Japanese budo architecture that the dojo was built on. The Ritual Network preserves these traditions not as history but as operating code. The strike is not a reference to a technique. The strike is the technique, running in augmented muscle-memory at speeds the original practitioners could not have imagined.</p>
+      <p>What makes her distinct within the Ritual Network is not that she mastered the dojo. Others have reached the upper tiers. What makes her distinct is that she left. The accord among Ritual Network operators is that the tradition contains you, that the ceremony is the boundary. Sable Ascent does not contest this. She simply operates outside it, on the other side of the fracture, in territory the dojo never mapped.</p>
+    </div>
+    <div class="pull-quote">
+      <div class="pq-rule"></div>
+      <div class="pq-text">She is its highest expression and its only graduate who actually left.</div>
+      <div class="pq-rule"></div>
+    </div>
+  </section>
+
+  <section class="section reveal" id="fracture-climb">
+    <div class="section-hdr"><span class="section-label">The Fracture Climb</span><div class="section-line"></div></div>
+    <div class="prose">
+      <p>The fracture was not a failure state. Every record the dojo kept on Sable Ascent shows clean progression: tier after tier cleared, no anomalies, no near-exits. The fracture appeared at the exact moment the final tier was completed, not as a crack in her structure but as a crack in the dojo's ceiling. She had surpassed the architecture that was built to contain mastery. The structure did not know what to do with what she had become.</p>
+      <p>She went through the fracture because it was the only opening available at the top. Not up, exactly, not out. Through. On the other side of the fracture the dojo's categories do not apply. There is no next tier. There is only what she decides to do with the capacity she built across every tier she climbed.</p>
+      <p>The Ritual Network tracks her because the traditions she carries are still encoded in her augmentations. The dojo built her. It cannot claim her. Both facts are true and the tension between them is where she operates. She is not hostile to the dojo. She is simply beyond its jurisdiction, and she does not come back.</p>
+    </div>
+  </section>
+
+  <section class="section reveal section-frame" id="arc">
+    <div class="section-hdr"><span class="section-label">Arc: Four Movements</span><div class="section-line"></div></div>
+    <div class="movements">
+      <div class="movement">
+        <div class="mv-numeral">I</div>
+        <div class="mv-title">The Signal Opens</div>
+        <div class="mv-desc">She doesn't enter the dojo through the gate. She was already past the threshold. Signal awakening, siam pulse, ritual engine. The ascendance runs on her frequency.</div>
+      </div>
+      <div class="movement">
+        <div class="mv-numeral">II</div>
+        <div class="mv-title">The Fracture March</div>
+        <div class="mv-desc">Every tier the dojo built, she passed through without slowing. Sacred threshold, war surge. She didn't cross the line. She rewrote where it was drawn.</div>
+      </div>
+      <div class="movement">
+        <div class="mv-numeral">III</div>
+        <div class="mv-title">War Ceremony</div>
+        <div class="mv-desc">Imphal strike, impact core. The discipline is no longer training. War ceremony, heavy ashes. The dojo's protocol is behind her now.</div>
+      </div>
+      <div class="movement">
+        <div class="mv-numeral">IV</div>
+        <div class="mv-title">Bushido Iron</div>
+        <div class="mv-desc">Last transmission. Chrome dojo. The only school still running is hers. Bushido iron is not a code she follows. It's a frequency she became.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section reveal section-frame" id="relationships">
+    <div class="section-hdr"><span class="section-label">Relationships</span><div class="section-line"></div></div>
+    <div class="rel-list">
+      <div class="rel-item">
+        <span class="rel-pill p-purple">Origin relation</span>
+        <div>
+          <span class="rel-target">Dojo Ascendance</span>
+          <span class="rel-desc">The dojo built her and cannot contain her. She does not disrespect it. She simply does not return. The dojo registers her as its highest achievement and its only unresolved departure.</span>
+        </div>
+      </div>
+      <div class="rel-item">
+        <span class="rel-pill p-purple">Ritual Network peer</span>
+        <div>
+          <span class="rel-target">Chrome Torii</span>
+          <span class="rel-desc">Both operate at the edge of what the Ritual Network's tradition can classify. Chrome Torii holds a threshold. Sable Ascent passed through one. They recognize each other's function without needing to coordinate.</span>
+        </div>
+      </div>
+      <div class="rel-item">
+        <span class="rel-pill p-blue">Ancient lineage</span>
+        <div>
+          <span class="rel-target">Skuldr</span>
+          <span class="rel-desc">Skuldr's Norse fate architecture and Sable Ascent's martial tier structure were both encoded from pre-megacity traditions. The Norn weaves what will come. The ascendant has already moved through what came. They exist in different temporal registers of the same inherited logic.</span>
+        </div>
+      </div>
+      <div class="rel-item">
+        <span class="rel-pill p-dim">Observed from distance</span>
+        <div>
+          <span class="rel-target">Sacred Protocol</span>
+          <span class="rel-desc">Neon Shrine's ceremonial amplification is built on the assumption that the practitioner returns to the shrine. Sable Ascent is a practitioner who does not return. Neon Shrine does not classify this as apostasy. It is simply a configuration that does not map to any existing ceremony.</span>
+        </div>
+      </div>
+      <div class="rel-item">
+        <span class="rel-pill p-dim">No contact</span>
+        <div>
+          <span class="rel-target">The Velocity</span>
+          <span class="rel-desc">Carbon Chamber and the Velocity operators represent speed as pressure, as external force. Sable Ascent's speed is internalized, encoded at the augmentation level, not competitive. They exist in adjacent frequency ranges that do not interact.</span>
+        </div>
+      </div>
+      <div class="rel-item">
+        <span class="rel-pill p-crimson">Architecture threat</span>
+        <div>
+          <span class="rel-target">Machine Control</span>
+          <span class="rel-desc">Machine Control's surveillance grid identified Sable Ascent as an operator with no current faction address after the fracture. A tier-cleared operator with no dojo to return to is an anomaly. She is aware of this classification. She has not taken steps to resolve it.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section reveal" id="sound">
+    <div class="section-hdr"><span class="section-label">Sound Signature</span><div class="section-line"></div></div>
+    <div class="data-panel">
+      <div class="meta-grid">
+        <span class="meta-k">Genres</span><span class="meta-v">Martial synthwave · Cyberpunk discipline · Industrial ritual · Southeast Asian encoded bass</span>
+        <span class="meta-k">BPM Range</span><span class="meta-v">110 – 145</span>
+        <span class="meta-k">Mood</span><span class="meta-v">Controlled ascent · Fracture as threshold · Post-tier freedom</span>
+        <span class="meta-k">Key Tracks</span><span class="meta-v">Fracture March · Imphal Strike · Bushido Iron · War Ceremony</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="section reveal" id="tracklist">
+    <div class="section-hdr"><span class="section-label">Mission Log 18: Tracklist</span><div class="section-line"></div></div>
+    <div class="tracklist-wrap">
+      <div class="tracklist">
+        <div class="tr"><span class="tr-n">01.</span><span class="tr-t">Signal Awakening</span><span class="tr-ts">00:00</span></div>
+        <div class="tr"><span class="tr-n">02.</span><span class="tr-t">Siam Pulse</span><span class="tr-ts">00:42</span></div>
+        <div class="tr"><span class="tr-n">03.</span><span class="tr-t">Silent Accord</span><span class="tr-ts">04:49</span></div>
+        <div class="tr"><span class="tr-n">04.</span><span class="tr-t">Loop Dominion</span><span class="tr-ts">10:01</span></div>
+        <div class="tr"><span class="tr-n">05.</span><span class="tr-t">Ritual Engine</span><span class="tr-ts">13:41</span></div>
+        <div class="tr"><span class="tr-n">06.</span><span class="tr-t">Fracture March</span><span class="tr-ts">19:00</span></div>
+        <div class="tr"><span class="tr-n">07.</span><span class="tr-t">Sacred Threshold</span><span class="tr-ts">23:57</span></div>
+        <div class="tr"><span class="tr-n">08.</span><span class="tr-t">War Surge</span><span class="tr-ts">28:35</span></div>
+        <div class="tr"><span class="tr-n">09.</span><span class="tr-t">Imphal Strike</span><span class="tr-ts">33:47</span></div>
+        <div class="tr"><span class="tr-n">10.</span><span class="tr-t">Impact Core</span><span class="tr-ts">38:10</span></div>
+        <div class="tr"><span class="tr-n">11.</span><span class="tr-t">War Ceremony</span><span class="tr-ts">40:13</span></div>
+        <div class="tr"><span class="tr-n">12.</span><span class="tr-t">Heavy Ashes</span><span class="tr-ts">45:35</span></div>
+        <div class="tr"><span class="tr-n">13.</span><span class="tr-t">Last Transmission</span><span class="tr-ts">50:02</span></div>
+        <div class="tr"><span class="tr-n">14.</span><span class="tr-t">Chrome Dojo</span><span class="tr-ts">53:30</span></div>
+        <div class="tr"><span class="tr-n">15.</span><span class="tr-t">Bushido Iron</span><span class="tr-ts">56:10</span></div>
+      </div>
+      <div class="tracklist-total"><span>15 Tracks</span><span>~60:00</span></div>
+    </div>
+  </section>
+
+  <section class="section reveal" id="field-notes">
+    <div class="section-hdr"><span class="section-label">Field Notes</span><div class="section-line"></div></div>
+    <div class="prose">
+      <p>Sable Ascent is built on the distinction between a ceiling and a destination. The dojo was designed with the assumption that the top tier is a destination. For most operators who enter the tier structure, it is. For Sable Ascent, the top tier was a ceiling, and when she reached it the ceiling fractured. The question the character poses is whether that fracture is a failure of the dojo or a revelation of something the dojo was always pointing toward without knowing it.</p>
+      <p>The martial traditions she carries are not decorative. Imphal Strike and Siam Pulse represent the encoded legacy of specific fighting cultures that the Ritual Network preserved as operational code. These are not aesthetic choices. They are techniques with histories, and those histories run in her augmentations alongside the Japanese budo structures the dojo was primarily built on. She is a convergence of martial traditions that were never designed to exist in the same body.</p>
+      <p>The post-fracture state is the most important part of her lore. She is not lost. She is not broken. She is operating at the full capacity of everything the dojo gave her, without the dojo's ceiling above her. The discipline is intact. The tiers are gone. This is what the dojo was actually building toward, even if the dojo did not know it.</p>
+    </div>
+  </section>
+
+  <footer class="footer reveal" aria-label="Operator links and credits">
+    <div class="closing-quote">"For those who keep listening… the ascendance was never the destination. The fracture was the method."</div>
+    <div class="section-hdr"><span class="section-label">Signal Broadcast</span><div class="section-line"></div></div>
+    <nav class="links-grid" aria-label="External links">
+      <span class="link-label">Bandcamp · Full Archive</span>
+      <a class="link-url" href="https://silvernightoperator.bandcamp.com" target="_blank" rel="noopener">silvernightoperator.bandcamp.com</a>
+      <span class="link-label">YouTube · Mixes &amp; Shorts</span>
+      <a class="link-url" href="https://youtube.com/@silvernightoperator" target="_blank" rel="noopener">@silvernightoperator</a>
+      <span class="link-label">Support · Ko-fi</span>
+      <a class="link-url" href="https://ko-fi.com/silvernightoperator" target="_blank" rel="noopener">ko-fi.com/silvernightoperator</a>
+    </nav>
+    <div class="copyright">Silver Night Operator &nbsp;·&nbsp; Classified Archive &nbsp;·&nbsp; Operator 18 &nbsp;·&nbsp; Sable Ascent</div>
+  </footer>
+
+</div>
+
+<script>
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.06 });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+const prog = document.getElementById('scrollProg');
+const heroImg = document.querySelector('.hero-img');
+const onScroll = () => {
+  const h = document.documentElement;
+  const scrollY = h.scrollTop;
+  if (prog) { const pct = (scrollY / (h.scrollHeight - h.clientHeight)) * 100; prog.style.width = Math.min(pct, 100) + '%'; }
+  if (heroImg) heroImg.style.transform = `translateY(${scrollY * 0.22}px)`;
+};
+document.documentElement.addEventListener('scroll', onScroll, { passive: true });
+
+document.querySelectorAll('.hero-img').forEach(img => {
+  if (img.complete) img.closest('.hero')?.classList.add('img-loaded');
+  else img.addEventListener('load', () => img.closest('.hero')?.classList.add('img-loaded'));
+});
+if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) document.body.classList.add('no-motion');
+</script>
+</body>
+</html>
