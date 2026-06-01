@@ -28,8 +28,6 @@ Every unlock, every dossier addition, every scheduled card touches this file.
 { released: true, lore: 'Lore/slug.html', slug: 'NN-slug', unlocksAt: null }
 ```
 
-`unlocksAt` is ISO 8601 with Colombia timezone offset (`-05:00`). Match to YouTube scheduled publish time.
-
 `unlocksAt` is ISO 8601 with Colombia timezone offset (`-05:00`). Match it to the YouTube scheduled publish time exactly.
 
 ---
@@ -111,6 +109,6 @@ npm run build    # → dist/  (always run before committing)
 ## Backlog
 
 See `BACKLOG.md` for prioritized tasks. Current top priorities:
-1. HTML dossiers for 9 remaining operators (01, 03, 05, 08, 22, 23, 24, 25, 26, 28)
-2. Vercel deploy (make the site public)
-3. Dynamic featured operators on home page (1-line fix)
+1. Conectar GitHub → Vercel auto-deploy
+2. Featured operators dinámicos en Home (1-line fix)
+3. Auditar dossiers 03–26 contra YouTube description.txt (ver regla en root `CLAUDE.md`)
