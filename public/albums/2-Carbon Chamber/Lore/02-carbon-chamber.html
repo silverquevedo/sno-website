@@ -88,14 +88,31 @@ body {
 .data-panel .meta-v { padding-right: 1.4rem; }
 
 /* ─── Prose ─────────────────────────────────────────────────────── */
-.prose { max-width: 72ch; }
-.prose-wide { max-width: 84ch; }
+.prose { max-width: none; }
+.prose-wide { max-width: none; }
 .prose p { margin-bottom: 1.35rem; }
 .prose p:last-child { margin-bottom: 0; }
 .prose em { color: var(--white); font-style: italic; }
 .pull-quote { display: flex; align-items: center; gap: 1.4rem; margin: 2.4rem 0 0; max-width: 68ch; }
 .pq-rule { flex: 1; height: 1px; background: var(--gold-dim); }
 .pq-text { font-family: var(--font-mono); font-size: 0.85rem; letter-spacing: 0.08em; color: var(--gold); text-align: center; line-height: 1.5; flex-shrink: 0; max-width: 34ch; }
+
+/* ─── Identity deep-dive ─────────────────────────────────────────── */
+.identity-deep-dive {
+  margin-top: 2.4rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--gold-dim);
+}
+.deep-label {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+  opacity: 0.7;
+  margin-bottom: 1.5rem;
+}
 
 /* ─── Movements ─────────────────────────────────────────────────── */
 .movements { display: flex; flex-direction: column; gap: 0.6rem; }
@@ -357,18 +374,15 @@ body {
       <p>Her method is taxonomy built in real time. The chaos is not the problem. The chaos is the raw material. She processes it through a framework she has refined over fourteen cycles, a personal classification system that exists nowhere in writing and nowhere in any Architecture registry. The Static Crown is not a title someone gave her. It is a description of what she does: she absorbs the electrical interference of the belt and wears it as structure. Order rendered from noise, cycling continuously.</p>
       <p>What she cannot touch is silence. Not the absence of sound, but the absence of signal: the moments when the machine goes quiet because something has failed catastrophically rather than functionally. In those pauses, her classification system has nothing to work with. She has trained for years to fill the gap with pattern memory. It is the closest thing she has to a weakness and she has never acknowledged it aloud.</p>
     </div>
+    <div class="identity-deep-dive">
+      <div class="deep-label">The Static Crown</div>
+      <p>The crown is not metaphor. It is operational status. When Carbon Chamber is in control mode, the signal processing she runs generates a persistent electromagnetic signature that her allies can track without equipment: a faint field of ordered frequency that pulses at regular intervals, indicating her system is coherent and operational. To those who know what they are feeling, the crown means the converter is running. The noise is being processed. The belt is legible.</p>
+      <p>EchoChamber, her pressure-mode identity, carries no crown. In pressure mode the field collapses inward. The processing does not stop but it becomes invisible, even to her. The shift between modes is not voluntary. She has learned to recognize the early signs: a slight compression in her acoustic processing, a thinning of the taxonomic output. She uses those seconds to complete any handoffs before the transition completes. She has never failed to complete a handoff. She has come close twice.</p>
+    </div>
     <div class="pull-quote">
       <div class="pq-rule"></div>
       <div class="pq-text">The chaos is not the problem. The chaos is the raw material.</div>
       <div class="pq-rule"></div>
-    </div>
-  </section>
-
-  <section class="section reveal" id="static-crown">
-    <div class="section-hdr"><span class="section-label">The Static Crown</span><div class="section-line"></div></div>
-    <div class="prose">
-      <p>The crown is not metaphor. It is operational status. When Carbon Chamber is in control mode, the signal processing she runs generates a persistent electromagnetic signature that her allies can track without equipment: a faint field of ordered frequency that pulses at regular intervals, indicating her system is coherent and operational. To those who know what they are feeling, the crown means the converter is running. The noise is being processed. The belt is legible.</p>
-      <p>EchoChamber, her pressure-mode identity, carries no crown. In pressure mode the field collapses inward. The processing does not stop but it becomes invisible, even to her. The shift between modes is not voluntary. She has learned to recognize the early signs: a slight compression in her acoustic processing, a thinning of the taxonomic output. She uses those seconds to complete any handoffs before the transition completes. She has never failed to complete a handoff. She has come close twice.</p>
     </div>
   </section>
 

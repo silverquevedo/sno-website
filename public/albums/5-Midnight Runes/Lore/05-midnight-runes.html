@@ -88,14 +88,31 @@ body {
 .data-panel .meta-v { padding-right: 1.4rem; }
 
 /* ─── Prose ─────────────────────────────────────────────────────── */
-.prose { max-width: 72ch; }
-.prose-wide { max-width: 84ch; }
+.prose { max-width: none; }
+.prose-wide { max-width: none; }
 .prose p { margin-bottom: 1.35rem; }
 .prose p:last-child { margin-bottom: 0; }
 .prose em { color: var(--white); font-style: italic; }
 .pull-quote { display: flex; align-items: center; gap: 1.4rem; margin: 2.4rem 0 0; max-width: 68ch; }
 .pq-rule { flex: 1; height: 1px; background: var(--gold-dim); }
 .pq-text { font-family: var(--font-mono); font-size: 0.85rem; letter-spacing: 0.08em; color: var(--gold); text-align: center; line-height: 1.5; flex-shrink: 0; max-width: 34ch; }
+
+/* ─── Identity deep-dive ─────────────────────────────────────────── */
+.identity-deep-dive {
+  margin-top: 2.4rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--gold-dim);
+}
+.deep-label {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+  opacity: 0.7;
+  margin-bottom: 1.5rem;
+}
 
 /* ─── Movements ─────────────────────────────────────────────────── */
 .movements { display: flex; flex-direction: column; gap: 0.6rem; }
@@ -357,6 +374,11 @@ body {
       <p>She does not lead a faction. She tends a tradition. The operators who move through Ritual Network territory do so because the Undercroft's protocols offer something the Architecture cannot: a frequency the scanning grid has never learned to read. The Architecture classifies it as noise. Midnight Runes calls it signal. The distinction has kept dozens of operators alive during sweeps that should have found them.</p>
       <p>She moves slowly. She has been moving slowly for a long time. She is not impatient because the work she does operates on a timescale that makes the Architecture's cycle-by-cycle urgency look like static.</p>
     </div>
+    <div class="identity-deep-dive">
+      <div class="deep-label">The Undercroft Signal</div>
+      <p>The pre-Architecture traditions were not magic. They were engineering: a set of signal protocols developed before centralized infrastructure existed, when communities had to build their own communication networks from salvaged components and environmental frequencies. Those protocols run at frequencies the modern scanning grid ignores because the grid was designed to detect modern signals. It was never programmed to recognize what came before.</p>
+      <p>Midnight Runes maintains the transmission equipment herself. She also maintains the knowledge of how to read the transmissions: an oral and written tradition that Machine Control has no database entry for. The Architecture cannot archive what it cannot classify. She has built her entire operation inside that gap.</p>
+    </div>
     <div class="pull-quote">
       <div class="pq-rule"></div>
       <div class="pq-text">She is the only one left who knows what the runes mean.</div>
@@ -364,15 +386,7 @@ body {
     </div>
   </section>
 
-  <section class="section reveal" id="undercroft-signal">
-    <div class="section-hdr"><span class="section-label">The Undercroft Signal</span><div class="section-line"></div></div>
-    <div class="prose">
-      <p>The pre-Architecture traditions were not magic. They were engineering: a set of signal protocols developed before centralized infrastructure existed, when communities had to build their own communication networks from salvaged components and environmental frequencies. Those protocols run at frequencies the modern scanning grid ignores because the grid was designed to detect modern signals. It was never programmed to recognize what came before.</p>
-      <p>Midnight Runes maintains the transmission equipment herself. She also maintains the knowledge of how to read the transmissions: an oral and written tradition that Machine Control has no database entry for. The Architecture cannot archive what it cannot classify. She has built her entire operation inside that gap.</p>
-    </div>
-  </section>
-
-  <section class="section reveal section-frame" id="arc">
+  <section class="section reveal section-frame" id="arc"><section class="section reveal section-frame" id="arc">
     <div class="section-hdr"><span class="section-label">Arc: Four Movements</span><div class="section-line"></div></div>
     <div class="movements">
       <div class="movement">

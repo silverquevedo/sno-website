@@ -88,14 +88,31 @@ body {
 .data-panel .meta-v { padding-right: 1.4rem; }
 
 /* ─── Prose ─────────────────────────────────────────────────────── */
-.prose { max-width: 72ch; }
-.prose-wide { max-width: 84ch; }
+.prose { max-width: none; }
+.prose-wide { max-width: none; }
 .prose p { margin-bottom: 1.35rem; }
 .prose p:last-child { margin-bottom: 0; }
 .prose em { color: var(--white); font-style: italic; }
 .pull-quote { display: flex; align-items: center; gap: 1.4rem; margin: 2.4rem 0 0; max-width: 68ch; }
 .pq-rule { flex: 1; height: 1px; background: var(--gold-dim); }
 .pq-text { font-family: var(--font-mono); font-size: 0.85rem; letter-spacing: 0.08em; color: var(--gold); text-align: center; line-height: 1.5; flex-shrink: 0; max-width: 34ch; }
+
+/* ─── Identity deep-dive ─────────────────────────────────────────── */
+.identity-deep-dive {
+  margin-top: 2.4rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--gold-dim);
+}
+.deep-label {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+  opacity: 0.7;
+  margin-bottom: 1.5rem;
+}
 
 /* ─── Movements ─────────────────────────────────────────────────── */
 .movements { display: flex; flex-direction: column; gap: 0.6rem; }
@@ -357,6 +374,11 @@ body {
       <p>She operates through back-channel infrastructure that exists in the gaps of the Architecture's scanning grid, running coordination traffic on frequencies that appear to the grid as ambient interference. Her communications are not encrypted. They are structured as noise: pattern-bearing static that resolves into instruction only for those who know the decoding key, which changes on a cycle she has never written down.</p>
       <p>What she cannot touch is attribution. She can coordinate any operation, route any team, clear any corridor. She cannot sign her name to the result. Every successful Ghost Layer action she has enabled is credited to the operator who executed it. This is not an oversight. It is the design. Visibility would end her operational utility in approximately six hours. She accepted that tradeoff before she accepted the role.</p>
     </div>
+    <div class="identity-deep-dive">
+      <div class="deep-label">The Cipher Run</div>
+      <p>The back-channel network NightControl maintains is not a single infrastructure. It is a rolling aggregate, rebuilt and rerouted every seventy-two hours, assembled from whatever nodes the Architecture has not yet scanned. She does not own the network. She inhabits it, temporarily, precisely long enough to run the current operation, then vanishes and rebuilds elsewhere. There is no fixed coordinate where NightControl can be found. There is only the current cipher, and the current cipher always leads somewhere new.</p>
+      <p>This makes her extraordinarily difficult to disrupt. It also makes her extraordinarily difficult to reach when something changes mid-operation. The operators she supports know this. They are trained to execute on the last confirmed instruction when contact drops, trusting that the conditions NightControl pre-set will hold. They almost always do.</p>
+    </div>
     <div class="pull-quote">
       <div class="pq-rule"></div>
       <div class="pq-text">The operation was over before it began. That was always the point.</div>
@@ -364,15 +386,7 @@ body {
     </div>
   </section>
 
-  <section class="section reveal" id="cipher-run">
-    <div class="section-hdr"><span class="section-label">The Cipher Run</span><div class="section-line"></div></div>
-    <div class="prose">
-      <p>The back-channel network NightControl maintains is not a single infrastructure. It is a rolling aggregate, rebuilt and rerouted every seventy-two hours, assembled from whatever nodes the Architecture has not yet scanned. She does not own the network. She inhabits it, temporarily, precisely long enough to run the current operation, then vanishes and rebuilds elsewhere. There is no fixed coordinate where NightControl can be found. There is only the current cipher, and the current cipher always leads somewhere new.</p>
-      <p>This makes her extraordinarily difficult to disrupt. It also makes her extraordinarily difficult to reach when something changes mid-operation. The operators she supports know this. They are trained to execute on the last confirmed instruction when contact drops, trusting that the conditions NightControl pre-set will hold. They almost always do.</p>
-    </div>
-  </section>
-
-  <section class="section reveal section-frame" id="arc">
+  <section class="section reveal section-frame" id="arc"><section class="section reveal section-frame" id="arc">
     <div class="section-hdr"><span class="section-label">Arc: Four Movements</span><div class="section-line"></div></div>
     <div class="movements">
       <div class="movement">

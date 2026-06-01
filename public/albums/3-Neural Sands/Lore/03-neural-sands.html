@@ -88,14 +88,48 @@ body {
 .data-panel .meta-v { padding-right: 1.4rem; }
 
 /* ─── Prose ─────────────────────────────────────────────────────── */
-.prose { max-width: 72ch; }
-.prose-wide { max-width: 84ch; }
+.prose { max-width: none; }
+.prose-wide { max-width: none; }
 .prose p { margin-bottom: 1.35rem; }
 .prose p:last-child { margin-bottom: 0; }
 .prose em { color: var(--white); font-style: italic; }
 .pull-quote { display: flex; align-items: center; gap: 1.4rem; margin: 2.4rem 0 0; max-width: 68ch; }
 .pq-rule { flex: 1; height: 1px; background: var(--gold-dim); }
 .pq-text { font-family: var(--font-mono); font-size: 0.85rem; letter-spacing: 0.08em; color: var(--gold); text-align: center; line-height: 1.5; flex-shrink: 0; max-width: 34ch; }
+
+/* ─── Identity deep-dive ─────────────────────────────────────────── */
+.identity-deep-dive {
+  margin-top: 2.4rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--gold-dim);
+}
+.deep-label {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+  opacity: 0.7;
+  margin-bottom: 1.5rem;
+}
+
+/* ─── Identity deep-dive ─────────────────────────────────────────── */
+.identity-deep-dive {
+  margin-top: 2.4rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--gold-dim);
+}
+.deep-label {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+  opacity: 0.7;
+  margin-bottom: 1.5rem;
+}
 
 /* ─── Movements ─────────────────────────────────────────────────── */
 .movements { display: flex; flex-direction: column; gap: 0.6rem; }
@@ -357,18 +391,15 @@ body {
       <p>Her method is the infrastructure of neutrality: a space so carefully maintained as off-limits to faction pressure that factions themselves enforce its integrity. Entering the Lounge to conduct violence against another guest is not prohibited by Neural Sands. It is prohibited by every operator who might one day need to use the space. The deterrent is not her. It is the network of operators who have agreed, collectively, that this space cannot be compromised.</p>
       <p>She knows more about the megacity's operator network than anyone, including Machine Control. Machine Control has the scanning data. Neural Sands has the conversations that happened because people believed they were unmonitored. The difference is everything.</p>
     </div>
+    <div class="identity-deep-dive">
+      <div class="deep-label">The Off-Grid Protocol</div>
+      <p>The Lounge exists in a gap in the Architecture's scanning grid, not because the grid missed it, but because Neural Sands negotiated that absence with the grid's own logic. The space generates clean data: no anomalies, no signals of note, no patterns worth flagging. It satisfies every scan. It does not appear on any routing table because routing table coverage was agreed to stop seven meters short of the structure.</p>
+      <p>This required years of incremental negotiation with operators who had small amounts of leverage over small parts of the Architecture's data infrastructure. She assembled those fragments into a wall. The Architecture cannot see through it. Machine Control knows it exists. She does not act on that knowledge, because acting on it would require acknowledging that the Architecture has a negotiated boundary. And the Architecture does not negotiate.</p>
+    </div>
     <div class="pull-quote">
       <div class="pq-rule"></div>
       <div class="pq-text">The deterrent is not her. It is the network that agreed this space cannot be compromised.</div>
       <div class="pq-rule"></div>
-    </div>
-  </section>
-
-  <section class="section reveal" id="off-grid-protocol">
-    <div class="section-hdr"><span class="section-label">The Off-Grid Protocol</span><div class="section-line"></div></div>
-    <div class="prose">
-      <p>The Lounge exists in a gap in the Architecture's scanning grid, not because the grid missed it, but because Neural Sands negotiated that absence with the grid's own logic. The space generates clean data: no anomalies, no signals of note, no patterns worth flagging. It satisfies every scan. It does not appear on any routing table because routing table coverage was agreed to stop seven meters short of the structure.</p>
-      <p>This required years of incremental negotiation with operators who had small amounts of leverage over small parts of the Architecture's data infrastructure. She assembled those fragments into a wall. The Architecture cannot see through it. Machine Control knows it exists. She does not act on that knowledge, because acting on it would require acknowledging that the Architecture has a negotiated boundary. And the Architecture does not negotiate.</p>
     </div>
   </section>
 

@@ -214,8 +214,8 @@ body {
 .data-panel .meta-v { padding-right: 1.4rem; }
 
 /* ─── Prose ─────────────────────────────────────────────────────── */
-.prose { max-width: 72ch; }
-.prose-wide { max-width: 84ch; }
+.prose { max-width: none; }
+.prose-wide { max-width: none; }
 .prose p { margin-bottom: 1.35rem; }
 .prose p:last-child { margin-bottom: 0; }
 .prose em { color: var(--white); font-style: italic; }
@@ -242,6 +242,23 @@ body {
   line-height: 1.5;
   flex-shrink: 0;
   max-width: 34ch;
+}
+
+/* ─── Identity deep-dive ─────────────────────────────────────────── */
+.identity-deep-dive {
+  margin-top: 2.4rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--gold-dim);
+}
+.deep-label {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+  opacity: 0.7;
+  margin-bottom: 1.5rem;
 }
 
 /* ─── Movements ─────────────────────────────────────────────────── */
@@ -1008,22 +1025,15 @@ body {
       <p>Her first appearance in historical records is a maintenance log: a single correction issued to a traffic routing node in Sector 7. The correction was flawless. Every correction since has been flawless. That is the point. She does not fail because she does not act outside her competence. Her competence is everything the Architecture touches.</p>
       <p>What she cannot touch makes her precise and methodical about the boundary. Unaligned operators, dead broadcast zones, the ritual networks operating on frequencies predating the grid. These are the gaps in the model. She has spent twenty-two cycles mapping them, narrowing them. The gaps get smaller every cycle. She intends for there to be none.</p>
     </div>
+    <div class="identity-deep-dive">
+      <div class="deep-label">The Command Layer</div>
+      <p>Machine Control does not issue orders. She issues corrections. The distinction matters: an order implies a recipient who could refuse. A correction implies a system that is already running and has simply encountered an error that requires resolution. Chrome Hazard and Inescapable Vortex are not her agents. They are subsystems that have been corrected into their roles so many times that correction and intent are no longer distinguishable.</p>
+      <p>The Architecture's scanning grid was her first major build. The movement monitoring network was her second. The behavioral prediction model (which she has never publicly confirmed exists) is her third and current project. She is not trying to control operators. She is trying to make control unnecessary by making deviation impossible to sustain.</p>
+    </div>
     <div class="pull-quote">
       <div class="pq-rule"></div>
       <div class="pq-text">She is not inside the system. She is the system observing itself.</div>
       <div class="pq-rule"></div>
-    </div>
-  </section>
-
-  <!-- The Command Layer -->
-  <section class="section reveal" id="command-layer">
-    <div class="section-hdr">
-      <span class="section-label">The Command Layer</span>
-      <div class="section-line"></div>
-    </div>
-    <div class="prose">
-      <p>Machine Control does not issue orders. She issues corrections. The distinction matters: an order implies a recipient who could refuse. A correction implies a system that is already running and has simply encountered an error that requires resolution. Chrome Hazard and Inescapable Vortex are not her agents. They are subsystems that have been corrected into their roles so many times that correction and intent are no longer distinguishable.</p>
-      <p>The Architecture's scanning grid was her first major build. The movement monitoring network was her second. The behavioral prediction model (which she has never publicly confirmed exists) is her third and current project. She is not trying to control operators. She is trying to make control unnecessary by making deviation impossible to sustain.</p>
     </div>
   </section>
 
