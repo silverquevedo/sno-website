@@ -626,6 +626,18 @@ document.querySelectorAll('.hero-img').forEach(img => {
   else img.addEventListener('load', () => img.closest('.hero')?.classList.add('img-loaded'));
 });
 if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) document.body.classList.add('no-motion');
+
+const _tagline = document.querySelector('.hero-tagline');
+if (_tagline) {
+  _tagline.addEventListener('animationend', e => {
+    if (e.animationName === 'hero-type') {
+      _tagline.style.whiteSpace = 'normal';
+      _tagline.style.overflow  = 'visible';
+      _tagline.style.width     = 'auto';
+      _tagline.style.borderRight = 'none';
+    }
+  });
+}
 </script>
 </body>
 </html>

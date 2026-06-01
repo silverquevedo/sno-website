@@ -1453,6 +1453,18 @@ if (reduceMotion) {
   });
   if (heroImg) heroImg.style.transform = 'none'; // no parallax
 }
+
+const _tagline = document.querySelector('.hero-tagline');
+if (_tagline) {
+  _tagline.addEventListener('animationend', e => {
+    if (e.animationName === 'hero-type') {
+      _tagline.style.whiteSpace = 'normal';
+      _tagline.style.overflow  = 'visible';
+      _tagline.style.width     = 'auto';
+      _tagline.style.borderRight = 'none';
+    }
+  });
+}
 </script>
 </body>
 </html>
