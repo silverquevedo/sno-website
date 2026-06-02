@@ -106,9 +106,17 @@ npm run build    # → dist/  (always run before committing)
 
 ---
 
+## Current Standards (updated 2026-06-02)
+
+All 28 operator dossiers follow these standards. See root `../CLAUDE.md` for full spec.
+- Split hero layout, 16:9 cover images, Record labels
+- Expanded movement descriptions (4-6 sentences each)
+- The Encounter (bard-voice, monospace, above Sound Signature)
+- Track durations (not cumulative timestamps)
+- Identity deep-dive merging unique section
+- Audio player with mute button in navbar
+- Zero em dashes in visible content
+
 ## Backlog
 
-See `BACKLOG.md` for prioritized tasks. Current top priorities:
-1. Conectar GitHub → Vercel auto-deploy
-2. Featured operators dinámicos en Home (1-line fix)
-3. Auditar dossiers 03–26 contra YouTube description.txt (ver regla en root `CLAUDE.md`)
+See `BACKLOG.md` for prioritized tasks.
