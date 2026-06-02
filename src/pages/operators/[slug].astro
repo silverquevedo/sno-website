@@ -183,8 +183,8 @@ const factionColor = FACTION_COLORS[op.faction] ?? 'var(--dim)';
           const slug = name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/-$/, '');
           return `/audio/${folder}/${slug}.mp3`;  // .mp3 — convert WAVs with ffmpeg
         });
-        if (tracks.length > 0 && window.parent.__snoSetTracks) {
-          window.parent.__snoSetTracks(tracks);
+        if (tracks.length > 0 && window.__snoSetTracks) {
+          window.__snoSetTracks(tracks);
         }
       } catch(e) {
         // Cross-origin or not loaded yet — silent fail
