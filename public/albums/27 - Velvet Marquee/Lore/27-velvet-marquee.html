@@ -24,12 +24,12 @@
   --purple:    #42226a;
   --dim-pill:  #333340;
   --body:      #d2d0c5;
-  --dim:       #7e7c74;   /* bumped from #5c5a52 — WCAG AA pass on --bg-card */
+  --dim:       #7e7c74;   /* bumped from #5c5a52, WCAG AA pass on --bg-card */
   --dimmer:    #36343080;
   --white:     #f0efe9;
   --font-inter: 'Inter', system-ui, -apple-system, sans-serif;
   --font-mono:  'Courier New', Courier, monospace;
-  --cyan:       #00c4ff;   /* system accent — bridges to gallery palette */
+  --cyan:       #00c4ff;   /* system accent, bridges to gallery palette */
 }
 
 /* ─── Reset ─────────────────────────────────────────────────────── */
@@ -110,7 +110,7 @@ body {
   font-size: 0.75rem;
   font-weight: 400;
   letter-spacing: 0.28em;
-  color: rgba(0,196,255,0.55);   /* opacity encoded in color — frees animation slot */
+  color: rgba(0,196,255,0.55);   /* opacity encoded in color, frees animation slot */
   text-transform: uppercase;
   margin-bottom: 1.1rem;
 }
@@ -521,7 +521,7 @@ body {
   letter-spacing: 0.24em;
   text-transform: uppercase;
   color: var(--dim);
-  /* opacity: 0.6 removed — color alone passes WCAG AA */
+  /* opacity: 0.6 removed, color alone passes WCAG AA */
 }
 .link-url:focus-visible {
   outline: 2px solid var(--cyan);
@@ -769,7 +769,7 @@ body::after {
 .class-panel .meta-grid > *:nth-child(10) { animation-delay: 0.39s; }
 .reveal.visible .class-panel .meta-grid > * { animation-play-state: running; }
 
-/* ─── Staggered movement cards — clip-path wipe ─────────────────── */
+/* ─── Staggered movement cards, clip-path wipe ─────────────────── */
 @keyframes move-clip-in {
   from { clip-path: inset(0 0 100% 0); opacity: 0; }
   to   { clip-path: inset(0 0 0% 0);   opacity: 1; }
@@ -812,7 +812,7 @@ body::after {
 .tr:nth-child(8)  { animation-delay: 0.30s; }
 .reveal.visible .tr { animation-play-state: running; }
 
-/* ─── Relationship card stagger — alternating sides ─────────────── */
+/* ─── Relationship card stagger, alternating sides ─────────────── */
 @keyframes rel-in-left {
   from { opacity: 0; transform: translateX(-14px) translateY(6px); }
   to   { opacity: 1; transform: none; }
@@ -995,7 +995,7 @@ body::after {
 .reveal.visible .class-panel { animation-play-state: running; }
 
 /* ─── Reduced-motion override for pseudo-elements ───────────────── */
-/* JS sets .no-motion on body — pseudo-elements can't be queried in JS */
+/* JS sets .no-motion on body, pseudo-elements can't be queried in JS */
 .no-motion .section-frame::before,
 .no-motion .section-frame::after {
   animation: none !important;
@@ -1076,12 +1076,12 @@ body::after {
   }
   .hero-title { font-size: clamp(2.4rem, 13vw, 3.6rem); margin-bottom: 0.8rem; }
 
-  /* Classification panel — widen key column so DESIGNATION doesn't bleed */
+  /* Classification panel, widen key column so DESIGNATION doesn't bleed */
   .class-panel .meta-grid { grid-template-columns: 115px 1fr; }
   .meta-grid { grid-template-columns: 115px 1fr; }
   .data-panel .meta-grid { grid-template-columns: 110px 1fr; }
 
-  /* Links grid — stack label above URL so nothing overflows */
+  /* Links grid, stack label above URL so nothing overflows */
   .links-grid { grid-template-columns: 1fr; }
   .link-label {
     border-right: none;
@@ -1183,7 +1183,7 @@ body::after {
     </div>
   </section>
 
-  <!-- Arc — Four Movements -->
+  <!-- Arc, Four Movements -->
   <section class="section reveal section-frame" id="arc">
     <div class="section-hdr">
       <span class="section-label">Arc: Four Movements</span>
@@ -1401,7 +1401,7 @@ const onScroll = () => {
     prog.style.width = Math.min(pct, 100) + '%';
   }
 
-  // Hero parallax — subtle depth (0.22x factor)
+  // Hero parallax, subtle depth (0.22x factor)
   if (heroImg) {
     heroImg.style.transform = `translateY(${scrollY * 0.22}px)`;
   }
@@ -1455,7 +1455,7 @@ if (!reduceMotion) {
 
 // ── Reduced motion: disable stagger animations ────────────────────
 if (reduceMotion) {
-  // pseudo-elements can't be queried — use a class on body
+  // pseudo-elements can't be queried, use a class on body
   document.body.classList.add('no-motion');
 
   document.querySelectorAll(
