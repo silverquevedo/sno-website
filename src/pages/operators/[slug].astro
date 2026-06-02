@@ -219,6 +219,11 @@ const factionColor = FACTION_COLORS[op.faction] ?? 'var(--dim)';
 .audio-icon--off { display: block; }
 .audio-btn.playing .audio-icon--on  { display: block; }
 .audio-btn.playing .audio-icon--off { display: none; }
+@keyframes pulse-hint {
+  0%, 100% { border-color: rgba(0,196,255,0.25); }
+  50%       { border-color: rgba(0,196,255,0.8); box-shadow: 0 0 8px rgba(0,196,255,0.4); }
+}
+.audio-btn.pulse-hint { animation: pulse-hint 0.5s ease-in-out 4; }
 
 /* ─── Iframe ────────────────────────────────────────── */
 .dossier-frame {
@@ -256,35 +261,65 @@ const factionColor = FACTION_COLORS[op.faction] ?? 'var(--dim)';
 
     let tracks = [];
     let playing = false;
+    let currentName = '';
 
     function formatName(filename) {
       return filename.replace(/\.mp3$/, '').replace(/[-_]/g, ' ');
     }
+
+    function formatDuration(secs) {
+      if (!isFinite(secs)) return '';
+      const m = Math.floor(secs / 60);
+      const s = Math.floor(secs % 60);
+      return m + ':' + String(s).padStart(2, '0');
+    }
+
+    function updateLabel() {
+      if (!trackLabel || !currentName) return;
+      const dur = formatDuration(audio.duration);
+      trackLabel.textContent = dur ? currentName + '  ' + dur : currentName;
+      trackLabel.classList.add('visible');
+    }
+
+    function setPlaying(src) {
+      const filename = src.split('/').pop() ?? '';
+      currentName = formatName(filename);
+      audio.src = src;
+      audio.play().then(() => {
+        btn.classList.add('playing');
+        playing = true;
+        updateLabel();
+      }).catch(() => {
+        btn.classList.add('pulse-hint');
+        setTimeout(() => btn.classList.remove('pulse-hint'), 2000);
+      });
+    }
+
+    function stop() {
+      audio.pause();
+      btn.classList.remove('playing');
+      if (trackLabel) { trackLabel.textContent = ''; trackLabel.classList.remove('visible'); }
+      playing = false;
+    }
+
+    audio.addEventListener('loadedmetadata', () => updateLabel());
 
     fetch('/audio-manifest.json')
       .then(r => r.json())
       .then(manifest => {
         const files = manifest[folder] ?? [];
         tracks = files.map(f => '/audio/' + folder + '/' + f);
+        // Attempt autoplay on page load
+        if (tracks.length > 0) setPlaying(tracks[0]);
       })
       .catch(() => {});
 
     btn.addEventListener('click', () => {
       if (playing) {
-        audio.pause();
-        btn.classList.remove('playing');
-        if (trackLabel) { trackLabel.textContent = ''; trackLabel.classList.remove('visible'); }
-        playing = false;
+        stop();
       } else {
         if (!tracks.length) return;
-        const src = tracks[Math.floor(Math.random() * tracks.length)];
-        const filename = src.split('/').pop() ?? '';
-        audio.src = src;
-        audio.play().then(() => {
-          btn.classList.add('playing');
-          if (trackLabel) { trackLabel.textContent = formatName(filename); trackLabel.classList.add('visible'); }
-          playing = true;
-        }).catch(() => {});
+        setPlaying(tracks[0]);
       }
     });
 
