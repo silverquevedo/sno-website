@@ -59,6 +59,20 @@ const factionColor = FACTION_COLORS[op.faction] ?? 'var(--dim)';
         </span>
       )}
     </div>
+
+    <!-- audio button -->
+    <button id="audio-toggle" class="audio-btn" aria-label="Toggle audio" title="Play track">
+      <svg class="audio-icon audio-icon--off" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M3 7h3l4-4v14l-4-4H3V7z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/>
+        <line x1="14" y1="7" x2="18" y2="13" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+        <line x1="18" y1="7" x2="14" y2="13" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+      </svg>
+      <svg class="audio-icon audio-icon--on" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M3 7h3l4-4v14l-4-4H3V7z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/>
+        <path d="M14 6.5a5 5 0 010 7" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+        <path d="M16.5 4a8 8 0 010 12" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+      </svg>
+    </button>
   </div>
 
   <!-- dossier embedded -->
@@ -150,6 +164,36 @@ const factionColor = FACTION_COLORS[op.faction] ?? 'var(--dim)';
   line-height: 1;
 }
 
+/* ─── Audio button ──────────────────────────────────── */
+.audio-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  background: none;
+  border: 1px solid rgba(0,196,255,0.25);
+  color: var(--dim);
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: color 0.15s, border-color 0.15s, background 0.15s;
+  padding: 0;
+}
+.audio-btn:hover {
+  color: var(--cyan);
+  border-color: rgba(0,196,255,0.5);
+  background: rgba(0,196,255,0.06);
+}
+.audio-btn.playing {
+  color: var(--cyan);
+  border-color: rgba(0,196,255,0.5);
+}
+.audio-icon { width: 16px; height: 16px; }
+.audio-icon--on  { display: none; }
+.audio-icon--off { display: block; }
+.audio-btn.playing .audio-icon--on  { display: block; }
+.audio-btn.playing .audio-icon--off { display: none; }
+
 /* ─── Iframe ────────────────────────────────────────── */
 .dossier-frame {
   display: block;
@@ -168,14 +212,41 @@ const factionColor = FACTION_COLORS[op.faction] ?? 'var(--dim)';
 </style>
 
 <script define:vars={{ folder: op.folder }}>
-  fetch('/audio-manifest.json')
-    .then(r => r.json())
-    .then(manifest => {
-      const files = manifest[folder];
-      if (files && files.length > 0) {
-        const tracks = files.map(f => '/audio/' + folder + '/' + f);
-        if (window.__snoSetTracks) window.__snoSetTracks(tracks);
+  (() => {
+    const btn = document.getElementById('audio-toggle');
+    const audio = document.getElementById('bg-audio');
+    if (!btn || !audio) return;
+
+    let tracks = [];
+    let playing = false;
+
+    fetch('/audio-manifest.json')
+      .then(r => r.json())
+      .then(manifest => {
+        const files = manifest[folder] ?? [];
+        tracks = files.map(f => '/audio/' + folder + '/' + f);
+      })
+      .catch(() => {});
+
+    btn.addEventListener('click', () => {
+      if (playing) {
+        audio.pause();
+        btn.classList.remove('playing');
+        playing = false;
+      } else {
+        if (!tracks.length) return;
+        const src = tracks[Math.floor(Math.random() * tracks.length)];
+        audio.src = src;
+        audio.play().then(() => {
+          btn.classList.add('playing');
+          playing = true;
+        }).catch(() => {});
       }
-    })
-    .catch(() => {});
+    });
+
+    audio.addEventListener('ended', () => {
+      btn.classList.remove('playing');
+      playing = false;
+    });
+  })();
 </script>
