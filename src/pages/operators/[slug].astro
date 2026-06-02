@@ -167,9 +167,7 @@ const factionColor = FACTION_COLORS[op.faction] ?? 'var(--dim)';
 }
 </style>
 
-<script>
-  // Load audio manifest and register available tracks for this operator
-  const folder = '{op.folder}';
+<script define:vars={{ folder: op.folder }}>
   fetch('/audio-manifest.json')
     .then(r => r.json())
     .then(manifest => {
