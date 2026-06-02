@@ -166,3 +166,29 @@ const factionColor = FACTION_COLORS[op.faction] ?? 'var(--dim)';
   .dossier-nav { gap: 0.4rem; }
 }
 </style>
+
+<script>
+  // Pass track names to the audio player in Base.astro
+  const iframe = document.querySelector('.dossier-frame');
+  if (iframe) {
+    iframe.addEventListener('load', () => {
+      try {
+        const doc = iframe.contentDocument || iframe.contentWindow?.document;
+        if (!doc) return;
+        const trackEls = doc.querySelectorAll('.tr-t');
+        const tracks = Array.from(trackEls).map(el => {
+          const name = el.textContent?.trim() || '';
+          // Construct audio URL: /audio/[operator-slug]/[track-name].mp3
+          const folder = '{op.folder}';
+          const slug = name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/-$/, '');
+          return `/audio/${folder}/${slug}.mp3`;  // .mp3 — convert WAVs with ffmpeg
+        });
+        if (tracks.length > 0 && window.parent.__snoSetTracks) {
+          window.parent.__snoSetTracks(tracks);
+        }
+      } catch(e) {
+        // Cross-origin or not loaded yet — silent fail
+      }
+    });
+  }
+</script>
