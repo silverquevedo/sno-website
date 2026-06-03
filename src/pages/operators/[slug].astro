@@ -194,7 +194,7 @@ const factionColor = FACTION_COLORS[op.faction] ?? 'var(--dim)';
   text-transform: uppercase;
   color: var(--cyan);
   opacity: 0;
-  max-width: 200px;
+  max-width: 260px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -294,8 +294,7 @@ const factionColor = FACTION_COLORS[op.faction] ?? 'var(--dim)';
 
     function updateLabel() {
       if (!trackLabel || !currentName) return;
-      const dur = formatDuration(audio.duration);
-      trackLabel.textContent = dur ? currentName + '  ' + dur : currentName;
+      trackLabel.textContent = currentName;
       trackLabel.classList.add('visible');
     }
 
