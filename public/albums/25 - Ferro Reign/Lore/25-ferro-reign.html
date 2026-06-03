@@ -221,8 +221,10 @@ body {
   font-size: 1rem;
   margin-bottom: 1.25rem;
   line-height: 1.75;
+  max-width: 68ch;  /* ~65-70ch is optimal reading line length */
 }
 .prose p:last-child { margin-bottom: 0; }
+.prose-wide p { max-width: none; }  /* 2-col layout manages line length naturally */
 
 /* 2-column prose for Identity (long, 3-paragraph sections) */
 @media (min-width: 860px) {
@@ -1116,7 +1118,8 @@ body::after {
   </div>
   <div class="hero-right">
     <img class="hero-img" src="../cover-raw.png"
-       fetchpriority="high" alt="Ferro Reign, Operator 25 cover art">
+       fetchpriority="high"
+       width="2944" height="1648" alt="Ferro Reign, Operator 25 cover art">
     <div class="hero-overlay"></div>
   </div>
   <div class="hero-glow"></div>
