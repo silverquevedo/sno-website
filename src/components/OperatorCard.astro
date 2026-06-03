@@ -230,10 +230,10 @@ const isLocked    = !op.released;
 .c-bl { bottom: 8px; left: 8px;  border-bottom: 1px solid var(--fc, var(--cyan)); border-left: 1px solid var(--fc, var(--cyan)); }
 .c-br { bottom: 8px; right: 8px; border-bottom: 1px solid var(--fc, var(--cyan)); border-right: 1px solid var(--fc, var(--cyan)); }
 
-.card:not(.locked):not(.scheduled):hover .c-tl,
-.card:not(.locked):not(.scheduled):hover .c-tr,
-.card:not(.locked):not(.scheduled):hover .c-bl,
-.card:not(.locked):not(.scheduled):hover .c-br { opacity: 0.7; }
+.card:not(.locked):not(.scheduled):not(.released):hover .c-tl,
+.card:not(.locked):not(.scheduled):not(.released):hover .c-tr,
+.card:not(.locked):not(.scheduled):not(.released):hover .c-bl,
+.card:not(.locked):not(.scheduled):not(.released):hover .c-br { opacity: 0.7; }
 
 /* ─── Number badge ───────────────────────────────────────── */
 .card-num {
@@ -307,7 +307,7 @@ const isLocked    = !op.released;
   transform: translateY(4px);
   transition: opacity 0.22s, transform 0.22s;
 }
-.card:not(.locked):not(.scheduled):hover .card-cta {
+.card:not(.locked):not(.scheduled):not(.released):hover .card-cta {
   opacity: 1;
   transform: translateY(0);
 }
