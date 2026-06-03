@@ -9,7 +9,7 @@ export interface Props {
 
 const { op, index = 0 } = Astro.props;
 
-const factionColor = FACTION_COLORS[op.faction] ?? '#7e7c74';
+const factionColor = FACTION_COLORS[op.faction] ?? '#9e9c94'; /* --dim token value */
 const art          = artUrl(op);
 const dossierUrl   = loreUrl(op);
 const delay        = (index % 12) * 35;

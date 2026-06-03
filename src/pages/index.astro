@@ -179,14 +179,14 @@ const featured = FEATURED_IDS.map(id => OPERATORS.find(op => op.id === id)!).fil
 
 .t1 {
   /* White neon tube — bright white core, tight blue-white glow */
-  color: #fff;
+  color: var(--neon-white);
   margin-bottom: -0.05em;
   text-shadow:
-    0 0 2px #fff,
-    0 0 6px #fff,
-    0 0 14px #fff,
-    0 0 26px #a8e8ff,
-    0 0 48px #5ad4ff,
+    0 0 2px var(--neon-white),
+    0 0 6px var(--neon-white),
+    0 0 14px var(--neon-white),
+    0 0 26px var(--cyan-pale),
+    0 0 48px var(--cyan-mid),
     0 0 70px rgba(0,196,255,0.55);
   animation: neon-flicker-t1 9s ease-in-out 3s infinite;
   will-change: opacity, text-shadow;
@@ -194,12 +194,12 @@ const featured = FEATURED_IDS.map(id => OPERATORS.find(op => op.id === id)!).fil
 
 .t2 {
   /* Cyan neon tube — saturated cyan core, focused glow */
-  color: #00d0ff;
+  color: var(--cyan-warm);
   text-shadow:
-    0 0 2px #b8f0ff,
-    0 0 6px #00d0ff,
-    0 0 14px #00c4ff,
-    0 0 28px #00b0ee,
+    0 0 2px var(--cyan-pale2),
+    0 0 6px var(--cyan-warm),
+    0 0 14px var(--cyan),
+    0 0 28px var(--cyan-deep),
     0 0 52px rgba(0,180,255,0.6),
     0 0 75px rgba(0,150,220,0.3);
   animation: neon-flicker-t2 12s ease-in-out 6s infinite;
@@ -210,7 +210,7 @@ const featured = FEATURED_IDS.map(id => OPERATORS.find(op => op.id === id)!).fil
 @keyframes neon-flicker-t1 {
   0%,  19%,  21%,  23%,  25%, 100% {
     opacity: 1;
-    text-shadow: 0 0 2px #fff, 0 0 6px #fff, 0 0 14px #fff, 0 0 26px #a8e8ff, 0 0 48px #5ad4ff, 0 0 70px rgba(0,196,255,0.55);
+    text-shadow: 0 0 2px var(--neon-white), 0 0 6px var(--neon-white), 0 0 14px var(--neon-white), 0 0 26px var(--cyan-pale), 0 0 48px var(--cyan-mid), 0 0 70px rgba(0,196,255,0.55);
   }
   20%, 22%, 24% { opacity: 0.12; text-shadow: none; }
   60%           { opacity: 0.88; }
@@ -219,7 +219,7 @@ const featured = FEATURED_IDS.map(id => OPERATORS.find(op => op.id === id)!).fil
 @keyframes neon-flicker-t2 {
   0%,  34%,  36%,  75%, 100% {
     opacity: 1;
-    text-shadow: 0 0 2px #b8f0ff, 0 0 6px #00d0ff, 0 0 14px #00c4ff, 0 0 28px #00b0ee, 0 0 52px rgba(0,180,255,0.6), 0 0 75px rgba(0,150,220,0.3);
+    text-shadow: 0 0 2px var(--cyan-pale2), 0 0 6px var(--cyan-warm), 0 0 14px var(--cyan), 0 0 28px var(--cyan-deep), 0 0 52px rgba(0,180,255,0.6), 0 0 75px rgba(0,150,220,0.3);
   }
   35%  { opacity: 0.08; text-shadow: none; }
   74%  { opacity: 0.82; }
@@ -259,7 +259,7 @@ const featured = FEATURED_IDS.map(id => OPERATORS.find(op => op.id === id)!).fil
   border-color: var(--cyan);
 }
 .cta-primary:hover {
-  background: #33d1ff;
+  background: var(--cyan-bright);
   box-shadow: 0 0 24px rgba(0,196,255,0.5);
 }
 
