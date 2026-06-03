@@ -1,11 +1,48 @@
 ---
 import Base from '../layouts/Base.astro';
-import OperatorCard from '../components/OperatorCard.astro';
-import { OPERATORS, FACTION_COLORS } from '../data/operators';
+import { FACTION_COLORS } from '../data/operators';
 
-// Featured: 3 most recent released operators by id (stable — id-based, not index-based)
-const FEATURED_IDS = [26, 27, 28];
-const featured = FEATURED_IDS.map(id => OPERATORS.find(op => op.id === id)!).filter(Boolean);
+// Intelligence file operators (hardcoded: early, mid, ghost layer)
+const INTEL_OPS = [
+  {
+    padded: '01',
+    name: 'Machine Control',
+    slug: '01-machine-control',
+    folder: '1-Machine Control',
+    faction: 'The Architecture',
+    factionColor: '#00c4ff',
+    status: 'ACTIVE',
+  },
+  {
+    padded: '05',
+    name: 'Midnight Runes',
+    slug: '05-midnight-runes',
+    folder: '5-Midnight Runes',
+    faction: 'The Ritual Network',
+    factionColor: '#b87aff',
+    status: 'ACTIVE',
+  },
+  {
+    padded: '23',
+    name: 'Ghost Signal',
+    slug: '23-ghost-signal',
+    folder: '23 - Ghost Signal',
+    faction: 'The Ghost Layer',
+    factionColor: '#8ab4d4',
+    status: 'GHOST',
+  },
+];
+
+const FACTIONS = [
+  { name: 'The Architecture',   desc: 'Corporate control. The ones who build the rules.',           color: '#00c4ff' },
+  { name: 'The Ritual Network', desc: 'Data cults. Operate at the edge of the mystic and digital.', color: '#b87aff' },
+  { name: 'South Bloc',         desc: 'Southern coalition. Cultural force and armed resistance.',    color: '#6bdf5a' },
+  { name: 'Iron North',         desc: 'Cold militarism. Steel discipline, zero deviation.',          color: '#ff9a5a' },
+  { name: 'The Ghost Layer',    desc: 'System ghosts. No faction, no trace, no record.',             color: '#8ab4d4' },
+  { name: 'Forbidden Zone',     desc: 'Red zone. Prohibited, lawless, ungoverned.',                  color: '#ff6060' },
+  { name: 'The Velocity',       desc: 'Speed and chaos. The city in perpetual motion.',              color: '#40e0d0' },
+  { name: 'Unaligned',          desc: 'No affiliation. Operate alone, outside every network.',       color: '#c9a84c' },
+];
 ---
 
 <Base
@@ -13,106 +50,224 @@ const featured = FEATURED_IDS.map(id => OPERATORS.find(op => op.id === id)!).fil
   description="28 Operators. 8 Factions. One Megacity."
 >
 
-  <!-- ── Hero ─────────────────────────────────────────── -->
-  <section class="hero">
-    <div class="hero-bg"></div>
-    <div class="hero-inner">
-      <div class="hero-eyebrow">CLASSIFIED BROADCAST · FREQUENCY SNO-001</div>
-      <h1 class="hero-title">
-        <span class="t1">Silver Night</span>
-        <span class="t2">Operator</span>
-      </h1>
-      <p class="hero-tagline">28 Operators · 8 Factions · One Megacity</p>
-      <div class="hero-cta">
-        <a href="/operators" class="cta-btn cta-primary">Enter the Grid</a>
-        <a href="https://silvernightoperator.bandcamp.com" target="_blank" rel="noopener" class="cta-btn cta-secondary">Bandcamp</a>
-      </div>
-    </div>
-    <div class="hero-scan"></div>
-  </section>
+<!-- ═══ § 1 — BROADCAST INTERCEPT ════════════════════════════ -->
+<section class="hero" aria-label="Broadcast intercept">
+  <div class="hero-scan" aria-hidden="true"></div>
 
-  <!-- ── Info strip ────────────────────────────────────── -->
-  <section class="info-strip">
-    <div class="info-inner">
-      <div class="info-block">
-        <div class="info-num">28</div>
-        <div class="info-label">OPERATORS</div>
-        <p class="info-body">
-          Each a codename. Each a 1-hour story told through music. From ghost-layer infiltrators to iron-north war architects.
-        </p>
-      </div>
-      <div class="info-divider"></div>
-      <div class="info-block">
-        <div class="info-num">8</div>
-        <div class="info-label">FACTIONS</div>
-        <p class="info-body">
-          The Architecture. The Ritual Network. South Bloc. Iron North. The Ghost Layer. Forbidden Zone. The Velocity. Unaligned.
-        </p>
-      </div>
-      <div class="info-divider"></div>
-      <div class="info-block">
-        <div class="info-num">1</div>
-        <div class="info-label">MEGACITY</div>
-        <p class="info-body">
-          A dense urban labyrinth where every faction holds territory, every signal is monitored, and every hour of music is a field report.
-        </p>
-      </div>
-    </div>
-  </section>
+  <div class="hero-inner">
 
-  <!-- ── Featured operators ────────────────────────────── -->
-  <section class="featured">
-    <div class="featured-inner">
-      <header class="section-hdr">
-        <span class="section-label">FEATURED OPERATORS</span>
-        <div class="section-line"></div>
-        <a href="/operators" class="section-link">View All →</a>
-      </header>
-      <div class="featured-grid">
-        {featured.map((op, i) => (
-          <OperatorCard op={op} index={i} />
-        ))}
-      </div>
+    <!-- Terminal intercept line -->
+    <div class="intercept-bar" aria-label="Signal intercepted, frequency SNO-001, classified">
+      <span class="intercept-arrow" aria-hidden="true">▸</span>
+      <span class="intercept-text" aria-hidden="true">SIGNAL INTERCEPTED · FREQUENCY SNO-001 · CLASSIFIED</span>
     </div>
-  </section>
 
-  <!-- ── Links ─────────────────────────────────────────── -->
-  <section class="links-section">
-    <div class="links-inner">
-      <header class="section-hdr">
-        <span class="section-label">BROADCAST CHANNELS</span>
-        <div class="section-line"></div>
-      </header>
-      <div class="links-grid">
-        <a href="https://silvernightoperator.bandcamp.com" target="_blank" rel="noopener" class="link-tile">
-          <div class="link-tile-inner">
-            <span class="link-icon">◈</span>
-            <span class="link-name">Bandcamp</span>
-            <span class="link-desc">High-quality downloads · Full discography</span>
+    <!-- Neon title -->
+    <h1 class="hero-title">
+      <span class="t1">Silver Night</span>
+      <span class="t2">Operator</span>
+    </h1>
+
+    <!-- Worldbuilding tagline -->
+    <p class="hero-tagline">
+      28 Operators. 8 Factions. A megacity that never sleeps. Every album is a field report.
+    </p>
+
+    <!-- Live broadcast indicator -->
+    <div class="broadcast-bar" role="status" aria-label="Broadcast active, frequency SNO-001, 24/7">
+      <span class="broadcast-dot" aria-hidden="true"></span>
+      <span class="broadcast-label">BROADCAST ACTIVE</span>
+      <span class="broadcast-sep" aria-hidden="true">·</span>
+      <span class="broadcast-freq">FREQUENCY SNO-001 · 24/7</span>
+    </div>
+
+    <!-- CTAs -->
+    <nav class="hero-cta" aria-label="Primary actions">
+      <a href="/operators" class="cta-btn cta-primary">Explore Operators</a>
+      <a
+        href="https://www.youtube.com/@silvernightoperator"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="cta-btn cta-secondary"
+      >Watch on YouTube</a>
+    </nav>
+
+  </div>
+</section>
+
+<!-- ═══ § 2 — FACTIONS POWER MAP ═════════════════════════════ -->
+<section class="factions" aria-labelledby="factions-hdr">
+  <div class="section-inner">
+    <header class="section-hdr">
+      <h2 class="section-label" id="factions-hdr">FACTIONS — POWER MAP</h2>
+      <div class="section-line" aria-hidden="true"></div>
+      <span class="section-meta">8 FACTIONS · 1 MEGACITY</span>
+    </header>
+
+    <div class="factions-grid" role="list">
+      {FACTIONS.map(f => (
+        <div class="faction-card" style={`--accent: ${f.color}`} role="listitem">
+          <span class="faction-dot" aria-hidden="true"></span>
+          <div class="faction-name">{f.name}</div>
+          <p class="faction-desc">{f.desc}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- ═══ § 3 — INTELLIGENCE FILES ═════════════════════════════ -->
+<section class="intel" aria-labelledby="intel-hdr">
+  <div class="section-inner">
+    <header class="section-hdr">
+      <h2 class="section-label" id="intel-hdr">INTELLIGENCE FILES</h2>
+      <div class="section-line" aria-hidden="true"></div>
+      <a href="/operators" class="section-link">All 28 Operators →</a>
+    </header>
+
+    <div class="intel-grid">
+      {INTEL_OPS.map(op => (
+        <a href={`/operators/${op.slug}`} class="intel-file">
+          <div class="intel-ghost-num" aria-hidden="true">{op.padded}</div>
+
+          <div class="intel-art">
+            <img
+              src={`/albums/${op.folder}/album.png`}
+              alt={`${op.name} operator album art`}
+              loading="lazy"
+              width="400"
+              height="400"
+            />
+          </div>
+
+          <div class="intel-body">
+            <span class="intel-id">OPERATOR {op.padded}</span>
+            <div class="intel-name">{op.name}</div>
+            <div class="intel-faction" style={`color: ${op.factionColor}`}>{op.faction}</div>
+            <div class={`intel-status intel-status--${op.status.toLowerCase()}`}>
+              STATUS: {op.status}
+            </div>
+            <span class="intel-cta-link">View Operator →</span>
           </div>
         </a>
-        <a href="https://www.youtube.com/@silvernightoperator" target="_blank" rel="noopener" class="link-tile">
-          <div class="link-tile-inner">
-            <span class="link-icon">▷</span>
-            <span class="link-name">YouTube</span>
-            <span class="link-desc">1-hour mixes · Operator videos · 24/7 stream</span>
-          </div>
-        </a>
-        <a href="https://ko-fi.com/silvernightoperator" target="_blank" rel="noopener" class="link-tile">
-          <div class="link-tile-inner">
-            <span class="link-icon">◉</span>
-            <span class="link-name">Ko-fi</span>
-            <span class="link-desc">Support the broadcast · Wallpacks</span>
-          </div>
-        </a>
-      </div>
+      ))}
     </div>
-  </section>
+  </div>
+</section>
+
+<!-- ═══ § 4 — BROADCAST CHANNELS ════════════════════════════ -->
+<section class="channels" aria-labelledby="channels-hdr">
+  <div class="section-inner">
+    <header class="section-hdr">
+      <h2 class="section-label" id="channels-hdr">BROADCAST CHANNELS</h2>
+      <div class="section-line" aria-hidden="true"></div>
+    </header>
+
+    <div class="channels-grid">
+      <a
+        href="https://silvernightoperator.bandcamp.com"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="channel-tile"
+        aria-label="Bandcamp — silvernightoperator.bandcamp.com"
+      >
+        <span class="channel-icon" aria-hidden="true">◈</span>
+        <div class="channel-body">
+          <div class="channel-name">Bandcamp</div>
+          <div class="channel-desc">High-quality downloads · Full discography</div>
+          <div class="channel-url">silvernightoperator.bandcamp.com</div>
+        </div>
+      </a>
+
+      <a
+        href="https://www.youtube.com/@silvernightoperator"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="channel-tile"
+        aria-label="YouTube — youtube.com/@silvernightoperator"
+      >
+        <span class="channel-icon" aria-hidden="true">▷</span>
+        <div class="channel-body">
+          <div class="channel-name">YouTube</div>
+          <div class="channel-desc">1-hour mixes · 24/7 live stream</div>
+          <div class="channel-url">youtube.com/@silvernightoperator</div>
+        </div>
+      </a>
+
+      <a
+        href="https://ko-fi.com/silvernightoperator"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="channel-tile"
+        aria-label="Ko-fi — ko-fi.com/silvernightoperator"
+      >
+        <span class="channel-icon" aria-hidden="true">◉</span>
+        <div class="channel-body">
+          <div class="channel-name">Ko-fi</div>
+          <div class="channel-desc">Support the broadcast · Exclusive wallpacks</div>
+          <div class="channel-url">ko-fi.com/silvernightoperator</div>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
 
 </Base>
 
 <style>
-/* ─── Hero ───────────────────────────────────────────── */
+/* ─── Shared layout shell ───────────────────────────────── */
+.section-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 clamp(1rem, 4vw, 3rem);
+}
+
+.section-hdr {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.section-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--dim);
+  white-space: nowrap;
+  flex-shrink: 0;
+  margin: 0;
+}
+
+.section-line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to right, rgba(0,196,255,0.2), transparent);
+}
+
+.section-meta {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.18em;
+  color: var(--dimmer);
+  white-space: nowrap;
+}
+
+.section-link {
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.14em;
+  color: var(--cyan);
+  text-decoration: none;
+  flex-shrink: 0;
+  opacity: 0.7;
+  transition: opacity 0.15s;
+}
+.section-link:hover { opacity: 1; }
+
+/* ─── §1 HERO ───────────────────────────────────────────── */
 .hero {
   position: relative;
   min-height: calc(100vh - var(--nav-h));
@@ -121,23 +276,15 @@ const featured = FEATURED_IDS.map(id => OPERATORS.find(op => op.id === id)!).fil
   overflow: hidden;
 }
 
-.hero-bg {
-  position: absolute; inset: 0;
-  background:
-    radial-gradient(ellipse 100% 55% at 50% 40%, rgba(0,90,170,0.28) 0%, transparent 65%),
-    radial-gradient(ellipse 60% 40% at 20% 80%, rgba(0,50,100,0.18) 0%, transparent 70%),
-    radial-gradient(ellipse 50% 30% at 85% 20%, rgba(80,0,160,0.08) 0%, transparent 70%);
-  pointer-events: none;
-}
-
+/* CRT scanlines */
 .hero-scan {
   position: absolute; inset: 0;
   background: repeating-linear-gradient(
     0deg,
     transparent,
     transparent 3px,
-    rgba(0,196,255,0.012) 3px,
-    rgba(0,196,255,0.012) 4px
+    rgba(0,196,255,0.010) 3px,
+    rgba(0,196,255,0.010) 4px
   );
   pointer-events: none;
 }
@@ -151,34 +298,60 @@ const featured = FEATURED_IDS.map(id => OPERATORS.find(op => op.id === id)!).fil
   text-align: center;
 }
 
-.hero-eyebrow {
+/* ── Intercept terminal line ─────────────────────────────── */
+.intercept-bar {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
   font-family: var(--font-mono);
-  font-size: 0.72rem;
-  letter-spacing: 0.22em;
-  color: var(--dim);
-  margin-bottom: 1.5rem;
-  animation: fade-in 0.6s ease both;
+  font-size: 0.68rem;
+  letter-spacing: 0.18em;
+  margin-bottom: 2rem;
+  animation: fade-up 0.5s cubic-bezier(0.16,1,0.3,1) both;
 }
 
-/* ── Neon title ─ */
+.intercept-arrow {
+  color: var(--magenta);
+  font-size: 0.8rem;
+  flex-shrink: 0;
+}
+
+.intercept-text {
+  color: var(--cyan);
+  overflow: hidden;
+  white-space: nowrap;
+  display: inline-block;
+  width: 0;
+  /* "SIGNAL INTERCEPTED · FREQUENCY SNO-001 · CLASSIFIED" = 51 chars */
+  animation:
+    typer 2.4s steps(51, end) 0.6s forwards,
+    cursor-blink 0.7s step-end 0.6s 5;
+  border-right: 1.5px solid var(--cyan);
+}
+
+@keyframes typer {
+  to { width: 51ch; }
+}
+
+@keyframes cursor-blink {
+  0%, 100% { border-right-color: var(--cyan); }
+  50%       { border-right-color: transparent; }
+}
+
+/* ── Neon title ──────────────────────────────────────────── */
 .hero-title {
   font-family: var(--font-display);
   font-size: clamp(3.8rem, 13vw, 10rem);
   line-height: 1;
   letter-spacing: 0.03em;
   text-transform: uppercase;
-  margin-bottom: 1.75rem;
-  animation: fade-in 0.6s ease 0.1s both;
+  margin-bottom: 1.5rem;
+  animation: fade-up 0.6s cubic-bezier(0.16,1,0.3,1) 0.15s both;
 }
 
-/* Both lines are block, stacked tight */
-.t1,
-.t2 {
-  display: block;
-}
+.t1, .t2 { display: block; }
 
 .t1 {
-  /* White neon tube — bright white core, tight blue-white glow */
   color: var(--neon-white);
   margin-bottom: -0.05em;
   text-shadow:
@@ -193,7 +366,6 @@ const featured = FEATURED_IDS.map(id => OPERATORS.find(op => op.id === id)!).fil
 }
 
 .t2 {
-  /* Cyan neon tube — saturated cyan core, focused glow */
   color: var(--cyan-warm);
   text-shadow:
     0 0 2px var(--cyan-pale2),
@@ -206,7 +378,6 @@ const featured = FEATURED_IDS.map(id => OPERATORS.find(op => op.id === id)!).fil
   will-change: opacity, text-shadow;
 }
 
-/* ── Flicker — brief tube-buzz, not a fade ─────────────── */
 @keyframes neon-flicker-t1 {
   0%,  19%,  21%,  23%,  25%, 100% {
     opacity: 1;
@@ -225,241 +396,396 @@ const featured = FEATURED_IDS.map(id => OPERATORS.find(op => op.id === id)!).fil
   74%  { opacity: 0.82; }
 }
 
+/* ── Tagline ─────────────────────────────────────────────── */
 .hero-tagline {
   font-family: var(--font-mono);
-  font-size: clamp(0.85rem, 1.8vw, 1.05rem);
-  letter-spacing: 0.18em;
+  font-size: clamp(0.78rem, 1.6vw, 0.95rem);
+  letter-spacing: 0.14em;
   color: var(--dim);
-  margin-bottom: 2.5rem;
-  animation: fade-in 0.6s ease 0.2s both;
+  max-width: 58ch;
+  margin: 0 auto 2rem;
+  line-height: 1.7;
+  animation: fade-up 0.6s cubic-bezier(0.16,1,0.3,1) 0.25s both;
 }
 
+/* ── Live broadcast bar ──────────────────────────────────── */
+.broadcast-bar {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.16em;
+  padding: 0.45rem 1rem;
+  border: 1px solid rgba(255,255,255,0.07);
+  background: rgba(0,0,0,0.35);
+  margin-bottom: 2.5rem;
+  animation: fade-up 0.6s cubic-bezier(0.16,1,0.3,1) 0.35s both;
+}
+
+.broadcast-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #4cde82;
+  box-shadow: 0 0 5px #4cde82, 0 0 10px #4cde82;
+  animation: dot-pulse 2.2s ease-in-out infinite;
+  flex-shrink: 0;
+}
+
+@keyframes dot-pulse {
+  0%, 100% { opacity: 1; box-shadow: 0 0 5px #4cde82, 0 0 10px #4cde82; }
+  50%       { opacity: 0.45; box-shadow: 0 0 2px #4cde82; }
+}
+
+.broadcast-label { color: var(--white); font-weight: 400; }
+.broadcast-sep   { color: var(--dimmer); }
+.broadcast-freq  { color: var(--dim); }
+
+/* ── CTAs ────────────────────────────────────────────────── */
 .hero-cta {
   display: flex;
-  gap: 1rem;
+  gap: 0.8rem;
   justify-content: center;
   flex-wrap: wrap;
-  animation: fade-in 0.6s ease 0.3s both;
+  animation: fade-up 0.6s cubic-bezier(0.16,1,0.3,1) 0.45s both;
 }
 
 .cta-btn {
   font-family: var(--font-mono);
-  font-size: 0.78rem;
+  font-size: 0.76rem;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   text-decoration: none;
   padding: 0.7rem 1.8rem;
   border: 1px solid;
-  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+  transition: background 0.18s, color 0.18s, box-shadow 0.18s, border-color 0.18s;
 }
 
 .cta-primary {
-  color: var(--bg);
+  color: #09090e;
   background: var(--cyan);
   border-color: var(--cyan);
 }
 .cta-primary:hover {
   background: var(--cyan-bright);
-  box-shadow: 0 0 24px rgba(0,196,255,0.5);
+  border-color: var(--cyan-bright);
+  box-shadow: 0 0 28px rgba(0,196,255,0.45);
+}
+.cta-primary:focus-visible {
+  outline: 2px solid var(--cyan);
+  outline-offset: 3px;
 }
 
 .cta-secondary {
   color: var(--dim);
   background: transparent;
-  border-color: rgba(255,255,255,0.15);
+  border-color: rgba(255,255,255,0.12);
 }
 .cta-secondary:hover {
   color: var(--white);
-  border-color: rgba(255,255,255,0.35);
+  border-color: rgba(255,255,255,0.3);
+}
+.cta-secondary:focus-visible {
+  outline: 2px solid var(--cyan);
+  outline-offset: 3px;
 }
 
-/* ─── Info strip ─────────────────────────────────────── */
-.info-strip {
-  border-top: 1px solid rgba(0,196,255,0.08);
-  border-bottom: 1px solid rgba(0,196,255,0.08);
-  background: rgba(13,13,23,0.7);
+/* ─── §2 FACTIONS ────────────────────────────────────────── */
+.factions {
+  padding: 5rem 0;
+  border-top: 1px solid rgba(0,196,255,0.06);
+  border-bottom: 1px solid rgba(0,196,255,0.06);
+  background: rgba(13,13,23,0.5);
 }
 
-.info-inner {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 3rem clamp(1rem, 4vw, 3rem);
+.factions-grid {
   display: grid;
-  grid-template-columns: 1fr auto 1fr auto 1fr;
-  gap: 2rem;
-  align-items: start;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: rgba(255,255,255,0.03);
 }
 
-@media (max-width: 700px) {
-  .info-inner {
-    grid-template-columns: 1fr;
-  }
-  .info-divider { display: none; }
+@media (max-width: 900px) {
+  .factions-grid { grid-template-columns: repeat(2, 1fr); }
 }
 
-.info-divider {
-  width: 1px;
-  align-self: stretch;
-  background: linear-gradient(to bottom, transparent, rgba(0,196,255,0.2), transparent);
+@media (max-width: 480px) {
+  .factions-grid { grid-template-columns: 1fr; }
 }
 
-.info-block {
-  text-align: center;
+.faction-card {
+  background: var(--bg-card);
+  padding: 1.5rem 1.4rem 1.6rem;
+  position: relative;
+  transition: background 0.2s;
+  cursor: default;
 }
 
-.info-num {
-  font-family: var(--font-display);
-  font-size: clamp(3rem, 6vw, 5rem);
-  color: var(--cyan);
-  line-height: 1;
-  margin-bottom: 0.2rem;
-  text-shadow: 0 0 30px rgba(0,196,255,0.4);
+/* Top accent — full-width, not a side stripe */
+.faction-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: var(--accent);
+  opacity: 0.35;
+  transition: opacity 0.2s;
 }
 
-.info-label {
-  font-family: var(--font-mono);
-  font-size: 0.68rem;
-  letter-spacing: 0.24em;
-  color: var(--dim);
-  margin-bottom: 0.75rem;
+.faction-card:hover::before { opacity: 0.85; }
+.faction-card:hover {
+  background: color-mix(in srgb, var(--accent) 5%, var(--bg-card));
 }
 
-.info-body {
-  font-size: 0.9rem;
-  color: var(--dimmer);
-  line-height: 1.65;
-  max-width: 28ch;
-  margin: 0 auto;
+.faction-dot {
+  display: block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  opacity: 0.5;
+  margin-bottom: 0.9rem;
 }
 
-/* ─── Section header ──────────────────────────────────── */
-.section-hdr {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  margin-bottom: 1.5rem;
-}
-
-.section-label {
+.faction-name {
   font-family: var(--font-mono);
   font-size: 0.72rem;
-  letter-spacing: 0.2em;
-  color: var(--dim);
-  flex-shrink: 0;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.5rem;
+  line-height: 1.3;
 }
 
-.section-line {
-  flex: 1;
-  height: 1px;
-  background: linear-gradient(to right, rgba(0,196,255,0.25), transparent);
+.faction-desc {
+  font-family: var(--font-inter, system-ui, sans-serif);
+  font-size: 0.82rem;
+  color: var(--dimmer);
+  line-height: 1.55;
 }
 
-.section-link {
-  font-family: var(--font-mono);
-  font-size: 0.68rem;
-  letter-spacing: 0.14em;
-  color: var(--cyan);
-  text-decoration: none;
-  flex-shrink: 0;
-  opacity: 0.7;
-  transition: opacity 0.15s;
-}
-.section-link:hover { opacity: 1; }
-
-/* ─── Featured ────────────────────────────────────────── */
-.featured {
-  padding: 3rem 0 4rem;
+/* ─── §3 INTELLIGENCE FILES ──────────────────────────────── */
+.intel {
+  padding: 5rem 0;
 }
 
-.featured-inner {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 0 clamp(1rem, 4vw, 3rem);
-}
-
-.featured-grid {
+.intel-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 1px;
+  background: rgba(255,255,255,0.03);
 }
 
-@media (max-width: 640px) {
-  .featured-grid { grid-template-columns: 1fr; }
+@media (max-width: 900px) {
+  .intel-grid { grid-template-columns: 1fr; }
 }
 
-/* ─── Links section ───────────────────────────────────── */
-.links-section {
-  border-top: 1px solid rgba(255,255,255,0.05);
-  padding: 3rem 0 5rem;
-  background: rgba(9,9,14,0.6);
-}
-
-.links-inner {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 0 clamp(1rem, 4vw, 3rem);
-}
-
-.links-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 1px;
-}
-
-.link-tile {
+.intel-file {
   display: block;
   text-decoration: none;
   background: var(--bg-card);
-  border: 1px solid rgba(255,255,255,0.05);
-  transition: border-color 0.2s, background 0.2s;
+  position: relative;
+  overflow: hidden;
+  transition: background 0.2s;
 }
 
-.link-tile:hover {
-  background: var(--surface);
-  border-color: rgba(0,196,255,0.2);
+.intel-file:hover { background: rgba(20,20,32,1); }
+
+.intel-file:focus-visible {
+  outline: 2px solid var(--cyan);
+  outline-offset: -2px;
 }
 
-.link-tile-inner {
+/* Ghost number watermark */
+.intel-ghost-num {
+  position: absolute;
+  top: 0.6rem;
+  right: 1rem;
+  font-family: var(--font-display);
+  font-size: clamp(4rem, 7vw, 7rem);
+  line-height: 1;
+  color: var(--white);
+  opacity: 0.04;
+  user-select: none;
+  pointer-events: none;
+  letter-spacing: 0.04em;
+  z-index: 1;
+  transition: opacity 0.3s;
+}
+
+.intel-file:hover .intel-ghost-num { opacity: 0.07; }
+
+/* Album art */
+.intel-art {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+}
+
+.intel-art img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s cubic-bezier(0.25,1,0.5,1);
+  filter: grayscale(10%);
+}
+
+.intel-file:hover .intel-art img {
+  transform: scale(1.04);
+  filter: grayscale(0%);
+}
+
+/* Body */
+.intel-body {
+  padding: 1.2rem 1.4rem 1.5rem;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  text-align: center;
-  padding: 2.5rem 1.5rem;
-  gap: 0.6rem;
+  gap: 0.38rem;
+  position: relative;
+  z-index: 2;
 }
 
-.link-icon {
-  font-size: 1.5rem;
-  color: var(--cyan);
-  opacity: 0.6;
-  margin-bottom: 0.25rem;
-}
-
-.link-name {
-  font-family: var(--font-display);
-  font-size: 1.6rem;
-  letter-spacing: 0.06em;
-  color: var(--white);
+.intel-id {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.24em;
+  color: var(--dimmer);
   text-transform: uppercase;
 }
 
-.link-desc {
+.intel-name {
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 2.5vw, 2rem);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--white);
+  line-height: 1.05;
+  margin-top: 0.1rem;
+}
+
+.intel-faction {
   font-family: var(--font-mono);
-  font-size: 0.68rem;
+  font-size: 0.64rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  margin-top: 0.1rem;
+}
+
+.intel-status {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.intel-status--active     { color: #4cde82; }
+.intel-status--ghost      { color: #8ab4d4; }
+.intel-status--classified { color: var(--gold); }
+
+.intel-cta-link {
+  font-family: var(--font-mono);
+  font-size: 0.64rem;
+  letter-spacing: 0.12em;
+  color: var(--cyan);
+  margin-top: 0.5rem;
+  opacity: 0.6;
+  transition: opacity 0.15s;
+}
+
+.intel-file:hover .intel-cta-link { opacity: 1; }
+
+/* ─── §4 BROADCAST CHANNELS ─────────────────────────────── */
+.channels {
+  padding: 4rem 0 6rem;
+  border-top: 1px solid rgba(255,255,255,0.04);
+  background: rgba(9,9,14,0.7);
+}
+
+.channels-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: rgba(255,255,255,0.03);
+}
+
+@media (max-width: 640px) {
+  .channels-grid { grid-template-columns: 1fr; }
+}
+
+.channel-tile {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  padding: 1.8rem 1.6rem;
+  background: var(--bg-card);
+  text-decoration: none;
+  border: 1px solid rgba(255,255,255,0.03);
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.channel-tile:hover {
+  background: var(--bg-lift);
+  border-color: rgba(0,196,255,0.15);
+}
+
+.channel-tile:focus-visible {
+  outline: 2px solid var(--cyan);
+  outline-offset: -2px;
+}
+
+.channel-icon {
+  font-size: 1.5rem;
+  color: var(--cyan);
+  opacity: 0.45;
+  flex-shrink: 0;
+  transition: opacity 0.2s;
+  line-height: 1;
+}
+
+.channel-tile:hover .channel-icon { opacity: 1; }
+
+.channel-name {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--white);
+  line-height: 1.1;
+  margin-bottom: 0.25rem;
+}
+
+.channel-desc {
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
   letter-spacing: 0.1em;
-  color: var(--dimmer);
+  color: var(--dim);
   line-height: 1.5;
 }
 
-/* ─── Animations ─────────────────────────────────────── */
-@keyframes fade-in {
-  from { opacity: 0; transform: translateY(8px); }
+.channel-url {
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.08em;
+  color: var(--dimmer);
+  margin-top: 0.2rem;
+  opacity: 0.7;
+}
+
+/* ─── Shared entrance animation ─────────────────────────── */
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(10px); }
   to   { opacity: 1; transform: translateY(0); }
 }
 
-/* ─── Reduced motion ─────────────────────────────────── */
+/* ─── Reduced motion ─────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
   .t1, .t2 { animation: none; }
-  .hero-eyebrow, .hero-title, .hero-tagline, .hero-cta { animation: none; }
+  .hero-title, .hero-tagline, .hero-cta,
+  .intercept-bar, .broadcast-bar { animation: none; }
+  .intercept-text { width: 51ch; border-right: none; animation: none; }
+  .intel-art img { transition: none; }
 }
 </style>
