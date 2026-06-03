@@ -1,0 +1,14 @@
+{
+  "name": "Silver Night Operator",
+  "short_name": "SNO",
+  "description": "28 Operators. 8 Factions. One Megacity.",
+  "icons": [
+    { "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml" },
+    { "src": "/favicon.ico", "sizes": "48x48", "type": "image/x-icon" }
+  ],
+  "theme_color": "#09090e",
+  "background_color": "#09090e",
+  "display": "standalone",
+  "scope": "/",
+  "start_url": "/"
+}

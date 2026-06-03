@@ -43,6 +43,13 @@ import { OPERATORS, FACTION_COLORS, FACTION_ORDER } from '../../data/operators';
 </Base>
 
 <script>
+// Restore scroll position when returning from a dossier page
+const savedY = sessionStorage.getItem('operatorsScrollY');
+if (savedY) {
+  requestAnimationFrame(() => window.scrollTo({ top: parseInt(savedY), behavior: 'instant' }));
+  sessionStorage.removeItem('operatorsScrollY');
+}
+
 let activeFaction: string | null = null;
 
 function filterCards(faction: string | null) {

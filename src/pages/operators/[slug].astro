@@ -25,7 +25,7 @@ const factionColor = FACTION_COLORS[op.faction] ?? 'var(--dim)';
 
   <!-- back bar -->
   <div class="dossier-back">
-    <a href="/operators" class="back-link">
+    <a href="/operators" class="back-link" id="back-to-grid">
       <span class="back-arrow">←</span> Operators
     </a>
 
@@ -311,8 +311,8 @@ const factionColor = FACTION_COLORS[op.faction] ?? 'var(--dim)';
       .then(manifest => {
         const files = manifest[folder] ?? [];
         tracks = files.map(f => '/audio/' + folder + '/' + f);
-        // Attempt autoplay on page load
-        if (tracks.length > 0) setPlaying(tracks[0]);
+        // Delay autoplay 2s so page render completes before audio fetch starts (LCP)
+        if (tracks.length > 0) setTimeout(() => setPlaying(tracks[0]), 2000);
       })
       .catch(() => {});
 
@@ -331,4 +331,9 @@ const factionColor = FACTION_COLORS[op.faction] ?? 'var(--dim)';
       playing = false;
     });
   })();
+
+  // Save scroll position so /operators restores to the right card on back nav
+  document.getElementById('back-to-grid')?.addEventListener('click', () => {
+    sessionStorage.setItem('operatorsScrollY', String(window.scrollY));
+  });
 </script>

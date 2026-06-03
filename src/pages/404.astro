@@ -1,0 +1,83 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="404 — Signal Lost · Silver Night Operator" description="Operator not found. The dossier may have been moved or classified beyond your clearance level.">
+  <div class="error-page">
+    <div class="error-inner">
+      <span class="error-code">404</span>
+      <div class="error-divider"></div>
+      <h1 class="error-title">Signal Lost</h1>
+      <p class="error-body">The dossier you requested has been moved, redacted, or does not exist. Your clearance level may be insufficient.</p>
+      <a href="/operators" class="error-cta">Return to Grid</a>
+    </div>
+  </div>
+</Base>
+
+<style>
+.error-page {
+  min-height: calc(100vh - var(--nav-h));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.error-inner {
+  text-align: center;
+  max-width: 480px;
+}
+
+.error-code {
+  display: block;
+  font-family: var(--font-display);
+  font-size: clamp(6rem, 20vw, 12rem);
+  line-height: 1;
+  color: var(--cyan);
+  opacity: 0.12;
+  letter-spacing: 0.06em;
+}
+
+.error-divider {
+  width: 3rem;
+  height: 1px;
+  background: rgba(0,196,255,0.3);
+  margin: 0 auto 1.5rem;
+}
+
+.error-title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 6vw, 3.5rem);
+  letter-spacing: 0.06em;
+  color: var(--white);
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+
+.error-body {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  color: var(--dim);
+  line-height: 1.7;
+  margin-bottom: 2rem;
+}
+
+.error-cta {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--cyan);
+  border: 1px solid rgba(0,196,255,0.35);
+  padding: 0.6rem 1.4rem;
+  text-decoration: none;
+  background: rgba(0,196,255,0.06);
+  transition: background 0.15s, border-color 0.15s;
+}
+.error-cta:hover {
+  background: rgba(0,196,255,0.12);
+  border-color: rgba(0,196,255,0.6);
+}
+</style>
