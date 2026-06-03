@@ -4,7 +4,7 @@ import OperatorCard from '../components/OperatorCard.astro';
 import { OPERATORS, FACTION_COLORS } from '../data/operators';
 
 // Featured: 3 most recent released operators by id (stable — id-based, not index-based)
-const FEATURED_IDS = [27, 28, 25];
+const FEATURED_IDS = [26, 27, 28];
 const featured = FEATURED_IDS.map(id => OPERATORS.find(op => op.id === id)!).filter(Boolean);
 ---
 
