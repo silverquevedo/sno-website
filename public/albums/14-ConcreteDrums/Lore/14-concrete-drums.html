@@ -185,6 +185,7 @@ body {
   color: var(--gold);
   white-space: nowrap;
   flex-shrink: 0;
+  margin: 0;  /* reset h2 browser defaults */
 }
 .section-line {
   flex: 1;
@@ -279,21 +280,17 @@ body {
   padding: 1.6rem 3.5rem 1.6rem 1.4rem;
   background: var(--bg-card);
   border: 1px solid rgba(201,168,76,0.07);
-  border-left-width: 2px;
-  border-left-color: rgba(201,168,76,0.18);
   overflow: hidden;
-  transition: background 0.22s ease, border-left-color 0.22s ease;
+  transition: background 0.22s ease;
 }
 .movement:last-child { border-bottom: 1px solid rgba(201,168,76,0.07); }
 .movement:hover { background: var(--bg-lift); }
-.movement:nth-child(1) { border-left-color: rgba(201,168,76,0.18); }
-.movement:nth-child(2) { border-left-color: rgba(201,168,76,0.3);  }
-.movement:nth-child(3) { border-left-color: rgba(201,168,76,0.45); }
-.movement:nth-child(4) { border-left-color: rgba(139,30,30,0.55);  }
-.movement:hover:nth-child(1),
-.movement:hover:nth-child(2),
-.movement:hover:nth-child(3) { border-left-color: var(--gold-dim); }
-.movement:hover:nth-child(4)  { border-left-color: var(--crimson); }
+/* Background tint escalation — I → II → III builds, IV breaks into crimson */
+.movement:nth-child(2) { background: rgba(201,168,76,0.018); }
+.movement:nth-child(3) { background: rgba(201,168,76,0.036); }
+.movement:nth-child(4) { background: rgba(139,30,30,0.042); border-color: rgba(139,30,30,0.14); }
+.movement:nth-child(4) .mv-title { color: var(--crimson); }
+.movement:nth-child(4):hover { background: rgba(139,30,30,0.07); }
 .mv-numeral {
   position: absolute;
   top: 0.5rem;
@@ -302,7 +299,7 @@ body {
   font-weight: 700;
   line-height: 1;
   color: var(--gold);
-  opacity: 0.07;
+  opacity: 0.13;
   letter-spacing: -0.04em;
   user-select: none;
   pointer-events: none;
@@ -313,7 +310,7 @@ body {
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--gold);
-  margin-bottom: 0.55rem;
+  margin: 0 0 0.55rem;  /* reset h3 browser defaults */
 }
 .mv-desc {
   font-size: 1rem;
@@ -1118,7 +1115,8 @@ body::after {
       </div>
   </div>
   <div class="hero-right">
-    <img class="hero-img" src="../cover-raw.png" alt="ConcreteDrums, Operator 14 cover art">
+    <img class="hero-img" src="../cover-raw.png"
+       fetchpriority="high" alt="ConcreteDrums, Operator 14 cover art">
     <div class="hero-overlay"></div>
   </div>
   <div class="hero-glow"></div>
@@ -1129,7 +1127,7 @@ body::after {
 
   <!-- Classification -->
   <section class="section reveal section-frame" id="classification">
-    <div class="section-hdr"><span class="section-label">Classification</span><div class="section-line"></div></div>
+    <div class="section-hdr"><h2 class="section-label">Classification</h2><div class="section-line"></div></div>
     <div class="class-panel">
       <div class="class-header">
         <div class="class-clearance">Clearance II</div>
@@ -1148,7 +1146,7 @@ body::after {
 
   <!-- Identity -->
   <section class="section reveal" id="identity">
-    <div class="section-hdr"><span class="section-label">Identity</span><div class="section-line"></div></div>
+    <div class="section-hdr"><h2 class="section-label">Identity</h2><div class="section-line"></div></div>
     <div class="prose prose-wide">
       <p>She calls herself Pulse Doctrine. Short afro. Gold jacket marked with signal patches. Cybernetic implant behind her left ear, not for listening, for broadcasting. She doesn't enter the city's rhythm. The city enters hers. Every sector that tries to run its own beat gets overridden before the second measure.</p>
       <p>Every networked system in the megacity operates on a timing signal. Processing cycles, routing protocols, surveillance refresh rates, transit sequencing: all of it runs on synchronized clock pulses that cascade from infrastructure to infrastructure, each system borrowing its beat from the system above it in the hierarchy. The Architecture controls the master timing signal. Or it believes it does.</p>
@@ -1170,32 +1168,32 @@ body::after {
 
   <!-- Arc, Four Movements -->
   <section class="section reveal section-frame" id="arc">
-    <div class="section-hdr"><span class="section-label">Arc: Four Movements</span><div class="section-line"></div></div>
+    <div class="section-hdr"><h2 class="section-label">Arc: Four Movements</h2><div class="section-line"></div></div>
     <div class="movements">
       <div class="movement">
         <div class="mv-numeral">I</div>
-        <div class="mv-title">The Beat Opens the Grid</div>
+        <h3 class="mv-title">The Beat Opens the Grid</h3>
         <div class="mv-desc"><p>She doesn't ask the city for tempo. She delivers it, a percussive pulse that enters the grid at the physical layer, transmitted through the concrete itself, conducted by every steel beam and reinforced foundation in the district. The war circuit fires and everything downstream aligns. Not because it was ordered to.</p>
 
         <p>The Pulse Doctrine does not negotiate with infrastructure. She calibrates it. Every factory floor, every routing hub, every automated assembly line in her territory operates on a rhythm that she set, not through administrative access, but through the simple physics of resonance. The machines don't know they're following her beat.</p></div>
       </div>
       <div class="movement">
         <div class="mv-numeral">II</div>
-        <div class="mv-title">Doctrine in Motion</div>
+        <h3 class="mv-title">Doctrine in Motion</h3>
         <div class="mv-desc"><p>She moves through the sectors setting the pulse, not metaphorically, but literally, carrying a portable percussion rig that broadcasts her frequency into every node she passes. Dark endurance carries her through the industrial zones, where the ambient noise of heavy machinery provides cover for her transmission.</p>
 
         <p>The rhythm is a directive. It tells every automated system within range to synchronize to her tempo. Factories that were running at eighty-five percent output suddenly hit ninety-eight. Routing algorithms that were producing error rates in the single digits drop to zero.</p></div>
       </div>
       <div class="movement">
         <div class="mv-numeral">III</div>
-        <div class="mv-title">Override Lock</div>
+        <h3 class="mv-title">Override Lock</h3>
         <div class="mv-desc"><p>The city's native protocol didn't survive contact with her beat. The Architecture's standard operating rhythm, a rigid 4/4 grid-locked cadence optimized for predictability rather than throughput, collapsed the moment her polyrhythmic override entered the system.</p>
 
         <p>She rewrote the cadence. Not by hacking the protocol stack, but by transmitting a signal so rhythmically coherent that the old protocol's synchronization loops could not maintain lock. The Architecture's engineers have been trying to restore the original cadence for eight cycles.</p></div>
       </div>
       <div class="movement">
         <div class="mv-numeral">IV</div>
-        <div class="mv-title">Final Protocol</div>
+        <h3 class="mv-title">Final Protocol</h3>
         <div class="mv-desc"><p>The only system running is her rhythm. Every other protocol in the district has either synchronized or shut down. Feral motion, the untamed, improvisational energy of live percussion adapted to digital transmission, now governs every automated process from the waterfront to the industrial belt.</p>
 
         <p>The city closes on her frequency. Not surrendering, synchronizing. The district's entire infrastructure now operates at the tempo she established, processing data and moving material with an efficiency the Architecture's own protocols never achieved. She didn't break the city. She tuned it. The Pulse Doctrine was never written down. It was played.</p></div>
@@ -1205,7 +1203,7 @@ body::after {
 
   <!-- Relationships -->
   <section class="section reveal section-frame" id="relationships">
-    <div class="section-hdr"><span class="section-label">Relationships</span><div class="section-line"></div></div>
+    <div class="section-hdr"><h2 class="section-label">Relationships</h2><div class="section-line"></div></div>
     <div class="rel-list">
       <div class="rel-item">
         <span class="rel-pill p-green">Root tradition</span>
@@ -1254,7 +1252,7 @@ body::after {
 
   <!-- Sound Signature -->
   <section class="section reveal" id="the-encounter">
-    <div class="section-hdr"><span class="section-label">The Encounter</span><div class="section-line"></div></div>
+    <div class="section-hdr"><h2 class="section-label">The Encounter</h2><div class="section-line"></div></div>
     <div class="encounter-text">
       <p>She doesn't ask the city for tempo. She delivers it. Short afro. Gold jacket marked with signal patches. Cybernetic implant behind her left ear, not for listening, for broadcasting. The Pulse Doctrine entered the industrial district at midnight and by dawn every automated system within range was running on her rhythm.</p>
       <p>We watched her move through the sectors, carrying a portable percussion rig that broadcast her frequency into every node she passed. Dark endurance through the industrial zones, where the ambient noise of heavy machinery provided cover for her transmission. The marimba drive, a polyrhythmic pattern adapted from coastal percussion traditions, encoded into a digital sequence that industrial equipment reads as an efficiency optimization protocol. Factories that were running at eighty-five percent output suddenly hit ninety-eight. The Architecture's efficiency auditors flagged the improvement as a positive anomaly. They have not investigated the cause. The cause is a woman with a drum machine and fourteen cycles of practice making infrastructure dance.</p>
@@ -1262,7 +1260,7 @@ body::after {
     </div>
   </section>
   <section class="section reveal" id="sound">
-    <div class="section-hdr"><span class="section-label">Sound Signature</span><div class="section-line"></div></div>
+    <div class="section-hdr"><h2 class="section-label">Sound Signature</h2><div class="section-line"></div></div>
     <div class="data-panel">
       <div class="meta-grid">
         <span class="meta-k">Genres</span><span class="meta-v">Caribbean cyberpunk · Afrobeat industrial · Rhythmic infrastructure · South Bloc pulse</span>
@@ -1275,7 +1273,7 @@ body::after {
 
   <!-- Tracklist -->
   <section class="section reveal" id="tracklist">
-    <div class="section-hdr"><span class="section-label">Mission Log 14: Tracklist</span><div class="section-line"></div></div>
+    <div class="section-hdr"><h2 class="section-label">Mission Log 14: Tracklist</h2><div class="section-line"></div></div>
     <div class="tracklist-wrap">
       <div class="tracklist">
         <div class="tr"><span class="tr-n">01.</span><span class="tr-t">War Circuit</span><span class="tr-ts">2:19</span></div>
@@ -1305,7 +1303,7 @@ body::after {
   <footer class="footer reveal" aria-label="Operator links and credits">
     <div class="closing-quote">"For those who keep listening... the velvet was never the point."</div>
     <div class="section-hdr">
-      <span class="section-label">Signal Broadcast</span>
+      <h2 class="section-label">Signal Broadcast</h2>
       <div class="section-line"></div>
     </div>
     <nav class="links-grid" aria-label="External links">

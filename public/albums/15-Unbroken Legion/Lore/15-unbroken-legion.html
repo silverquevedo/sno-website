@@ -185,6 +185,7 @@ body {
   color: var(--gold);
   white-space: nowrap;
   flex-shrink: 0;
+  margin: 0;  /* reset h2 browser defaults */
 }
 .section-line {
   flex: 1;
@@ -279,21 +280,17 @@ body {
   padding: 1.6rem 3.5rem 1.6rem 1.4rem;
   background: var(--bg-card);
   border: 1px solid rgba(201,168,76,0.07);
-  border-left-width: 2px;
-  border-left-color: rgba(201,168,76,0.18);
   overflow: hidden;
-  transition: background 0.22s ease, border-left-color 0.22s ease;
+  transition: background 0.22s ease;
 }
 .movement:last-child { border-bottom: 1px solid rgba(201,168,76,0.07); }
 .movement:hover { background: var(--bg-lift); }
-.movement:nth-child(1) { border-left-color: rgba(201,168,76,0.18); }
-.movement:nth-child(2) { border-left-color: rgba(201,168,76,0.3);  }
-.movement:nth-child(3) { border-left-color: rgba(201,168,76,0.45); }
-.movement:nth-child(4) { border-left-color: rgba(139,30,30,0.55);  }
-.movement:hover:nth-child(1),
-.movement:hover:nth-child(2),
-.movement:hover:nth-child(3) { border-left-color: var(--gold-dim); }
-.movement:hover:nth-child(4)  { border-left-color: var(--crimson); }
+/* Background tint escalation — I → II → III builds, IV breaks into crimson */
+.movement:nth-child(2) { background: rgba(201,168,76,0.018); }
+.movement:nth-child(3) { background: rgba(201,168,76,0.036); }
+.movement:nth-child(4) { background: rgba(139,30,30,0.042); border-color: rgba(139,30,30,0.14); }
+.movement:nth-child(4) .mv-title { color: var(--crimson); }
+.movement:nth-child(4):hover { background: rgba(139,30,30,0.07); }
 .mv-numeral {
   position: absolute;
   top: 0.5rem;
@@ -302,7 +299,7 @@ body {
   font-weight: 700;
   line-height: 1;
   color: var(--gold);
-  opacity: 0.07;
+  opacity: 0.13;
   letter-spacing: -0.04em;
   user-select: none;
   pointer-events: none;
@@ -313,7 +310,7 @@ body {
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--gold);
-  margin-bottom: 0.55rem;
+  margin: 0 0 0.55rem;  /* reset h3 browser defaults */
 }
 .mv-desc {
   font-size: 1rem;
@@ -1118,7 +1115,8 @@ body::after {
       </div>
   </div>
   <div class="hero-right">
-    <img class="hero-img" src="../cover-raw.png" alt="Unbroken Legion, Operator 15 cover art">
+    <img class="hero-img" src="../cover-raw.png"
+       fetchpriority="high" alt="Unbroken Legion, Operator 15 cover art">
     <div class="hero-overlay"></div>
   </div>
   <div class="hero-glow"></div>
@@ -1129,7 +1127,7 @@ body::after {
 
   <!-- Classification -->
   <section class="section reveal section-frame" id="classification">
-    <div class="section-hdr"><span class="section-label">Classification</span><div class="section-line"></div></div>
+    <div class="section-hdr"><h2 class="section-label">Classification</h2><div class="section-line"></div></div>
     <div class="class-panel">
       <div class="class-header">
         <div class="class-clearance">Clearance III</div>
@@ -1148,7 +1146,7 @@ body::after {
 
   <!-- Identity -->
   <section class="section reveal" id="identity">
-    <div class="section-hdr"><span class="section-label">Identity</span><div class="section-line"></div></div>
+    <div class="section-hdr"><h2 class="section-label">Identity</h2><div class="section-line"></div></div>
     <div class="prose prose-wide">
       <p>She calls herself Iron Glen. The highlands existed before the Architecture named them. Before the megacity's expansion grid reached the northern territories, before the scanning infrastructure was laid over the old land, the clans were already there, and the names were already given, and the wars were already fought. Iron North is not a faction that arose in response to the megacity. It is what was already there when the megacity arrived, still intact, still armed, still running its own hierarchy.</p>
       <p>Iron Glen is the war commander of that hierarchy. Not its apex, which is Ferro Reign's domain, but its military intelligence: the operator who translates Iron North's hierarchical authority into operational force. Ferro Reign defines the standard. Iron Glen enforces the boundary. She does not hold the throne and has never sought it. She holds the perimeter, which requires a different and, in her view, more necessary set of capacities.</p>
@@ -1169,32 +1167,32 @@ body::after {
 
   <!-- Arc, Four Movements -->
   <section class="section reveal section-frame" id="arc">
-    <div class="section-hdr"><span class="section-label">Arc: Four Movements</span><div class="section-line"></div></div>
+    <div class="section-hdr"><h2 class="section-label">Arc: Four Movements</h2><div class="section-line"></div></div>
     <div class="movements">
       <div class="movement">
         <div class="mv-numeral">I</div>
-        <div class="mv-title">Blood Before Code</div>
+        <h3 class="mv-title">Blood Before Code</h3>
         <div class="mv-desc"><p>The clan existed before the megacity named it a faction, before the Architecture's taxonomy division assigned it a classification code, before the first survey team mapped the highland territories, before anyone in the city had a word for what Iron North was. The bloodlines were already here. The names were already given.</p>
 
         <p>The war anthem plays and every bloodline in the grid remembers. Not as nostalgia, as current operational status. The anthem is not a historical artifact. It is a standing order, encoded in frequencies that the Architecture's signal monitoring division has never successfully classified.</p></div>
       </div>
       <div class="movement">
         <div class="mv-numeral">II</div>
-        <div class="mv-title">The War Machine Runs</div>
+        <h3 class="mv-title">The War Machine Runs</h3>
         <div class="mv-desc"><p>Tribal patterns, synthetic chassis, forged through ruin. The war machine of Iron North is not a conventional military force, it is a fusion of pre-Architecture combat traditions with cyberpunk augmentation, every soldier carrying the clan markings of their bloodline etched into chassis plating that was manufactured in the same forges that produc...</p>
 
         <p>The terrain remembers her because she is part of it. The highland passes, the river crossings, the defensive ridges, every topographical feature in Iron North's territory has a name in the old language, and she knows all of them.</p></div>
       </div>
       <div class="movement">
         <div class="mv-numeral">III</div>
-        <div class="mv-title">The Cost of Standing</div>
+        <h3 class="mv-title">The Cost of Standing</h3>
         <div class="mv-desc"><p>Iron clans in ashes. Fallen steel legion. The cost of standing is not a theoretical exercise in Iron North, it is a ledger with entries dating back twelve generations, every page recording the names of clans that held their ground against incursion and paid the full price for doing so. Iron Glen has read every page.</p>
 
         <p>The last warbound holds the line because someone has to. Not out of desperation, the highland position is not desperate, and Iron North's defensive infrastructure is stronger now than it has been in forty cycles, but out of duty.</p></div>
       </div>
       <div class="movement">
         <div class="mv-numeral">IV</div>
-        <div class="mv-title">March of the Unbroken</div>
+        <h3 class="mv-title">March of the Unbroken</h3>
         <div class="mv-desc"><p>Steel requiem, synthetic highlands, the march never stops. The Unbroken Legion does not rest because the protocols it was built to enforce do not have a standby mode. The march is continuous, a rolling deployment that cycles units through every defensive position in Iron North's territory on a schedule that predates the Architecture's existence.</p>
 
         <p>They called the valley Iron Glen long before she was born, the name was already in the old maps, already in the clan songs, already associated with the quality of endurance that the valley's geography demanded of anyone who tried to live there. She made sure it earned the name.</p></div>
@@ -1204,7 +1202,7 @@ body::after {
 
   <!-- Relationships -->
   <section class="section reveal section-frame" id="relationships">
-    <div class="section-hdr"><span class="section-label">Relationships</span><div class="section-line"></div></div>
+    <div class="section-hdr"><h2 class="section-label">Relationships</h2><div class="section-line"></div></div>
     <div class="rel-list">
       <div class="rel-item">
         <span class="rel-pill p-orange">Command structure</span>
@@ -1253,7 +1251,7 @@ body::after {
 
   <!-- Sound Signature -->
   <section class="section reveal" id="the-encounter">
-    <div class="section-hdr"><span class="section-label">The Encounter</span><div class="section-line"></div></div>
+    <div class="section-hdr"><h2 class="section-label">The Encounter</h2><div class="section-line"></div></div>
     <div class="encounter-text">
       <p>The highlands existed before the Architecture named them. Before the megacity's expansion grid reached the northern territories, before the scanning infrastructure was laid over the old land, the clans were already there. The names were already given. The wars were already fought. Iron North is not a faction that arose in response to the megacity. It is what was already there when the megacity arrived, still intact, still armed, still running its own hierarchy.</p>
       <p>Iron Glen is the war commander of that hierarchy. Not its apex, that's Ferro Reign's domain, but its military intelligence: the operator who translates Iron North's hierarchical authority into operational force. We met her at the perimeter, where the highland protocols run on signal systems that derive from Celtic battle communications: layered, redundant, designed to maintain coherence when the center falls. The Architecture's military analysis division has reviewed Iron North's communication patterns three times and produced three inconclusive reports. The protocols do not match any Architecture-standard military framework because they are not derived from one.</p>
@@ -1261,7 +1259,7 @@ body::after {
     </div>
   </section>
   <section class="section reveal" id="sound">
-    <div class="section-hdr"><span class="section-label">Sound Signature</span><div class="section-line"></div></div>
+    <div class="section-hdr"><h2 class="section-label">Sound Signature</h2><div class="section-line"></div></div>
     <div class="data-panel">
       <div class="meta-grid">
         <span class="meta-k">Genres</span><span class="meta-v">Celtic cyberpunk · Industrial war · Dark Scottish synthwave · Military highland frequency</span>
@@ -1274,7 +1272,7 @@ body::after {
 
   <!-- Tracklist -->
   <section class="section reveal" id="tracklist">
-    <div class="section-hdr"><span class="section-label">Mission Log 15: Tracklist</span><div class="section-line"></div></div>
+    <div class="section-hdr"><h2 class="section-label">Mission Log 15: Tracklist</h2><div class="section-line"></div></div>
     <div class="tracklist-wrap">
       <div class="tracklist">
         <div class="tr"><span class="tr-n">01.</span><span class="tr-t">Afro Celtic Battle</span><span class="tr-ts">4:38</span><span class="tr-note">The highland protocols meeting older ancestral war traditions</span></div>
@@ -1304,7 +1302,7 @@ body::after {
   <footer class="footer reveal" aria-label="Operator links and credits">
     <div class="closing-quote">"For those who keep listening... the velvet was never the point."</div>
     <div class="section-hdr">
-      <span class="section-label">Signal Broadcast</span>
+      <h2 class="section-label">Signal Broadcast</h2>
       <div class="section-line"></div>
     </div>
     <nav class="links-grid" aria-label="External links">

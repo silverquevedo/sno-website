@@ -185,6 +185,7 @@ body {
   color: var(--gold);
   white-space: nowrap;
   flex-shrink: 0;
+  margin: 0;  /* reset h2 browser defaults */
 }
 .section-line {
   flex: 1;
@@ -279,21 +280,17 @@ body {
   padding: 1.6rem 3.5rem 1.6rem 1.4rem;
   background: var(--bg-card);
   border: 1px solid rgba(201,168,76,0.07);
-  border-left-width: 2px;
-  border-left-color: rgba(201,168,76,0.18);
   overflow: hidden;
-  transition: background 0.22s ease, border-left-color 0.22s ease;
+  transition: background 0.22s ease;
 }
 .movement:last-child { border-bottom: 1px solid rgba(201,168,76,0.07); }
 .movement:hover { background: var(--bg-lift); }
-.movement:nth-child(1) { border-left-color: rgba(201,168,76,0.18); }
-.movement:nth-child(2) { border-left-color: rgba(201,168,76,0.3);  }
-.movement:nth-child(3) { border-left-color: rgba(201,168,76,0.45); }
-.movement:nth-child(4) { border-left-color: rgba(139,30,30,0.55);  }
-.movement:hover:nth-child(1),
-.movement:hover:nth-child(2),
-.movement:hover:nth-child(3) { border-left-color: var(--gold-dim); }
-.movement:hover:nth-child(4)  { border-left-color: var(--crimson); }
+/* Background tint escalation — I → II → III builds, IV breaks into crimson */
+.movement:nth-child(2) { background: rgba(201,168,76,0.018); }
+.movement:nth-child(3) { background: rgba(201,168,76,0.036); }
+.movement:nth-child(4) { background: rgba(139,30,30,0.042); border-color: rgba(139,30,30,0.14); }
+.movement:nth-child(4) .mv-title { color: var(--crimson); }
+.movement:nth-child(4):hover { background: rgba(139,30,30,0.07); }
 .mv-numeral {
   position: absolute;
   top: 0.5rem;
@@ -302,7 +299,7 @@ body {
   font-weight: 700;
   line-height: 1;
   color: var(--gold);
-  opacity: 0.07;
+  opacity: 0.13;
   letter-spacing: -0.04em;
   user-select: none;
   pointer-events: none;
@@ -313,7 +310,7 @@ body {
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--gold);
-  margin-bottom: 0.55rem;
+  margin: 0 0 0.55rem;  /* reset h3 browser defaults */
 }
 .mv-desc {
   font-size: 1rem;
@@ -1118,7 +1115,8 @@ body::after {
       </div>
   </div>
   <div class="hero-right">
-    <img class="hero-img" src="../cover-raw.png" alt="UnderCityRage, Operator 12 cover art">
+    <img class="hero-img" src="../cover-raw.png"
+       fetchpriority="high" alt="UnderCityRage, Operator 12 cover art">
     <div class="hero-overlay"></div>
   </div>
   <div class="hero-glow"></div>
@@ -1129,7 +1127,7 @@ body::after {
 
   <!-- Classification -->
   <section class="section reveal section-frame" id="classification">
-    <div class="section-hdr"><span class="section-label">Classification</span><div class="section-line"></div></div>
+    <div class="section-hdr"><h2 class="section-label">Classification</h2><div class="section-line"></div></div>
     <div class="class-panel">
       <div class="class-header">
         <div class="class-clearance">Clearance II</div>
@@ -1148,7 +1146,7 @@ body::after {
 
   <!-- Identity -->
   <section class="section reveal" id="identity">
-    <div class="section-hdr"><span class="section-label">Identity</span><div class="section-line"></div></div>
+    <div class="section-hdr"><h2 class="section-label">Identity</h2><div class="section-line"></div></div>
     <div class="prose prose-wide">
       <p>She calls herself Asphalt Crown. White tactical suit marked with the distance she's covered. Cybernetic arms built for grip, not show. Visor that reads the street at speed. She doesn't govern from the towers. She governs from the pavement up. The undercity didn't give her the crown. She built it, corner by corner, under neon that nobody up top bothers to name.</p>
       <p>The throne is the street. Not a metaphor: Asphalt Crown built her authority in the Forbidden Zone by owning every surface the megacity's official infrastructure ignores. The drainage network beneath Sector 12. The decommissioned surface roads the Architecture rerouted above-grade and stopped maintaining. The service corridors connecting megabuilding foundations. The megacity's official map ends at the curb. Below the curb is hers.</p>
@@ -1169,18 +1167,18 @@ body::after {
 
   <!-- Arc, Four Movements -->
   <section class="section reveal section-frame" id="arc">
-    <div class="section-hdr"><span class="section-label">Arc: Four Movements</span><div class="section-line"></div></div>
+    <div class="section-hdr"><h2 class="section-label">Arc: Four Movements</h2><div class="section-line"></div></div>
     <div class="movements">
       <div class="movement">
         <div class="mv-numeral">I</div>
-        <div class="mv-title">Where the Street Begins</div>
+        <h3 class="mv-title">Where the Street Begins</h3>
         <div class="mv-desc"><p>She doesn't look up. The towers are background noise, a vertical city of glass and steel that rises above the street level like it belongs to a different planet. The asphalt is her sky, and she is already moving through it with the pace of someone who has never needed a map. The street floor is not the bottom of the megacity. It is the foundation.</p>
 
         <p>She governs from the pavement up because that is where governance actually happens. Not in the boardrooms, not in the Architecture's command nodes, on the corners, in the alleys, at the intersection where three different faction territories meet and none of them have jurisdiction. The Street Floor is not a title she claimed.</p></div>
       </div>
       <div class="movement">
         <div class="mv-numeral">II</div>
-        <div class="mv-title">Protocol Chase</div>
+        <h3 class="mv-title">Protocol Chase</h3>
         <div class="mv-desc"><p>Something locked a target on her, an Architecture scanner, a rival faction's tracking drone, a bounty algorithm running on a server she has never seen. It doesn't matter which one. By the time the targeting system completed its acquisition cycle, she was already past the first checkpoint and accelerating.</p>
 
         <p>She doesn't run from pursuit. She routes through it. The chase is not a threat, it is a test of whether the pursuing system understands the terrain. They never do. The Street Floor is mapped in her muscle memory, every alley and service corridor and abandoned basement that connects two points the Architecture thinks are separated by a full distr...</p>
@@ -1190,14 +1188,14 @@ body::after {
       </div>
       <div class="movement">
         <div class="mv-numeral">III</div>
-        <div class="mv-title">The Undercity Has No Maps</div>
+        <h3 class="mv-title">The Undercity Has No Maps</h3>
         <div class="mv-desc"><p>Above the gutter line, the city logs everything, every transit, every transaction, every signal ping that crosses an Architecture-monitored node. The surveillance grid is comprehensive, layered, redundant. Down here, none of it reaches.</p>
 
         <p>She is the only route that matters because she is the only operator who has mapped the undercity from the inside. Not with survey equipment, not with scanning drones, but with fourteen cycles of walking every tunnel, marking every collapse, cataloguing every entrance and exit. The Architecture's maps of the undercity are blank. Hers are complete.</p></div>
       </div>
       <div class="movement">
         <div class="mv-numeral">IV</div>
-        <div class="mv-title">Concrete Authority</div>
+        <h3 class="mv-title">Concrete Authority</h3>
         <div class="mv-desc"><p>The city runs low. She runs deep, deeper than any Architecture scanner can reach, deeper than any faction's territory extends, deeper than the foundations of the towers themselves. The street floor is not the bottom of the megacity.</p>
 
         <p>She built authority out of that depth. Not through any formal claim, not through any faction's recognition, but through the simple fact that she has been here longer than anyone and will be here after everyone else has moved on. The street doesn't answer to the towers. It answers to her. Every operator who moves through the undercity knows this.</p>
@@ -1210,7 +1208,7 @@ body::after {
 
   <!-- Relationships -->
   <section class="section reveal section-frame" id="relationships">
-    <div class="section-hdr"><span class="section-label">Relationships</span><div class="section-line"></div></div>
+    <div class="section-hdr"><h2 class="section-label">Relationships</h2><div class="section-line"></div></div>
     <div class="rel-list">
       <div class="rel-item">
         <span class="rel-pill p-orange">Territorial layer below</span>
@@ -1259,7 +1257,7 @@ body::after {
 
   <!-- Sound Signature -->
   <section class="section reveal" id="the-encounter">
-    <div class="section-hdr"><span class="section-label">The Encounter</span><div class="section-line"></div></div>
+    <div class="section-hdr"><h2 class="section-label">The Encounter</h2><div class="section-line"></div></div>
     <div class="encounter-text">
       <p>The towers don't reach the street floor. They stop at the sky, glass and steel rising above the pavement like they belong to a different planet. Below the gutter line, the city is different, older, harder, governed by operators who have never needed clearance codes or faction recognition. The Street Floor runs the undercity, and the undercity runs on concrete and rage.</p>
       <p>Met her at an intersection where three faction territories meet and none of them have jurisdiction. She was already moving, the asphalt her sky, the alleyways her arteries. The towers are background noise to her. She governs from the pavement up because that is where governance actually happens. Not in the boardrooms, not in the Architecture's command nodes, on the corners, in the alleys, at the boundary where official authority ends and real authority begins. She has held this ground for fourteen cycles without a single challenge succeeding.</p>
@@ -1267,7 +1265,7 @@ body::after {
     </div>
   </section>
   <section class="section reveal" id="sound">
-    <div class="section-hdr"><span class="section-label">Sound Signature</span><div class="section-line"></div></div>
+    <div class="section-hdr"><h2 class="section-label">Sound Signature</h2><div class="section-line"></div></div>
     <div class="data-panel">
       <div class="meta-grid">
         <span class="meta-k">Genres</span><span class="meta-v">Forbidden Zone industrial · Street-level dark techno · Cyberpunk pursuit · Underground bass</span>
@@ -1280,7 +1278,7 @@ body::after {
 
   <!-- Tracklist -->
   <section class="section reveal" id="tracklist">
-    <div class="section-hdr"><span class="section-label">Mission Log 12: Tracklist</span><div class="section-line"></div></div>
+    <div class="section-hdr"><h2 class="section-label">Mission Log 12: Tracklist</h2><div class="section-line"></div></div>
     <div class="tracklist-wrap">
       <div class="tracklist">
         <div class="tr"><span class="tr-n">01.</span><span class="tr-t">Over Neon</span><span class="tr-ts">2:40</span></div>
@@ -1311,7 +1309,7 @@ body::after {
   <footer class="footer reveal" aria-label="Operator links and credits">
     <div class="closing-quote">"For those who keep listening... the velvet was never the point."</div>
     <div class="section-hdr">
-      <span class="section-label">Signal Broadcast</span>
+      <h2 class="section-label">Signal Broadcast</h2>
       <div class="section-line"></div>
     </div>
     <nav class="links-grid" aria-label="External links">

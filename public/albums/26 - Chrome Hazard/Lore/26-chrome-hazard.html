@@ -185,6 +185,7 @@ body {
   color: var(--gold);
   white-space: nowrap;
   flex-shrink: 0;
+  margin: 0;  /* reset h2 browser defaults */
 }
 .section-line {
   flex: 1;
@@ -279,21 +280,17 @@ body {
   padding: 1.6rem 3.5rem 1.6rem 1.4rem;
   background: var(--bg-card);
   border: 1px solid rgba(201,168,76,0.07);
-  border-left-width: 2px;
-  border-left-color: rgba(201,168,76,0.18);
   overflow: hidden;
-  transition: background 0.22s ease, border-left-color 0.22s ease;
+  transition: background 0.22s ease;
 }
 .movement:last-child { border-bottom: 1px solid rgba(201,168,76,0.07); }
 .movement:hover { background: var(--bg-lift); }
-.movement:nth-child(1) { border-left-color: rgba(201,168,76,0.18); }
-.movement:nth-child(2) { border-left-color: rgba(201,168,76,0.3);  }
-.movement:nth-child(3) { border-left-color: rgba(201,168,76,0.45); }
-.movement:nth-child(4) { border-left-color: rgba(139,30,30,0.55);  }
-.movement:hover:nth-child(1),
-.movement:hover:nth-child(2),
-.movement:hover:nth-child(3) { border-left-color: var(--gold-dim); }
-.movement:hover:nth-child(4)  { border-left-color: var(--crimson); }
+/* Background tint escalation — I → II → III builds, IV breaks into crimson */
+.movement:nth-child(2) { background: rgba(201,168,76,0.018); }
+.movement:nth-child(3) { background: rgba(201,168,76,0.036); }
+.movement:nth-child(4) { background: rgba(139,30,30,0.042); border-color: rgba(139,30,30,0.14); }
+.movement:nth-child(4) .mv-title { color: var(--crimson); }
+.movement:nth-child(4):hover { background: rgba(139,30,30,0.07); }
 .mv-numeral {
   position: absolute;
   top: 0.5rem;
@@ -302,7 +299,7 @@ body {
   font-weight: 700;
   line-height: 1;
   color: var(--gold);
-  opacity: 0.07;
+  opacity: 0.13;
   letter-spacing: -0.04em;
   user-select: none;
   pointer-events: none;
@@ -313,7 +310,7 @@ body {
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--gold);
-  margin-bottom: 0.55rem;
+  margin: 0 0 0.55rem;  /* reset h3 browser defaults */
 }
 .mv-desc {
   font-size: 1rem;
@@ -1123,6 +1120,7 @@ body::after {
   <div class="hero-right">
     <img class="hero-img"
        src="../cover-raw.png"
+       fetchpriority="high"
        alt="Chrome Hazard, Operator 26 cover art">
     <div class="hero-overlay"></div>
   </div>
@@ -1134,7 +1132,7 @@ body::after {
 
   <!-- Classification -->
   <section class="section reveal section-frame" id="classification">
-    <div class="section-hdr"><span class="section-label">Classification</span><div class="section-line"></div></div>
+    <div class="section-hdr"><h2 class="section-label">Classification</h2><div class="section-line"></div></div>
     <div class="class-panel">
       <div class="class-header">
         <div class="class-clearance">Clearance IV</div>
@@ -1153,7 +1151,7 @@ body::after {
 
   <!-- Identity -->
   <section class="section reveal" id="identity">
-    <div class="section-hdr"><span class="section-label">Identity</span><div class="section-line"></div></div>
+    <div class="section-hdr"><h2 class="section-label">Identity</h2><div class="section-line"></div></div>
     <div class="prose prose-wide">
       <p>She calls herself Chrome Hazard. She does not pursue anomalies. She names them. In the Architecture's operational model, naming an anomaly is the first step toward correction: an unnamed deviation cannot be routed to the appropriate response protocol. Chrome Hazard is the system that converts raw anomaly data into classified entities that Machine Control can act on. Her classification database is the most comprehensive catalog of operator identities in the megacity. It is also the most incomplete, because the operators who matter most are the ones she cannot classify.</p>
       <p>She is methodical in a way that is indistinguishable from obsession. Her classification protocols iterate through every available data point, cross-reference against the historical database, and return a confidence rating. When the confidence rating is low, she runs the protocol again with additional constraints. When the protocol returns the same result with additional constraints, she considers the result a classification failure and opens a new methodology thread. She has fourteen open methodology threads. Eleven of them are for the same entity: Velvet Marquee.</p>
@@ -1174,11 +1172,11 @@ body::after {
 
   <!-- Arc, Four Movements -->
   <section class="section reveal section-frame" id="arc">
-    <div class="section-hdr"><span class="section-label">Arc: Four Movements</span><div class="section-line"></div></div>
+    <div class="section-hdr"><h2 class="section-label">Arc: Four Movements</h2><div class="section-line"></div></div>
     <div class="movements">
       <div class="movement">
         <div class="mv-numeral">I</div>
-        <div class="mv-title">False Negative</div>
+        <h3 class="mv-title">False Negative</h3>
         <div class="mv-desc"><p>Every instrument clears her. The Architecture's classification array, a multi-spectrum scanning protocol that analyses every operator on a rotating seventy-two-hour cycle, runs its standard diagnostic. The result: no threat detected, no anomaly present, no further investigation required. The scan runs clean. The alarm stays silent.</p>
 
         <p>The False Negative is not a glitch. It is the system functioning exactly as designed, and the design was never capable of classifying what Chrome Hazard actually is. She sits in the pressure chamber, platinum hair loose, crimson-soaked, while every instrument in the Architecture's arsenal certifies her as harmless.</p>
@@ -1188,21 +1186,21 @@ body::after {
       </div>
       <div class="movement">
         <div class="mv-numeral">II</div>
-        <div class="mv-title">Depth Protocol</div>
+        <h3 class="mv-title">Depth Protocol</h3>
         <div class="mv-desc"><p>She descends to where the rules stop applying. The deep-pressure environment of the sealed corridor, where the Architecture's scanning grid cannot penetrate. Down here, classification doesn't matter because the classification system was built for the surface world, where pressure is atmospheric and threats announce themselves in frequencies the ...</p>
 
         <p>Down here, only depth matters. Chrome Hazard has been operating at depth for longer than the Architecture's pressure sensors have been calibrated to measure. The Depth Protocol is not an evasion technique.</p></div>
       </div>
       <div class="movement">
         <div class="mv-numeral">III</div>
-        <div class="mv-title">Red Reading</div>
+        <h3 class="mv-title">Red Reading</h3>
         <div class="mv-desc"><p>The instruments finally tell the truth, not because they were recalibrated, but because she allowed them to read what was always there. Crimson across every readout. Fourteen cycles of accumulated pressure data, released into the surface monitoring network in a single burst transmission.</p>
 
         <p>It's already too late. The corridor was sealed before the alarm sounded. The alarm only sounded because she decided it was time for the Architecture to see what it had been standing next to. The Red Reading is not a confession. It is a demonstration.</p></div>
       </div>
       <div class="movement">
         <div class="mv-numeral">IV</div>
-        <div class="mv-title">Correct Classification</div>
+        <h3 class="mv-title">Correct Classification</h3>
         <div class="mv-desc"><p>She was never the warning. She was the event the warning couldn't name, the correct classification the Architecture's taxonomy was never designed to produce. Contract closed. The interval between what the scan said and what she was has collapsed to zero. The pressure chamber releases its seal.</p>
 
         <p>Chrome Hazard has spent fourteen cycles getting closer to understanding her own blind spots. The correct classification was always there, buried in the data, visible to anyone who knew how to read the gaps between the clean scans.</p>
@@ -1215,7 +1213,7 @@ body::after {
 
   <!-- Relationships -->
   <section class="section reveal section-frame" id="relationships">
-    <div class="section-hdr"><span class="section-label">Relationships</span><div class="section-line"></div></div>
+    <div class="section-hdr"><h2 class="section-label">Relationships</h2><div class="section-line"></div></div>
     <div class="rel-list">
       <div class="rel-item">
         <span class="rel-pill p-blue">Reports to</span>
@@ -1264,7 +1262,7 @@ body::after {
 
   <!-- Sound Signature -->
   <section class="section reveal" id="the-encounter">
-    <div class="section-hdr"><span class="section-label">The Encounter</span><div class="section-line"></div></div>
+    <div class="section-hdr"><h2 class="section-label">The Encounter</h2><div class="section-line"></div></div>
     <div class="encounter-text">
       <p>Platinum hair loose, crimson-soaked. Eyes cold as the porthole light behind her. She sits in the pressure chamber while every instrument in the Architecture's classification array certifies her as harmless. The scan runs clean. The alarm stays silent. The file says no threat. The file has never been more wrong.</p>
       <p>For fourteen cycles, Chrome Hazard has been the Architecture's primary classification and anomaly-flagging subsystem, and for fourteen cycles, her own scans have returned the same result. No threat detected. No anomaly present. She is getting closer to understanding her own system's blind spots, and what she has found is that the blind spot is not in the equipment. The blind spot is in the assumption that something the scanner cannot classify must be harmless. The hazard sign is yellow. The hazard sign was installed by the same people who calibrated the scanners. They have never questioned why their equipment consistently fails to register what they are standing next to.</p>
@@ -1272,7 +1270,7 @@ body::after {
     </div>
   </section>
   <section class="section reveal" id="sound">
-    <div class="section-hdr"><span class="section-label">Sound Signature</span><div class="section-line"></div></div>
+    <div class="section-hdr"><h2 class="section-label">Sound Signature</h2><div class="section-line"></div></div>
     <div class="data-panel">
       <div class="meta-grid">
         <span class="meta-k">Genres</span><span class="meta-v">Dark Techno &middot; Industrial Scanner &middot; Cyberpunk Classification &middot; Architecture Frequency</span>
@@ -1285,7 +1283,7 @@ body::after {
 
   <!-- Tracklist -->
   <section class="section reveal" id="tracklist">
-    <div class="section-hdr"><span class="section-label">Mission Log 26: Tracklist</span><div class="section-line"></div></div>
+    <div class="section-hdr"><h2 class="section-label">Mission Log 26: Tracklist</h2><div class="section-line"></div></div>
     <div class="tracklist-wrap">
       <div class="tracklist">
         <div class="tr"><span class="tr-n">01.</span><span class="tr-t">Null Approach</span><span class="tr-ts">3:48</span></div>
@@ -1317,7 +1315,7 @@ body::after {
   <footer class="footer reveal" aria-label="Operator links and credits">
     <div class="closing-quote">"For those who keep listening... the velvet was never the point."</div>
     <div class="section-hdr">
-      <span class="section-label">Signal Broadcast</span>
+      <h2 class="section-label">Signal Broadcast</h2>
       <div class="section-line"></div>
     </div>
     <nav class="links-grid" aria-label="External links">

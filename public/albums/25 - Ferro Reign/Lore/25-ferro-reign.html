@@ -185,6 +185,7 @@ body {
   color: var(--gold);
   white-space: nowrap;
   flex-shrink: 0;
+  margin: 0;  /* reset h2 browser defaults */
 }
 .section-line {
   flex: 1;
@@ -279,21 +280,17 @@ body {
   padding: 1.6rem 3.5rem 1.6rem 1.4rem;
   background: var(--bg-card);
   border: 1px solid rgba(201,168,76,0.07);
-  border-left-width: 2px;
-  border-left-color: rgba(201,168,76,0.18);
   overflow: hidden;
-  transition: background 0.22s ease, border-left-color 0.22s ease;
+  transition: background 0.22s ease;
 }
 .movement:last-child { border-bottom: 1px solid rgba(201,168,76,0.07); }
 .movement:hover { background: var(--bg-lift); }
-.movement:nth-child(1) { border-left-color: rgba(201,168,76,0.18); }
-.movement:nth-child(2) { border-left-color: rgba(201,168,76,0.3);  }
-.movement:nth-child(3) { border-left-color: rgba(201,168,76,0.45); }
-.movement:nth-child(4) { border-left-color: rgba(139,30,30,0.55);  }
-.movement:hover:nth-child(1),
-.movement:hover:nth-child(2),
-.movement:hover:nth-child(3) { border-left-color: var(--gold-dim); }
-.movement:hover:nth-child(4)  { border-left-color: var(--crimson); }
+/* Background tint escalation — I → II → III builds, IV breaks into crimson */
+.movement:nth-child(2) { background: rgba(201,168,76,0.018); }
+.movement:nth-child(3) { background: rgba(201,168,76,0.036); }
+.movement:nth-child(4) { background: rgba(139,30,30,0.042); border-color: rgba(139,30,30,0.14); }
+.movement:nth-child(4) .mv-title { color: var(--crimson); }
+.movement:nth-child(4):hover { background: rgba(139,30,30,0.07); }
 .mv-numeral {
   position: absolute;
   top: 0.5rem;
@@ -302,7 +299,7 @@ body {
   font-weight: 700;
   line-height: 1;
   color: var(--gold);
-  opacity: 0.07;
+  opacity: 0.13;
   letter-spacing: -0.04em;
   user-select: none;
   pointer-events: none;
@@ -313,7 +310,7 @@ body {
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--gold);
-  margin-bottom: 0.55rem;
+  margin: 0 0 0.55rem;  /* reset h3 browser defaults */
 }
 .mv-desc {
   font-size: 1rem;
@@ -1118,7 +1115,8 @@ body::after {
       </div>
   </div>
   <div class="hero-right">
-    <img class="hero-img" src="../cover-raw.png" alt="Ferro Reign, Operator 25 cover art">
+    <img class="hero-img" src="../cover-raw.png"
+       fetchpriority="high" alt="Ferro Reign, Operator 25 cover art">
     <div class="hero-overlay"></div>
   </div>
   <div class="hero-glow"></div>
@@ -1129,7 +1127,7 @@ body::after {
 
   <!-- Classification -->
   <section class="section reveal section-frame" id="classification">
-    <div class="section-hdr"><span class="section-label">Classification</span><div class="section-line"></div></div>
+    <div class="section-hdr"><h2 class="section-label">Classification</h2><div class="section-line"></div></div>
     <div class="class-panel">
       <div class="class-header">
         <div class="class-clearance">Clearance IV</div>
@@ -1148,7 +1146,7 @@ body::after {
 
   <!-- Identity -->
   <section class="section reveal" id="identity">
-    <div class="section-hdr"><span class="section-label">Identity</span><div class="section-line"></div></div>
+    <div class="section-hdr"><h2 class="section-label">Identity</h2><div class="section-line"></div></div>
     <div class="prose prose-wide">
       <p>She calls herself Ferro Reign. Iron North is not a territory in the conventional sense. It is a hierarchy: a social and biological system in which the degree and precision of augmentation determines position, authority, and access to resources. At the top of that hierarchy is Ferro Reign, not because she seized it but because her augmentation is the standard the hierarchy measures everything else against. She did not create Iron North. She created herself, and Iron North organized around the result.</p>
       <p>Her augmentations are not visible in the way most operators' modifications are visible. She does not have exposed components or visible infrastructure. Everything is internal, layered, reconfigured at the biological level so completely that the boundary between original tissue and engineered system no longer exists. She is not a person with augmentations. She is an augmented system that retained its personhood through the process.</p>
@@ -1169,32 +1167,32 @@ body::after {
 
   <!-- Arc, Four Movements -->
   <section class="section reveal section-frame" id="arc">
-    <div class="section-hdr"><span class="section-label">Arc: Four Movements</span><div class="section-line"></div></div>
+    <div class="section-hdr"><h2 class="section-label">Arc: Four Movements</h2><div class="section-line"></div></div>
     <div class="movements">
       <div class="movement">
         <div class="mv-numeral">I</div>
-        <div class="mv-title">The Binding</div>
+        <h3 class="mv-title">The Binding</h3>
         <div class="mv-desc"><p>Iron meets flesh for the first time, not in a surgical theater, not in an augmentation clinic, but in the private forge where Ferro Reign's biological hierarchy initiates its members through direct integration with the metal that will become their permanent interface.</p>
 
         <p>The Binding is not a medical procedure. It is a coronation conducted in molten metal and nerve fusion, witnessed only by the Iron North operatives who have already passed through it themselves. The armor doesn't protect her.</p></div>
       </div>
       <div class="movement">
         <div class="mv-numeral">II</div>
-        <div class="mv-title">The Weight of Rule</div>
+        <h3 class="mv-title">The Weight of Rule</h3>
         <div class="mv-desc"><p>She moves through the city and the city bends, not metaphorically, but physically, the weight of her augmented frame leaving impressions in the pavement that the Architecture's maintenance division has logged as unexplained structural stress for eleven consecutive cycles. Every step is a declaration: the Iron North does not request passage.</p>
 
         <p>The weight of rule is not a burden she carries. It is the only configuration that makes sense when your body has been fused with enough iron to crush a standard combat vehicle. The throne isn't a seat of power.</p></div>
       </div>
       <div class="movement">
         <div class="mv-numeral">III</div>
-        <div class="mv-title">Contested Metal</div>
+        <h3 class="mv-title">Contested Metal</h3>
         <div class="mv-desc"><p>Resistance rises, a coalition of Iron North clans who reject the Gilt Standard, who believe the biological hierarchy should be earned through combat rather than forged through augmentation. They have been gathering support in the outer territories for three cycles, amassing enough conventional military force to challenge her position.</p>
 
         <p>The contested metal phase of her reign lasted exactly four days. By the end of the first day, she had identified every clan leader who signed the resistance declaration. By the end of the second, she had routed their combined forces at three separate engagements. By the end of the third, the surviving leaders had withdrawn their challenge.</p></div>
       </div>
       <div class="movement">
         <div class="mv-numeral">IV</div>
-        <div class="mv-title">Total Dominion</div>
+        <h3 class="mv-title">Total Dominion</h3>
         <div class="mv-desc"><p>Machine and flesh become one throne, the final integration, completed not in a single moment but across fourteen cycles of continuous adaptation, until the distinction between the operator and her command infrastructure is no longer detectable by any measurement the Architecture possesses.</p>
 
         <p>Total dominion is not a state she achieved. It is a state she revealed, the underlying truth of Iron North's biological hierarchy, now made visible to every operator in the megacity. The last track carries her name because every track carries her name. The iron never forgets what it has been fused with.</p></div>
@@ -1204,7 +1202,7 @@ body::after {
 
   <!-- Relationships -->
   <section class="section reveal section-frame" id="relationships">
-    <div class="section-hdr"><span class="section-label">Relationships</span><div class="section-line"></div></div>
+    <div class="section-hdr"><h2 class="section-label">Relationships</h2><div class="section-line"></div></div>
     <div class="rel-list">
       <div class="rel-item">
         <span class="rel-pill p-crimson">Rival</span>
@@ -1253,7 +1251,7 @@ body::after {
 
   <!-- Sound Signature -->
   <section class="section reveal" id="the-encounter">
-    <div class="section-hdr"><span class="section-label">The Encounter</span><div class="section-line"></div></div>
+    <div class="section-hdr"><h2 class="section-label">The Encounter</h2><div class="section-line"></div></div>
     <div class="encounter-text">
       <p>The armor doesn't protect her. It IS her. The throne isn't a seat of power. It's the interface between the organic and the mechanical, the point where the Gilt Standard becomes physical law. She doesn't command the machine. She became it, fourteen cycles ago, in a private forge where Iron North's biological hierarchy initiates its members through direct integration with the metal that will become their permanent interface.</p>
       <p>We were permitted to witness the tail end of an operational cycle, the iron moving through contested territory, the city bending under the weight of her passage. Every step leaves a mark in the pavement. The Architecture's maintenance division has logged the structural stress as unexplained for eleven consecutive cycles. They have not investigated the cause. The cause is a woman whose augmented frame weighs enough to crush a standard combat vehicle, and she is not the heaviest thing in Iron North. She is the standard. Ferro Reign created herself, and Iron North organized around the result.</p>
@@ -1261,7 +1259,7 @@ body::after {
     </div>
   </section>
   <section class="section reveal" id="sound">
-    <div class="section-hdr"><span class="section-label">Sound Signature</span><div class="section-line"></div></div>
+    <div class="section-hdr"><h2 class="section-label">Sound Signature</h2><div class="section-line"></div></div>
     <div class="data-panel">
       <div class="meta-grid">
         <span class="meta-k">Genres</span><span class="meta-v">Industrial Metal · Dark Ceremonial · Cyberpunk Hierarchy · Biological Machinery</span>
@@ -1274,7 +1272,7 @@ body::after {
 
   <!-- Tracklist -->
   <section class="section reveal" id="tracklist">
-    <div class="section-hdr"><span class="section-label">Mission Log 25: Tracklist</span><div class="section-line"></div></div>
+    <div class="section-hdr"><h2 class="section-label">Mission Log 25: Tracklist</h2><div class="section-line"></div></div>
     <div class="tracklist-wrap">
       <div class="tracklist">
         <div class="tr"><span class="tr-n">01.</span><span class="tr-t">Null Suture</span><span class="tr-ts">3:02</span></div>
@@ -1304,7 +1302,7 @@ body::after {
   <footer class="footer reveal" aria-label="Operator links and credits">
     <div class="closing-quote">"For those who keep listening... the velvet was never the point."</div>
     <div class="section-hdr">
-      <span class="section-label">Signal Broadcast</span>
+      <h2 class="section-label">Signal Broadcast</h2>
       <div class="section-line"></div>
     </div>
     <nav class="links-grid" aria-label="External links">

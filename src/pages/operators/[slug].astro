@@ -117,6 +117,10 @@ const factionColor = FACTION_COLORS[op.faction] ?? 'var(--dim)';
   transition: color 0.15s;
 }
 .back-link:hover { color: var(--cyan); }
+.back-link:focus-visible {
+  outline: 2px solid var(--cyan);
+  outline-offset: 3px;
+}
 .back-arrow { font-size: 0.9rem; }
 
 /* ─── Centre nav cluster ────────────────────────────── */
@@ -156,6 +160,11 @@ const factionColor = FACTION_COLORS[op.faction] ?? 'var(--dim)';
   color: var(--cyan);
   border-color: rgba(0,196,255,0.45);
   background: rgba(0,196,255,0.06);
+}
+.nav-chip:not(.nav-chip--disabled):focus-visible {
+  outline: 2px solid var(--cyan);
+  outline-offset: 3px;
+  color: var(--cyan);
 }
 .nav-chip--disabled {
   opacity: 0.25;
@@ -198,8 +207,8 @@ const factionColor = FACTION_COLORS[op.faction] ?? 'var(--dim)';
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 2rem;
-  height: 2rem;
+  width: 2.75rem;   /* 44px — WCAG 2.5.5 minimum touch target */
+  height: 2.75rem;
   background: none;
   border: 1px solid rgba(0,196,255,0.25);
   color: var(--dim);
@@ -239,7 +248,14 @@ const factionColor = FACTION_COLORS[op.faction] ?? 'var(--dim)';
 
 /* ─── Mobile ─────────────────────────────────────────── */
 @media (max-width: 640px) {
-  .dossier-meta { display: none; }
+  /* Clip to just the padded number ("01") — enough context, no crowding */
+  .dossier-meta {
+    flex: 0 0 2.5ch;
+    overflow: hidden;
+    text-overflow: clip;
+    white-space: nowrap;
+    letter-spacing: 0;
+  }
   .dossier-back { padding: 0 0.75rem; }
   .dossier-nav { gap: 0.4rem; margin-right: 0; }
   /* On mobile keep audio-cluster in flow, no absolute */

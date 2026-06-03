@@ -185,6 +185,7 @@ body {
   color: var(--gold);
   white-space: nowrap;
   flex-shrink: 0;
+  margin: 0;  /* reset h2 browser defaults */
 }
 .section-line {
   flex: 1;
@@ -279,21 +280,17 @@ body {
   padding: 1.6rem 3.5rem 1.6rem 1.4rem;
   background: var(--bg-card);
   border: 1px solid rgba(201,168,76,0.07);
-  border-left-width: 2px;
-  border-left-color: rgba(201,168,76,0.18);
   overflow: hidden;
-  transition: background 0.22s ease, border-left-color 0.22s ease;
+  transition: background 0.22s ease;
 }
 .movement:last-child { border-bottom: 1px solid rgba(201,168,76,0.07); }
 .movement:hover { background: var(--bg-lift); }
-.movement:nth-child(1) { border-left-color: rgba(201,168,76,0.18); }
-.movement:nth-child(2) { border-left-color: rgba(201,168,76,0.3);  }
-.movement:nth-child(3) { border-left-color: rgba(201,168,76,0.45); }
-.movement:nth-child(4) { border-left-color: rgba(139,30,30,0.55);  }
-.movement:hover:nth-child(1),
-.movement:hover:nth-child(2),
-.movement:hover:nth-child(3) { border-left-color: var(--gold-dim); }
-.movement:hover:nth-child(4)  { border-left-color: var(--crimson); }
+/* Background tint escalation — I → II → III builds, IV breaks into crimson */
+.movement:nth-child(2) { background: rgba(201,168,76,0.018); }
+.movement:nth-child(3) { background: rgba(201,168,76,0.036); }
+.movement:nth-child(4) { background: rgba(139,30,30,0.042); border-color: rgba(139,30,30,0.14); }
+.movement:nth-child(4) .mv-title { color: var(--crimson); }
+.movement:nth-child(4):hover { background: rgba(139,30,30,0.07); }
 .mv-numeral {
   position: absolute;
   top: 0.5rem;
@@ -302,7 +299,7 @@ body {
   font-weight: 700;
   line-height: 1;
   color: var(--gold);
-  opacity: 0.07;
+  opacity: 0.13;
   letter-spacing: -0.04em;
   user-select: none;
   pointer-events: none;
@@ -313,7 +310,7 @@ body {
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--gold);
-  margin-bottom: 0.55rem;
+  margin: 0 0 0.55rem;  /* reset h3 browser defaults */
 }
 .mv-desc {
   font-size: 1rem;
@@ -1123,6 +1120,7 @@ body::after {
   <div class="hero-right">
     <img class="hero-img"
        src="../cover-raw.png"
+       fetchpriority="high"
        alt="Velvet Marquee, Operator 27 cover art">
     <div class="hero-overlay"></div>
   </div>
@@ -1135,7 +1133,7 @@ body::after {
   <!-- Classification -->
   <section class="section reveal section-frame" id="classification">
     <div class="section-hdr">
-      <span class="section-label">Classification</span>
+      <h2 class="section-label">Classification</h2>
       <div class="section-line"></div>
     </div>
     <div class="class-panel">
@@ -1162,7 +1160,7 @@ body::after {
   <!-- Identity -->
   <section class="section reveal" id="identity">
     <div class="section-hdr">
-      <span class="section-label">Identity</span>
+      <h2 class="section-label">Identity</h2>
       <div class="section-line"></div>
     </div>
     <div class="prose prose-wide">
@@ -1186,28 +1184,28 @@ body::after {
   <!-- Arc, Four Movements -->
   <section class="section reveal section-frame" id="arc">
     <div class="section-hdr">
-      <span class="section-label">Arc: Four Movements</span>
+      <h2 class="section-label">Arc: Four Movements</h2>
       <div class="section-line"></div>
     </div>
     <div class="movements">
       <div class="movement">
         <div class="mv-numeral">I</div>
-        <div class="mv-title">The Tent Descends</div>
+        <h3 class="mv-title">The Tent Descends</h3>
         <div class="mv-desc">The circus doesn't announce itself. It appears: canvas and iron, sawdust and silence. By the time you smell the greasepaint, the exits are already sealed. A district wakes up and the circus is simply there.</div>
       </div>
       <div class="movement">
         <div class="mv-numeral">II</div>
-        <div class="mv-title">She Claims the Floor</div>
+        <h3 class="mv-title">She Claims the Floor</h3>
         <div class="mv-desc">Center ring. Her word is the act; the act is her word. The audience doesn't choose to watch. The intelligence operation is already running. Contracts are made in the front rows while the crowd watches fire.</div>
       </div>
       <div class="movement">
         <div class="mv-numeral">III</div>
-        <div class="mv-title">Cogs Behind the Curtain</div>
+        <h3 class="mv-title">Cogs Behind the Curtain</h3>
         <div class="mv-desc">The machinery was always there. She lets you hear it now: gears, brass, velocity. The Marquee's true structure becomes visible to the few watching for it: a distributed network of augmented performers, each one a node, each one collecting.</div>
       </div>
       <div class="movement">
         <div class="mv-numeral">IV</div>
-        <div class="mv-title">The Greasepaint Cracks</div>
+        <h3 class="mv-title">The Greasepaint Cracks</h3>
         <div class="mv-desc">The painted face splits. What's underneath doesn't perform. The Marquee closes the show on her own terms, moves the tent before morning. The district is left with nothing but sawdust and the unsettling sense that something happened they can't quite name.</div>
       </div>
     </div>
@@ -1216,7 +1214,7 @@ body::after {
   <!-- Relationships -->
   <section class="section reveal section-frame" id="relationships">
     <div class="section-hdr">
-      <span class="section-label">Relationships</span>
+      <h2 class="section-label">Relationships</h2>
       <div class="section-line"></div>
     </div>
     <div class="rel-list">
@@ -1268,7 +1266,7 @@ body::after {
   <!-- Sound Signature -->
   <section class="section reveal" id="the-encounter">
     <div class="section-hdr">
-      <span class="section-label">The Encounter</span>
+      <h2 class="section-label">The Encounter</h2>
       <div class="section-line"></div>
     </div>
     <div class="encounter-text">
@@ -1279,7 +1277,7 @@ body::after {
   </section>
   <section class="section reveal" id="sound">
     <div class="section-hdr">
-      <span class="section-label">Sound Signature</span>
+      <h2 class="section-label">Sound Signature</h2>
       <div class="section-line"></div>
     </div>
     <div class="data-panel">
@@ -1299,7 +1297,7 @@ body::after {
   <!-- Tracklist -->
   <section class="section reveal" id="tracklist">
     <div class="section-hdr">
-      <span class="section-label">Mission Log 27: Tracklist</span>
+      <h2 class="section-label">Mission Log 27: Tracklist</h2>
       <div class="section-line"></div>
     </div>
     <div class="tracklist-wrap">
@@ -1364,7 +1362,7 @@ body::after {
   <footer class="footer reveal" aria-label="Operator links and credits">
     <div class="closing-quote">"For those who keep listening... the velvet was never the point."</div>
     <div class="section-hdr">
-      <span class="section-label">Signal Broadcast</span>
+      <h2 class="section-label">Signal Broadcast</h2>
       <div class="section-line"></div>
     </div>
     <nav class="links-grid" aria-label="External links">

@@ -185,6 +185,7 @@ body {
   color: var(--gold);
   white-space: nowrap;
   flex-shrink: 0;
+  margin: 0;  /* reset h2 browser defaults */
 }
 .section-line {
   flex: 1;
@@ -279,21 +280,17 @@ body {
   padding: 1.6rem 3.5rem 1.6rem 1.4rem;
   background: var(--bg-card);
   border: 1px solid rgba(201,168,76,0.07);
-  border-left-width: 2px;
-  border-left-color: rgba(201,168,76,0.18);
   overflow: hidden;
-  transition: background 0.22s ease, border-left-color 0.22s ease;
+  transition: background 0.22s ease;
 }
 .movement:last-child { border-bottom: 1px solid rgba(201,168,76,0.07); }
 .movement:hover { background: var(--bg-lift); }
-.movement:nth-child(1) { border-left-color: rgba(201,168,76,0.18); }
-.movement:nth-child(2) { border-left-color: rgba(201,168,76,0.3);  }
-.movement:nth-child(3) { border-left-color: rgba(201,168,76,0.45); }
-.movement:nth-child(4) { border-left-color: rgba(139,30,30,0.55);  }
-.movement:hover:nth-child(1),
-.movement:hover:nth-child(2),
-.movement:hover:nth-child(3) { border-left-color: var(--gold-dim); }
-.movement:hover:nth-child(4)  { border-left-color: var(--crimson); }
+/* Background tint escalation — I → II → III builds, IV breaks into crimson */
+.movement:nth-child(2) { background: rgba(201,168,76,0.018); }
+.movement:nth-child(3) { background: rgba(201,168,76,0.036); }
+.movement:nth-child(4) { background: rgba(139,30,30,0.042); border-color: rgba(139,30,30,0.14); }
+.movement:nth-child(4) .mv-title { color: var(--crimson); }
+.movement:nth-child(4):hover { background: rgba(139,30,30,0.07); }
 .mv-numeral {
   position: absolute;
   top: 0.5rem;
@@ -302,7 +299,7 @@ body {
   font-weight: 700;
   line-height: 1;
   color: var(--gold);
-  opacity: 0.07;
+  opacity: 0.13;
   letter-spacing: -0.04em;
   user-select: none;
   pointer-events: none;
@@ -313,7 +310,7 @@ body {
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--gold);
-  margin-bottom: 0.55rem;
+  margin: 0 0 0.55rem;  /* reset h3 browser defaults */
 }
 .mv-desc {
   font-size: 1rem;
@@ -1118,7 +1115,8 @@ body::after {
       </div>
   </div>
   <div class="hero-right">
-    <img class="hero-img" src="../cover-raw.png" alt="Midnight Runes, Operator 05 cover art" style="object-position: center top;">
+    <img class="hero-img" src="../cover-raw.png"
+       fetchpriority="high" alt="Midnight Runes, Operator 05 cover art" style="object-position: center top;">
     <div class="hero-overlay"></div>
   </div>
   <div class="hero-glow"></div>
@@ -1129,7 +1127,7 @@ body::after {
 
   <!-- Classification -->
   <section class="section reveal section-frame" id="classification">
-    <div class="section-hdr"><span class="section-label">Classification</span><div class="section-line"></div></div>
+    <div class="section-hdr"><h2 class="section-label">Classification</h2><div class="section-line"></div></div>
     <div class="class-panel">
       <div class="class-header">
         <div class="class-clearance">Clearance I</div>
@@ -1148,7 +1146,7 @@ body::after {
 
   <!-- Identity -->
   <section class="section reveal" id="identity">
-    <div class="section-hdr"><span class="section-label">Identity</span><div class="section-line"></div></div>
+    <div class="section-hdr"><h2 class="section-label">Identity</h2><div class="section-line"></div></div>
     <div class="prose prose-wide">
       <p>She calls herself the Frost Oracle. Augmented eyes that glow violet in the dark. Mechanical hands spread wide like she's reading something no one else can see. The runes in the datastream are her scripture. She read them before anyone coded them. The megacity built itself over the old world. She was already there.</p>
       <p>She does not lead a faction. She tends a tradition. The operators who move through Ritual Network territory do so because the Undercroft's protocols offer something the Architecture cannot: a frequency the scanning grid has never learned to read. The Architecture classifies it as noise. Midnight Runes calls it signal. The distinction has kept dozens of operators alive during sweeps that should have found them.</p>
@@ -1168,32 +1166,32 @@ body::after {
 
   <!-- Arc, Four Movements -->
   <section class="section reveal section-frame" id="arc"><section class="section reveal section-frame" id="arc">
-    <div class="section-hdr"><span class="section-label">Arc: Four Movements</span><div class="section-line"></div></div>
+    <div class="section-hdr"><h2 class="section-label">Arc: Four Movements</h2><div class="section-line"></div></div>
     <div class="movements">
       <div class="movement">
         <div class="mv-numeral">I</div>
-        <div class="mv-title">The Old World Wakes</div>
+        <h3 class="mv-title">The Old World Wakes</h3>
         <div class="mv-desc"><p>Before the megacity existed, the runes were already here, carved into stone, etched into circuit boards salvaged from the first generation of computing equipment, transmitted on frequencies the modern grid has forgotten how to tune.</p>
 
         <p>The old world did not end when the megacity was built. It went underground. It kept transmitting. She is the only one who has been listening the entire time. The first rune of this session is always the same one: the acknowledgment that the listener has arrived and the transmission may begin.</p></div>
       </div>
       <div class="movement">
         <div class="mv-numeral">II</div>
-        <div class="mv-title">The Gods Are Data Now</div>
+        <h3 class="mv-title">The Gods Are Data Now</h3>
         <div class="mv-desc"><p>The old gods didn't disappear when the megacity rose. They adapted, the same way a signal adapts to interference by shifting to a frequency the interference does not occupy. She finds them in the gaps between neon towers, in the narrow bands of spectrum the Architecture classifies as dead air, in the subsonic hum beneath every district's power g...</p>
 
         <p>The gods are data now, but data is not less sacred than stone. A prayer transmitted on an encrypted frequency is still a prayer. An offering made in kilowatt-hours instead of livestock is still an offering.</p></div>
       </div>
       <div class="movement">
         <div class="mv-numeral">III</div>
-        <div class="mv-title">The Oath</div>
+        <h3 class="mv-title">The Oath</h3>
         <div class="mv-desc"><p>The ritual has always been a binding, a promise between practitioner and system that predates every legal framework the megacity has ever attempted to impose. She makes the same oath she has made in every age: to maintain the transmission, to protect the frequency, to pass the knowledge to whoever proves capable of receiving it.</p>
 
         <p>The oath is not spoken. It is transmitted, encoded in the same pre-Architecture protocol the Undercroft has used for centuries, and the transmission itself is the binding act. While the signal runs, the oath holds.</p></div>
       </div>
       <div class="movement">
         <div class="mv-numeral">IV</div>
-        <div class="mv-title">Runic Code</div>
+        <h3 class="mv-title">Runic Code</h3>
         <div class="mv-desc"><p>The datastream carries the same symbols it always has: runic patterns embedded in signal noise, repeating at intervals measured in decades rather than seconds, legible only to someone who has been watching long enough to recognize the cycle.</p>
 
         <p>A successor must find the frequency themselves, must learn to read the runes without being taught, must prove the patience to watch a pattern that takes thirty years to complete a single iteration. She has been watching for longer than the Architecture has existed. The current iteration is almost complete.</p></div>
@@ -1203,7 +1201,7 @@ body::after {
 
   <!-- Relationships -->
   <section class="section reveal section-frame" id="relationships">
-    <div class="section-hdr"><span class="section-label">Relationships</span><div class="section-line"></div></div>
+    <div class="section-hdr"><h2 class="section-label">Relationships</h2><div class="section-line"></div></div>
     <div class="rel-list">
       <div class="rel-item">
         <span class="rel-pill p-purple">Elder to</span>
@@ -1253,7 +1251,7 @@ body::after {
   <!-- Sound Signature -->
   <section class="section reveal" id="the-encounter">
       <div class="encounter-text">
-    <div class="section-hdr"><span class="section-label">The Encounter</span><div class="section-line"></div></div>
+    <div class="section-hdr"><h2 class="section-label">The Encounter</h2><div class="section-line"></div></div>
     <div class="encounter-text">
       <p>The longest night of the year. A signal that no equipment could classify. Not noise. Not data. Something older, running on frequencies that predate every communication protocol the Architecture has ever standardized. Down through service tunnels and abandoned transit corridors, following it, until a chamber lit by the glow of ancient transmission equipment. There she was. The Frost Oracle. Augmented eyes glowing violet in the dark. Mechanical hands spread wide, reading something invisible to everyone else in the room.</p>
       <p>She had been expecting the visit. The runes are not decoration, she said. They are instructions, a set of signal protocols developed before centralized infrastructure existed, maintained continuously through every century since. The Architecture calls it noise because the Architecture was built by people who didn't know what they were hearing. Midnight Runes has been listening the entire time. She is the only one left who knows what the symbols mean. She is training no successor because the tradition does not work that way. The successor must find the frequency themselves.</p>
@@ -1261,7 +1259,7 @@ body::after {
     </div>
   </section>
   <section class="section reveal" id="sound">
-    <div class="section-hdr"><span class="section-label">Sound Signature</span><div class="section-line"></div></div>
+    <div class="section-hdr"><h2 class="section-label">Sound Signature</h2><div class="section-line"></div></div>
     <div class="data-panel">
       <div class="meta-grid">
         <span class="meta-k">Genres</span><span class="meta-v">Ritual Industrial · Dark Nordic Synthwave · Cyberpunk Ancient · Pre-Architecture Frequencies</span>
@@ -1274,7 +1272,7 @@ body::after {
 
   <!-- Tracklist -->
   <section class="section reveal" id="tracklist">
-    <div class="section-hdr"><span class="section-label">Mission Log 05: Tracklist</span><div class="section-line"></div></div>
+    <div class="section-hdr"><h2 class="section-label">Mission Log 05: Tracklist</h2><div class="section-line"></div></div>
     <div class="tracklist-wrap">
       <div class="tracklist">
         <div class="tr"><span class="tr-n">01.</span><span class="tr-t">Ancient Augmented</span><span class="tr-ts">3:27</span><span class="tr-note">The first rune activates: the listener has arrived, transmission begins</span></div>
@@ -1305,7 +1303,7 @@ body::after {
   <footer class="footer reveal" aria-label="Operator links and credits">
     <div class="closing-quote">"For those who keep listening... the velvet was never the point."</div>
     <div class="section-hdr">
-      <span class="section-label">Signal Broadcast</span>
+      <h2 class="section-label">Signal Broadcast</h2>
       <div class="section-line"></div>
     </div>
     <nav class="links-grid" aria-label="External links">

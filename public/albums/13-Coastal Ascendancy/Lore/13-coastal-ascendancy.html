@@ -185,6 +185,7 @@ body {
   color: var(--gold);
   white-space: nowrap;
   flex-shrink: 0;
+  margin: 0;  /* reset h2 browser defaults */
 }
 .section-line {
   flex: 1;
@@ -279,21 +280,17 @@ body {
   padding: 1.6rem 3.5rem 1.6rem 1.4rem;
   background: var(--bg-card);
   border: 1px solid rgba(201,168,76,0.07);
-  border-left-width: 2px;
-  border-left-color: rgba(201,168,76,0.18);
   overflow: hidden;
-  transition: background 0.22s ease, border-left-color 0.22s ease;
+  transition: background 0.22s ease;
 }
 .movement:last-child { border-bottom: 1px solid rgba(201,168,76,0.07); }
 .movement:hover { background: var(--bg-lift); }
-.movement:nth-child(1) { border-left-color: rgba(201,168,76,0.18); }
-.movement:nth-child(2) { border-left-color: rgba(201,168,76,0.3);  }
-.movement:nth-child(3) { border-left-color: rgba(201,168,76,0.45); }
-.movement:nth-child(4) { border-left-color: rgba(139,30,30,0.55);  }
-.movement:hover:nth-child(1),
-.movement:hover:nth-child(2),
-.movement:hover:nth-child(3) { border-left-color: var(--gold-dim); }
-.movement:hover:nth-child(4)  { border-left-color: var(--crimson); }
+/* Background tint escalation — I → II → III builds, IV breaks into crimson */
+.movement:nth-child(2) { background: rgba(201,168,76,0.018); }
+.movement:nth-child(3) { background: rgba(201,168,76,0.036); }
+.movement:nth-child(4) { background: rgba(139,30,30,0.042); border-color: rgba(139,30,30,0.14); }
+.movement:nth-child(4) .mv-title { color: var(--crimson); }
+.movement:nth-child(4):hover { background: rgba(139,30,30,0.07); }
 .mv-numeral {
   position: absolute;
   top: 0.5rem;
@@ -302,7 +299,7 @@ body {
   font-weight: 700;
   line-height: 1;
   color: var(--gold);
-  opacity: 0.07;
+  opacity: 0.13;
   letter-spacing: -0.04em;
   user-select: none;
   pointer-events: none;
@@ -313,7 +310,7 @@ body {
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--gold);
-  margin-bottom: 0.55rem;
+  margin: 0 0 0.55rem;  /* reset h3 browser defaults */
 }
 .mv-desc {
   font-size: 1rem;
@@ -1118,7 +1115,8 @@ body::after {
       </div>
   </div>
   <div class="hero-right">
-    <img class="hero-img" src="../cover-raw.png" alt="Coastal Ascendancy, Operator 13 cover art" style="object-position: center 35%;">
+    <img class="hero-img" src="../cover-raw.png"
+       fetchpriority="high" alt="Coastal Ascendancy, Operator 13 cover art" style="object-position: center 35%;">
     <div class="hero-overlay"></div>
   </div>
   <div class="hero-glow"></div>
@@ -1129,7 +1127,7 @@ body::after {
 
   <!-- Classification -->
   <section class="section reveal section-frame" id="classification">
-    <div class="section-hdr"><span class="section-label">Classification</span><div class="section-line"></div></div>
+    <div class="section-hdr"><h2 class="section-label">Classification</h2><div class="section-line"></div></div>
     <div class="class-panel">
       <div class="class-header">
         <div class="class-clearance">Clearance II</div>
@@ -1148,7 +1146,7 @@ body::after {
 
   <!-- Identity -->
   <section class="section reveal" id="identity">
-    <div class="section-hdr"><span class="section-label">Identity</span><div class="section-line"></div></div>
+    <div class="section-hdr"><h2 class="section-label">Identity</h2><div class="section-line"></div></div>
     <div class="prose prose-wide">
       <p>She calls herself Tide Sovereign. Natural hair catching the neon. Gold chains over pulse-worn skin. Eyes that hold the frequency of the coast in a city that forgot the ocean exists. She didn't ascend through the corporate floors. She rose the way tides rise, without asking permission, without announcing arrival. The rhythm was here before the first tower. It will be here after the last one falls.</p>
       <p>Coastal Ascendancy does not invade the megacity. She rises through it. The distinction is not semantic. An invasion requires an exterior force entering a defended space. A tide requires none of that: it requires only water, time, and the property of water that it finds every unsealed gap and fills it without asking. The megacity's scanning protocols were built to detect and classify movement. They were not built to detect something that does not move so much as expand.</p>
@@ -1170,32 +1168,32 @@ body::after {
 
   <!-- Arc, Four Movements -->
   <section class="section reveal section-frame" id="arc">
-    <div class="section-hdr"><span class="section-label">Arc: Four Movements</span><div class="section-line"></div></div>
+    <div class="section-hdr"><h2 class="section-label">Arc: Four Movements</h2><div class="section-line"></div></div>
     <div class="movements">
       <div class="movement">
         <div class="mv-numeral">I</div>
-        <div class="mv-title">Before the City Was Built</div>
+        <h3 class="mv-title">Before the City Was Built</h3>
         <div class="mv-desc"><p>The island existed before the first cable was laid, before the megacity's expansion grid reached the water, before the coastal districts were zoned and developed, before anyone in the Architecture's planning division had ever set foot on sand.</p>
 
         <p>She carries that rhythm now, not as heritage, but as active transmission. The Tide Sovereign did not inherit the coastal frequency. She is its current bearer, the latest in a chain of carriers that predates every legal framework the megacity has attempted to impose on the waterfront. The city thinks it discovered the coast.</p></div>
       </div>
       <div class="movement">
         <div class="mv-numeral">II</div>
-        <div class="mv-title">The Rhythm Enters the Grid</div>
+        <h3 class="mv-title">The Rhythm Enters the Grid</h3>
         <div class="mv-desc"><p>Concrete doesn't stop a tide. It redirects it, the water finds new channels, new inlets, new paths through the infrastructure the city thought was sealed. She moves through the megacity the same way, flowing around obstacles rather than confronting them, accumulating force in the spaces between the city's rigid structures.</p>
 
         <p>The city adjusts its frequency to match hers, not consciously, not through any administrative decision, but through the simple physics of signal propagation. A strong enough transmission on a clear enough frequency will eventually pull nearby systems into resonance. The Tide Sovereign has been broadcasting the coastal pulse for fourteen cycles.</p></div>
       </div>
       <div class="movement">
         <div class="mv-numeral">III</div>
-        <div class="mv-title">Coastal Override</div>
+        <h3 class="mv-title">Coastal Override</h3>
         <div class="mv-desc"><p>The megacity runs on protocols, rigid, deterministic, conditional logic encoded in silicon and enforced by the Architecture's compliance framework. She runs on pulse, organic, adaptive, responsive to conditions that no protocol was written to anticipate. When protocol meets pulse, pulse wins. Not because it is stronger, but because it is faster.</p>
 
         <p>Every circuit that meets her frequency gets rewritten from the coast up. The rewriting is not malicious. It is simply what happens when a coherent signal encounters a system that was never designed to filter it. The Architecture's coastal monitoring stations have been reporting anomalous readings for eleven cycles. The readings are not anomalous.</p></div>
       </div>
       <div class="movement">
         <div class="mv-numeral">IV</div>
-        <div class="mv-title">Tide Dominion</div>
+        <h3 class="mv-title">Tide Dominion</h3>
         <div class="mv-desc"><p>The ascendancy was never a climb. She didn't fight her way up through the ranks of any faction, didn't seize any throne, didn't overthrow any existing power structure. It was a rising. Gradual, inevitable, powered by forces the city could not resist because it had never learned to recognize them as hostile. The tide doesn't attack. It arrives.</p>
 
         <p>The city didn't fall. It got covered, slowly, from the water up. Every coastal district now operates on frequencies that originated in her transmission network. Every waterfront routing node prioritizes traffic that carries her signal signature. The Architecture's compliance checks still report normal status because "normal" has been redefined.</p></div>
@@ -1205,7 +1203,7 @@ body::after {
 
   <!-- Relationships -->
   <section class="section reveal section-frame" id="relationships">
-    <div class="section-hdr"><span class="section-label">Relationships</span><div class="section-line"></div></div>
+    <div class="section-hdr"><h2 class="section-label">Relationships</h2><div class="section-line"></div></div>
     <div class="rel-list">
       <div class="rel-item">
         <span class="rel-pill p-green">Root tradition</span>
@@ -1254,7 +1252,7 @@ body::after {
 
   <!-- Sound Signature -->
   <section class="section reveal" id="the-encounter">
-    <div class="section-hdr"><span class="section-label">The Encounter</span><div class="section-line"></div></div>
+    <div class="section-hdr"><h2 class="section-label">The Encounter</h2><div class="section-line"></div></div>
     <div class="encounter-text">
       <p>The tide was rising before the city finished building its walls. Before the first coastal district was zoned and developed, before the Architecture's planning division had ever set foot on sand, the rhythm was already here, carried in the percussion of waves against rock, in the call-and-response of fishing crews, in the pulse of communities that had been living on the coast for generations. The Tide Sovereign is not a newcomer to the megacity. The megacity is a newcomer to her coast.</p>
       <p>Natural hair catching the neon. Gold chains over pulse-worn skin. Eyes that hold the frequency of the ocean in a city that forgot the ocean exists. She didn't ascend through the corporate floors. She rose the way tides rise, without asking permission, without announcing arrival. We followed her signal through the coastal districts for three days, watching the infrastructure adjust to her presence. Every waterfront routing node now prioritizes traffic that carries her signal signature. The Architecture's compliance checks still report normal status because "normal" has been redefined. The ascendancy was never a climb. It was a rising.</p>
@@ -1262,7 +1260,7 @@ body::after {
     </div>
   </section>
   <section class="section reveal" id="sound">
-    <div class="section-hdr"><span class="section-label">Sound Signature</span><div class="section-line"></div></div>
+    <div class="section-hdr"><h2 class="section-label">Sound Signature</h2><div class="section-line"></div></div>
     <div class="data-panel">
       <div class="meta-grid">
         <span class="meta-k">Genres</span><span class="meta-v">Afrofuturist synthwave · Coastal cyberpunk · Tribal industrial · Island frequency</span>
@@ -1275,7 +1273,7 @@ body::after {
 
   <!-- Tracklist -->
   <section class="section reveal" id="tracklist">
-    <div class="section-hdr"><span class="section-label">Mission Log 13: Tracklist</span><div class="section-line"></div></div>
+    <div class="section-hdr"><h2 class="section-label">Mission Log 13: Tracklist</h2><div class="section-line"></div></div>
     <div class="tracklist-wrap">
       <div class="tracklist">
         <div class="tr"><span class="tr-n">01.</span><span class="tr-t">Island Dominion</span><span class="tr-ts">3:08</span></div>
@@ -1307,7 +1305,7 @@ body::after {
   <footer class="footer reveal" aria-label="Operator links and credits">
     <div class="closing-quote">"For those who keep listening... the velvet was never the point."</div>
     <div class="section-hdr">
-      <span class="section-label">Signal Broadcast</span>
+      <h2 class="section-label">Signal Broadcast</h2>
       <div class="section-line"></div>
     </div>
     <nav class="links-grid" aria-label="External links">

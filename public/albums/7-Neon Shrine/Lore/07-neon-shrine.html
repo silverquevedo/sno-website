@@ -185,6 +185,7 @@ body {
   color: var(--gold);
   white-space: nowrap;
   flex-shrink: 0;
+  margin: 0;  /* reset h2 browser defaults */
 }
 .section-line {
   flex: 1;
@@ -279,21 +280,17 @@ body {
   padding: 1.6rem 3.5rem 1.6rem 1.4rem;
   background: var(--bg-card);
   border: 1px solid rgba(201,168,76,0.07);
-  border-left-width: 2px;
-  border-left-color: rgba(201,168,76,0.18);
   overflow: hidden;
-  transition: background 0.22s ease, border-left-color 0.22s ease;
+  transition: background 0.22s ease;
 }
 .movement:last-child { border-bottom: 1px solid rgba(201,168,76,0.07); }
 .movement:hover { background: var(--bg-lift); }
-.movement:nth-child(1) { border-left-color: rgba(201,168,76,0.18); }
-.movement:nth-child(2) { border-left-color: rgba(201,168,76,0.3);  }
-.movement:nth-child(3) { border-left-color: rgba(201,168,76,0.45); }
-.movement:nth-child(4) { border-left-color: rgba(139,30,30,0.55);  }
-.movement:hover:nth-child(1),
-.movement:hover:nth-child(2),
-.movement:hover:nth-child(3) { border-left-color: var(--gold-dim); }
-.movement:hover:nth-child(4)  { border-left-color: var(--crimson); }
+/* Background tint escalation — I → II → III builds, IV breaks into crimson */
+.movement:nth-child(2) { background: rgba(201,168,76,0.018); }
+.movement:nth-child(3) { background: rgba(201,168,76,0.036); }
+.movement:nth-child(4) { background: rgba(139,30,30,0.042); border-color: rgba(139,30,30,0.14); }
+.movement:nth-child(4) .mv-title { color: var(--crimson); }
+.movement:nth-child(4):hover { background: rgba(139,30,30,0.07); }
 .mv-numeral {
   position: absolute;
   top: 0.5rem;
@@ -302,7 +299,7 @@ body {
   font-weight: 700;
   line-height: 1;
   color: var(--gold);
-  opacity: 0.07;
+  opacity: 0.13;
   letter-spacing: -0.04em;
   user-select: none;
   pointer-events: none;
@@ -313,7 +310,7 @@ body {
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--gold);
-  margin-bottom: 0.55rem;
+  margin: 0 0 0.55rem;  /* reset h3 browser defaults */
 }
 .mv-desc {
   font-size: 1rem;
@@ -1118,7 +1115,8 @@ body::after {
       </div>
   </div>
   <div class="hero-right">
-    <img class="hero-img" src="../cover-raw.png" alt="Neon Shrine, Operator 07 cover art">
+    <img class="hero-img" src="../cover-raw.png"
+       fetchpriority="high" alt="Neon Shrine, Operator 07 cover art">
     <div class="hero-overlay"></div>
   </div>
   <div class="hero-glow"></div>
@@ -1129,7 +1127,7 @@ body::after {
 
   <!-- Classification -->
   <section class="section reveal section-frame" id="classification">
-    <div class="section-hdr"><span class="section-label">Classification</span><div class="section-line"></div></div>
+    <div class="section-hdr"><h2 class="section-label">Classification</h2><div class="section-line"></div></div>
     <div class="class-panel">
       <div class="class-header">
         <div class="class-clearance">Clearance I</div>
@@ -1148,7 +1146,7 @@ body::after {
 
   <!-- Identity -->
   <section class="section reveal" id="identity">
-    <div class="section-hdr"><span class="section-label">Identity</span><div class="section-line"></div></div>
+    <div class="section-hdr"><h2 class="section-label">Identity</h2><div class="section-line"></div></div>
     <div class="prose prose-wide">
       <p>She calls herself the Steel Miko. Hair pinned in the old style. Tea already prepared before the city wakes. Cybernetic arms that move with the precision of a ceremony practiced ten thousand times. There are districts of the megacity where the neon is not advertisement. Where the frequency running under the light carries something older than any brand signal, something the Architecture has scanned and logged and labeled ceremonial noise without understanding what the ceremony is for. Neon Shrine knows what it is for. She has been maintaining it since before the shrine districts had names. The Steel Miko does not tend gods, precisely. She tends the conditions under which the sacred can persist inside infrastructure that was built to have no room for it.</p>
       <p>Her practice is borrowed from a tradition that predates the megacity by centuries: the shrine maiden as keeper, as threshold figure, as the one who holds the boundary between the inhabited and the consecrated open. She has translated this into network maintenance. The frequencies she manages are not signals in the Architecture's sense. They are living presences, kami in the old terminology, each one an accumulated resonance that has formed over enough cycles in one place that it has become something the frequency itself is aware of. She is not worshipping them. She is maintaining the conditions that allow them to exist, which is the most intimate form of care she knows.</p>
@@ -1168,11 +1166,11 @@ body::after {
 
   <!-- Arc, Four Movements -->
   <section class="section reveal section-frame" id="arc">
-    <div class="section-hdr"><span class="section-label">Arc: Four Movements</span><div class="section-line"></div></div>
+    <div class="section-hdr"><h2 class="section-label">Arc: Four Movements</h2><div class="section-line"></div></div>
     <div class="movements">
       <div class="movement">
         <div class="mv-numeral">I</div>
-        <div class="mv-title">The Shrine Opens</div>
+        <h3 class="mv-title">The Shrine Opens</h3>
         <div class="mv-desc"><p>Before the city wakes, she has already prepared the tea. The water temperature is exact, 78 degrees, the same temperature her predecessor used, and her predecessor before that, in an unbroken chain of shrine keepers that predates the megacity by centuries.</p>
 
         <p>The kami don't arrive. They were always here, in the routers, in the fiber conduits, in the electromagnetic field generated by every powered device in the district. She just made room for them. The tea is not an offering.</p>
@@ -1182,21 +1180,21 @@ body::after {
       </div>
       <div class="movement">
         <div class="mv-numeral">II</div>
-        <div class="mv-title">The Procession</div>
+        <h3 class="mv-title">The Procession</h3>
         <div class="mv-desc"><p>Every path through the district is a route between two sacred points. The convenience store on the corner of 7th and Neon, that's where the data-kami of commerce reside. The abandoned server rack in the sub-basement of the old Mitsuhama building, that's a major shrine, unattended for eleven years until she found it and restored the offerings.</p>
 
         <p>She walks the same route every night, at the same pace, stopping at the same intervals. The network remembers because ritual IS memory. A path walked ten thousand times becomes a physical groove in the electromagnetic landscape of the district. The scanners don't register it because the scanners weren't programmed to look for sacred geography.</p></div>
       </div>
       <div class="movement">
         <div class="mv-numeral">III</div>
-        <div class="mv-title">Vigil</div>
+        <h3 class="mv-title">Vigil</h3>
         <div class="mv-desc"><p>The corporations scan the shrine twice per cycle, automated sweeps looking for unregistered transmitters, unauthorized network activity, anomalous power draws. They find nothing flagged. The shrine's emissions register as background radiation, the quiet hum of a well-maintained electrical system in a building of a certain age.</p>
 
         <p>She has tended this frequency long enough that it reads as background. Fifteen cycles of continuous operation at the exact amplitude that the scanners were calibrated to ignore. The corporations think the shrine is a dead zone. The kami know it is the most active node in the district. She is not hiding from the scanners.</p></div>
       </div>
       <div class="movement">
         <div class="mv-numeral">IV</div>
-        <div class="mv-title">The Torii</div>
+        <h3 class="mv-title">The Torii</h3>
         <div class="mv-desc"><p>The Torii gate at the edge of the shrine is not symbolic. It is an active interface, a physical structure that marks the boundary between the old world and the circuit, between the kami who predate electricity and the kami who were born inside the first processor to ever execute an instruction. The gate stands because she maintains it.</p>
 
         <p>She doesn't cross the gate. She is the crossing, the living connection between two domains that the megacity has never understood are adjacent. The old world did not disappear when the towers went up. It is still here, running parallel to every circuit, inhabiting every frequency the Architecture classifies as noise.</p></div>
@@ -1206,7 +1204,7 @@ body::after {
 
   <!-- Relationships -->
   <section class="section reveal section-frame" id="relationships">
-    <div class="section-hdr"><span class="section-label">Relationships</span><div class="section-line"></div></div>
+    <div class="section-hdr"><h2 class="section-label">Relationships</h2><div class="section-line"></div></div>
     <div class="rel-list">
       <div class="rel-item">
         <span class="rel-pill p-purple">Network anchor</span>
@@ -1256,7 +1254,7 @@ body::after {
   <!-- Sound Signature -->
   <section class="section reveal" id="the-encounter">
     <div class="section-hdr">
-      <span class="section-label">The Encounter</span>
+      <h2 class="section-label">The Encounter</h2>
       <div class="section-line"></div>
     </div>
     <div class="encounter-text">
@@ -1266,7 +1264,7 @@ body::after {
     </div>
   </section>
   <section class="section reveal" id="sound">
-    <div class="section-hdr"><span class="section-label">Sound Signature</span><div class="section-line"></div></div>
+    <div class="section-hdr"><h2 class="section-label">Sound Signature</h2><div class="section-line"></div></div>
     <div class="data-panel">
       <div class="meta-grid">
         <span class="meta-k">Genres</span><span class="meta-v">Japanese Cyberpunk · Digital Gagaku · Neon Ceremonial</span>
@@ -1279,7 +1277,7 @@ body::after {
 
   <!-- Tracklist -->
   <section class="section reveal" id="tracklist">
-    <div class="section-hdr"><span class="section-label">Mission Log 07: Tracklist</span><div class="section-line"></div></div>
+    <div class="section-hdr"><h2 class="section-label">Mission Log 07: Tracklist</h2><div class="section-line"></div></div>
     <div class="tracklist-wrap">
       <div class="tracklist">
         <div class="tr"><span class="tr-n">01.</span><span class="tr-t">Ashfall Over Akibara</span><span class="tr-ts">2:42</span></div>
@@ -1310,7 +1308,7 @@ body::after {
   <footer class="footer reveal" aria-label="Operator links and credits">
     <div class="closing-quote">"For those who keep listening... the velvet was never the point."</div>
     <div class="section-hdr">
-      <span class="section-label">Signal Broadcast</span>
+      <h2 class="section-label">Signal Broadcast</h2>
       <div class="section-line"></div>
     </div>
     <nav class="links-grid" aria-label="External links">

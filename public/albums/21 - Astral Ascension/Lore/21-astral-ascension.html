@@ -185,6 +185,7 @@ body {
   color: var(--gold);
   white-space: nowrap;
   flex-shrink: 0;
+  margin: 0;  /* reset h2 browser defaults */
 }
 .section-line {
   flex: 1;
@@ -279,21 +280,17 @@ body {
   padding: 1.6rem 3.5rem 1.6rem 1.4rem;
   background: var(--bg-card);
   border: 1px solid rgba(201,168,76,0.07);
-  border-left-width: 2px;
-  border-left-color: rgba(201,168,76,0.18);
   overflow: hidden;
-  transition: background 0.22s ease, border-left-color 0.22s ease;
+  transition: background 0.22s ease;
 }
 .movement:last-child { border-bottom: 1px solid rgba(201,168,76,0.07); }
 .movement:hover { background: var(--bg-lift); }
-.movement:nth-child(1) { border-left-color: rgba(201,168,76,0.18); }
-.movement:nth-child(2) { border-left-color: rgba(201,168,76,0.3);  }
-.movement:nth-child(3) { border-left-color: rgba(201,168,76,0.45); }
-.movement:nth-child(4) { border-left-color: rgba(139,30,30,0.55);  }
-.movement:hover:nth-child(1),
-.movement:hover:nth-child(2),
-.movement:hover:nth-child(3) { border-left-color: var(--gold-dim); }
-.movement:hover:nth-child(4)  { border-left-color: var(--crimson); }
+/* Background tint escalation — I → II → III builds, IV breaks into crimson */
+.movement:nth-child(2) { background: rgba(201,168,76,0.018); }
+.movement:nth-child(3) { background: rgba(201,168,76,0.036); }
+.movement:nth-child(4) { background: rgba(139,30,30,0.042); border-color: rgba(139,30,30,0.14); }
+.movement:nth-child(4) .mv-title { color: var(--crimson); }
+.movement:nth-child(4):hover { background: rgba(139,30,30,0.07); }
 .mv-numeral {
   position: absolute;
   top: 0.5rem;
@@ -302,7 +299,7 @@ body {
   font-weight: 700;
   line-height: 1;
   color: var(--gold);
-  opacity: 0.07;
+  opacity: 0.13;
   letter-spacing: -0.04em;
   user-select: none;
   pointer-events: none;
@@ -313,7 +310,7 @@ body {
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--gold);
-  margin-bottom: 0.55rem;
+  margin: 0 0 0.55rem;  /* reset h3 browser defaults */
 }
 .mv-desc {
   font-size: 1rem;
@@ -1118,7 +1115,8 @@ body::after {
       </div>
   </div>
   <div class="hero-right">
-    <img class="hero-img" src="../cover-raw.png" alt="Astral Ascension, Operator 21 cover art" style="object-position: right top;">
+    <img class="hero-img" src="../cover-raw.png"
+       fetchpriority="high" alt="Astral Ascension, Operator 21 cover art" style="object-position: right top;">
     <div class="hero-overlay"></div>
   </div>
   <div class="hero-glow"></div>
@@ -1129,7 +1127,7 @@ body::after {
 
   <!-- Classification -->
   <section class="section reveal section-frame" id="classification">
-    <div class="section-hdr"><span class="section-label">Classification</span><div class="section-line"></div></div>
+    <div class="section-hdr"><h2 class="section-label">Classification</h2><div class="section-line"></div></div>
     <div class="class-panel">
       <div class="class-header">
         <div class="class-clearance">Clearance III</div>
@@ -1148,7 +1146,7 @@ body::after {
 
   <!-- Identity -->
   <section class="section reveal" id="identity">
-    <div class="section-hdr"><span class="section-label">Identity</span><div class="section-line"></div></div>
+    <div class="section-hdr"><h2 class="section-label">Identity</h2><div class="section-line"></div></div>
     <div class="prose prose-wide">
       <p>She calls herself Cosmic Requiem. Sitting cross-legged on the city floor in a combat suit trimmed with neon, not watching the towers, not watching the sky, counting down something no timer in the grid can display. She didn't ascend to reach the stars. She was already past the event horizon, already beyond the last signal, already in the frequency the city stopped transmitting years ago. In the deep architecture of the cybernetic mind, the signal is not heard. It is felt. A cybernetic ritual encoded as a transmission, a descent through fractured signals and sacred circuitry, where every drop is a choice you can't undo and every silence is a threshold watching you back.</p>
       <p>Every other operator in the catalog has a relationship to the megacity. They fight it, hide inside it, encode ancient signals through its infrastructure, or perform for its audiences. Cosmic Requiem's relationship to the megacity is departure. She is not in conflict with the Architecture. She is not allied with the Ghost Layer. She is not preserving a tradition inside the Ritual Network. She has already calculated the trajectory and confirmed it: the megacity is not the destination. The megacity is the launch point.</p>
@@ -1170,11 +1168,11 @@ body::after {
 
   <!-- Arc, Four Movements -->
   <section class="section reveal section-frame" id="arc">
-    <div class="section-hdr"><span class="section-label">Arc: Four Movements</span><div class="section-line"></div></div>
+    <div class="section-hdr"><h2 class="section-label">Arc: Four Movements</h2><div class="section-line"></div></div>
     <div class="movements">
       <div class="movement">
         <div class="mv-numeral">I</div>
-        <div class="mv-title">The Route Opens</div>
+        <h3 class="mv-title">The Route Opens</h3>
         <div class="mv-desc"><p>Ashen route departure, the launch trajectory is charted through sectors the Architecture abandoned after the last infrastructure collapse, where the monitoring grid is thinnest and the signal interference is lowest.</p>
 
         <p>The event horizon communion marks the boundary, the point where the megacity's signal infrastructure ends and the void begins. She crosses without requesting clearance because the Architecture's aerospace authority has no protocol for a human-scale transmission exiting the atmosphere under its own power.</p>
@@ -1184,7 +1182,7 @@ body::after {
       </div>
       <div class="movement">
         <div class="mv-numeral">II</div>
-        <div class="mv-title">Signal in the Void</div>
+        <h3 class="mv-title">Signal in the Void</h3>
         <div class="mv-desc"><p>Echo strike, the last transmission from the megacity reaches her position and reflects back toward the surface, carrying a compressed record of every signal the city has emitted in the past thirty seconds.</p>
 
         <p>Choir transmission: her signal resolves into a harmonic pattern that no ground-based receiver can fully decode, it requires the vacuum of space to propagate without distortion. Ether program: the autonomous navigation routine that will guide her through the remaining phases of the ascension.</p>
@@ -1194,7 +1192,7 @@ body::after {
       </div>
       <div class="movement">
         <div class="mv-numeral">III</div>
-        <div class="mv-title">Cosmic Memory</div>
+        <h3 class="mv-title">Cosmic Memory</h3>
         <div class="mv-desc"><p>Astro industrial signature, the Cosmic Requiem's transmission now carries the unique spectral fingerprint of an operator who has passed beyond the megacity's gravitational and electromagnetic influence.</p>
 
         <p>Gravity collision: the moment when her trajectory intersects with a major orbital body's gravitational field, forcing a course correction that she executes with the precision of someone who calculated every variable before she left the ground.</p>
@@ -1217,7 +1215,7 @@ body::after {
 
   <!-- Relationships -->
   <section class="section reveal section-frame" id="relationships">
-    <div class="section-hdr"><span class="section-label">Relationships</span><div class="section-line"></div></div>
+    <div class="section-hdr"><h2 class="section-label">Relationships</h2><div class="section-line"></div></div>
     <div class="rel-list">
       <div class="rel-item">
         <span class="rel-pill p-dim">No faction, no anchor</span>
@@ -1266,7 +1264,7 @@ body::after {
 
   <!-- Sound Signature -->
   <section class="section reveal" id="the-encounter">
-    <div class="section-hdr"><span class="section-label">The Encounter</span><div class="section-line"></div></div>
+    <div class="section-hdr"><h2 class="section-label">The Encounter</h2><div class="section-line"></div></div>
     <div class="encounter-text">
       <p>Sitting cross-legged on the city floor in a combat suit trimmed with neon. Not watching the towers. Not watching the sky. Counting down something no timer in the grid can display. The Cosmic Requiem was already past the event horizon before we arrived, already beyond the last signal, already in the frequency the city stopped transmitting years ago.</p>
       <p>We tracked her departure through the ashen route, following the trail of deactivated monitoring stations she left in her wake. The Architecture's aerospace authority has no protocol for a human-scale transmission exiting the atmosphere under its own power, so they classified the event as a sensor malfunction and archived it without investigation. By the time the first alert reached a human operator, she was already past the ionosphere. The countdown was already running before she sat down. The only thing the grid registered was a momentary spike in the ashen frequency band.</p>
@@ -1274,7 +1272,7 @@ body::after {
     </div>
   </section>
   <section class="section reveal" id="sound">
-    <div class="section-hdr"><span class="section-label">Sound Signature</span><div class="section-line"></div></div>
+    <div class="section-hdr"><h2 class="section-label">Sound Signature</h2><div class="section-line"></div></div>
     <div class="data-panel">
       <div class="meta-grid">
         <span class="meta-k">Genres</span><span class="meta-v">Cosmic synthwave · Industrial transcendence · Dark ambient departure · Electronic requiem</span>
@@ -1287,7 +1285,7 @@ body::after {
 
   <!-- Tracklist -->
   <section class="section reveal" id="tracklist">
-    <div class="section-hdr"><span class="section-label">Mission Log 21: Tracklist</span><div class="section-line"></div></div>
+    <div class="section-hdr"><h2 class="section-label">Mission Log 21: Tracklist</h2><div class="section-line"></div></div>
     <div class="tracklist-wrap">
       <div class="tracklist">
         <div class="tr"><span class="tr-n">01.</span><span class="tr-t">Ashen Route Departure</span><span class="tr-ts">3:28</span></div>
@@ -1318,7 +1316,7 @@ body::after {
   <footer class="footer reveal" aria-label="Operator links and credits">
     <div class="closing-quote">"For those who keep listening... the velvet was never the point."</div>
     <div class="section-hdr">
-      <span class="section-label">Signal Broadcast</span>
+      <h2 class="section-label">Signal Broadcast</h2>
       <div class="section-line"></div>
     </div>
     <nav class="links-grid" aria-label="External links">

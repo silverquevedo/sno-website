@@ -185,6 +185,7 @@ body {
   color: var(--gold);
   white-space: nowrap;
   flex-shrink: 0;
+  margin: 0;  /* reset h2 browser defaults */
 }
 .section-line {
   flex: 1;
@@ -279,21 +280,17 @@ body {
   padding: 1.6rem 3.5rem 1.6rem 1.4rem;
   background: var(--bg-card);
   border: 1px solid rgba(201,168,76,0.07);
-  border-left-width: 2px;
-  border-left-color: rgba(201,168,76,0.18);
   overflow: hidden;
-  transition: background 0.22s ease, border-left-color 0.22s ease;
+  transition: background 0.22s ease;
 }
 .movement:last-child { border-bottom: 1px solid rgba(201,168,76,0.07); }
 .movement:hover { background: var(--bg-lift); }
-.movement:nth-child(1) { border-left-color: rgba(201,168,76,0.18); }
-.movement:nth-child(2) { border-left-color: rgba(201,168,76,0.3);  }
-.movement:nth-child(3) { border-left-color: rgba(201,168,76,0.45); }
-.movement:nth-child(4) { border-left-color: rgba(139,30,30,0.55);  }
-.movement:hover:nth-child(1),
-.movement:hover:nth-child(2),
-.movement:hover:nth-child(3) { border-left-color: var(--gold-dim); }
-.movement:hover:nth-child(4)  { border-left-color: var(--crimson); }
+/* Background tint escalation — I → II → III builds, IV breaks into crimson */
+.movement:nth-child(2) { background: rgba(201,168,76,0.018); }
+.movement:nth-child(3) { background: rgba(201,168,76,0.036); }
+.movement:nth-child(4) { background: rgba(139,30,30,0.042); border-color: rgba(139,30,30,0.14); }
+.movement:nth-child(4) .mv-title { color: var(--crimson); }
+.movement:nth-child(4):hover { background: rgba(139,30,30,0.07); }
 .mv-numeral {
   position: absolute;
   top: 0.5rem;
@@ -302,7 +299,7 @@ body {
   font-weight: 700;
   line-height: 1;
   color: var(--gold);
-  opacity: 0.07;
+  opacity: 0.13;
   letter-spacing: -0.04em;
   user-select: none;
   pointer-events: none;
@@ -313,7 +310,7 @@ body {
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--gold);
-  margin-bottom: 0.55rem;
+  margin: 0 0 0.55rem;  /* reset h3 browser defaults */
 }
 .mv-desc {
   font-size: 1rem;
@@ -1123,6 +1120,7 @@ body::after {
   <div class="hero-right">
     <img class="hero-img"
        src="../cover-raw.png"
+       fetchpriority="high"
        alt="Velvet Marquee, Operator 27 cover art">
     <div class="hero-overlay"></div>
   </div>
@@ -1134,7 +1132,7 @@ body::after {
 
   <!-- Classification -->
   <section class="section reveal section-frame" id="classification">
-    <div class="section-hdr"><span class="section-label">Classification</span><div class="section-line"></div></div>
+    <div class="section-hdr"><h2 class="section-label">Classification</h2><div class="section-line"></div></div>
     <div class="class-panel">
       <div class="class-header">
         <div class="class-clearance">Clearance IV</div>
@@ -1153,7 +1151,7 @@ body::after {
 
   <!-- Identity -->
   <section class="section reveal" id="identity">
-    <div class="section-hdr"><span class="section-label">Identity</span><div class="section-line"></div></div>
+    <div class="section-hdr"><h2 class="section-label">Identity</h2><div class="section-line"></div></div>
     <div class="prose prose-wide">
       <p>She calls herself Phantom Throne. Dark red hair loose, cross and chains against black armor, cyberpunk gauntlets tracing neon patterns in the dark. She is seated. She does not move. Everything moves around her. In the underground architecture of the night city, the operator does not chase the signal. The signal bends toward her. Every beat is a command she already issued. Every silence is a trap she already set. An iron ritual encoded in neon and circuit, a descent through controlled chaos and fractured pursuit. The Silver Night Operator doesn't escape the vortex. She is the vortex.</p>
       <p>Phantom Throne does not pursue operators. She watches the data that operators produce when they move. Every transit route, every signal ping, every routing request that crosses an Architecture node generates a data signature. She reads those signatures. She knows where everyone is, where they are going, and what deviation from their stated route means: not because she surveils individuals, but because she understands movement as a language, and fluency in that language makes individual surveillance redundant.</p>
@@ -1174,18 +1172,18 @@ body::after {
 
   <!-- Arc, Four Movements -->
   <section class="section reveal section-frame" id="arc">
-    <div class="section-hdr"><span class="section-label">Arc: Four Movements</span><div class="section-line"></div></div>
+    <div class="section-hdr"><h2 class="section-label">Arc: Four Movements</h2><div class="section-line"></div></div>
     <div class="movements">
       <div class="movement">
         <div class="mv-numeral">I</div>
-        <div class="mv-title">Throne</div>
+        <h3 class="mv-title">Throne</h3>
         <div class="mv-desc"><p>The city breathes but doesn't dare speak. The districts closest to the Vortex have learned, over fourteen cycles, that silence is the only stable configuration when Phantom Throne is receiving. She arrives in low frequency, subsonic, beneath the threshold of human hearing, but every monitoring station within range registers the pressure change.</p>
 
         <p>She is seated. She does not move. Everything moves around her. The Architecture's scanning grid registers a gravitational anomaly centered on her monitoring station, not because she is generating mass, but because every signal in the district is being slowly pulled into her reception cone. The Throne is not a piece of furniture.</p></div>
       </div>
       <div class="movement">
         <div class="mv-numeral">II</div>
-        <div class="mv-title">Court</div>
+        <h3 class="mv-title">Court</h3>
         <div class="mv-desc"><p>Control is established. The system collapses inward, not through failure, but through the inexorable pull of a centralized gravity well that every data stream in the district must eventually fall into. Those who remain know their place in the order because the order has been demonstrated, continuously, for fourteen cycles.</p>
 
         <p>Court is not a location. It is the state of being within the Vortex's event horizon, the radius around her monitoring station where no signal can pass without being read, logged, and cross-referenced. The Architecture's own routing protocols now prioritize her station's processing capacity because her analysis consistently outperforms the centra...</p>
@@ -1195,7 +1193,7 @@ body::after {
       </div>
       <div class="movement">
         <div class="mv-numeral">IV</div>
-        <div class="mv-title">Vortex</div>
+        <h3 class="mv-title">Vortex</h3>
         <div class="mv-desc"><p>Iron signal, the final transmission pattern, carrying the accumulated weight of every tracking operation she has ever run. Override surge: the moment when her protocols replace the Architecture's at every node in the district, a cascading takeover that propagates through the network at the speed of light.</p>
 
         <p>The current runs deep, deeper than the Architecture's own monitoring infrastructure, deeper than any operator has ever mapped. What enters the vortex does not surface because surfacing would require moving against a current that has been accelerating for fourteen cycles. She never left the throne because leaving was never necessary.</p>
@@ -1208,7 +1206,7 @@ body::after {
 
   <!-- Relationships -->
   <section class="section reveal section-frame" id="relationships">
-    <div class="section-hdr"><span class="section-label">Relationships</span><div class="section-line"></div></div>
+    <div class="section-hdr"><h2 class="section-label">Relationships</h2><div class="section-line"></div></div>
     <div class="rel-list">
       <div class="rel-item">
         <span class="rel-pill p-blue">Reports to</span>
@@ -1257,7 +1255,7 @@ body::after {
 
   <!-- Sound Signature -->
   <section class="section reveal" id="the-encounter">
-    <div class="section-hdr"><span class="section-label">The Encounter</span><div class="section-line"></div></div>
+    <div class="section-hdr"><h2 class="section-label">The Encounter</h2><div class="section-line"></div></div>
     <div class="encounter-text">
       <p>Dark red hair loose. Cross and chains against black armor. Cyberpunk gauntlets tracing neon patterns in the dark. She is seated. She does not move. Everything moves around her. The Phantom Throne has been monitoring the megacity's movement data for fourteen cycles from a station that no one outside the Architecture's command layer has ever been permitted to enter. We were permitted.</p>
       <p>The monitoring station is not a room. It is a gravitational center, a point around which every data stream in the district slowly orbits before falling into her processing queue. Every transit route, every signal ping, every routing request that crosses an Architecture node generates a data signature. She reads those signatures. Not because she surveils individuals, but because she understands movement as a language, and fluency in that language makes individual surveillance redundant. Machines don't know who she is. The signal does. Every beat is a command she already issued. Every silence is a trap she already set.</p>
@@ -1265,7 +1263,7 @@ body::after {
     </div>
   </section>
   <section class="section reveal" id="sound">
-    <div class="section-hdr"><span class="section-label">Sound Signature</span><div class="section-line"></div></div>
+    <div class="section-hdr"><h2 class="section-label">Sound Signature</h2><div class="section-line"></div></div>
     <div class="data-panel">
       <div class="meta-grid">
         <span class="meta-k">Genres</span><span class="meta-v">Dark Techno &middot; Industrial Pursuit &middot; Grid Pressure &middot; Cyberpunk Infrastructure</span>
@@ -1278,7 +1276,7 @@ body::after {
 
   <!-- Tracklist -->
   <section class="section reveal" id="tracklist">
-    <div class="section-hdr"><span class="section-label">Mission Log 22: Tracklist</span><div class="section-line"></div></div>
+    <div class="section-hdr"><h2 class="section-label">Mission Log 22: Tracklist</h2><div class="section-line"></div></div>
     <div class="tracklist-wrap">
       <div class="tracklist">
         <div class="tr"><span class="tr-n">01.</span><span class="tr-t">Under Current</span><span class="tr-ts">3:15</span></div>
@@ -1310,7 +1308,7 @@ body::after {
   <footer class="footer reveal" aria-label="Operator links and credits">
     <div class="closing-quote">"For those who keep listening... the velvet was never the point."</div>
     <div class="section-hdr">
-      <span class="section-label">Signal Broadcast</span>
+      <h2 class="section-label">Signal Broadcast</h2>
       <div class="section-line"></div>
     </div>
     <nav class="links-grid" aria-label="External links">

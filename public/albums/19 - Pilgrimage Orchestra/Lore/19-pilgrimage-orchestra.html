@@ -185,6 +185,7 @@ body {
   color: var(--gold);
   white-space: nowrap;
   flex-shrink: 0;
+  margin: 0;  /* reset h2 browser defaults */
 }
 .section-line {
   flex: 1;
@@ -279,21 +280,17 @@ body {
   padding: 1.6rem 3.5rem 1.6rem 1.4rem;
   background: var(--bg-card);
   border: 1px solid rgba(201,168,76,0.07);
-  border-left-width: 2px;
-  border-left-color: rgba(201,168,76,0.18);
   overflow: hidden;
-  transition: background 0.22s ease, border-left-color 0.22s ease;
+  transition: background 0.22s ease;
 }
 .movement:last-child { border-bottom: 1px solid rgba(201,168,76,0.07); }
 .movement:hover { background: var(--bg-lift); }
-.movement:nth-child(1) { border-left-color: rgba(201,168,76,0.18); }
-.movement:nth-child(2) { border-left-color: rgba(201,168,76,0.3);  }
-.movement:nth-child(3) { border-left-color: rgba(201,168,76,0.45); }
-.movement:nth-child(4) { border-left-color: rgba(139,30,30,0.55);  }
-.movement:hover:nth-child(1),
-.movement:hover:nth-child(2),
-.movement:hover:nth-child(3) { border-left-color: var(--gold-dim); }
-.movement:hover:nth-child(4)  { border-left-color: var(--crimson); }
+/* Background tint escalation — I → II → III builds, IV breaks into crimson */
+.movement:nth-child(2) { background: rgba(201,168,76,0.018); }
+.movement:nth-child(3) { background: rgba(201,168,76,0.036); }
+.movement:nth-child(4) { background: rgba(139,30,30,0.042); border-color: rgba(139,30,30,0.14); }
+.movement:nth-child(4) .mv-title { color: var(--crimson); }
+.movement:nth-child(4):hover { background: rgba(139,30,30,0.07); }
 .mv-numeral {
   position: absolute;
   top: 0.5rem;
@@ -302,7 +299,7 @@ body {
   font-weight: 700;
   line-height: 1;
   color: var(--gold);
-  opacity: 0.07;
+  opacity: 0.13;
   letter-spacing: -0.04em;
   user-select: none;
   pointer-events: none;
@@ -313,7 +310,7 @@ body {
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--gold);
-  margin-bottom: 0.55rem;
+  margin: 0 0 0.55rem;  /* reset h3 browser defaults */
 }
 .mv-desc {
   font-size: 1rem;
@@ -1118,7 +1115,8 @@ body::after {
       </div>
   </div>
   <div class="hero-right">
-    <img class="hero-img" src="../cover-raw.png" alt="Pilgrimage Orchestra, Operator 19 cover art">
+    <img class="hero-img" src="../cover-raw.png"
+       fetchpriority="high" alt="Pilgrimage Orchestra, Operator 19 cover art">
     <div class="hero-overlay"></div>
   </div>
   <div class="hero-glow"></div>
@@ -1129,7 +1127,7 @@ body::after {
 
   <!-- Classification -->
   <section class="section reveal section-frame" id="classification">
-    <div class="section-hdr"><span class="section-label">Classification</span><div class="section-line"></div></div>
+    <div class="section-hdr"><h2 class="section-label">Classification</h2><div class="section-line"></div></div>
     <div class="class-panel">
       <div class="class-header">
         <div class="class-clearance">Clearance III</div>
@@ -1148,7 +1146,7 @@ body::after {
 
   <!-- Identity -->
   <section class="section reveal" id="identity">
-    <div class="section-hdr"><span class="section-label">Identity</span><div class="section-line"></div></div>
+    <div class="section-hdr"><h2 class="section-label">Identity</h2><div class="section-line"></div></div>
     <div class="prose prose-wide">
       <p>She calls herself Vega Conductor. Silver hair loose over pink augment-eyes, stationed at a mixing board that runs two signals simultaneously without either knowing about the other. In the cities that never sleep, two worlds exist in parallel. Below: secret congregations gather in underground vaults, where ritual frequencies pulse beneath the megacity and techno-mystics fuse ancient ceremony with cybernetic devotion. Above: orchestras perform in glass towers for those who own the sky, chrome rituals disguised as galas, steel carnivals behind locked doors. The same signal, filtered through gold and indigo light. Both factions hear the same frequency. Neither knows the other is listening. She plays for both worlds and answers to neither.</p>
       <p>The Ghost Layer's operators hide. Vega Conductor does the opposite: she is visible everywhere, on every screen, on every frequency, in every district simultaneously. She is not hiding inside the signal. She is the signal. What makes her Ghost Layer is not concealment but illegibility: she broadcasts so widely, across such incompatible contexts, that no single faction can claim her as operating within their territory. She is simultaneously too present to be hidden and too distributed to be caught.</p>
@@ -1169,18 +1167,18 @@ body::after {
 
   <!-- Arc, Four Movements -->
   <section class="section reveal section-frame" id="arc">
-    <div class="section-hdr"><span class="section-label">Arc: Four Movements</span><div class="section-line"></div></div>
+    <div class="section-hdr"><h2 class="section-label">Arc: Four Movements</h2><div class="section-line"></div></div>
     <div class="movements">
       <div class="movement">
         <div class="mv-numeral">I</div>
-        <div class="mv-title">The Signal Descends</div>
+        <h3 class="mv-title">The Signal Descends</h3>
         <div class="mv-desc"><p>She initiates the circuit from above, not from a command center, but from a mixing board positioned at the exact midpoint between the glass towers and the underground vaults. Vega: the star that marks the transmission origin.</p>
 
         <p>The underground picks up the frequency before the towers know she's transmitting. The congregations in the vaults have been waiting for this signal for six cycles, not because she told them it was coming, but because the ritual calendar predicted it, and the ritual calendar has never been wrong.</p></div>
       </div>
       <div class="movement">
         <div class="mv-numeral">II</div>
-        <div class="mv-title">The Congregation Assembles</div>
+        <h3 class="mv-title">The Congregation Assembles</h3>
         <div class="mv-desc"><p>Ghost mantra, the frequency resolves into a pattern that the underground congregations recognize from their oldest ceremonies, a chant encoded in the subsonic range of her transmission. Cyber congregation: the gathering is not physical but electromagnetic, every receiver in the vaults tuned to the same frequency at the same moment.</p>
 
         <p>Both worlds tune in simultaneously, the congregations in the vaults and the orchestras in the towers. Neither knows the other is listening. The Vega Conductor is transmitting a single frequency that passes through the megacity's entire vertical axis, from the lowest vault to the highest penthouse. She knows both audiences are receiving her.</p>
@@ -1190,7 +1188,7 @@ body::after {
       </div>
       <div class="movement">
         <div class="mv-numeral">IV</div>
-        <div class="mv-title">Final Transmission</div>
+        <h3 class="mv-title">Final Transmission</h3>
         <div class="mv-desc"><p>Jade protocol, the closing sequence, named for the mineral that ancient civilizations believed connected the earthly realm to the celestial. The final transmission carries the accumulated data of every receiver that tuned in during the pilgrimage: congregations and orchestras, vaults and towers, the underground and the elite, all of them unknowi...</p>
 
         <p>The pilgrimage closes. She played for both worlds and answered to neither. The towers will remember the evening as a particularly moving orchestral performance. The vaults will remember it as a sacred ceremony that arrived on schedule.</p></div>
@@ -1200,7 +1198,7 @@ body::after {
 
   <!-- Relationships -->
   <section class="section reveal section-frame" id="relationships">
-    <div class="section-hdr"><span class="section-label">Relationships</span><div class="section-line"></div></div>
+    <div class="section-hdr"><h2 class="section-label">Relationships</h2><div class="section-line"></div></div>
     <div class="rel-list">
       <div class="rel-item">
         <span class="rel-pill p-blue">Ghost Layer</span>
@@ -1249,7 +1247,7 @@ body::after {
 
   <!-- Sound Signature -->
   <section class="section reveal" id="the-encounter">
-    <div class="section-hdr"><span class="section-label">The Encounter</span><div class="section-line"></div></div>
+    <div class="section-hdr"><h2 class="section-label">The Encounter</h2><div class="section-line"></div></div>
     <div class="encounter-text">
       <p>Silver hair loose over pink augment-eyes. Stationed at a mixing board that runs two signals simultaneously without either knowing about the other. The Vega Conductor plays for both worlds and answers to neither. Below: secret congregations gather in underground vaults, where ritual frequencies pulse beneath the megacity and techno-mystics fuse ancient ceremony with cybernetic devotion. Above: orchestras perform in glass towers for those who own the sky, chrome rituals disguised as galas, steel carnivals behind locked doors.</p>
       <p>We attended both performances on the same night. The underground ceremony in a vault beneath Sector 22, where the congregation received a frequency they believed was sacred and private. The orchestral gala in a tower above Sector 22, where the elite received the same frequency filtered through gold and indigo light. Neither audience knew the other was listening. The Vega Conductor was transmitting a single signal that passed through the megacity's entire vertical axis, and she had designed it so that each audience heard exactly what they expected to hear. The pilgrimage has no destination. It has a frequency.</p>
@@ -1257,7 +1255,7 @@ body::after {
     </div>
   </section>
   <section class="section reveal" id="sound">
-    <div class="section-hdr"><span class="section-label">Sound Signature</span><div class="section-line"></div></div>
+    <div class="section-hdr"><h2 class="section-label">Sound Signature</h2><div class="section-line"></div></div>
     <div class="data-panel">
       <div class="meta-grid">
         <span class="meta-k">Genres</span><span class="meta-v">Ghost Layer Ambient · Dual-Signal Electronic · Cyberpunk Orchestral · Industrial Congregation</span>
@@ -1270,7 +1268,7 @@ body::after {
 
   <!-- Tracklist -->
   <section class="section reveal" id="tracklist">
-    <div class="section-hdr"><span class="section-label">Mission Log 19: Tracklist</span><div class="section-line"></div></div>
+    <div class="section-hdr"><h2 class="section-label">Mission Log 19: Tracklist</h2><div class="section-line"></div></div>
     <div class="tracklist-wrap">
       <div class="tracklist">
         <div class="tr"><span class="tr-n">01.</span><span class="tr-t">Vega Circuit</span><span class="tr-ts">3:22</span></div>
@@ -1297,7 +1295,7 @@ body::after {
   <footer class="footer reveal" aria-label="Operator links and credits">
     <div class="closing-quote">"For those who keep listening... the velvet was never the point."</div>
     <div class="section-hdr">
-      <span class="section-label">Signal Broadcast</span>
+      <h2 class="section-label">Signal Broadcast</h2>
       <div class="section-line"></div>
     </div>
     <nav class="links-grid" aria-label="External links">

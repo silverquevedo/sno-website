@@ -185,6 +185,7 @@ body {
   color: var(--gold);
   white-space: nowrap;
   flex-shrink: 0;
+  margin: 0;  /* reset h2 browser defaults */
 }
 .section-line {
   flex: 1;
@@ -279,21 +280,17 @@ body {
   padding: 1.6rem 3.5rem 1.6rem 1.4rem;
   background: var(--bg-card);
   border: 1px solid rgba(201,168,76,0.07);
-  border-left-width: 2px;
-  border-left-color: rgba(201,168,76,0.18);
   overflow: hidden;
-  transition: background 0.22s ease, border-left-color 0.22s ease;
+  transition: background 0.22s ease;
 }
 .movement:last-child { border-bottom: 1px solid rgba(201,168,76,0.07); }
 .movement:hover { background: var(--bg-lift); }
-.movement:nth-child(1) { border-left-color: rgba(201,168,76,0.18); }
-.movement:nth-child(2) { border-left-color: rgba(201,168,76,0.3);  }
-.movement:nth-child(3) { border-left-color: rgba(201,168,76,0.45); }
-.movement:nth-child(4) { border-left-color: rgba(139,30,30,0.55);  }
-.movement:hover:nth-child(1),
-.movement:hover:nth-child(2),
-.movement:hover:nth-child(3) { border-left-color: var(--gold-dim); }
-.movement:hover:nth-child(4)  { border-left-color: var(--crimson); }
+/* Background tint escalation — I → II → III builds, IV breaks into crimson */
+.movement:nth-child(2) { background: rgba(201,168,76,0.018); }
+.movement:nth-child(3) { background: rgba(201,168,76,0.036); }
+.movement:nth-child(4) { background: rgba(139,30,30,0.042); border-color: rgba(139,30,30,0.14); }
+.movement:nth-child(4) .mv-title { color: var(--crimson); }
+.movement:nth-child(4):hover { background: rgba(139,30,30,0.07); }
 .mv-numeral {
   position: absolute;
   top: 0.5rem;
@@ -302,7 +299,7 @@ body {
   font-weight: 700;
   line-height: 1;
   color: var(--gold);
-  opacity: 0.07;
+  opacity: 0.13;
   letter-spacing: -0.04em;
   user-select: none;
   pointer-events: none;
@@ -313,7 +310,7 @@ body {
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--gold);
-  margin-bottom: 0.55rem;
+  margin: 0 0 0.55rem;  /* reset h3 browser defaults */
 }
 .mv-desc {
   font-size: 1rem;
@@ -1118,7 +1115,8 @@ body::after {
       </div>
   </div>
   <div class="hero-right">
-    <img class="hero-img" src="../cover-raw.png" alt="Carbon Chamber, Operator 02 cover art">
+    <img class="hero-img" src="../cover-raw.png"
+       fetchpriority="high" alt="Carbon Chamber, Operator 02 cover art">
     <div class="hero-overlay"></div>
   </div>
   <div class="hero-glow"></div>
@@ -1129,7 +1127,7 @@ body::after {
 
   <!-- Classification -->
   <section class="section reveal section-frame" id="classification">
-    <div class="section-hdr"><span class="section-label">Classification</span><div class="section-line"></div></div>
+    <div class="section-hdr"><h2 class="section-label">Classification</h2><div class="section-line"></div></div>
     <div class="class-panel">
       <div class="class-header">
         <div class="class-clearance">Clearance I</div>
@@ -1148,7 +1146,7 @@ body::after {
 
   <!-- Identity -->
   <section class="section reveal" id="identity">
-    <div class="section-hdr"><span class="section-label">Identity</span><div class="section-line"></div></div>
+    <div class="section-hdr"><h2 class="section-label">Identity</h2><div class="section-line"></div></div>
     <div class="prose prose-wide">
       <p>She calls herself the Static Crown. A sealed room. Twelve monitors. Cables that run into the walls and never come back out. She doesn't filter the signal. She IS the filter. The noise doesn't stop. She just decides what it means. The industrial processing belt runs on compressed cycles and shift rotations, mechanical output measured in tons per hour. Carbon Chamber lives inside that logic, not as a product of The Velocity's pressure but as the mechanism that makes pressure legible. Every screaming frequency the belt generates, she translates into usable intelligence. Every overclock, every thermal spike, every factory floor alarm the system was built to ignore: she assigns it meaning, ranks it, routes it forward.</p>
       <p>Her method is taxonomy built in real time. The chaos is not the problem. The chaos is the raw material. She processes it through a framework she has refined over fourteen cycles, a personal classification system that exists nowhere in writing and nowhere in any Architecture registry. The Static Crown is not a title someone gave her. It is a description of what she does: she absorbs the electrical interference of the belt and wears it as structure. Order rendered from noise, cycling continuously.</p>
@@ -1169,32 +1167,32 @@ body::after {
 
   <!-- Arc, Four Movements -->
   <section class="section reveal section-frame" id="arc">
-    <div class="section-hdr"><span class="section-label">Arc: Four Movements</span><div class="section-line"></div></div>
+    <div class="section-hdr"><h2 class="section-label">Arc: Four Movements</h2><div class="section-line"></div></div>
     <div class="movements">
       <div class="movement">
         <div class="mv-numeral">I</div>
-        <div class="mv-title">The Noise Arrives</div>
+        <h3 class="mv-title">The Noise Arrives</h3>
         <div class="mv-desc"><p>The chamber fills with every frequency the city bleeds out: factory alarms, routing pings, thermal spikes from overloaded transformers, the subsonic hum of machines that haven't stopped running in eleven cycles. She doesn't flinch. She has heard worse.</p>
 
         <p>She catalogues by frequency band first, then by source district, then by threat potential, a triage system she built herself when the Architecture's standard classification proved too slow. Nothing enters the chamber without being tagged. Nothing gets a second pass until every first pass is complete.</p></div>
       </div>
       <div class="movement">
         <div class="mv-numeral">II</div>
-        <div class="mv-title">Pattern Read</div>
+        <h3 class="mv-title">Pattern Read</h3>
         <div class="mv-desc"><p>Somewhere inside the static, structure reveals itself. Not gradually, but all at once, like a language suddenly becoming legible after hours of listening. She found the pattern before the pattern knew it could be found. What looked like random noise ten seconds ago now reads as a structured transmission from a district node that should be dark.</p>
 
         <p>She cross-references it against fourteen cycles of archived intake. The match is partial but the partial match is enough. The taxonomy has a new entry. The crown pulses once, confirming the classification took. She returns to the intake stream. The pattern stays tagged.</p></div>
       </div>
       <div class="movement">
         <div class="mv-numeral">III</div>
-        <div class="mv-title">Crown Locked</div>
+        <h3 class="mv-title">Crown Locked</h3>
         <div class="mv-desc"><p>She stops reading the noise. She starts writing it. This is the transition that separates her from every other signal analyst in the megacity: the moment when passive classification becomes active control.</p>
 
         <p>The static bends to her frequency now because she has learned to broadcast inside it, to insert her own structuring signal into the chaos at exactly the amplitude where the belt cannot distinguish it from natural interference. The factories don't know they're being rewritten. The routing nodes don't register the override.</p></div>
       </div>
       <div class="movement">
         <div class="mv-numeral">IV</div>
-        <div class="mv-title">Absolute Signal</div>
+        <h3 class="mv-title">Absolute Signal</h3>
         <div class="mv-desc"><p>The chamber goes quiet. Not because the noise stopped. The belt never stops. But because she made every frequency answer to her. What enters the chamber now is not chaos. It is pre-classified, pre-routed, pre-resolved by the filtering architecture she has imposed on the intake stream.</p>
 
         <p>The silence is not absence of signal; it is signal so perfectly ordered that it no longer reads as noise to any sensor. She sits in the center of it, the Static Crown fully deployed, the taxonomy complete for this cycle.</p></div>
@@ -1204,7 +1202,7 @@ body::after {
 
   <!-- Relationships -->
   <section class="section reveal section-frame" id="relationships">
-    <div class="section-hdr"><span class="section-label">Relationships</span><div class="section-line"></div></div>
+    <div class="section-hdr"><h2 class="section-label">Relationships</h2><div class="section-line"></div></div>
     <div class="rel-list">
       <div class="rel-item">
         <span class="rel-pill p-crimson">Twin identity</span>
@@ -1254,7 +1252,7 @@ body::after {
   <!-- Sound Signature -->
   <section class="section reveal" id="the-encounter">
       <div class="encounter-text">
-    <div class="section-hdr"><span class="section-label">The Encounter</span><div class="section-line"></div></div>
+    <div class="section-hdr"><h2 class="section-label">The Encounter</h2><div class="section-line"></div></div>
     <div class="encounter-text">
       <p>Midnight. The processing district. A frequency that didn't match any registered broadcast. The noise was overwhelming, a wall of mechanical sound that made every piece of equipment useless. Just before leaving, the noise suddenly organized itself into a pattern. She had noticed. She was making the noise legible so the message could get through.</p>
       <p>Carbon Chamber doesn't filter the signal. She IS the filter. Every screaming frequency the belt generates, she translates into meaning. The Static Crown is not a title she gave herself, it is the electromagnetic signature her allies can feel three districts away, the pulse that tells them the converter is running and the noise is being processed. Two hours in her sealed room. Twelve monitors feeding data that can't be parsed without her taxonomy. The Architecture has tried eleven times to standardize her classification system. She has declined eleven times. The taxonomy is hers. It stays hers.</p>
@@ -1262,7 +1260,7 @@ body::after {
     </div>
   </section>
   <section class="section reveal" id="sound">
-    <div class="section-hdr"><span class="section-label">Sound Signature</span><div class="section-line"></div></div>
+    <div class="section-hdr"><h2 class="section-label">Sound Signature</h2><div class="section-line"></div></div>
     <div class="data-panel">
       <div class="meta-grid">
         <span class="meta-k">Genres</span><span class="meta-v">Industrial Techno · Dark Electro · Cyberpunk Machine Ambient</span>
@@ -1275,7 +1273,7 @@ body::after {
 
   <!-- Tracklist -->
   <section class="section reveal" id="tracklist">
-    <div class="section-hdr"><span class="section-label">Mission Log 02: Tracklist</span><div class="section-line"></div></div>
+    <div class="section-hdr"><h2 class="section-label">Mission Log 02: Tracklist</h2><div class="section-line"></div></div>
     <div class="tracklist-wrap">
       <div class="tracklist">
         <div class="tr"><span class="tr-n">01.</span><span class="tr-t">Urban Exoshell</span><span class="tr-ts">3:09</span><span class="tr-note">The city feeds its noise into the chamber</span></div>
@@ -1300,7 +1298,7 @@ body::after {
   <footer class="footer reveal" aria-label="Operator links and credits">
     <div class="closing-quote">"For those who keep listening... the velvet was never the point."</div>
     <div class="section-hdr">
-      <span class="section-label">Signal Broadcast</span>
+      <h2 class="section-label">Signal Broadcast</h2>
       <div class="section-line"></div>
     </div>
     <nav class="links-grid" aria-label="External links">

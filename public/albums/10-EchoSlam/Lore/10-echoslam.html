@@ -185,6 +185,7 @@ body {
   color: var(--gold);
   white-space: nowrap;
   flex-shrink: 0;
+  margin: 0;  /* reset h2 browser defaults */
 }
 .section-line {
   flex: 1;
@@ -279,21 +280,17 @@ body {
   padding: 1.6rem 3.5rem 1.6rem 1.4rem;
   background: var(--bg-card);
   border: 1px solid rgba(201,168,76,0.07);
-  border-left-width: 2px;
-  border-left-color: rgba(201,168,76,0.18);
   overflow: hidden;
-  transition: background 0.22s ease, border-left-color 0.22s ease;
+  transition: background 0.22s ease;
 }
 .movement:last-child { border-bottom: 1px solid rgba(201,168,76,0.07); }
 .movement:hover { background: var(--bg-lift); }
-.movement:nth-child(1) { border-left-color: rgba(201,168,76,0.18); }
-.movement:nth-child(2) { border-left-color: rgba(201,168,76,0.3);  }
-.movement:nth-child(3) { border-left-color: rgba(201,168,76,0.45); }
-.movement:nth-child(4) { border-left-color: rgba(139,30,30,0.55);  }
-.movement:hover:nth-child(1),
-.movement:hover:nth-child(2),
-.movement:hover:nth-child(3) { border-left-color: var(--gold-dim); }
-.movement:hover:nth-child(4)  { border-left-color: var(--crimson); }
+/* Background tint escalation — I → II → III builds, IV breaks into crimson */
+.movement:nth-child(2) { background: rgba(201,168,76,0.018); }
+.movement:nth-child(3) { background: rgba(201,168,76,0.036); }
+.movement:nth-child(4) { background: rgba(139,30,30,0.042); border-color: rgba(139,30,30,0.14); }
+.movement:nth-child(4) .mv-title { color: var(--crimson); }
+.movement:nth-child(4):hover { background: rgba(139,30,30,0.07); }
 .mv-numeral {
   position: absolute;
   top: 0.5rem;
@@ -302,7 +299,7 @@ body {
   font-weight: 700;
   line-height: 1;
   color: var(--gold);
-  opacity: 0.07;
+  opacity: 0.13;
   letter-spacing: -0.04em;
   user-select: none;
   pointer-events: none;
@@ -313,7 +310,7 @@ body {
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--gold);
-  margin-bottom: 0.55rem;
+  margin: 0 0 0.55rem;  /* reset h3 browser defaults */
 }
 .mv-desc {
   font-size: 1rem;
@@ -1117,7 +1114,8 @@ body::after {
       </div>
   </div>
   <div class="hero-right">
-    <img class="hero-img" src="../cover-raw.png" alt="EchoSlam, Operator 10 cover art">
+    <img class="hero-img" src="../cover-raw.png"
+       fetchpriority="high" alt="EchoSlam, Operator 10 cover art">
     <div class="hero-overlay"></div>
   </div>
   <div class="hero-glow"></div>
@@ -1128,7 +1126,7 @@ body::after {
 
   <!-- Classification -->
   <section class="section reveal section-frame" id="classification">
-    <div class="section-hdr"><span class="section-label">Classification</span><div class="section-line"></div></div>
+    <div class="section-hdr"><h2 class="section-label">Classification</h2><div class="section-line"></div></div>
     <div class="class-panel">
       <div class="class-header">
         <div class="class-clearance">Clearance II</div>
@@ -1147,7 +1145,7 @@ body::after {
 
   <!-- Identity -->
   <section class="section reveal" id="identity">
-    <div class="section-hdr"><span class="section-label">Identity</span><div class="section-line"></div></div>
+    <div class="section-hdr"><h2 class="section-label">Identity</h2><div class="section-line"></div></div>
     <div class="prose prose-wide">
       <p>She calls herself the Torque Signal. Pink hair. Cybernetic hand on the wheel. Eyes on a city that can't move fast enough to matter. The Velocity has three operators and they each represent a different relationship to speed. Carbon Chamber converts it. EchoChamber tests it. EchoSlam embodies it. She is not a philosopher of motion. She is motion itself, given a name and a corridor and a target destination that she will reach before anyone has confirmed the route is clear.</p>
       <p>She drives the hyperlanes. Not routes: the hyperlanes, the megacity's highest-grade transit corridors, built for freight tonnage and velocity loads that the surface city cannot sustain. The lanes run beneath the grid, above the undercity, through the structural spine of the megacity at speeds that the transit authority monitors but does not control. EchoSlam controls them. She knows every merge, every grade change, every gap in the overhead sensor net where a second can be recovered. The Architecture has her marked as a persistent transit anomaly. She is consistently twelve seconds ahead of any response asset it deploys.</p>
@@ -1167,32 +1165,32 @@ body::after {
 
   <!-- Arc, Four Movements -->
   <section class="section reveal section-frame" id="arc">
-    <div class="section-hdr"><span class="section-label">Arc: Four Movements</span><div class="section-line"></div></div>
+    <div class="section-hdr"><h2 class="section-label">Arc: Four Movements</h2><div class="section-line"></div></div>
     <div class="movements">
       <div class="movement">
         <div class="mv-numeral">I</div>
-        <div class="mv-title">Entry Point</div>
+        <h3 class="mv-title">Entry Point</h3>
         <div class="mv-desc"><p>The city grid appears on the display, a three-dimensional wireframe of every route, every junction, every sensor checkpoint between her current position and the target sector. She doesn't study it. By the time the rendering completes, she has already processed the data and discarded ninety percent of it as irrelevant.</p>
 
         <p>She's already moving before the route loads. The cybernetic hand on the wheel applies torque with the precision of someone who has calculated the optimal acceleration curve before the engine finished starting. The grid will try to update her position every half-second.</p></div>
       </div>
       <div class="movement">
         <div class="mv-numeral">II</div>
-        <div class="mv-title">Overtake Protocol</div>
+        <h3 class="mv-title">Overtake Protocol</h3>
         <div class="mv-desc"><p>Three sectors crossed in under ninety seconds. Four signal cuts, sensor relays that detected an anomalous velocity reading and attempted to log it. Two Architecture monitoring systems that elevated the anomaly to a flag, initiated the tracking protocol, and began composing the alert. None of them were fast enough to finish the sentence.</p>
 
         <p>By the time the first alert reached a human operator, she was already seven sectors past the flag point, running a route that no longer intersected any of the sensor grid's active scanning zones. The Architecture's tracking system has a ninety-eighth-percentile confidence interval for velocity estimation. She exceeds it as a matter of routine.</p></div>
       </div>
       <div class="movement">
         <div class="mv-numeral">III</div>
-        <div class="mv-title">Redline</div>
+        <h3 class="mv-title">Redline</h3>
         <div class="mv-desc"><p>The chassis wasn't built for this speed. The manufacturer's specifications list a maximum sustained velocity that she exceeded in the first twelve seconds of the run. The cooling system is operating at one hundred and forty percent of its rated capacity.</p>
 
         <p>She also knows exactly how much past the limit it will hold, not from calculation, but from testing. She has pushed this chassis to failure twice before, on closed courses, under controlled conditions, measuring the exact moment when each subsystem gave out. The current configuration operates at ninety-two percent of the true failure threshold.</p></div>
       </div>
       <div class="movement">
         <div class="mv-numeral">IV</div>
-        <div class="mv-title">Ghost Sector</div>
+        <h3 class="mv-title">Ghost Sector</h3>
         <div class="mv-desc"><p>The final stretch doesn't appear on any official map. The Architecture's cartography division updates the district grid every seventy-two hours. This route did not exist seventy-two hours ago. It exists now because she built it at one hundred and eighty kilometers per hour, threading through service corridors and abandoned transit tunnels that t...</p>
 
         <p>She's the only one who knows the way out because no one else has ever been fast enough to follow her through the entire sequence. The Ghost Sector is not a place. It is a velocity threshold. Cross it and the city becomes a different map, one the Architecture doesn't maintain, one only the Torque Signal can read.</p></div>
@@ -1202,7 +1200,7 @@ body::after {
 
   <!-- Relationships -->
   <section class="section reveal section-frame" id="relationships">
-    <div class="section-hdr"><span class="section-label">Relationships</span><div class="section-line"></div></div>
+    <div class="section-hdr"><h2 class="section-label">Relationships</h2><div class="section-line"></div></div>
     <div class="rel-list">
       <div class="rel-item">
         <span class="rel-pill p-blue">Velocity peer</span>
@@ -1245,7 +1243,7 @@ body::after {
   <!-- Sound Signature -->
   <section class="section reveal" id="the-encounter">
     <div class="section-hdr">
-      <span class="section-label">The Encounter</span>
+      <h2 class="section-label">The Encounter</h2>
       <div class="section-line"></div>
     </div>
     <div class="encounter-text">
@@ -1255,7 +1253,7 @@ body::after {
     </div>
   </section>
   <section class="section reveal" id="sound">
-    <div class="section-hdr"><span class="section-label">Sound Signature</span><div class="section-line"></div></div>
+    <div class="section-hdr"><h2 class="section-label">Sound Signature</h2><div class="section-line"></div></div>
     <div class="data-panel">
       <div class="meta-grid">
         <span class="meta-k">Genres</span><span class="meta-v">High-Velocity Industrial · Cyberpunk Hyperlane · Pressure Techno · Dark Transit</span>
@@ -1268,7 +1266,7 @@ body::after {
 
   <!-- Tracklist -->
   <section class="section reveal" id="tracklist">
-    <div class="section-hdr"><span class="section-label">Mission Log 10: Tracklist</span><div class="section-line"></div></div>
+    <div class="section-hdr"><h2 class="section-label">Mission Log 10: Tracklist</h2><div class="section-line"></div></div>
     <div class="tracklist-wrap">
       <div class="tracklist">
         <div class="tr"><span class="tr-n">01.</span><span class="tr-t">City Airflow</span><span class="tr-ts">3:14</span></div>
@@ -1301,7 +1299,7 @@ body::after {
   <footer class="footer reveal" aria-label="Operator links and credits">
     <div class="closing-quote">"For those who keep listening... the velvet was never the point."</div>
     <div class="section-hdr">
-      <span class="section-label">Signal Broadcast</span>
+      <h2 class="section-label">Signal Broadcast</h2>
       <div class="section-line"></div>
     </div>
     <nav class="links-grid" aria-label="External links">

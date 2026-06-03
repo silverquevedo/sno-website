@@ -185,6 +185,7 @@ body {
   color: var(--gold);
   white-space: nowrap;
   flex-shrink: 0;
+  margin: 0;  /* reset h2 browser defaults */
 }
 .section-line {
   flex: 1;
@@ -279,21 +280,17 @@ body {
   padding: 1.6rem 3.5rem 1.6rem 1.4rem;
   background: var(--bg-card);
   border: 1px solid rgba(201,168,76,0.07);
-  border-left-width: 2px;
-  border-left-color: rgba(201,168,76,0.18);
   overflow: hidden;
-  transition: background 0.22s ease, border-left-color 0.22s ease;
+  transition: background 0.22s ease;
 }
 .movement:last-child { border-bottom: 1px solid rgba(201,168,76,0.07); }
 .movement:hover { background: var(--bg-lift); }
-.movement:nth-child(1) { border-left-color: rgba(201,168,76,0.18); }
-.movement:nth-child(2) { border-left-color: rgba(201,168,76,0.3);  }
-.movement:nth-child(3) { border-left-color: rgba(201,168,76,0.45); }
-.movement:nth-child(4) { border-left-color: rgba(139,30,30,0.55);  }
-.movement:hover:nth-child(1),
-.movement:hover:nth-child(2),
-.movement:hover:nth-child(3) { border-left-color: var(--gold-dim); }
-.movement:hover:nth-child(4)  { border-left-color: var(--crimson); }
+/* Background tint escalation — I → II → III builds, IV breaks into crimson */
+.movement:nth-child(2) { background: rgba(201,168,76,0.018); }
+.movement:nth-child(3) { background: rgba(201,168,76,0.036); }
+.movement:nth-child(4) { background: rgba(139,30,30,0.042); border-color: rgba(139,30,30,0.14); }
+.movement:nth-child(4) .mv-title { color: var(--crimson); }
+.movement:nth-child(4):hover { background: rgba(139,30,30,0.07); }
 .mv-numeral {
   position: absolute;
   top: 0.5rem;
@@ -302,7 +299,7 @@ body {
   font-weight: 700;
   line-height: 1;
   color: var(--gold);
-  opacity: 0.07;
+  opacity: 0.13;
   letter-spacing: -0.04em;
   user-select: none;
   pointer-events: none;
@@ -313,7 +310,7 @@ body {
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--gold);
-  margin-bottom: 0.55rem;
+  margin: 0 0 0.55rem;  /* reset h3 browser defaults */
 }
 .mv-desc {
   font-size: 1rem;
@@ -1118,7 +1115,8 @@ body::after {
       </div>
   </div>
   <div class="hero-right">
-    <img class="hero-img" src="../cover-raw.png" alt="Tribal Circuits, Operator 08 cover art">
+    <img class="hero-img" src="../cover-raw.png"
+       fetchpriority="high" alt="Tribal Circuits, Operator 08 cover art">
     <div class="hero-overlay"></div>
   </div>
   <div class="hero-glow"></div>
@@ -1129,7 +1127,7 @@ body::after {
 
   <!-- Classification -->
   <section class="section reveal section-frame" id="classification">
-    <div class="section-hdr"><span class="section-label">Classification</span><div class="section-line"></div></div>
+    <div class="section-hdr"><h2 class="section-label">Classification</h2><div class="section-line"></div></div>
     <div class="class-panel">
       <div class="class-header">
         <div class="class-clearance">Clearance II</div>
@@ -1148,7 +1146,7 @@ body::after {
 
   <!-- Identity -->
   <section class="section reveal" id="identity">
-    <div class="section-hdr"><span class="section-label">Identity</span><div class="section-line"></div></div>
+    <div class="section-hdr"><h2 class="section-label">Identity</h2><div class="section-line"></div></div>
     <div class="prose prose-wide">
       <p>She calls herself the Southern Current. Dreadlocks falling over her face. Tattoos that map territories the city pretends don't exist. Cybernetic arms that carry a signal older than every tower above her. South Bloc existed before the Architecture's expansion reached the southern districts. By the time the scanning grid arrived, the community had already built its own signal infrastructure: not as resistance, but as how they had always communicated. The Architecture found a functioning network it couldn't map and a population that didn't recognize its classification authority because the population had never needed it.</p>
       <p>Tribal Circuits is not a person who built something. She is the person who made sure what was already built stayed standing when the Architecture tried to absorb it. Her work is not technical: it is the negotiation of cultural persistence. Every time the Architecture's routing network tried to route through South Bloc infrastructure, she found a way to make that routing contingent on leaving the community's own signal systems untouched. The Architecture got its routing. South Bloc kept its frequency bands.</p>
@@ -1168,32 +1166,32 @@ body::after {
 
   <!-- Arc, Four Movements -->
   <section class="section reveal section-frame" id="arc">
-    <div class="section-hdr"><span class="section-label">Arc: Four Movements</span><div class="section-line"></div></div>
+    <div class="section-hdr"><h2 class="section-label">Arc: Four Movements</h2><div class="section-line"></div></div>
     <div class="movements">
       <div class="movement">
         <div class="mv-numeral">I</div>
-        <div class="mv-title">The Current Was Always There</div>
+        <h3 class="mv-title">The Current Was Always There</h3>
         <div class="mv-desc"><p>The megacity didn't build over nothing. Before the first foundation was poured, before the first cable was laid, the south city was already here, markets, sound systems, signal networks running on salvaged equipment and ancestral knowledge. The Southern Current was born in that south city, and she has never left it.</p>
 
         <p>Every code reload she transmits is a pulse from the roots, reminding the concrete above who was there first. The Architecture's survey maps show empty terrain before the towers went up. The maps are wrong. The south city was never empty. It was never silent. It was simply transmitting on a frequency the survey equipment wasn't built to hear.</p></div>
       </div>
       <div class="movement">
         <div class="mv-numeral">II</div>
-        <div class="mv-title">The Forbidden Zones</div>
+        <h3 class="mv-title">The Forbidden Zones</h3>
         <div class="mv-desc"><p>They mapped the city and called certain frequencies off-limits, the bands the Architecture couldn't classify, the signal ranges that predated its regulatory framework. The Forbidden Zones on the official spectrum allocation chart are not empty. They are occupied by transmissions that were running before the chart was drawn.</p>
 
         <p>Her signal rides the same ancestral frequencies her grandmother used, and her grandmother before her, in a chain of transmission that makes the Architecture's fourteen-cycle scanning grid look like a temporary installation, which, compared to the Southern Current, it is.</p></div>
       </div>
       <div class="movement">
         <div class="mv-numeral">III</div>
-        <div class="mv-title">South City Memory</div>
+        <h3 class="mv-title">South City Memory</h3>
         <div class="mv-desc"><p>The south city didn't disappear when the towers went up. It became the basement of everything above it, the literal foundation, the physical substrate, the underground network of tunnels, markets, and signal relays that the megacity's official infrastructure was laid directly on top of. The Architecture calls it legacy infrastructure.</p>
 
         <p>She moves through the south city like she never left, because she never did. Her body still carries the map, in the tattoos that trace the old neighborhood boundaries, in the frequencies her cybernetic arms were calibrated to receive before she was old enough to read.</p></div>
       </div>
       <div class="movement">
         <div class="mv-numeral">IV</div>
-        <div class="mv-title">The Root Frequency</div>
+        <h3 class="mv-title">The Root Frequency</h3>
         <div class="mv-desc"><p>The soundclash was never entertainment. It was documentation, a living archive of territorial disputes, community alliances, celebration and mourning, transmitted through bass frequencies that could travel further than any written record.</p>
 
         <p>The ritual roots remember what the history books erased. The Architecture's official history of the megacity begins with the first tower's construction. The soundclash archive begins three hundred years earlier. She holds both recordings. She knows which one is accurate.</p></div>
@@ -1203,7 +1201,7 @@ body::after {
 
   <!-- Relationships -->
   <section class="section reveal section-frame" id="relationships">
-    <div class="section-hdr"><span class="section-label">Relationships</span><div class="section-line"></div></div>
+    <div class="section-hdr"><h2 class="section-label">Relationships</h2><div class="section-line"></div></div>
     <div class="rel-list">
       <div class="rel-item">
         <span class="rel-pill p-purple">Elder tradition</span>
@@ -1253,7 +1251,7 @@ body::after {
   <!-- Sound Signature -->
   <section class="section reveal" id="the-encounter">
     <div class="section-hdr">
-      <span class="section-label">The Encounter</span>
+      <h2 class="section-label">The Encounter</h2>
       <div class="section-line"></div>
     </div>
     <div class="encounter-text">
@@ -1263,7 +1261,7 @@ body::after {
     </div>
   </section>
   <section class="section reveal" id="sound">
-    <div class="section-hdr"><span class="section-label">Sound Signature</span><div class="section-line"></div></div>
+    <div class="section-hdr"><h2 class="section-label">Sound Signature</h2><div class="section-line"></div></div>
     <div class="data-panel">
       <div class="meta-grid">
         <span class="meta-k">Genres</span><span class="meta-v">Afrobeat Techno · Tribal Industrial · Cyberpunk Roots · Southern Mesh Frequencies</span>
@@ -1276,7 +1274,7 @@ body::after {
 
   <!-- Tracklist -->
   <section class="section reveal" id="tracklist">
-    <div class="section-hdr"><span class="section-label">Mission Log 08: Tracklist</span><div class="section-line"></div></div>
+    <div class="section-hdr"><h2 class="section-label">Mission Log 08: Tracklist</h2><div class="section-line"></div></div>
     <div class="tracklist-wrap">
       <div class="tracklist">
         <div class="tr"><span class="tr-n">01.</span><span class="tr-t">Ancestral Code Reload</span><span class="tr-ts">3:03</span></div>
@@ -1307,7 +1305,7 @@ body::after {
   <footer class="footer reveal" aria-label="Operator links and credits">
     <div class="closing-quote">"For those who keep listening... the velvet was never the point."</div>
     <div class="section-hdr">
-      <span class="section-label">Signal Broadcast</span>
+      <h2 class="section-label">Signal Broadcast</h2>
       <div class="section-line"></div>
     </div>
     <nav class="links-grid" aria-label="External links">

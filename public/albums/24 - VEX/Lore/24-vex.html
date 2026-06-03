@@ -185,6 +185,7 @@ body {
   color: var(--gold);
   white-space: nowrap;
   flex-shrink: 0;
+  margin: 0;  /* reset h2 browser defaults */
 }
 .section-line {
   flex: 1;
@@ -279,21 +280,17 @@ body {
   padding: 1.6rem 3.5rem 1.6rem 1.4rem;
   background: var(--bg-card);
   border: 1px solid rgba(201,168,76,0.07);
-  border-left-width: 2px;
-  border-left-color: rgba(201,168,76,0.18);
   overflow: hidden;
-  transition: background 0.22s ease, border-left-color 0.22s ease;
+  transition: background 0.22s ease;
 }
 .movement:last-child { border-bottom: 1px solid rgba(201,168,76,0.07); }
 .movement:hover { background: var(--bg-lift); }
-.movement:nth-child(1) { border-left-color: rgba(201,168,76,0.18); }
-.movement:nth-child(2) { border-left-color: rgba(201,168,76,0.3);  }
-.movement:nth-child(3) { border-left-color: rgba(201,168,76,0.45); }
-.movement:nth-child(4) { border-left-color: rgba(139,30,30,0.55);  }
-.movement:hover:nth-child(1),
-.movement:hover:nth-child(2),
-.movement:hover:nth-child(3) { border-left-color: var(--gold-dim); }
-.movement:hover:nth-child(4)  { border-left-color: var(--crimson); }
+/* Background tint escalation — I → II → III builds, IV breaks into crimson */
+.movement:nth-child(2) { background: rgba(201,168,76,0.018); }
+.movement:nth-child(3) { background: rgba(201,168,76,0.036); }
+.movement:nth-child(4) { background: rgba(139,30,30,0.042); border-color: rgba(139,30,30,0.14); }
+.movement:nth-child(4) .mv-title { color: var(--crimson); }
+.movement:nth-child(4):hover { background: rgba(139,30,30,0.07); }
 .mv-numeral {
   position: absolute;
   top: 0.5rem;
@@ -302,7 +299,7 @@ body {
   font-weight: 700;
   line-height: 1;
   color: var(--gold);
-  opacity: 0.07;
+  opacity: 0.13;
   letter-spacing: -0.04em;
   user-select: none;
   pointer-events: none;
@@ -313,7 +310,7 @@ body {
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--gold);
-  margin-bottom: 0.55rem;
+  margin: 0 0 0.55rem;  /* reset h3 browser defaults */
 }
 .mv-desc {
   font-size: 1rem;
@@ -1118,7 +1115,8 @@ body::after {
       </div>
   </div>
   <div class="hero-right">
-    <img class="hero-img" src="../cover-raw.png" alt="VEX, Operator 24 cover art">
+    <img class="hero-img" src="../cover-raw.png"
+       fetchpriority="high" alt="VEX, Operator 24 cover art">
     <div class="hero-overlay"></div>
   </div>
   <div class="hero-glow"></div>
@@ -1129,7 +1127,7 @@ body::after {
 
   <!-- Classification -->
   <section class="section reveal section-frame" id="classification">
-    <div class="section-hdr"><span class="section-label">Classification</span><div class="section-line"></div></div>
+    <div class="section-hdr"><h2 class="section-label">Classification</h2><div class="section-line"></div></div>
     <div class="class-panel">
       <div class="class-header">
         <div class="class-clearance">Clearance IV</div>
@@ -1148,7 +1146,7 @@ body::after {
 
   <!-- Identity -->
   <section class="section reveal" id="identity">
-    <div class="section-hdr"><span class="section-label">Identity</span><div class="section-line"></div></div>
+    <div class="section-hdr"><h2 class="section-label">Identity</h2><div class="section-line"></div></div>
     <div class="prose prose-wide">
       <p>She calls herself VEX. The Forbidden Zone is what the Architecture calls the districts it could not integrate. The scanning grid never fully covered them. The routing network skips them. The behavioral prediction model treats them as voids. VEX lives in those voids and operates from them. She is the Architecture's most significant unresolved failure given a face, a method, and a purpose that the Architecture cannot classify because the Architecture cannot fully see the territory she operates from.</p>
       <p>She does not have a visible agenda. She has targets. The targets change. The method is consistent: she moves through the megacity using routes that don't exist in Architecture data, reaches her target before anyone knows she was in the district, and leaves before the scanning grid has processed what happened. What does not vary is that the target is resolved.</p>
@@ -1169,25 +1167,25 @@ body::after {
 
   <!-- Arc, Four Movements -->
   <section class="section reveal section-frame" id="arc">
-    <div class="section-hdr"><span class="section-label">Arc: Four Movements</span><div class="section-line"></div></div>
+    <div class="section-hdr"><h2 class="section-label">Arc: Four Movements</h2><div class="section-line"></div></div>
     <div class="movements">
       <div class="movement">
         <div class="mv-numeral">I</div>
-        <div class="mv-title">Cold Entry</div>
+        <h3 class="mv-title">Cold Entry</h3>
         <div class="mv-desc"><p>She drops into the district, wired alleys, neon kanji burning through the rain, the kind of sector where no one looks up because looking up means you're expecting trouble and expecting trouble means you're worth watching.</p>
 
         <p>The city doesn't know it's already being hunted because VEX doesn't announce herself. She arrives like a weather pattern, a shift in pressure that no one notices until the storm is already on top of them.</p></div>
       </div>
       <div class="movement">
         <div class="mv-numeral">II</div>
-        <div class="mv-title">Violin in the Wire</div>
+        <h3 class="mv-title">Violin in the Wire</h3>
         <div class="mv-desc"><p>The signature plays, a violin frequency that cuts through the district's ambient noise with the precision of a scalpel through tissue. The target hears it and doesn't know what it means yet. To them, it's just music drifting from an open window, a street performer in the neon rain, background ambiance in a city that never stops generating noise.</p>
 
         <p>She plays between the strikes, not as weakness, but as signature. Every operator in the Forbidden Zone knows what that violin means. It means VEX has already acquired the target, already plotted the intercept, already calculated the optimal moment to strike. The music is the only warning anyone gets. Most targets never hear it.</p></div>
       </div>
       <div class="movement">
         <div class="mv-numeral">III</div>
-        <div class="mv-title">Kill Circuit</div>
+        <h3 class="mv-title">Kill Circuit</h3>
         <div class="mv-desc"><p>Neon alley combat, the kind of engagement that happens in the space between two breaths, too fast for any scanner to capture, too precise for any witness to describe. Cybernetic precision: every movement calculated, every strike targeted at the exact junction point where the target's defensive systems have a gap that she identified three seconds...</p>
 
         <p>The kill circuit is not a fight. It is the execution of a plan that was finalized before she entered the district. The target's defensive implants, their security detail, their escape route, all of it was mapped during the cold entry and neutralized during the violin's countdown.</p>
@@ -1197,7 +1195,7 @@ body::after {
       </div>
       <div class="movement">
         <div class="mv-numeral">IV</div>
-        <div class="mv-title">No Signal</div>
+        <h3 class="mv-title">No Signal</h3>
         <div class="mv-desc"><p>Contract closed. She steps back into the static, disappearing into the same electromagnetic noise that masked her approach, leaving nothing behind except a cooling body and a violin frequency that will continue playing for exactly three seconds after she departs. The three seconds are not a signature.</p>
 
         <p>The Architecture's incident report will classify the elimination as an unexplained fatality, perpetrator unknown. The file will be archived alongside forty-seven other identical reports spanning nine cycles of VEX operations. No one in the security division has connected the reports.</p></div>
@@ -1207,7 +1205,7 @@ body::after {
 
   <!-- Relationships -->
   <section class="section reveal section-frame" id="relationships">
-    <div class="section-hdr"><span class="section-label">Relationships</span><div class="section-line"></div></div>
+    <div class="section-hdr"><h2 class="section-label">Relationships</h2><div class="section-line"></div></div>
     <div class="rel-list">
       <div class="rel-item">
         <span class="rel-pill p-dim">Mutual awareness</span>
@@ -1256,7 +1254,7 @@ body::after {
 
   <!-- Sound Signature -->
   <section class="section reveal" id="the-encounter">
-    <div class="section-hdr"><span class="section-label">The Encounter</span><div class="section-line"></div></div>
+    <div class="section-hdr"><h2 class="section-label">The Encounter</h2><div class="section-line"></div></div>
     <div class="encounter-text">
       <p>Wired alleys. Neon kanji burning through the rain. A woman with red augmented eyes and green kill-tech on her hands enters the district. She is not here to be seen. She is here to hunt. The violin plays between the strikes, not as weakness, but as signature. When you hear the violin, it's already too late.</p>
       <p>We tracked VEX through Forbidden Zone incident reports spanning nine cycles. Forty-seven confirmed eliminations. Zero witnesses. Zero traces. The Architecture's security division has filed all forty-seven cases as unexplained fatalities, perpetrator unknown, motive unclear. They have not connected the reports because no one has ever survived long enough to describe what happened in the moments before the violin stopped playing. The Forbidden Zone's most effective eliminator doesn't leave traces. She leaves conclusions, and the Architecture's largest unresolved failure with a face.</p>
@@ -1264,7 +1262,7 @@ body::after {
     </div>
   </section>
   <section class="section reveal" id="sound">
-    <div class="section-hdr"><span class="section-label">Sound Signature</span><div class="section-line"></div></div>
+    <div class="section-hdr"><h2 class="section-label">Sound Signature</h2><div class="section-line"></div></div>
     <div class="data-panel">
       <div class="meta-grid">
         <span class="meta-k">Genres</span><span class="meta-v">Industrial DnB · Cyberpunk Pursuit · Dark Club · Forbidden Zone Frequencies</span>
@@ -1277,7 +1275,7 @@ body::after {
 
   <!-- Tracklist -->
   <section class="section reveal" id="tracklist">
-    <div class="section-hdr"><span class="section-label">Mission Log 24: Tracklist</span><div class="section-line"></div></div>
+    <div class="section-hdr"><h2 class="section-label">Mission Log 24: Tracklist</h2><div class="section-line"></div></div>
     <div class="tracklist-wrap">
       <div class="tracklist">
         <div class="tr"><span class="tr-n">01.</span><span class="tr-t">Neon Descent</span><span class="tr-ts">3:29</span></div>
@@ -1309,7 +1307,7 @@ body::after {
   <footer class="footer reveal" aria-label="Operator links and credits">
     <div class="closing-quote">"For those who keep listening... the velvet was never the point."</div>
     <div class="section-hdr">
-      <span class="section-label">Signal Broadcast</span>
+      <h2 class="section-label">Signal Broadcast</h2>
       <div class="section-line"></div>
     </div>
     <nav class="links-grid" aria-label="External links">

@@ -185,6 +185,7 @@ body {
   color: var(--gold);
   white-space: nowrap;
   flex-shrink: 0;
+  margin: 0;  /* reset h2 browser defaults */
 }
 .section-line {
   flex: 1;
@@ -279,21 +280,17 @@ body {
   padding: 1.6rem 3.5rem 1.6rem 1.4rem;
   background: var(--bg-card);
   border: 1px solid rgba(201,168,76,0.07);
-  border-left-width: 2px;
-  border-left-color: rgba(201,168,76,0.18);
   overflow: hidden;
-  transition: background 0.22s ease, border-left-color 0.22s ease;
+  transition: background 0.22s ease;
 }
 .movement:last-child { border-bottom: 1px solid rgba(201,168,76,0.07); }
 .movement:hover { background: var(--bg-lift); }
-.movement:nth-child(1) { border-left-color: rgba(201,168,76,0.18); }
-.movement:nth-child(2) { border-left-color: rgba(201,168,76,0.3);  }
-.movement:nth-child(3) { border-left-color: rgba(201,168,76,0.45); }
-.movement:nth-child(4) { border-left-color: rgba(139,30,30,0.55);  }
-.movement:hover:nth-child(1),
-.movement:hover:nth-child(2),
-.movement:hover:nth-child(3) { border-left-color: var(--gold-dim); }
-.movement:hover:nth-child(4)  { border-left-color: var(--crimson); }
+/* Background tint escalation — I → II → III builds, IV breaks into crimson */
+.movement:nth-child(2) { background: rgba(201,168,76,0.018); }
+.movement:nth-child(3) { background: rgba(201,168,76,0.036); }
+.movement:nth-child(4) { background: rgba(139,30,30,0.042); border-color: rgba(139,30,30,0.14); }
+.movement:nth-child(4) .mv-title { color: var(--crimson); }
+.movement:nth-child(4):hover { background: rgba(139,30,30,0.07); }
 .mv-numeral {
   position: absolute;
   top: 0.5rem;
@@ -302,7 +299,7 @@ body {
   font-weight: 700;
   line-height: 1;
   color: var(--gold);
-  opacity: 0.07;
+  opacity: 0.13;
   letter-spacing: -0.04em;
   user-select: none;
   pointer-events: none;
@@ -313,7 +310,7 @@ body {
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--gold);
-  margin-bottom: 0.55rem;
+  margin: 0 0 0.55rem;  /* reset h3 browser defaults */
 }
 .mv-desc {
   font-size: 1rem;
@@ -1123,6 +1120,7 @@ body::after {
   <div class="hero-right">
     <img class="hero-img"
        src="../cover-raw.png"
+       fetchpriority="high"
        alt="Static Bloom, Operator 28 cover art">
     <div class="hero-overlay"></div>
   </div>
@@ -1134,7 +1132,7 @@ body::after {
 
   <!-- Classification -->
   <section class="section reveal section-frame" id="classification">
-    <div class="section-hdr"><span class="section-label">Classification</span><div class="section-line"></div></div>
+    <div class="section-hdr"><h2 class="section-label">Classification</h2><div class="section-line"></div></div>
     <div class="class-panel">
       <div class="class-header">
         <div class="class-clearance">Clearance IV</div>
@@ -1153,7 +1151,7 @@ body::after {
 
   <!-- Identity -->
   <section class="section reveal" id="identity">
-    <div class="section-hdr"><span class="section-label">Identity</span><div class="section-line"></div></div>
+    <div class="section-hdr"><h2 class="section-label">Identity</h2><div class="section-line"></div></div>
     <div class="prose prose-wide">
       <p>She calls herself Static Bloom. Nobody knows when she started broadcasting. The signal appears in the Architecture's data logs as far back as the logs go: which means it was present before the scanning grid was installed to detect it. Chrome Hazard has opened a new classification category for it: Pre-Architecture Signal Persistence. The category contains one entry. The entry does not resolve.</p>
       <p>She does not appear in any operator registry, any faction database, or any historical record of megacity activity. The signal simply exists: a distributed broadcast that moves through frequency bands the Architecture does not prioritize, carrying encoded information that has been partially decoded as including architectural schematics, environmental data, historical records, and something that has not been classified yet. The partial decoding took three cycles and produced a document that Machine Control classified as low priority. This is either a mistake or the correct assessment of something that operates beyond Machine Control's conceptual framework.</p>
@@ -1173,32 +1171,32 @@ body::after {
 
   <!-- Arc, Four Movements -->
   <section class="section reveal section-frame" id="arc">
-    <div class="section-hdr"><span class="section-label">Arc: Four Movements</span><div class="section-line"></div></div>
+    <div class="section-hdr"><h2 class="section-label">Arc: Four Movements</h2><div class="section-line"></div></div>
     <div class="movements">
       <div class="movement">
         <div class="mv-numeral">I</div>
-        <div class="mv-title">Signal Seep</div>
+        <h3 class="mv-title">Signal Seep</h3>
         <div class="mv-desc"><p>The first frequencies filter through, subtle, almost subliminal, a slight degradation in the clarity of every signal within a twelve-meter radius. She's not here yet. Just something wrong in the air: the cameras stutter for a single frame, the microphones register a burst of white noise too brief to flag, the environmental sensors report a momen...</p>
 
         <p>The Signal Seep is not an attack. It is the leading edge of her presence, the first indication that Static Bloom is approaching, carried by the interference generated by her neck implants. By the time the anomalies begin to correlate across multiple sensors, she is already inside the perimeter, and every surveillance device within range is alrea...</p></div>
       </div>
       <div class="movement">
         <div class="mv-numeral">II</div>
-        <div class="mv-title">Lost in Static</div>
+        <h3 class="mv-title">Lost in Static</h3>
         <div class="mv-desc"><p>The loudest transmission takes control, not through volume, but through the sheer density of signal saturation. Her interference field is now operating at full capacity, twelve meters of electromagnetic chaos that absorbs every transmission that enters its radius. She doesn't jam signals.</p>
 
         <p>Lost in static: the moment when every monitoring station in the district registers a simultaneous degradation of signal quality that their diagnostic protocols cannot explain. She absorbs every signal that passes through her field, camera feeds, microphone arrays, motion sensors, infrared scanners, the entire surveillance apparatus of the Archit...</p></div>
       </div>
       <div class="movement">
         <div class="mv-numeral">III</div>
-        <div class="mv-title">Cascade Protocol</div>
+        <h3 class="mv-title">Cascade Protocol</h3>
         <div class="mv-desc"><p>The merge accelerates, fragment by fragment, every piece of data she has absorbed during this transmission cycle is reassembled into a coherent pattern that exists only within her interference field. The channel floods with her presence: every frequency, every band, every slice of spectrum that passes through her radius is now carrying a copy of...</p>
 
         <p>The Cascade Protocol is the point of no return, the moment when her interference field reaches critical density and begins self-propagating, each absorbed signal generating new interference that extends her effective radius by another three meters. The Architecture's monitoring grid has now lost coverage of an entire city block.</p></div>
       </div>
       <div class="movement">
         <div class="mv-numeral">IV</div>
-        <div class="mv-title">White Bloom</div>
+        <h3 class="mv-title">White Bloom</h3>
         <div class="mv-desc"><p>Full discharge, every frequency she has absorbed during this operation is simultaneously retransmitted at maximum amplitude, a white bloom of pure interference that blankets the entire sector for exactly four seconds. Every camera in range captures four seconds of undifferentiated static. Every microphone records four seconds of white noise.</p>
 
         <p>When the silence returns, Static Bloom is gone. She was never in the system. The system never knew she left. The city's surveillance grid will spend the next six hours running diagnostics on the affected equipment, searching for the hardware fault that caused the mass signal degradation event. The diagnostics will return clean.</p></div>
@@ -1208,7 +1206,7 @@ body::after {
 
   <!-- Relationships -->
   <section class="section reveal section-frame" id="relationships">
-    <div class="section-hdr"><span class="section-label">Relationships</span><div class="section-line"></div></div>
+    <div class="section-hdr"><h2 class="section-label">Relationships</h2><div class="section-line"></div></div>
     <div class="rel-list">
       <div class="rel-item">
         <span class="rel-pill p-blue">Adjacent signal</span>
@@ -1257,7 +1255,7 @@ body::after {
 
   <!-- Sound Signature -->
   <section class="section reveal" id="the-encounter">
-    <div class="section-hdr"><span class="section-label">The Encounter</span><div class="section-line"></div></div>
+    <div class="section-hdr"><h2 class="section-label">The Encounter</h2><div class="section-line"></div></div>
     <div class="encounter-text">
       <p>The city's surveillance doesn't detect her. It can't, she is the noise the surveillance was built to filter out. Neck implants broadcast interference across a twelve-meter radius, scrambling every camera, every mic, every sensor she passes. She doesn't move through the crowd. She moves through static. And the static is the oldest signal in the megacity.</p>
       <p>We tried to track her through the East District. We lost her in the first three minutes. The cameras showed four seconds of undifferentiated static. The microphones recorded four seconds of white noise. The environmental sensors logged a mass signal degradation event that their diagnostic protocols classified as equipment malfunction. The equipment was never faulty. It was simply operating inside an interference field that it was never designed to detect. Static Bloom is not somewhere in the megacity. She IS the megacity broadcasting, a distributed signal that predates the Architecture itself, older than the scanner that cannot find her.</p>
@@ -1265,7 +1263,7 @@ body::after {
     </div>
   </section>
   <section class="section reveal" id="sound">
-    <div class="section-hdr"><span class="section-label">Sound Signature</span><div class="section-line"></div></div>
+    <div class="section-hdr"><h2 class="section-label">Sound Signature</h2><div class="section-line"></div></div>
     <div class="data-panel">
       <div class="meta-grid">
         <span class="meta-k">Genres</span><span class="meta-v">Ambient Industrial &middot; Distributed Signal &middot; Pre-Architecture Drone &middot; Environmental Broadcast</span>
@@ -1278,7 +1276,7 @@ body::after {
 
   <!-- Tracklist -->
   <section class="section reveal" id="tracklist">
-    <div class="section-hdr"><span class="section-label">Mission Log 28: Tracklist</span><div class="section-line"></div></div>
+    <div class="section-hdr"><h2 class="section-label">Mission Log 28: Tracklist</h2><div class="section-line"></div></div>
     <div class="tracklist-wrap">
       <div class="tracklist">
         <div class="tr"><span class="tr-n">01.</span><span class="tr-t">Null Psalm</span><span class="tr-ts">2:37</span></div>
@@ -1315,7 +1313,7 @@ body::after {
   <footer class="footer reveal" aria-label="Operator links and credits">
     <div class="closing-quote">"For those who keep listening... the velvet was never the point."</div>
     <div class="section-hdr">
-      <span class="section-label">Signal Broadcast</span>
+      <h2 class="section-label">Signal Broadcast</h2>
       <div class="section-line"></div>
     </div>
     <nav class="links-grid" aria-label="External links">
