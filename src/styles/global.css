@@ -108,9 +108,32 @@ body::after {
 }
 
 /* ─── Scrollbar ──────────────────────────────────────────── */
-::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: var(--bg); }
-::-webkit-scrollbar-thumb { background: rgba(0,196,255,0.25); border-radius: 3px; }
+/* Firefox */
+* { scrollbar-width: thin; scrollbar-color: rgba(0,196,255,0.3) transparent; }
+
+/* Chromium / Safari */
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;           /* horizontal scrollbars (dossier tables, etc.) */
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0,196,255,0.28);
+  border-radius: 2px;
+  box-shadow: 0 0 6px rgba(0,196,255,0.35);
+  transition: background 0.2s;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0,196,255,0.65);
+  box-shadow: 0 0 10px rgba(0,196,255,0.55), 0 0 20px rgba(0,196,255,0.2);
+}
+
+::-webkit-scrollbar-corner { background: transparent; }
 
 /* ─── Reduced motion ─────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
