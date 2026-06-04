@@ -332,13 +332,15 @@ const youtubeId = op.youtube ?? null;
       player.classList.remove('visible');
       player.setAttribute('aria-hidden', 'true');
       btn.classList.remove('active');
-      // Reset iframe to stop playback
       iframe.setAttribute('src', '');
       open = false;
     }
 
     btn.addEventListener('click', () => open ? hide() : show());
     closeBtn?.addEventListener('click', hide);
+
+    // Autoplay on load — small delay so the dossier iframe renders first
+    setTimeout(show, 800);
   })();
 
   // Save scroll position so /operators restores to the right card on back nav
