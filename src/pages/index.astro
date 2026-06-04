@@ -984,25 +984,32 @@ const FACTIONS = FACTION_ORDER.map(name => ({
 /* ─── Context body typewriter ────────────────────────────── */
 .context-body.js-typing p { color: transparent; }
 
-.context-body p.typing { color: var(--status-active); }
-.context-body p.typed  { color: var(--status-active); }
+.context-body p.typing {
+  color: var(--cyan-bright);
+  text-shadow: 0 0 5px rgba(0,196,255,0.8), 0 0 16px rgba(0,196,255,0.45);
+}
+.context-body p.typed {
+  color: var(--cyan-bright);
+  text-shadow: 0 0 5px rgba(0,196,255,0.8), 0 0 16px rgba(0,196,255,0.45);
+}
 
 .context-body p.context-emphasis.typing {
-  color: var(--status-active);
+  color: var(--cyan-bright);
   font-weight: 700;
-  text-shadow: 0 0 8px rgba(77, 222, 130, 0.5), 0 0 20px rgba(77, 222, 130, 0.25);
+  text-shadow: 0 0 6px rgba(0,196,255,0.95), 0 0 18px rgba(0,196,255,0.6), 0 0 40px rgba(0,196,255,0.25);
 }
 .context-body p.context-emphasis.typed {
-  color: var(--status-active) !important;
+  color: var(--cyan-bright) !important;
   font-weight: 700 !important;
-  text-shadow: 0 0 8px rgba(77, 222, 130, 0.5), 0 0 20px rgba(77, 222, 130, 0.25) !important;
+  text-shadow: 0 0 6px rgba(0,196,255,0.95), 0 0 18px rgba(0,196,255,0.6), 0 0 40px rgba(0,196,255,0.25) !important;
 }
 
 .cursor {
   display: inline-block;
   width: 0.55ch;
   height: 1em;
-  background: var(--status-active);
+  background: var(--cyan);
+  box-shadow: 0 0 6px var(--cyan);
   vertical-align: text-bottom;
   margin-left: 1px;
   animation: cursor-blink 0.65s step-end infinite;
