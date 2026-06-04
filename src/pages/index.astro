@@ -243,6 +243,75 @@ const FACTIONS = FACTION_ORDER.map(name => ({
 
 </Base>
 
+<script>
+// ── Context body typewriter ──────────────────────────────
+(() => {
+  const body = document.querySelector<HTMLElement>('.context-body');
+  if (!body) return;
+
+  const paragraphs = [...body.querySelectorAll<HTMLParagraphElement>('p')];
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const isMobile = window.innerWidth < 640;
+
+  // Reduced motion or mobile: show text in terminal green immediately, no animation
+  if (reduceMotion || isMobile) {
+    paragraphs.forEach(p => p.classList.add('typed'));
+    return;
+  }
+
+  // Store original text, clear each paragraph
+  const texts = paragraphs.map(p => p.textContent ?? '');
+  paragraphs.forEach(p => { p.textContent = ''; });
+  body.classList.add('js-typing');
+
+  // Blinking block cursor
+  const cursor = document.createElement('span');
+  cursor.className = 'cursor';
+  cursor.setAttribute('aria-hidden', 'true');
+
+  function typeParagraph(idx: number): void {
+    if (idx >= paragraphs.length) {
+      cursor.remove();
+      return;
+    }
+
+    const p = paragraphs[idx];
+    const text = texts[idx];
+    const isEmphasis = p.classList.contains('context-emphasis');
+    const charDelay = isEmphasis ? 25 : 18;
+    let i = 0;
+
+    p.classList.add('typing');
+    p.appendChild(cursor);
+
+    const iv = setInterval(() => {
+      if (i < text.length) {
+        p.insertBefore(document.createTextNode(text[i]), cursor);
+        i++;
+      } else {
+        clearInterval(iv);
+        p.classList.remove('typing');
+        p.classList.add('typed');
+        setTimeout(() => typeParagraph(idx + 1), 300);
+      }
+    }, charDelay);
+  }
+
+  // Trigger when section scrolls into view (30% threshold)
+  const observer = new IntersectionObserver(
+    (entries) => {
+      if (entries[0].isIntersecting) {
+        observer.disconnect();
+        typeParagraph(0);
+      }
+    },
+    { threshold: 0.3 }
+  );
+
+  observer.observe(body);
+})();
+</script>
+
 <style>
 /* ─── Shared layout shell ───────────────────────────────── */
 .section-inner {
@@ -927,6 +996,30 @@ const FACTIONS = FACTION_ORDER.map(name => ({
   to   { opacity: 1; transform: translateY(0); }
 }
 
+/* ─── Context body typewriter ────────────────────────────── */
+.context-body.js-typing p { color: transparent; }
+
+.context-body p.typing { color: var(--status-active); }
+.context-body p.typed  { color: var(--status-active); }
+
+.context-body p.context-emphasis.typing { color: var(--white); }
+.context-body p.context-emphasis.typed  { color: var(--white) !important; }
+
+.cursor {
+  display: inline-block;
+  width: 0.55ch;
+  height: 1em;
+  background: var(--status-active);
+  vertical-align: text-bottom;
+  margin-left: 1px;
+  animation: cursor-blink 0.65s step-end infinite;
+}
+
+@keyframes cursor-blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
 /* ─── Reduced motion ─────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
   .t1, .t2 { animation: none; }
@@ -934,5 +1027,6 @@ const FACTIONS = FACTION_ORDER.map(name => ({
   .intercept-bar, .broadcast-bar { animation: none; }
   .intercept-text { width: 46ch; border-right: none; animation: none; }
   .intel-art img { transition: none; }
+  .cursor { animation: none; opacity: 1; }
 }
 </style>
