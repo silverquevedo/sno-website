@@ -1,36 +1,21 @@
 ---
 import Base from '../layouts/Base.astro';
-import { FACTION_COLORS, FACTION_ORDER } from '../data/operators';
+import { OPERATORS, FACTION_COLORS, FACTION_ORDER } from '../data/operators';
 
-const INTEL_OPS = [
-  {
-    padded: '01',
-    name: 'Machine Control',
-    slug: '01-machine-control',
-    folder: '1-Machine Control',
-    faction: 'The Architecture',
-    factionColor: '#00c4ff',
-    status: 'ACTIVE',
-  },
-  {
-    padded: '05',
-    name: 'Midnight Runes',
-    slug: '05-midnight-runes',
-    folder: '5-Midnight Runes',
-    faction: 'The Ritual Network',
-    factionColor: '#b87aff',
-    status: 'ACTIVE',
-  },
-  {
-    padded: '23',
-    name: 'Ghost Signal',
-    slug: '23-ghost-signal',
-    folder: '23 - Ghost Signal',
-    faction: 'The Ghost Layer',
-    factionColor: '#8ab4d4',
-    status: 'GHOST',
-  },
-];
+// 3 most recently released operators (highest IDs with dossier + slug)
+const INTEL_OPS = OPERATORS
+  .filter(op => op.released && op.slug && op.lore)
+  .slice(-3)
+  .reverse()
+  .map(op => ({
+    padded: String(op.id).padStart(2, '0'),
+    name: op.name,
+    slug: op.slug!,
+    folder: op.folder,
+    faction: op.faction,
+    factionColor: FACTION_COLORS[op.faction] ?? '#9e9c94',
+    status: op.faction === 'The Ghost Layer' ? 'GHOST' : 'ACTIVE',
+  }));
 
 const FACTION_DESCS: Record<string, string> = {
   'The Architecture':   'They build the rules. They control the flows. Invisible in power.',
@@ -145,7 +130,7 @@ const FACTIONS = FACTION_ORDER.map(name => ({
 <section class="intel" aria-labelledby="intel-hdr">
   <div class="section-inner">
     <header class="section-hdr">
-      <h2 class="section-label" id="intel-hdr">FEATURED TRANSMISSIONS</h2>
+      <h2 class="section-label" id="intel-hdr">LATEST TRANSMISSIONS</h2>
       <div class="section-line" aria-hidden="true"></div>
       <a href="/operators" class="section-link">View all operators →</a>
     </header>
