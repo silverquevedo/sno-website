@@ -104,12 +104,18 @@ const FACTIONS = FACTION_ORDER.map(name => ({
 <section class="context" aria-labelledby="context-hdr">
   <div class="section-inner">
     <div class="context-label" id="context-hdr" aria-hidden="true">OPERATIONAL CONTEXT</div>
-    <div class="context-body">
-      <p>A megacity. Eight factions. Territory divided by power, ritual, velocity and blood.</p>
-      <p>Silver Night Operator moves between all of them. No permanent allegiance. Documenting what is found.</p>
-      <p>Each transmission is an operator: a character, a story, one hour of signal.</p>
-      <p class="context-emphasis">These are not songs. These are field records.</p>
-      <p><span class="context-count">28</span> transmissions completed. The signal continues.</p>
+    <div class="context-layout">
+      <div class="context-stat" aria-hidden="true">
+        <div class="context-count">28</div>
+        <div class="context-count-sub">Transmissions<br/>completed.</div>
+      </div>
+      <div class="context-body">
+        <p>A megacity. Eight factions. Territory divided by power, ritual, velocity and blood.</p>
+        <p>Silver Night Operator moves between all of them. No permanent allegiance. Documenting what is found.</p>
+        <p>Each transmission is an operator: a character, a story, one hour of signal.</p>
+        <p class="context-emphasis">These are not songs. These are field records.</p>
+        <p>The signal continues.</p>
+      </div>
     </div>
   </div>
 </section>
@@ -537,8 +543,43 @@ const FACTIONS = FACTION_ORDER.map(name => ({
   border-bottom: 1px solid var(--cyan-12);
 }
 
+.context-layout {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--space-8);
+  align-items: start;
+}
+
+.context-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-3);
+  padding-right: var(--space-8);
+  border-right: 1px solid var(--cyan-12);
+}
+
+.context-count {
+  font-family: var(--font-display);
+  font-size: clamp(6rem, 12vw, 10rem);
+  line-height: 0.85;
+  color: var(--cyan);
+  letter-spacing: 0.02em;
+  text-shadow: 0 0 40px var(--cyan-50), 0 0 80px rgba(0,196,255,0.2);
+  display: block;
+}
+
+.context-count-sub {
+  font-family: var(--font-mono);
+  font-size: var(--text-micro);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--dimmer);
+  line-height: 1.5;
+}
+
 .context-body {
-  max-width: 68ch;
+  max-width: 62ch;
   display: flex;
   flex-direction: column;
   gap: var(--space-5);
@@ -553,21 +594,29 @@ const FACTIONS = FACTION_ORDER.map(name => ({
 }
 
 .context-emphasis {
-  color: var(--body) !important;
-  font-style: italic;
-  font-size: clamp(0.95rem, 1.6vw, 1.08rem) !important;
-  letter-spacing: 0.05em !important;
+  font-family: var(--font-mono);
+  font-size: clamp(1rem, 2vw, 1.25rem) !important;
+  letter-spacing: 0.04em !important;
+  line-height: 1.5 !important;
+  color: var(--white) !important;
+  font-style: normal !important;
+  margin: var(--space-2) 0;
 }
 
-.context-count {
-  font-family: var(--font-display);
-  font-size: clamp(2.8rem, 5vw, 4rem);
-  line-height: 0.9;
-  color: var(--cyan);
-  vertical-align: middle;
-  margin-right: 0.15em;
-  letter-spacing: 0.04em;
-  text-shadow: 0 0 20px var(--cyan-50);
+@media (max-width: 640px) {
+  .context-layout {
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+  }
+  .context-stat {
+    flex-direction: row;
+    align-items: baseline;
+    gap: var(--space-4);
+    border-right: none;
+    padding-right: 0;
+    padding-bottom: var(--space-4);
+    border-bottom: 1px solid var(--cyan-12);
+  }
 }
 
 /* ─── §3 FACTIONS ────────────────────────────────────────── */
@@ -605,13 +654,13 @@ const FACTIONS = FACTION_ORDER.map(name => ({
   content: '';
   position: absolute;
   top: 0; left: 0; right: 0;
-  height: 2px;
+  height: 3px;
   background: var(--accent);
-  opacity: 0.35;
-  transition: opacity 0.2s;
+  opacity: 0.5;
+  transition: opacity var(--t-base);
 }
 
-.faction-card:hover::before { opacity: 0.85; }
+.faction-card:hover::before { opacity: 1; }
 .faction-card:hover {
   background: color-mix(in srgb, var(--accent) 5%, var(--bg-card));
 }
@@ -683,18 +732,18 @@ const FACTIONS = FACTION_ORDER.map(name => ({
   top: 0.6rem;
   right: 1rem;
   font-family: var(--font-display);
-  font-size: clamp(4rem, 7vw, 7rem);
+  font-size: clamp(5rem, 9vw, 9rem);
   line-height: 1;
   color: var(--white);
-  opacity: 0.04;
+  opacity: 0.07;
   user-select: none;
   pointer-events: none;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.02em;
   z-index: 1;
-  transition: opacity 0.3s;
+  transition: opacity var(--t-slow);
 }
 
-.intel-file:hover .intel-ghost-num { opacity: 0.07; }
+.intel-file:hover .intel-ghost-num { opacity: 0.14; }
 
 .intel-art {
   width: 100%;

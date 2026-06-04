@@ -258,12 +258,14 @@ const isLocked    = !op.released;
   font-size: 5.5rem;
   line-height: 1;
   color: var(--fc, var(--cyan));
-  opacity: 0.065;
+  opacity: 0.09;
   letter-spacing: -0.02em;
   z-index: 2;
   pointer-events: none;
   user-select: none;
+  transition: opacity var(--t-slow);
 }
+.card:not(.locked):not(.scheduled):not(.released):hover .card-num-wm { opacity: 0.15; }
 
 /* ─── Faction dot ────────────────────────────────────────── */
 .card-faction-dot {
