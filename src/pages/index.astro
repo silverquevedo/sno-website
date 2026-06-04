@@ -2,7 +2,6 @@
 import Base from '../layouts/Base.astro';
 import { FACTION_COLORS } from '../data/operators';
 
-// Intelligence file operators (hardcoded: early, mid, ghost layer)
 const INTEL_OPS = [
   {
     padded: '01',
@@ -34,14 +33,14 @@ const INTEL_OPS = [
 ];
 
 const FACTIONS = [
-  { name: 'The Architecture',   desc: 'Corporate control. The ones who build the rules.',           color: '#00c4ff' },
-  { name: 'The Ritual Network', desc: 'Data cults. Operate at the edge of the mystic and digital.', color: '#b87aff' },
-  { name: 'South Bloc',         desc: 'Southern coalition. Cultural force and armed resistance.',    color: '#6bdf5a' },
-  { name: 'Iron North',         desc: 'Cold militarism. Steel discipline, zero deviation.',          color: '#ff9a5a' },
-  { name: 'The Ghost Layer',    desc: 'System ghosts. No faction, no trace, no record.',             color: '#8ab4d4' },
-  { name: 'Forbidden Zone',     desc: 'Red zone. Prohibited, lawless, ungoverned.',                  color: '#ff6060' },
-  { name: 'The Velocity',       desc: 'Speed and chaos. The city in perpetual motion.',              color: '#40e0d0' },
-  { name: 'Unaligned',          desc: 'No affiliation. Operate alone, outside every network.',       color: '#c9a84c' },
+  { name: 'The Architecture',   desc: 'They build the rules. They control the flows. Invisible in power.',                                        color: '#00c4ff' },
+  { name: 'The Ritual Network', desc: 'Operate where data becomes ritual. The bridge between the digital and the ancient.',                        color: '#b87aff' },
+  { name: 'South Bloc',         desc: 'Cultural resistance from the south. Stronger than any official map shows.',                                  color: '#6bdf5a' },
+  { name: 'Iron North',         desc: 'Absolute discipline. Calculated cold. They don\'t negotiate.',                                               color: '#ff9a5a' },
+  { name: 'The Ghost Layer',    desc: 'No official record. No fixed territory. They exist because no one can prove they don\'t.',                   color: '#8ab4d4' },
+  { name: 'Forbidden Zone',     desc: 'Banned on every official map. Active on every map that matters.',                                            color: '#ff6060' },
+  { name: 'The Velocity',       desc: 'The city in motion. Chaos with direction. You can\'t keep up.',                                              color: '#40e0d0' },
+  { name: 'Unaligned',          desc: 'No faction. No network. Operate alone. The most dangerous or the most free — depends on who you ask.',       color: '#c9a84c' },
 ];
 ---
 
@@ -50,16 +49,16 @@ const FACTIONS = [
   description="28 Operators. 8 Factions. One Megacity."
 >
 
-<!-- ═══ § 1 — BROADCAST INTERCEPT ════════════════════════════ -->
-<section class="hero" aria-label="Broadcast intercept">
+<!-- ═══ § 1 — ACTIVE TRANSMISSION ════════════════════════════ -->
+<section class="hero" aria-label="Active transmission">
   <div class="hero-scan" aria-hidden="true"></div>
 
   <div class="hero-inner">
 
     <!-- Terminal intercept line -->
-    <div class="intercept-bar" aria-label="Signal intercepted, frequency SNO-001, classified">
+    <div class="intercept-bar" aria-label="Frequency SNO-001, signal active, classified">
       <span class="intercept-arrow" aria-hidden="true">▸</span>
-      <span class="intercept-text" aria-hidden="true">SIGNAL INTERCEPTED · FREQUENCY SNO-001 · CLASSIFIED</span>
+      <span class="intercept-text" aria-hidden="true">FREQUENCY SNO-001 · SIGNAL ACTIVE · CLASSIFIED</span>
     </div>
 
     <!-- Neon title -->
@@ -68,38 +67,53 @@ const FACTIONS = [
       <span class="t2">Operator</span>
     </h1>
 
-    <!-- Worldbuilding tagline -->
+    <!-- Field report tagline -->
     <p class="hero-tagline">
-      28 Operators. 8 Factions. A megacity that never sleeps. Every album is a field report.
+      28 transmissions logged.<br/>
+      The megacity doesn't know yet.
     </p>
 
     <!-- Live broadcast indicator -->
-    <div class="broadcast-bar" role="status" aria-label="Broadcast active, frequency SNO-001, 24/7">
+    <div class="broadcast-bar" role="status" aria-label="Transmission in progress, 24/7, megacity broadcast">
       <span class="broadcast-dot" aria-hidden="true"></span>
-      <span class="broadcast-label">BROADCAST ACTIVE</span>
+      <span class="broadcast-label">TRANSMISSION IN PROGRESS</span>
       <span class="broadcast-sep" aria-hidden="true">·</span>
-      <span class="broadcast-freq">FREQUENCY SNO-001 · 24/7</span>
+      <span class="broadcast-freq">24/7 · MEGACITY BROADCAST</span>
     </div>
 
     <!-- CTAs -->
     <nav class="hero-cta" aria-label="Primary actions">
-      <a href="/operators" class="cta-btn cta-primary">Explore Operators</a>
+      <a href="/operators" class="cta-btn cta-primary">→ Access the archive</a>
       <a
         href="https://www.youtube.com/@silvernightoperator"
         target="_blank"
         rel="noopener noreferrer"
         class="cta-btn cta-secondary"
-      >Watch on YouTube</a>
+      >▷ Listen live</a>
     </nav>
 
   </div>
 </section>
 
-<!-- ═══ § 2 — FACTIONS POWER MAP ═════════════════════════════ -->
+<!-- ═══ § 2 — OPERATIONAL CONTEXT ════════════════════════════ -->
+<section class="context" aria-labelledby="context-hdr">
+  <div class="section-inner">
+    <div class="context-label" id="context-hdr" aria-hidden="true">OPERATIONAL CONTEXT</div>
+    <div class="context-body">
+      <p>A megacity. Eight factions. Territory divided by power, ritual, velocity and blood.</p>
+      <p>Silver Night Operator moves between all of them. No permanent allegiance. Documenting what is found.</p>
+      <p>Each transmission is an operator: a character, a story, one hour of signal.</p>
+      <p class="context-emphasis">These are not songs. These are field records.</p>
+      <p><span class="context-count">28</span> transmissions completed. The signal continues.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ § 3 — FACTIONS ════════════════════════════════════════ -->
 <section class="factions" aria-labelledby="factions-hdr">
   <div class="section-inner">
     <header class="section-hdr">
-      <h2 class="section-label" id="factions-hdr">FACTIONS — POWER MAP</h2>
+      <h2 class="section-label" id="factions-hdr">FIELD INTELLIGENCE — ACTIVE FACTIONS</h2>
       <div class="section-line" aria-hidden="true"></div>
       <span class="section-meta">8 FACTIONS · 1 MEGACITY</span>
     </header>
@@ -116,13 +130,13 @@ const FACTIONS = [
   </div>
 </section>
 
-<!-- ═══ § 3 — INTELLIGENCE FILES ═════════════════════════════ -->
+<!-- ═══ § 4 — LATEST TRANSMISSIONS ═══════════════════════════ -->
 <section class="intel" aria-labelledby="intel-hdr">
   <div class="section-inner">
     <header class="section-hdr">
-      <h2 class="section-label" id="intel-hdr">INTELLIGENCE FILES</h2>
+      <h2 class="section-label" id="intel-hdr">LATEST TRANSMISSIONS LOGGED</h2>
       <div class="section-line" aria-hidden="true"></div>
-      <a href="/operators" class="section-link">All 28 Operators →</a>
+      <a href="/operators" class="section-link">View all operators →</a>
     </header>
 
     <div class="intel-grid">
@@ -147,15 +161,19 @@ const FACTIONS = [
             <div class={`intel-status intel-status--${op.status.toLowerCase()}`}>
               STATUS: {op.status}
             </div>
-            <span class="intel-cta-link">View Operator →</span>
+            <span class="intel-cta-link">→ Open file</span>
           </div>
         </a>
       ))}
     </div>
+
+    <div class="intel-footer">
+      <a href="/operators" class="intel-all-link">View all operators →</a>
+    </div>
   </div>
 </section>
 
-<!-- ═══ § 4 — BROADCAST CHANNELS ════════════════════════════ -->
+<!-- ═══ § 5 — BROADCAST CHANNELS ════════════════════════════ -->
 <section class="channels" aria-labelledby="channels-hdr">
   <div class="section-inner">
     <header class="section-hdr">
@@ -174,7 +192,7 @@ const FACTIONS = [
         <span class="channel-icon" aria-hidden="true">◈</span>
         <div class="channel-body">
           <div class="channel-name">Bandcamp</div>
-          <div class="channel-desc">High-quality downloads · Full discography</div>
+          <div class="channel-desc">High-quality archive files. Full discography.</div>
           <div class="channel-url">silvernightoperator.bandcamp.com</div>
         </div>
       </a>
@@ -189,7 +207,7 @@ const FACTIONS = [
         <span class="channel-icon" aria-hidden="true">▷</span>
         <div class="channel-body">
           <div class="channel-name">YouTube</div>
-          <div class="channel-desc">1-hour mixes · 24/7 live stream</div>
+          <div class="channel-desc">1-hour transmissions. 24/7 live stream active.</div>
           <div class="channel-url">youtube.com/@silvernightoperator</div>
         </div>
       </a>
@@ -204,7 +222,7 @@ const FACTIONS = [
         <span class="channel-icon" aria-hidden="true">◉</span>
         <div class="channel-body">
           <div class="channel-name">Ko-fi</div>
-          <div class="channel-desc">Support the broadcast · Exclusive wallpacks</div>
+          <div class="channel-desc">Support the signal. Access exclusive material.</div>
           <div class="channel-url">ko-fi.com/silvernightoperator</div>
         </div>
       </a>
@@ -322,15 +340,15 @@ const FACTIONS = [
   white-space: nowrap;
   display: inline-block;
   width: 0;
-  /* "SIGNAL INTERCEPTED · FREQUENCY SNO-001 · CLASSIFIED" = 51 chars */
+  /* "FREQUENCY SNO-001 · SIGNAL ACTIVE · CLASSIFIED" = 46 chars */
   animation:
-    typer 2.4s steps(51, end) 0.6s forwards,
+    typer 2.2s steps(46, end) 0.6s forwards,
     cursor-blink 0.7s step-end 0.6s 5;
   border-right: 1.5px solid var(--cyan);
 }
 
 @keyframes typer {
-  to { width: 51ch; }
+  to { width: 46ch; }
 }
 
 @keyframes cursor-blink {
@@ -399,12 +417,12 @@ const FACTIONS = [
 /* ── Tagline ─────────────────────────────────────────────── */
 .hero-tagline {
   font-family: var(--font-mono);
-  font-size: clamp(0.78rem, 1.6vw, 0.95rem);
-  letter-spacing: 0.14em;
-  color: var(--dim);
-  max-width: 58ch;
+  font-size: clamp(0.88rem, 1.8vw, 1.1rem);
+  letter-spacing: 0.1em;
+  color: var(--body);
+  max-width: 46ch;
   margin: 0 auto 2rem;
-  line-height: 1.7;
+  line-height: 1.8;
   animation: fade-up 0.6s cubic-bezier(0.16,1,0.3,1) 0.25s both;
 }
 
@@ -454,7 +472,7 @@ const FACTIONS = [
 .cta-btn {
   font-family: var(--font-mono);
   font-size: 0.76rem;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
   text-decoration: none;
   padding: 0.7rem 1.8rem;
@@ -491,7 +509,56 @@ const FACTIONS = [
   outline-offset: 3px;
 }
 
-/* ─── §2 FACTIONS ────────────────────────────────────────── */
+/* ─── §2 OPERATIONAL CONTEXT ────────────────────────────── */
+.context {
+  padding: 5rem 0;
+  border-top: 1px solid rgba(0,196,255,0.06);
+  background: rgba(13,13,23,0.6);
+}
+
+.context-label {
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--dim);
+  margin-bottom: 2.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(0,196,255,0.12);
+}
+
+.context-body {
+  max-width: 64ch;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.context-body p {
+  font-family: var(--font-mono);
+  font-size: clamp(0.85rem, 1.4vw, 0.98rem);
+  line-height: 1.75;
+  letter-spacing: 0.04em;
+  color: var(--dim);
+}
+
+.context-emphasis {
+  color: var(--body) !important;
+  font-style: italic;
+}
+
+.context-count {
+  font-family: var(--font-display);
+  font-size: 2.4rem;
+  line-height: 1;
+  color: var(--cyan);
+  vertical-align: middle;
+  margin-right: 0.1em;
+  letter-spacing: 0.04em;
+  text-shadow: 0 0 12px rgba(0,196,255,0.5);
+}
+
+/* ─── §3 FACTIONS ────────────────────────────────────────── */
 .factions {
   padding: 5rem 0;
   border-top: 1px solid rgba(0,196,255,0.06);
@@ -522,7 +589,6 @@ const FACTIONS = [
   cursor: default;
 }
 
-/* Top accent — full-width, not a side stripe */
 .faction-card::before {
   content: '';
   position: absolute;
@@ -566,7 +632,7 @@ const FACTIONS = [
   line-height: 1.55;
 }
 
-/* ─── §3 INTELLIGENCE FILES ──────────────────────────────── */
+/* ─── §4 LATEST TRANSMISSIONS ───────────────────────────── */
 .intel {
   padding: 5rem 0;
 }
@@ -576,6 +642,7 @@ const FACTIONS = [
   grid-template-columns: repeat(3, 1fr);
   gap: 1px;
   background: rgba(255,255,255,0.03);
+  margin-bottom: 2rem;
 }
 
 @media (max-width: 900px) {
@@ -598,7 +665,6 @@ const FACTIONS = [
   outline-offset: -2px;
 }
 
-/* Ghost number watermark */
 .intel-ghost-num {
   position: absolute;
   top: 0.6rem;
@@ -617,7 +683,6 @@ const FACTIONS = [
 
 .intel-file:hover .intel-ghost-num { opacity: 0.07; }
 
-/* Album art */
 .intel-art {
   width: 100%;
   aspect-ratio: 1 / 1;
@@ -638,7 +703,6 @@ const FACTIONS = [
   filter: grayscale(0%);
 }
 
-/* Body */
 .intel-body {
   padding: 1.2rem 1.4rem 1.5rem;
   display: flex;
@@ -697,7 +761,28 @@ const FACTIONS = [
 
 .intel-file:hover .intel-cta-link { opacity: 1; }
 
-/* ─── §4 BROADCAST CHANNELS ─────────────────────────────── */
+.intel-footer {
+  text-align: center;
+  padding-top: 1rem;
+}
+
+.intel-all-link {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--dim);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(0,196,255,0.2);
+  padding-bottom: 2px;
+  transition: color 0.15s, border-color 0.15s;
+}
+.intel-all-link:hover {
+  color: var(--cyan);
+  border-bottom-color: var(--cyan);
+}
+
+/* ─── §5 BROADCAST CHANNELS ─────────────────────────────── */
 .channels {
   padding: 4rem 0 6rem;
   border-top: 1px solid rgba(255,255,255,0.04);
@@ -785,7 +870,7 @@ const FACTIONS = [
   .t1, .t2 { animation: none; }
   .hero-title, .hero-tagline, .hero-cta,
   .intercept-bar, .broadcast-bar { animation: none; }
-  .intercept-text { width: 51ch; border-right: none; animation: none; }
+  .intercept-text { width: 46ch; border-right: none; animation: none; }
   .intel-art img { transition: none; }
 }
 </style>
