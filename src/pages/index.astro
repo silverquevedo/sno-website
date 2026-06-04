@@ -252,6 +252,11 @@ const FACTIONS = FACTION_ORDER.map(name => ({
   margin-bottom: var(--space-6);
 }
 
+/* Factions header needs extra separation before the dense grid */
+.factions .section-hdr {
+  margin-bottom: var(--space-8);
+}
+
 .section-label {
   font-family: var(--font-mono);
   font-size: var(--text-label);
@@ -422,12 +427,12 @@ const FACTIONS = FACTION_ORDER.map(name => ({
 /* ── Tagline ─────────────────────────────────────────────── */
 .hero-tagline {
   font-family: var(--font-mono);
-  font-size: clamp(0.88rem, 1.8vw, 1.1rem);
-  letter-spacing: 0.1em;
+  font-size: clamp(0.92rem, 1.8vw, 1.1rem);
+  letter-spacing: 0.08em;
   color: var(--body);
   max-width: 46ch;
-  margin: 0 auto 2rem;
-  line-height: 1.8;
+  margin: 0 auto var(--space-6);
+  line-height: 1.9;
   animation: fade-up 0.6s cubic-bezier(0.16,1,0.3,1) 0.25s both;
 }
 
@@ -516,7 +521,7 @@ const FACTIONS = FACTION_ORDER.map(name => ({
 
 /* ─── §2 OPERATIONAL CONTEXT ────────────────────────────── */
 .context {
-  padding: var(--section-v) 0;
+  padding: 3.5rem 0 4.5rem;
   border-top: 1px solid var(--cyan-8);
   background: rgba(13,13,23,0.6);
 }
@@ -527,45 +532,47 @@ const FACTIONS = FACTION_ORDER.map(name => ({
   letter-spacing: 0.28em;
   text-transform: uppercase;
   color: var(--dim);
-  margin-bottom: 2.5rem;
+  margin-bottom: var(--space-8);
   padding-bottom: var(--space-4);
   border-bottom: 1px solid var(--cyan-12);
 }
 
 .context-body {
-  max-width: 64ch;
+  max-width: 68ch;
   display: flex;
   flex-direction: column;
-  gap: 1.2rem;
+  gap: var(--space-5);
 }
 
 .context-body p {
   font-family: var(--font-mono);
-  font-size: clamp(0.85rem, 1.4vw, 0.98rem);
-  line-height: 1.75;
-  letter-spacing: 0.04em;
+  font-size: clamp(0.88rem, 1.5vw, 1rem);
+  line-height: 1.8;
+  letter-spacing: 0.03em;
   color: var(--dim);
 }
 
 .context-emphasis {
   color: var(--body) !important;
   font-style: italic;
+  font-size: clamp(0.95rem, 1.6vw, 1.08rem) !important;
+  letter-spacing: 0.05em !important;
 }
 
 .context-count {
   font-family: var(--font-display);
-  font-size: 2.4rem;
-  line-height: 1;
+  font-size: clamp(2.8rem, 5vw, 4rem);
+  line-height: 0.9;
   color: var(--cyan);
   vertical-align: middle;
-  margin-right: 0.1em;
+  margin-right: 0.15em;
   letter-spacing: 0.04em;
-  text-shadow: 0 0 12px rgba(0,196,255,0.5);
+  text-shadow: 0 0 20px var(--cyan-50);
 }
 
 /* ─── §3 FACTIONS ────────────────────────────────────────── */
 .factions {
-  padding: var(--section-v) 0;
+  padding: 6rem 0;
   border-top: 1px solid var(--cyan-8);
   border-bottom: 1px solid var(--cyan-8);
   background: rgba(13,13,23,0.5);
@@ -588,7 +595,7 @@ const FACTIONS = FACTION_ORDER.map(name => ({
 
 .faction-card {
   background: var(--bg-card);
-  padding: var(--space-5) var(--space-5) 1.6rem;
+  padding: var(--space-6) var(--space-5) var(--space-6);
   position: relative;
   transition: background var(--t-base);
   cursor: default;
@@ -710,10 +717,10 @@ const FACTIONS = FACTION_ORDER.map(name => ({
 }
 
 .intel-body {
-  padding: 1.2rem 1.4rem 1.5rem;
+  padding: var(--space-5) var(--space-5) var(--space-5);
   display: flex;
   flex-direction: column;
-  gap: 0.38rem;
+  gap: var(--space-2);
   position: relative;
   z-index: 2;
 }
@@ -790,7 +797,7 @@ const FACTIONS = FACTION_ORDER.map(name => ({
 
 /* ─── §5 BROADCAST CHANNELS ─────────────────────────────── */
 .channels {
-  padding: var(--section-v) 0;
+  padding: 4rem 0 5rem;
   border-top: 1px solid var(--white-5);
   background: var(--bg-glass-60);
 }
