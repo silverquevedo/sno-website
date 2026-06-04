@@ -97,7 +97,7 @@ const ogTitle = title.includes('Silver Night Operator') ? title : `${title} · S
   position: absolute;
   top: -100%;
   left: 1rem;
-  z-index: 9999;
+  z-index: var(--z-skip);
   background: var(--bg, #09090e);
   color: var(--cyan, #00c4ff);
   padding: 0.5rem 1rem;
@@ -114,11 +114,11 @@ const ogTitle = title.includes('Silver Night Operator') ? title : `${title} · S
   position: fixed;
   top: 0; left: 0; right: 0;
   height: var(--nav-h);
-  z-index: 200;
-  background: rgba(9, 9, 14, 0.92);
+  z-index: var(--z-nav);
+  background: var(--bg-glass-92);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border-bottom: 1px solid rgba(0,196,255,0.1);
+  border-bottom: 1px solid var(--cyan-10);
 }
 
 .site-nav::after {
@@ -143,13 +143,13 @@ const ogTitle = title.includes('Silver Night Operator') ? title : `${title} · S
   display: flex;
   align-items: center;
   gap: 2rem;
-  padding: 0 clamp(1rem, 4vw, 3rem);
+  padding: 0 var(--page-pad);
 }
 
 .nav-logo {
   display: flex;
   align-items: center;
-  gap: 0.55rem;
+  gap: var(--space-2);
   text-decoration: none;
   flex-shrink: 0;
   margin-right: 0.5rem;
@@ -184,20 +184,20 @@ const ogTitle = title.includes('Silver Night Operator') ? title : `${title} · S
 
 .nav-link {
   font-family: var(--font-mono);
-  font-size: 0.75rem;
+  font-size: var(--text-ui);
   font-weight: 700;
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--dim);
   text-decoration: none;
-  padding: 0.4rem 0.9rem;
+  padding: var(--space-2) 0.9rem;
   border-bottom: 2px solid transparent;
-  transition: color 0.15s, border-color 0.15s;
+  transition: color var(--t-fast), border-color var(--t-fast);
 }
 
 .nav-link:hover {
   color: var(--white);
-  border-bottom-color: rgba(0,196,255,0.3);
+  border-bottom-color: var(--cyan-30);
 }
 
 .nav-link.is-active {
@@ -213,13 +213,13 @@ const ogTitle = title.includes('Silver Night Operator') ? title : `${title} · S
 
 .nav-ext {
   font-family: var(--font-mono);
-  font-size: 0.72rem;
+  font-size: var(--text-label);
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--dim);
   text-decoration: none;
-  padding: 0.35rem 0.7rem;
-  transition: color 0.15s;
+  padding: var(--space-2) var(--space-3);
+  transition: color var(--t-fast);
 }
 
 .nav-ext:hover { color: var(--cyan); }
@@ -234,7 +234,7 @@ const ogTitle = title.includes('Silver Night Operator') ? title : `${title} · S
   .site-nav {
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
-    background: rgba(9, 9, 14, 0.97);
+    background: var(--bg-glass-97);
   }
 }
 </style>

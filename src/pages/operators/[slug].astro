@@ -109,10 +109,10 @@ const youtubeId = op.youtube ?? null;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 clamp(1rem, 4vw, 3rem);
+  padding: 0 var(--page-pad);
   height: 41px;
-  border-bottom: 1px solid rgba(0,196,255,0.1);
-  background: rgba(9,9,14,0.85);
+  border-bottom: 1px solid var(--cyan-10);
+  background: var(--bg-glass-85);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   gap: 1rem;
@@ -148,7 +148,7 @@ const youtubeId = op.youtube ?? null;
 
 .dossier-meta {
   font-family: var(--font-mono);
-  font-size: 0.7rem;
+  font-size: var(--text-label);
   letter-spacing: 0.16em;
   text-transform: uppercase;
   white-space: nowrap;
@@ -159,13 +159,13 @@ const youtubeId = op.youtube ?? null;
 .nav-chip {
   display: flex;
   align-items: center;
-  gap: 0.3rem;
+  gap: var(--space-1);
   font-family: var(--font-mono);
-  font-size: 0.68rem;
+  font-size: var(--text-micro);
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  padding: 0.18rem 0.55rem;
-  border: 1px solid rgba(0,196,255,0.3);
+  padding: var(--space-1) var(--space-2);
+  border: 1px solid var(--cyan-30);
   color: var(--body);
   text-decoration: none;
   transition: color 0.15s, border-color 0.15s, background 0.15s;
@@ -173,8 +173,8 @@ const youtubeId = op.youtube ?? null;
 }
 .nav-chip:not(.nav-chip--disabled):hover {
   color: var(--cyan);
-  border-color: rgba(0,196,255,0.45);
-  background: rgba(0,196,255,0.06);
+  border-color: var(--cyan-40);
+  background: var(--cyan-5);
 }
 .nav-chip:not(.nav-chip--disabled):focus-visible {
   outline: 2px solid var(--cyan);
@@ -195,40 +195,40 @@ const youtubeId = op.youtube ?? null;
 .mix-btn {
   display: flex;
   align-items: center;
-  gap: 0.4rem;
+  gap: var(--space-2);
   font-family: var(--font-mono);
-  font-size: 0.68rem;
+  font-size: var(--text-label);
   font-weight: 700;
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--dim);
   background: none;
-  border: 1px solid rgba(0,196,255,0.25);
-  padding: 0.3rem 0.75rem;
+  border: 1px solid var(--cyan-25);
+  padding: var(--space-1) var(--space-3);
   cursor: pointer;
   flex-shrink: 0;
-  transition: color 0.15s, border-color 0.15s, background 0.15s;
+  transition: color var(--t-fast), border-color var(--t-fast), background var(--t-fast);
 }
 .mix-btn:hover {
   color: var(--cyan);
-  border-color: rgba(0,196,255,0.5);
-  background: rgba(0,196,255,0.06);
+  border-color: var(--cyan-50);
+  background: var(--cyan-5);
 }
 .mix-btn.active {
   color: var(--cyan);
-  border-color: rgba(0,196,255,0.6);
+  border-color: var(--cyan-50);
 }
 
 /* ─── Floating YouTube player ────────────────────────── */
 .yt-player {
   position: fixed;
-  bottom: 1.5rem;
-  right: 1.5rem;
+  bottom: var(--space-5);
+  right: var(--space-5);
   width: 320px;
-  background: #0d0d16;
-  border: 1px solid rgba(0,196,255,0.25);
-  box-shadow: 0 8px 32px rgba(0,0,0,0.6), 0 0 0 1px rgba(0,196,255,0.08);
-  z-index: 500;
+  background: var(--bg-lift);
+  border: 1px solid var(--cyan-25);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.6), 0 0 0 1px var(--cyan-8);
+  z-index: var(--z-float);
   transform: translateY(120%) scale(0.95);
   opacity: 0;
   transition: transform 0.25s cubic-bezier(0.34,1.56,0.64,1), opacity 0.2s ease;
@@ -243,12 +243,12 @@ const youtubeId = op.youtube ?? null;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0.45rem 0.75rem;
-  border-bottom: 1px solid rgba(0,196,255,0.12);
+  padding: var(--space-2) var(--space-3);
+  border-bottom: 1px solid var(--cyan-12);
 }
 .yt-label {
   font-family: var(--font-mono);
-  font-size: 0.68rem;
+  font-size: var(--text-micro);
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--cyan);
@@ -289,7 +289,7 @@ const youtubeId = op.youtube ?? null;
   width: 100%;
   height: calc(100vh - var(--nav-h) - 41px);
   border: none;
-  background: #09090e;
+  background: var(--bg);
 }
 
 /* ─── Mobile ─────────────────────────────────────────── */

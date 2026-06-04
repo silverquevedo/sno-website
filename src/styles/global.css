@@ -38,6 +38,70 @@
   --font-inter:   'Inter', system-ui, -apple-system, sans-serif;
   --font-mono:    'Courier New', Courier, monospace;
 
+  /* ── HUD type scale ──────────────────────────────────── */
+  --text-micro:   0.68rem;   /*  10.9px — IDs, metadata, status badges */
+  --text-label:   0.72rem;   /*  11.5px — faction labels, HUD text, link labels */
+  --text-ui:      0.75rem;   /*  12px   — nav links, chips, CTAs, buttons */
+  --text-body-sm: 0.875rem;  /*  14px   — card descriptions, faction/channel copy */
+  --text-body:    1rem;      /*  16px   — body paragraphs */
+
+  /* ── Spacing scale (8px base) ────────────────────────── */
+  --space-1:  0.25rem;   /*  4px */
+  --space-2:  0.5rem;    /*  8px */
+  --space-3:  0.75rem;   /* 12px */
+  --space-4:  1rem;      /* 16px */
+  --space-5:  1.5rem;    /* 24px */
+  --space-6:  2rem;      /* 32px */
+  --space-8:  3rem;      /* 48px */
+  --space-10: 5rem;      /* 80px */
+
+  /* ── Page rhythm ─────────────────────────────────────── */
+  --page-pad:  clamp(1rem, 4vw, 3rem);
+  --section-v: 5rem;
+
+  /* ── Color opacity variants ──────────────────────────── */
+  --status-active: #4cde82;
+
+  --bg-glass-10: rgba(9, 9, 14, 0.10);
+  --bg-glass-35: rgba(9, 9, 14, 0.35);
+  --bg-glass-60: rgba(9, 9, 14, 0.60);
+  --bg-glass-85: rgba(9, 9, 14, 0.85);
+  --bg-glass-92: rgba(9, 9, 14, 0.92);
+  --bg-glass-97: rgba(9, 9, 14, 0.97);
+
+  --cyan-5:  rgba(0, 196, 255, 0.05);
+  --cyan-8:  rgba(0, 196, 255, 0.08);
+  --cyan-10: rgba(0, 196, 255, 0.10);
+  --cyan-12: rgba(0, 196, 255, 0.12);
+  --cyan-20: rgba(0, 196, 255, 0.20);
+  --cyan-25: rgba(0, 196, 255, 0.25);
+  --cyan-30: rgba(0, 196, 255, 0.30);
+  --cyan-40: rgba(0, 196, 255, 0.40);
+  --cyan-50: rgba(0, 196, 255, 0.50);
+
+  --white-3:  rgba(255, 255, 255, 0.03);
+  --white-5:  rgba(255, 255, 255, 0.05);
+  --white-7:  rgba(255, 255, 255, 0.07);
+  --white-9:  rgba(255, 255, 255, 0.09);
+  --white-12: rgba(255, 255, 255, 0.12);
+
+  /* ── Z-index scale ───────────────────────────────────── */
+  --z-card:    3;
+  --z-sticky:  100;
+  --z-nav:     200;
+  --z-float:   500;
+  --z-overlay: 9000;
+  --z-skip:    9999;
+
+  /* ── Transition scale ────────────────────────────────── */
+  --t-fast:    0.15s ease;
+  --t-base:    0.2s ease;
+  --t-slow:    0.3s ease;
+  --ease-out:  cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* ── Breakpoints (for reference — use values directly in @media) ─ */
+  /* sm: 480px | md: 640px | lg: 900px */
+
   /* Faction colors */
   --f-architecture:  #00c4ff;
   --f-ritual:        #b87aff;
@@ -86,7 +150,7 @@ body::after {
     rgba(0,0,0,0.025) 4px
   );
   pointer-events: none;
-  z-index: 9000;
+  z-index: var(--z-overlay);
 }
 
 /* ─── HUD monospace elements ─────────────────────────────── */

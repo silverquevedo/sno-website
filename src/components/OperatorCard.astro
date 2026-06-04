@@ -238,16 +238,16 @@ const isLocked    = !op.released;
 
 /* ─── Number badge ───────────────────────────────────────── */
 .card-num {
-  position: absolute; top: 0.7rem; left: 0.7rem;
+  position: absolute; top: var(--space-3); left: var(--space-3);
   font-family: var(--font-mono);
-  font-size: 0.68rem;
+  font-size: var(--text-micro);
   font-weight: 400;
   letter-spacing: 0.16em;
   color: var(--fc, var(--cyan));
   background: color-mix(in srgb, var(--fc, var(--cyan)) 10%, transparent);
   border: 1px solid color-mix(in srgb, var(--fc, var(--cyan)) 30%, transparent);
-  padding: 0.2rem 0.5rem;
-  z-index: 3;
+  padding: var(--space-1) var(--space-2);
+  z-index: var(--z-card);
 }
 
 /* ─── Number watermark ───────────────────────────────────── */
@@ -296,7 +296,7 @@ const isLocked    = !op.released;
 
 .card-faction-label {
   font-family: var(--font-mono);
-  font-size: 0.72rem;
+  font-size: var(--text-label);
   letter-spacing: 0.14em;
   text-transform: uppercase;
 }
@@ -320,13 +320,13 @@ const isLocked    = !op.released;
 .card-cta-btn {
   display: inline-block;
   font-family: var(--font-mono);
-  font-size: 0.72rem;
+  font-size: var(--text-label);
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--cyan);
-  border: 1px solid rgba(0,196,255,0.4);
-  padding: 0.35rem 0.7rem;
-  background: rgba(0,196,255,0.08);
+  border: 1px solid var(--cyan-40);
+  padding: var(--space-1) var(--space-3);
+  background: var(--cyan-8);
 }
 
 /* ─── Locked state ───────────────────────────────────────── */
@@ -361,7 +361,7 @@ const isLocked    = !op.released;
 .lock-icon { width: 22px; height: 22px; color: rgba(255,255,255,0.55); }
 .lock-label {
   font-family: var(--font-mono);
-  font-size: 0.72rem;
+  font-size: var(--text-label);
   letter-spacing: 0.24em;
   text-transform: uppercase;
   color: rgba(255,255,255,0.65);
@@ -404,10 +404,10 @@ const isLocked    = !op.released;
 
 .countdown-label {
   font-family: var(--font-mono);
-  font-size: 0.68rem;
+  font-size: var(--text-micro);
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: rgba(255,255,255,0.5);
+  color: var(--white-9);
 }
 
 .countdown-timer {
@@ -430,15 +430,12 @@ const isLocked    = !op.released;
 /* ─── Hidden (filter) ────────────────────────────────────── */
 .card.hidden { display: none; }
 
-/* ─── Faction hover shadows ──────────────────────────────── */
-.card[data-faction="The Architecture"]:not(.locked):not(.scheduled):hover  { box-shadow: 0 8px 32px rgba(0,196,255,0.18),   0 0 0 1px rgba(0,196,255,0.3); }
-.card[data-faction="The Ritual Network"]:not(.locked):not(.scheduled):hover{ box-shadow: 0 8px 32px rgba(184,122,255,0.18), 0 0 0 1px rgba(184,122,255,0.3); }
-.card[data-faction="South Bloc"]:not(.locked):not(.scheduled):hover        { box-shadow: 0 8px 32px rgba(107,223,90,0.18),  0 0 0 1px rgba(107,223,90,0.3); }
-.card[data-faction="Iron North"]:not(.locked):not(.scheduled):hover        { box-shadow: 0 8px 32px rgba(255,154,90,0.18),  0 0 0 1px rgba(255,154,90,0.3); }
-.card[data-faction="The Ghost Layer"]:not(.locked):not(.scheduled):hover   { box-shadow: 0 8px 32px rgba(138,180,212,0.18), 0 0 0 1px rgba(138,180,212,0.3); }
-.card[data-faction="Forbidden Zone"]:not(.locked):not(.scheduled):hover    { box-shadow: 0 8px 32px rgba(255,96,96,0.18),   0 0 0 1px rgba(255,96,96,0.3); }
-.card[data-faction="The Velocity"]:not(.locked):not(.scheduled):hover      { box-shadow: 0 8px 32px rgba(64,224,208,0.18),  0 0 0 1px rgba(64,224,208,0.3); }
-.card[data-faction="Unaligned"]:not(.locked):not(.scheduled):hover         { box-shadow: 0 8px 32px rgba(201,168,76,0.18),  0 0 0 1px rgba(201,168,76,0.3); }
+/* ─── Faction hover shadow — single rule via --fc ────────── */
+.card:not(.locked):not(.scheduled):not(.released):hover {
+  box-shadow:
+    0 8px 32px color-mix(in srgb, var(--fc, var(--cyan)) 18%, transparent),
+    0 0 0 1px  color-mix(in srgb, var(--fc, var(--cyan)) 30%, transparent);
+}
 </style>
 
 <script>

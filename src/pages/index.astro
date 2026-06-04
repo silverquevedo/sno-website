@@ -1,6 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
-import { FACTION_COLORS } from '../data/operators';
+import { FACTION_COLORS, FACTION_ORDER } from '../data/operators';
 
 const INTEL_OPS = [
   {
@@ -32,16 +32,21 @@ const INTEL_OPS = [
   },
 ];
 
-const FACTIONS = [
-  { name: 'The Architecture',   desc: 'They build the rules. They control the flows. Invisible in power.',                                        color: '#00c4ff' },
-  { name: 'The Ritual Network', desc: 'Operate where data becomes ritual. The bridge between the digital and the ancient.',                        color: '#b87aff' },
-  { name: 'South Bloc',         desc: 'Cultural resistance from the south. Stronger than any official map shows.',                                  color: '#6bdf5a' },
-  { name: 'Iron North',         desc: 'Absolute discipline. Calculated cold. They don\'t negotiate.',                                               color: '#ff9a5a' },
-  { name: 'The Ghost Layer',    desc: 'No official record. No fixed territory. They exist because no one can prove they don\'t.',                   color: '#8ab4d4' },
-  { name: 'Forbidden Zone',     desc: 'Banned on every official map. Active on every map that matters.',                                            color: '#ff6060' },
-  { name: 'The Velocity',       desc: 'The city in motion. Chaos with direction. You can\'t keep up.',                                              color: '#40e0d0' },
-  { name: 'Unaligned',          desc: 'No faction. No network. Operate alone. The most dangerous or the most free — depends on who you ask.',       color: '#c9a84c' },
-];
+const FACTION_DESCS: Record<string, string> = {
+  'The Architecture':   'They build the rules. They control the flows. Invisible in power.',
+  'The Ritual Network': 'Operate where data becomes ritual. The bridge between the digital and the ancient.',
+  'South Bloc':         'Cultural resistance from the south. Stronger than any official map shows.',
+  'Iron North':         "Absolute discipline. Calculated cold. They don't negotiate.",
+  'The Ghost Layer':    "No official record. No fixed territory. They exist because no one can prove they don't.",
+  'Forbidden Zone':     'Banned on every official map. Active on every map that matters.',
+  'The Velocity':       "The city in motion. Chaos with direction. You can't keep up.",
+  'Unaligned':          'No faction. No network. Operate alone. The most dangerous or the most free. Depends on who you ask.',
+};
+const FACTIONS = FACTION_ORDER.map(name => ({
+  name,
+  desc: FACTION_DESCS[name] ?? '',
+  color: FACTION_COLORS[name] ?? 'var(--dim)',
+}));
 ---
 
 <Base
@@ -237,19 +242,19 @@ const FACTIONS = [
 .section-inner {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 0 clamp(1rem, 4vw, 3rem);
+  padding: 0 var(--page-pad);
 }
 
 .section-hdr {
   display: flex;
   align-items: center;
-  gap: 1rem;
-  margin-bottom: 2rem;
+  gap: var(--space-4);
+  margin-bottom: var(--space-6);
 }
 
 .section-label {
   font-family: var(--font-mono);
-  font-size: 0.72rem;
+  font-size: var(--text-label);
   font-weight: 400;
   letter-spacing: 0.2em;
   text-transform: uppercase;
@@ -262,12 +267,12 @@ const FACTIONS = [
 .section-line {
   flex: 1;
   height: 1px;
-  background: linear-gradient(to right, rgba(0,196,255,0.2), transparent);
+  background: linear-gradient(to right, var(--cyan-20), transparent);
 }
 
 .section-meta {
   font-family: var(--font-mono);
-  font-size: 0.7rem;
+  font-size: var(--text-label);
   letter-spacing: 0.16em;
   color: var(--dim);
   white-space: nowrap;
@@ -275,13 +280,13 @@ const FACTIONS = [
 
 .section-link {
   font-family: var(--font-mono);
-  font-size: 0.72rem;
+  font-size: var(--text-label);
   letter-spacing: 0.14em;
   color: var(--cyan);
   text-decoration: none;
   flex-shrink: 0;
   opacity: 0.7;
-  transition: opacity 0.15s;
+  transition: opacity var(--t-fast);
 }
 .section-link:hover { opacity: 1; }
 
@@ -312,7 +317,7 @@ const FACTIONS = [
   z-index: 1;
   max-width: 1280px;
   margin: 0 auto;
-  padding: 5rem clamp(1rem, 6vw, 5rem);
+  padding: var(--section-v) clamp(1rem, 6vw, 5rem);
   text-align: center;
 }
 
@@ -320,11 +325,11 @@ const FACTIONS = [
 .intercept-bar {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: var(--space-2);
   font-family: var(--font-mono);
-  font-size: 0.68rem;
+  font-size: var(--text-micro);
   letter-spacing: 0.18em;
-  margin-bottom: 2rem;
+  margin-bottom: var(--space-6);
   animation: fade-up 0.5s cubic-bezier(0.16,1,0.3,1) both;
 }
 
@@ -430,13 +435,13 @@ const FACTIONS = [
 .broadcast-bar {
   display: inline-flex;
   align-items: center;
-  gap: 0.55rem;
+  gap: var(--space-2);
   font-family: var(--font-mono);
-  font-size: 0.72rem;
+  font-size: var(--text-label);
   letter-spacing: 0.14em;
-  padding: 0.45rem 1rem;
-  border: 1px solid rgba(255,255,255,0.07);
-  background: rgba(0,0,0,0.35);
+  padding: var(--space-2) var(--space-4);
+  border: 1px solid var(--white-7);
+  background: var(--bg-glass-35);
   margin-bottom: 2.5rem;
   animation: fade-up 0.6s cubic-bezier(0.16,1,0.3,1) 0.35s both;
 }
@@ -445,15 +450,15 @@ const FACTIONS = [
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: #4cde82;
-  box-shadow: 0 0 5px #4cde82, 0 0 10px #4cde82;
+  background: var(--status-active);
+  box-shadow: 0 0 5px var(--status-active), 0 0 10px var(--status-active);
   animation: dot-pulse 2.2s ease-in-out infinite;
   flex-shrink: 0;
 }
 
 @keyframes dot-pulse {
-  0%, 100% { opacity: 1; box-shadow: 0 0 5px #4cde82, 0 0 10px #4cde82; }
-  50%       { opacity: 0.45; box-shadow: 0 0 2px #4cde82; }
+  0%, 100% { opacity: 1; box-shadow: 0 0 5px var(--status-active), 0 0 10px var(--status-active); }
+  50%       { opacity: 0.45; box-shadow: 0 0 2px var(--status-active); }
 }
 
 .broadcast-label { color: var(--white); font-weight: 400; }
@@ -471,24 +476,24 @@ const FACTIONS = [
 
 .cta-btn {
   font-family: var(--font-mono);
-  font-size: 0.76rem;
+  font-size: var(--text-ui);
   letter-spacing: 0.16em;
   text-transform: uppercase;
   text-decoration: none;
   padding: 0.7rem 1.8rem;
   border: 1px solid;
-  transition: background 0.18s, color 0.18s, box-shadow 0.18s, border-color 0.18s;
+  transition: background var(--t-base), color var(--t-base), box-shadow var(--t-base), border-color var(--t-base);
 }
 
 .cta-primary {
-  color: #09090e;
+  color: var(--bg);
   background: var(--cyan);
   border-color: var(--cyan);
 }
 .cta-primary:hover {
   background: var(--cyan-bright);
   border-color: var(--cyan-bright);
-  box-shadow: 0 0 28px rgba(0,196,255,0.45);
+  box-shadow: 0 0 28px var(--cyan-40);
 }
 .cta-primary:focus-visible {
   outline: 2px solid var(--cyan);
@@ -498,7 +503,7 @@ const FACTIONS = [
 .cta-secondary {
   color: var(--dim);
   background: transparent;
-  border-color: rgba(255,255,255,0.12);
+  border-color: var(--white-12);
 }
 .cta-secondary:hover {
   color: var(--white);
@@ -511,20 +516,20 @@ const FACTIONS = [
 
 /* ─── §2 OPERATIONAL CONTEXT ────────────────────────────── */
 .context {
-  padding: 5rem 0;
-  border-top: 1px solid rgba(0,196,255,0.06);
+  padding: var(--section-v) 0;
+  border-top: 1px solid var(--cyan-8);
   background: rgba(13,13,23,0.6);
 }
 
 .context-label {
   font-family: var(--font-mono);
-  font-size: 0.66rem;
+  font-size: var(--text-micro);
   letter-spacing: 0.28em;
   text-transform: uppercase;
   color: var(--dim);
   margin-bottom: 2.5rem;
-  padding-bottom: 1rem;
-  border-bottom: 1px solid rgba(0,196,255,0.12);
+  padding-bottom: var(--space-4);
+  border-bottom: 1px solid var(--cyan-12);
 }
 
 .context-body {
@@ -560,9 +565,9 @@ const FACTIONS = [
 
 /* ─── §3 FACTIONS ────────────────────────────────────────── */
 .factions {
-  padding: 5rem 0;
-  border-top: 1px solid rgba(0,196,255,0.06);
-  border-bottom: 1px solid rgba(0,196,255,0.06);
+  padding: var(--section-v) 0;
+  border-top: 1px solid var(--cyan-8);
+  border-bottom: 1px solid var(--cyan-8);
   background: rgba(13,13,23,0.5);
 }
 
@@ -570,7 +575,7 @@ const FACTIONS = [
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 1px;
-  background: rgba(255,255,255,0.03);
+  background: var(--white-3);
 }
 
 @media (max-width: 900px) {
@@ -583,9 +588,9 @@ const FACTIONS = [
 
 .faction-card {
   background: var(--bg-card);
-  padding: 1.5rem 1.4rem 1.6rem;
+  padding: var(--space-5) var(--space-5) 1.6rem;
   position: relative;
-  transition: background 0.2s;
+  transition: background var(--t-base);
   cursor: default;
 }
 
@@ -616,18 +621,18 @@ const FACTIONS = [
 
 .faction-name {
   font-family: var(--font-mono);
-  font-size: 0.75rem;
+  font-size: var(--text-ui);
   font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--accent);
-  margin-bottom: 0.5rem;
+  margin-bottom: var(--space-2);
   line-height: 1.3;
 }
 
 .faction-desc {
   font-family: var(--font-inter, system-ui, sans-serif);
-  font-size: 0.88rem;
+  font-size: var(--text-body-sm);
   font-weight: 400;
   color: var(--dim);
   line-height: 1.6;
@@ -635,15 +640,15 @@ const FACTIONS = [
 
 /* ─── §4 LATEST TRANSMISSIONS ───────────────────────────── */
 .intel {
-  padding: 5rem 0;
+  padding: var(--section-v) 0;
 }
 
 .intel-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 1px;
-  background: rgba(255,255,255,0.03);
-  margin-bottom: 2rem;
+  background: var(--white-3);
+  margin-bottom: var(--space-6);
 }
 
 @media (max-width: 900px) {
@@ -656,10 +661,10 @@ const FACTIONS = [
   background: var(--bg-card);
   position: relative;
   overflow: hidden;
-  transition: background 0.2s;
+  transition: background var(--t-base);
 }
 
-.intel-file:hover { background: rgba(20,20,32,1); }
+.intel-file:hover { background: var(--surface); }
 
 .intel-file:focus-visible {
   outline: 2px solid var(--cyan);
@@ -715,7 +720,7 @@ const FACTIONS = [
 
 .intel-id {
   font-family: var(--font-mono);
-  font-size: 0.68rem;
+  font-size: var(--text-micro);
   letter-spacing: 0.2em;
   color: var(--dimmer);
   text-transform: uppercase;
@@ -728,36 +733,36 @@ const FACTIONS = [
   text-transform: uppercase;
   color: var(--white);
   line-height: 1.05;
-  margin-top: 0.1rem;
+  margin-top: var(--space-1);
 }
 
 .intel-faction {
   font-family: var(--font-mono);
-  font-size: 0.7rem;
+  font-size: var(--text-label);
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  margin-top: 0.1rem;
+  margin-top: var(--space-1);
 }
 
 .intel-status {
   font-family: var(--font-mono);
-  font-size: 0.68rem;
+  font-size: var(--text-micro);
   letter-spacing: 0.18em;
   text-transform: uppercase;
 }
 
-.intel-status--active     { color: #4cde82; }
-.intel-status--ghost      { color: #8ab4d4; }
+.intel-status--active     { color: var(--status-active); }
+.intel-status--ghost      { color: var(--f-ghost); }
 .intel-status--classified { color: var(--gold); }
 
 .intel-cta-link {
   font-family: var(--font-mono);
-  font-size: 0.7rem;
+  font-size: var(--text-label);
   letter-spacing: 0.12em;
   color: var(--cyan);
-  margin-top: 0.5rem;
+  margin-top: var(--space-2);
   opacity: 0.6;
-  transition: opacity 0.15s;
+  transition: opacity var(--t-fast);
 }
 
 .intel-file:hover .intel-cta-link { opacity: 1; }
@@ -769,14 +774,14 @@ const FACTIONS = [
 
 .intel-all-link {
   font-family: var(--font-mono);
-  font-size: 0.75rem;
+  font-size: var(--text-ui);
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--dim);
   text-decoration: none;
-  border-bottom: 1px solid rgba(0,196,255,0.2);
+  border-bottom: 1px solid var(--cyan-20);
   padding-bottom: 2px;
-  transition: color 0.15s, border-color 0.15s;
+  transition: color var(--t-fast), border-color var(--t-fast);
 }
 .intel-all-link:hover {
   color: var(--cyan);
@@ -785,16 +790,16 @@ const FACTIONS = [
 
 /* ─── §5 BROADCAST CHANNELS ─────────────────────────────── */
 .channels {
-  padding: 4rem 0 6rem;
-  border-top: 1px solid rgba(255,255,255,0.04);
-  background: rgba(9,9,14,0.7);
+  padding: var(--section-v) 0;
+  border-top: 1px solid var(--white-5);
+  background: var(--bg-glass-60);
 }
 
 .channels-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 1px;
-  background: rgba(255,255,255,0.03);
+  background: var(--white-3);
 }
 
 @media (max-width: 640px) {
@@ -804,17 +809,17 @@ const FACTIONS = [
 .channel-tile {
   display: flex;
   align-items: center;
-  gap: 1.2rem;
-  padding: 1.8rem 1.6rem;
+  gap: var(--space-5);
+  padding: 1.8rem var(--space-5);
   background: var(--bg-card);
   text-decoration: none;
-  border: 1px solid rgba(255,255,255,0.03);
-  transition: background 0.2s, border-color 0.2s;
+  border: 1px solid var(--white-3);
+  transition: background var(--t-base), border-color var(--t-base);
 }
 
 .channel-tile:hover {
   background: var(--bg-lift);
-  border-color: rgba(0,196,255,0.15);
+  border-color: var(--cyan-12);
 }
 
 .channel-tile:focus-visible {
@@ -827,7 +832,7 @@ const FACTIONS = [
   color: var(--cyan);
   opacity: 0.45;
   flex-shrink: 0;
-  transition: opacity 0.2s;
+  transition: opacity var(--t-base);
   line-height: 1;
 }
 
@@ -840,12 +845,12 @@ const FACTIONS = [
   text-transform: uppercase;
   color: var(--white);
   line-height: 1.1;
-  margin-bottom: 0.25rem;
+  margin-bottom: var(--space-1);
 }
 
 .channel-desc {
   font-family: var(--font-inter, system-ui, sans-serif);
-  font-size: 0.85rem;
+  font-size: var(--text-body-sm);
   font-weight: 400;
   color: var(--dim);
   line-height: 1.55;
@@ -853,10 +858,10 @@ const FACTIONS = [
 
 .channel-url {
   font-family: var(--font-mono);
-  font-size: 0.68rem;
+  font-size: var(--text-micro);
   letter-spacing: 0.06em;
   color: var(--dimmer);
-  margin-top: 0.3rem;
+  margin-top: var(--space-1);
   opacity: 0.8;
 }
 
