@@ -987,8 +987,16 @@ const FACTIONS = FACTION_ORDER.map(name => ({
 .context-body p.typing { color: var(--status-active); }
 .context-body p.typed  { color: var(--status-active); }
 
-.context-body p.context-emphasis.typing { color: var(--white); }
-.context-body p.context-emphasis.typed  { color: var(--white) !important; }
+.context-body p.context-emphasis.typing {
+  color: var(--status-active);
+  font-weight: 700;
+  text-shadow: 0 0 8px rgba(77, 222, 130, 0.5), 0 0 20px rgba(77, 222, 130, 0.25);
+}
+.context-body p.context-emphasis.typed {
+  color: var(--status-active) !important;
+  font-weight: 700 !important;
+  text-shadow: 0 0 8px rgba(77, 222, 130, 0.5), 0 0 20px rgba(77, 222, 130, 0.25) !important;
+}
 
 .cursor {
   display: inline-block;

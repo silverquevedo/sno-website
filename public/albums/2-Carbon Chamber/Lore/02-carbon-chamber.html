@@ -647,7 +647,7 @@ body::after {
     opacity: 1;
     animation:
       hero-type  1.9s steps(54) 0.85s forwards,
-      hero-caret 0.8s step-end  2.8s   3 forwards;
+      hero-caret 0.8s step-end  2.8s infinite;
   }
 }
 
@@ -1015,7 +1015,9 @@ body::after {
   font-family: var(--font-mono);
   font-size: 0.88rem;
   line-height: 1.8;
-  color: var(--body);
+  color: #4cde82;
+  font-weight: 700;
+  text-shadow: 0 0 8px rgba(77,222,130,0.4), 0 0 20px rgba(77,222,130,0.18);
   margin-bottom: 1.35rem;
   letter-spacing: 0.02em;
 }
@@ -1415,7 +1417,6 @@ if (reduceMotion) {
     el.style.animation  = 'none';
     el.style.width      = 'auto';
     el.style.whiteSpace = 'normal';
-    el.style.borderRight = 'none';
     el.style.overflow   = 'visible';
     el.style.opacity    = '1';
   });
@@ -1429,7 +1430,6 @@ if (_tagline) {
       _tagline.style.whiteSpace = 'normal';
       _tagline.style.overflow  = 'visible';
       _tagline.style.width     = 'auto';
-      _tagline.style.borderRight = 'none';
     }
   });
 }
