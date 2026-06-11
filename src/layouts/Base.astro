@@ -5,13 +5,18 @@ export interface Props {
   title?: string;
   description?: string;
   ogImage?: string;
+  /** false hides the site footer — used by full-viewport pages like the dossier */
+  footer?: boolean;
 }
 
 const {
   title = 'Silver Night Operator',
   description = '28 Operators. 8 Factions. One Megacity.',
   ogImage = '/og-default.png',
+  footer = true,
 } = Astro.props;
+
+const year = new Date().getFullYear();
 
 const canonicalURL = new URL(Astro.url.pathname, 'https://silvernightoperator.com');
 const ogTitle = title.includes('Silver Night Operator') ? title : `${title} · Silver Night Operator`;
@@ -82,6 +87,24 @@ const ogTitle = title.includes('Silver Night Operator') ? title : `${title} · S
   <main id="main-content">
   <slot />
   </main>
+
+  {footer && (
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <div class="footer-sig">
+          <span class="footer-dot" aria-hidden="true"></span>
+          <span class="footer-brand">SNO · Silver Night Operator</span>
+        </div>
+        <span class="footer-tag" aria-hidden="true">The signal continues.</span>
+        <div class="footer-links">
+          <a href="https://silvernightoperator.bandcamp.com" target="_blank" rel="noopener" class="footer-link">Bandcamp</a>
+          <a href="https://www.youtube.com/@silvernightoperator" target="_blank" rel="noopener" class="footer-link">YouTube</a>
+          <a href="https://ko-fi.com/silvernightoperator" target="_blank" rel="noopener" class="footer-link">Ko-fi</a>
+          <span class="footer-year">© {year}</span>
+        </div>
+      </div>
+    </footer>
+  )}
 
   <!-- Audio player -->
   <audio id="bg-audio" preload="none"></audio>
@@ -227,6 +250,86 @@ const ogTitle = title.includes('Silver Night Operator') ? title : `${title} · S
 
 @media (max-width: 600px) {
   .nav-external { display: none; }
+}
+
+/* ─── Footer ─────────────────────────────────────────────── */
+.site-footer {
+  border-top: 1px solid var(--cyan-10);
+  background: var(--bg-glass-60);
+}
+
+.footer-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: var(--space-5) var(--page-pad);
+  display: flex;
+  align-items: center;
+  gap: var(--space-5);
+  flex-wrap: wrap;
+}
+
+.footer-sig {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.footer-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--cyan);
+  box-shadow: 0 0 5px var(--cyan), 0 0 10px var(--cyan-30);
+  flex-shrink: 0;
+}
+
+.footer-brand {
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--dim);
+}
+
+.footer-tag {
+  font-family: var(--font-mono);
+  font-size: var(--text-micro);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--dimmer);
+}
+
+.footer-links {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.footer-link {
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--dim);
+  text-decoration: none;
+  transition: color var(--t-fast);
+}
+.footer-link:hover { color: var(--cyan); }
+
+.footer-year {
+  font-family: var(--font-mono);
+  font-size: var(--text-micro);
+  letter-spacing: 0.14em;
+  color: var(--dimmer);
+}
+
+@media (max-width: 640px) {
+  .footer-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-3);
+  }
+  .footer-links { margin-left: 0; }
 }
 
 /* ─── Mobile perf: disable expensive blur on low-end devices ── */

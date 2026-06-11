@@ -164,6 +164,12 @@ body::after {
   outline-offset: 2px;
 }
 
+/* ─── Text selection ─────────────────────────────────────── */
+::selection {
+  background: var(--cyan-25);
+  color: var(--white);
+}
+
 /* ─── Typography utilities ───────────────────────────────── */
 .display {
   font-family: var(--font-display);

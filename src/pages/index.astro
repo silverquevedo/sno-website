@@ -1,6 +1,8 @@
 ---
 import Base from '../layouts/Base.astro';
-import { OPERATORS, FACTION_COLORS, FACTION_ORDER } from '../data/operators';
+import { OPERATORS, FACTION_COLORS, FACTION_ORDER, artUrl } from '../data/operators';
+
+const OP_COUNT = OPERATORS.length;
 
 // 3 most recently released operators (highest IDs with dossier + slug)
 const INTEL_OPS = OPERATORS
@@ -11,7 +13,7 @@ const INTEL_OPS = OPERATORS
     padded: String(op.id).padStart(2, '0'),
     name: op.name,
     slug: op.slug!,
-    folder: op.folder,
+    art: artUrl(op),
     faction: op.faction,
     factionColor: FACTION_COLORS[op.faction] ?? '#9e9c94',
     status: op.faction === 'The Ghost Layer' ? 'GHOST' : 'ACTIVE',
@@ -91,7 +93,7 @@ const FACTIONS = FACTION_ORDER.map(name => ({
     <div class="context-label" id="context-hdr" aria-hidden="true">OPERATIONAL CONTEXT</div>
     <div class="context-layout">
       <div class="context-stat" aria-hidden="true">
-        <div class="context-count">28</div>
+        <div class="context-count">{OP_COUNT}</div>
         <div class="context-count-sub">Transmissions<br/>completed.</div>
       </div>
       <div class="context-body">
@@ -116,11 +118,18 @@ const FACTIONS = FACTION_ORDER.map(name => ({
 
     <div class="factions-grid" role="list">
       {FACTIONS.map(f => (
-        <div class="faction-card" style={`--accent: ${f.color}`} role="listitem">
+        <a
+          class="faction-card"
+          style={`--accent: ${f.color}`}
+          role="listitem"
+          href={`/operators?faction=${encodeURIComponent(f.name)}`}
+          aria-label={`${f.name} — view operators`}
+        >
           <span class="faction-dot" aria-hidden="true"></span>
           <div class="faction-name">{f.name}</div>
           <p class="faction-desc">{f.desc}</p>
-        </div>
+          <span class="faction-cta" aria-hidden="true">→ View operators</span>
+        </a>
       ))}
     </div>
   </div>
@@ -142,7 +151,7 @@ const FACTIONS = FACTION_ORDER.map(name => ({
 
           <div class="intel-art">
             <img
-              src={`/albums/${op.folder}/album.png`}
+              src={op.art}
               alt={`${op.name} operator album art`}
               loading="lazy"
               width="400"
@@ -697,11 +706,17 @@ const FACTIONS = FACTION_ORDER.map(name => ({
 }
 
 .faction-card {
+  display: block;
   background: var(--bg-card);
   padding: var(--space-6) var(--space-5) var(--space-6);
   position: relative;
   transition: background var(--t-base);
-  cursor: default;
+  text-decoration: none;
+}
+
+.faction-card:focus-visible {
+  outline: 2px solid var(--accent, var(--cyan));
+  outline-offset: -2px;
 }
 
 .faction-card::before {
@@ -746,6 +761,25 @@ const FACTIONS = FACTION_ORDER.map(name => ({
   font-weight: 400;
   color: var(--dim);
   line-height: 1.6;
+}
+
+.faction-cta {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent, var(--cyan));
+  margin-top: var(--space-3);
+  opacity: 0;
+  transform: translateY(3px);
+  transition: opacity var(--t-base), transform var(--t-base);
+}
+
+.faction-card:hover .faction-cta,
+.faction-card:focus-visible .faction-cta {
+  opacity: 0.85;
+  transform: translateY(0);
 }
 
 /* ─── §4 LATEST TRANSMISSIONS ───────────────────────────── */

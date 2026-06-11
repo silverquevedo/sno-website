@@ -77,6 +77,15 @@ export const OPERATORS: Operator[] = [
   { id: 28, folder: '28 - Static Bloom',         name: 'Static Bloom',         faction: 'The Ghost Layer',    art: 'album.png',                      released: false, lore: 'Lore/28-static-bloom.html',          slug: '28-static-bloom',          unlocksAt: null, youtube: null },
 ];
 
+/** The four visual states an operator card can be in — see Operator.released docs above */
+export type CardState = 'locked' | 'released' | 'scheduled' | 'unlocked';
+
+export function cardState(op: Operator): CardState {
+  if (!op.released) return 'locked';
+  if (!op.slug || !op.lore) return 'released';
+  return op.unlocksAt ? 'scheduled' : 'unlocked';
+}
+
 /** Returns the public-facing art URL for an operator */
 export function artUrl(op: Operator): string {
   return `/albums/${op.folder}/${op.art}`;
