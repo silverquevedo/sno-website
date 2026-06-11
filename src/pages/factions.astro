@@ -1,0 +1,271 @@
+---
+import Base from '../layouts/Base.astro';
+import { OPERATORS, cardState } from '../data/operators';
+import { FACTIONS } from '../data/factions';
+
+const STATUS_LABELS = {
+  unlocked:  'Active',
+  scheduled: 'Scheduled',
+  released:  'Active',
+  locked:    'Classified',
+} as const;
+
+const sections = FACTIONS.map(f => ({
+  ...f,
+  ops: OPERATORS
+    .filter(op => op.faction === f.name)
+    .map(op => {
+      const state = cardState(op);
+      return {
+        padded: String(op.id).padStart(2, '0'),
+        name: op.name,
+        state,
+        status: STATUS_LABELS[state],
+        url: state === 'unlocked' || state === 'scheduled' ? `/operators/${op.slug}` : null,
+      };
+    }),
+}));
+---
+
+<Base title="Factions — Silver Night Operator" description="8 Factions. One Megacity. Field intelligence on every active network.">
+
+  <!-- ── Page header ───────────────────────────────────── -->
+  <div class="fx-header">
+    <div class="fx-header-inner">
+      <h1 class="fx-title">Factions</h1>
+      <span class="fx-count">{FACTIONS.length}</span>
+      <span class="fx-meta" aria-hidden="true">FIELD INTELLIGENCE · 1 MEGACITY</span>
+    </div>
+  </div>
+
+  <!-- ── Faction sections ──────────────────────────────── -->
+  <main class="fx-main">
+    {sections.map(f => (
+      <section class="fx-section" style={`--accent: ${f.color}`} aria-label={f.name}>
+        <header class="fx-hdr">
+          <span class="fx-dot" aria-hidden="true"></span>
+          <h2 class="fx-name">{f.name}</h2>
+          <span class="fx-ops-count">{f.ops.length} {f.ops.length === 1 ? 'OPERATOR' : 'OPERATORS'}</span>
+          <a class="fx-grid-link" href={`/operators?faction=${encodeURIComponent(f.name)}`}>→ View in grid</a>
+        </header>
+        <p class="fx-desc">{f.desc}</p>
+        <ul class="fx-roster">
+          {f.ops.map(o => (
+            <li class="fx-op">
+              {o.url ? (
+                <a href={o.url} class="fx-row">
+                  <span class="fx-op-id">{o.padded}</span>
+                  <span class="fx-op-name">{o.name}</span>
+                  <span class:list={['fx-op-status', `fx-op-status--${o.state}`]}>{o.status}</span>
+                </a>
+              ) : (
+                <span class="fx-row fx-row--static">
+                  <span class="fx-op-id">{o.padded}</span>
+                  {o.state === 'locked' ? (
+                    <span class="fx-op-name fx-op-name--redacted" aria-label="Redacted">████████████</span>
+                  ) : (
+                    <span class="fx-op-name">{o.name}</span>
+                  )}
+                  <span class:list={['fx-op-status', `fx-op-status--${o.state}`]}>{o.status}</span>
+                </span>
+              )}
+            </li>
+          ))}
+        </ul>
+      </section>
+    ))}
+  </main>
+
+</Base>
+
+<style>
+/* ─── Page header (mirrors /operators) ──────────────────── */
+.fx-header {
+  padding: 2rem var(--page-pad) 0;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.fx-header-inner {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  border-bottom: 1px solid var(--cyan-12);
+  padding-bottom: 1.25rem;
+}
+
+.fx-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  letter-spacing: 0.04em;
+  color: var(--white);
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+.fx-count {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.18em;
+  color: var(--cyan);
+  background: var(--cyan-8);
+  border: 1px solid var(--cyan-20);
+  padding: 0.2rem 0.55rem;
+}
+
+.fx-meta {
+  margin-left: auto;
+  font-family: var(--font-mono);
+  font-size: var(--text-micro);
+  letter-spacing: 0.2em;
+  color: var(--dimmer);
+  white-space: nowrap;
+}
+
+@media (max-width: 640px) {
+  .fx-meta { display: none; }
+}
+
+/* ─── Sections ───────────────────────────────────────────── */
+.fx-main {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: var(--space-6) var(--page-pad) var(--space-10);
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-5);
+}
+
+@media (max-width: 900px) {
+  .fx-main { grid-template-columns: 1fr; }
+}
+
+.fx-section {
+  background: var(--bg-card);
+  border: 1px solid var(--white-5);
+  border-top: 3px solid color-mix(in srgb, var(--accent) 60%, transparent);
+  padding: var(--space-5);
+  transition: border-color var(--t-base);
+}
+
+.fx-section:hover {
+  border-top-color: var(--accent);
+}
+
+.fx-hdr {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-3);
+}
+
+.fx-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 6px var(--accent);
+  flex-shrink: 0;
+}
+
+.fx-name {
+  font-family: var(--font-mono);
+  font-size: var(--text-body-sm);
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  line-height: 1.2;
+}
+
+.fx-ops-count {
+  font-family: var(--font-mono);
+  font-size: var(--text-micro);
+  letter-spacing: 0.16em;
+  color: var(--dimmer);
+  white-space: nowrap;
+}
+
+.fx-grid-link {
+  margin-left: auto;
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  text-decoration: none;
+  opacity: 0.6;
+  white-space: nowrap;
+  transition: opacity var(--t-fast);
+}
+.fx-grid-link:hover { opacity: 1; }
+
+.fx-desc {
+  font-family: var(--font-inter, system-ui, sans-serif);
+  font-size: var(--text-body-sm);
+  color: var(--dim);
+  line-height: 1.6;
+  margin-bottom: var(--space-4);
+  max-width: 58ch;
+}
+
+/* ─── Roster ─────────────────────────────────────────────── */
+.fx-roster {
+  list-style: none;
+  border-top: 1px solid var(--white-5);
+}
+
+.fx-row {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-3);
+  padding: var(--space-2) var(--space-1);
+  border-bottom: 1px solid var(--white-3);
+  font-family: var(--font-mono);
+  font-size: var(--text-ui);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--body);
+  transition: background var(--t-fast), color var(--t-fast);
+}
+
+a.fx-row:hover {
+  background: color-mix(in srgb, var(--accent) 6%, transparent);
+  color: var(--white);
+}
+a.fx-row:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: -2px;
+}
+
+.fx-op-id {
+  color: var(--accent);
+  opacity: 0.8;
+  flex-shrink: 0;
+}
+
+.fx-op-name {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.fx-op-name--redacted {
+  color: var(--dimmer);
+  letter-spacing: -0.04em;
+  opacity: 0.5;
+}
+
+.fx-op-status {
+  font-size: var(--text-micro);
+  letter-spacing: 0.16em;
+  flex-shrink: 0;
+}
+
+.fx-op-status--unlocked,
+.fx-op-status--released  { color: var(--status-active); }
+.fx-op-status--scheduled { color: var(--cyan); }
+.fx-op-status--locked    { color: var(--gold); opacity: 0.7; }
+</style>

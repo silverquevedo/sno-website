@@ -1,7 +1,12 @@
 ---
 import Base from '../../layouts/Base.astro';
 import OperatorCard from '../../components/OperatorCard.astro';
-import { OPERATORS, FACTION_COLORS, FACTION_ORDER } from '../../data/operators';
+import { OPERATORS, FACTION_COLORS, FACTION_ORDER, nextTransmission } from '../../data/operators';
+
+// Locked card teaser — only when the next transmission is still locked
+// (scheduled ops already show their own countdown overlay)
+const nextOp = nextTransmission();
+const nextLockedId = nextOp && !nextOp.released ? nextOp.id : null;
 ---
 
 <Base title="Operators — Silver Night Operator" description="28 Operators. 8 Factions. One Megacity.">
@@ -36,7 +41,7 @@ import { OPERATORS, FACTION_COLORS, FACTION_ORDER } from '../../data/operators';
   <main class="operator-main">
     <div class="operator-grid" id="operator-grid">
       {OPERATORS.map((op, i) => (
-        <OperatorCard op={op} index={i} />
+        <OperatorCard op={op} index={i} isNext={op.id === nextLockedId} />
       ))}
     </div>
   </main>

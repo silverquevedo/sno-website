@@ -5,9 +5,17 @@ import { FACTION_COLORS, artUrl, loreUrl, cardState } from '../data/operators';
 export interface Props {
   op: Operator;
   index?: number;
+  /** true on the next operator to unlock — shows the INCOMING SIGNAL teaser on locked cards */
+  isNext?: boolean;
 }
 
-const { op, index = 0 } = Astro.props;
+const { op, index = 0, isNext = false } = Astro.props;
+
+const nextDate = op.unlocksAt
+  ? new Date(op.unlocksAt)
+      .toLocaleDateString('en-US', { month: 'short', day: 'numeric' })
+      .toUpperCase()
+  : null;
 
 const factionColor = FACTION_COLORS[op.faction] ?? '#9e9c94'; /* --dim token value */
 const art          = artUrl(op);
@@ -65,6 +73,9 @@ const ariaLabel =
           <path d="M5 7V5a3 3 0 016 0v2"/>
         </svg>
         <span class="lock-label">Classified</span>
+        {isNext && (
+          <span class="lock-next">Incoming Signal{nextDate ? ` · ${nextDate}` : ''}</span>
+        )}
       </div>
     </div>
   )}
@@ -307,6 +318,15 @@ const ariaLabel =
   color: rgba(255,255,255,0.65);
 }
 
+.lock-next {
+  font-family: var(--font-mono);
+  font-size: var(--text-micro);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--status-active) 70%, transparent);
+  text-align: center;
+}
+
 /* Dim the name/faction on locked cards */
 .card.locked .card-name { opacity: 0.25; }
 .card.locked .card-faction-label { opacity: 0.2; }
@@ -379,6 +399,8 @@ const ariaLabel =
 </style>
 
 <script>
+import { formatCountdown } from '../scripts/countdown';
+
 // ── Skeleton shimmer removal ─────────────────────────────
 document.querySelectorAll<HTMLElement>('.card').forEach(card => {
   const img = card.querySelector<HTMLImageElement>('.card-art');
@@ -392,18 +414,6 @@ document.querySelectorAll<HTMLElement>('.card').forEach(card => {
 });
 
 // ── Scheduled unlock countdown ───────────────────────────
-function pad(n: number) { return String(Math.floor(n)).padStart(2, '0'); }
-
-function formatCountdown(ms: number): string {
-  if (ms <= 0) return '00d 00h 00m 00s';
-  const s   = ms / 1000;
-  const d   = Math.floor(s / 86400);
-  const h   = Math.floor((s % 86400) / 3600);
-  const m   = Math.floor((s % 3600) / 60);
-  const sec = Math.floor(s % 60);
-  return `${pad(d)}d ${pad(h)}h ${pad(m)}m ${pad(sec)}s`;
-}
-
 function unlockCard(card: HTMLElement) {
   card.classList.add('unlocking');
 

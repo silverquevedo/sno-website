@@ -86,6 +86,18 @@ export function cardState(op: Operator): CardState {
   return op.unlocksAt ? 'scheduled' : 'unlocked';
 }
 
+/**
+ * The operator whose unlock is coming next: the soonest future unlocksAt wins,
+ * otherwise the lowest-id locked operator. Null once everything is unlocked.
+ */
+export function nextTransmission(now: Date = new Date()): Operator | null {
+  const scheduled = OPERATORS
+    .filter(op => op.unlocksAt && new Date(op.unlocksAt) > now)
+    .sort((a, b) => new Date(a.unlocksAt!).getTime() - new Date(b.unlocksAt!).getTime())[0];
+  if (scheduled) return scheduled;
+  return OPERATORS.filter(op => !op.released).sort((a, b) => a.id - b.id)[0] ?? null;
+}
+
 /** Returns the public-facing art URL for an operator */
 export function artUrl(op: Operator): string {
   return `/albums/${op.folder}/${op.art}`;

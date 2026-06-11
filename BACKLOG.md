@@ -14,6 +14,12 @@ _Last updated: 2026-06-11_
 - Página 404 custom (Signal Lost)
 - Footer global estilo HUD
 - Faction cards del Home enlazan al grid filtrado (`/operators?faction=...`)
+- Página `/factions` con lore + roster por facción
+- Share cards: `og-default.png` generado + `og:image` por operador (album art)
+- Sitemap generado en build desde `operators.ts` (`src/pages/sitemap.xml.ts`)
+- JSON-LD MusicAlbum en páginas de dossier
+- Módulo "Next Transmission" en el Home (countdown / signal detected)
+- Teaser "Incoming Signal" en la card locked del próximo operador
 
 ---
 
@@ -63,7 +69,11 @@ El hero usa solo gradiente CSS. Agregar imagen de ciudad cyberpunk + overlay.
 .hero { background-image: url('/images/hero-city.jpg'); }
 ```
 
-### 6. Dominio personalizado
+### 6. og-default.png diseñado
+El actual es generado con `scripts/generate-og-default.py` (Pillow, fuente mono de sistema
++ art de Chrome Hazard). Funciona, pero un asset diseñado con Bebas Neue quedaría mejor.
+
+### 7. Dominio personalizado
 Agregar dominio custom en Vercel dashboard si existe.
 
 ---
@@ -76,9 +86,6 @@ Elimina el edit manual de operators.ts. El video pasa a público en YouTube → 
 **Stack:** Neon (Postgres serverless) + Astro SSR (`output: 'server'` + `@astrojs/vercel`) + Vercel Cron que consulta YouTube Data API cada 5 min.
 
 Ver plan detallado en `../.claude/plans/listo-entonces-hagamos-esto-imperative-book.md` (Workstream C2–5).
-
-### 8. Página de Facciones (`/factions`)
-Descripción + color + lista de operadores por facción.
 
 ### 9. Búsqueda de operadores
 Filtro client-side por nombre/facción sobre el grid.

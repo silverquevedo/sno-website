@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import { SITE_URL } from '../data/site';
 
 export interface Props {
   title?: string;
@@ -18,7 +19,8 @@ const {
 
 const year = new Date().getFullYear();
 
-const canonicalURL = new URL(Astro.url.pathname, 'https://silvernightoperator.com');
+const canonicalURL = new URL(Astro.url.pathname, SITE_URL);
+const ogImageURL = new URL(ogImage, SITE_URL);
 const ogTitle = title.includes('Silver Night Operator') ? title : `${title} · Silver Night Operator`;
 ---
 <!DOCTYPE html>
@@ -38,14 +40,14 @@ const ogTitle = title.includes('Silver Night Operator') ? title : `${title} · S
   <meta property="og:url" content={canonicalURL} />
   <meta property="og:title" content={ogTitle} />
   <meta property="og:description" content={description} />
-  <meta property="og:image" content={ogImage} />
+  <meta property="og:image" content={ogImageURL} />
   <meta property="og:site_name" content="Silver Night Operator" />
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content={ogTitle} />
   <meta name="twitter:description" content={description} />
-  <meta name="twitter:image" content={ogImage} />
+  <meta name="twitter:image" content={ogImageURL} />
 
   <!-- Favicon -->
   <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
@@ -61,6 +63,8 @@ const ogTitle = title.includes('Silver Night Operator') ? title : `${title} · S
     rel="stylesheet"
   />
 
+  <slot name="head" />
+
 </head>
 <body>
   <a href="#main-content" class="skip-link">Skip to content</a>
@@ -75,6 +79,7 @@ const ogTitle = title.includes('Silver Night Operator') ? title : `${title} · S
       <div class="nav-links">
         <a class="nav-link" href="/" data-page="home">Home</a>
         <a class="nav-link" href="/operators" data-page="operators">Operators</a>
+        <a class="nav-link" href="/factions" data-page="factions">Factions</a>
       </div>
       <div class="nav-external">
         <a href="https://silvernightoperator.bandcamp.com" target="_blank" rel="noopener" class="nav-ext">Bandcamp</a>

@@ -69,6 +69,16 @@
 - Mono HUD strip: brand signature, "The signal continues.", external links
 - Hidden on dossier pages (full-viewport iframe) via `<Base footer={false}>`
 
+### Next Transmission strip (home)
+- Single mono HUD line between hero and Operational Context, links to /operators
+- Scheduled (`unlocksAt` set): operator number + name + live countdown
+- No date yet: operator number + green pulse dot + "Signal Detected · Decrypting"
+
+### Factions page (/factions)
+- Two-column grid of faction panels: accent top border, dot + name + count + grid link
+- Roster as mono archive rows: `01 · NAME · ACTIVE` (locked ops redacted as `████ · CLASSIFIED`)
+- Status colors: active green, scheduled cyan, classified gold
+
 ## Motion principles
 
 - Card entrance: translateY + opacity, staggered by index
