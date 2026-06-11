@@ -1,5 +1,5 @@
 # SNO Website — Backlog
-_Last updated: 2026-06-01_
+_Last updated: 2026-06-11_
 
 ## ✅ Completado
 
@@ -9,7 +9,17 @@ _Last updated: 2026-06-01_
 - Ops 27 (Velvet Marquee) y 28 (Static Bloom) tienen dossier listo, carta LOCKED
 - Website desplegado en Vercel
 - DOSSIER-SPEC.md: spec canónico para crear dossiers
-- Sistema de estados: released / scheduled / unlocked / locked
+- Sistema de estados: released / scheduled / unlocked / locked (`cardState()` en `operators.ts`)
+- Featured operators dinámicos en Home (últimos 3 con dossier)
+- Página 404 custom (Signal Lost)
+- Footer global estilo HUD
+- Faction cards del Home enlazan al grid filtrado (`/operators?faction=...`)
+- Página `/factions` con lore + roster por facción
+- Share cards: `og-default.png` generado + `og:image` por operador (album art)
+- Sitemap generado en build desde `operators.ts` (`src/pages/sitemap.xml.ts`)
+- JSON-LD MusicAlbum en páginas de dossier
+- Módulo "Next Transmission" en el Home (countdown / signal detected)
+- Teaser "Incoming Signal" en la card locked del próximo operador
 
 ---
 
@@ -23,17 +33,7 @@ Actualmente se requiere `vercel --prod` manual en cada push.
 
 ---
 
-### 2. Featured operators dinámicos en Home
-Los 3 featured están hardcodeados en `src/pages/index.astro` (índices 26, 27, 24).
-
-**Fix rápido (1 línea):**
-```ts
-const featured = OPERATORS.filter(op => op.slug && op.released).slice(-3).reverse();
-```
-
----
-
-### 3. Desbloquear ops 27 y 28 cuando estén listas
+### 2. Desbloquear ops 27 y 28 cuando estén listas
 Cuando el video de YouTube esté público:
 1. `operators.ts` → cambiar `released: false` a `released: true`
 2. `git push` → auto-deploy
@@ -44,7 +44,7 @@ Op 27 (Velvet Marquee) y op 28 (Static Bloom) ya tienen dossier HTML listo.
 
 ## 🔴 Alta prioridad (continuación)
 
-### 4. Auditar y expandir dossiers 03–26 desde el YouTube description
+### 3. Auditar y expandir dossiers 03–26 desde el YouTube description
 Los agentes crearon los 24 dossiers sin necesariamente leer el `description.txt`. Pueden tener narrativas desconectadas de lo publicado.
 
 **Regla (documentada en DOSSIER-SPEC + skill v5.1):**
@@ -63,21 +63,17 @@ El YouTube description.txt es la semilla. El dossier es el árbol.
 
 ## 🟡 Media prioridad
 
-### 4. Página 404 custom
-Crear `src/pages/404.astro` con estilo SNO.
-```
-SIGNAL LOST
-OPERATOR NOT FOUND · CODE 404
-← Return to Grid
-```
-
 ### 5. Hero con imagen de fondo
 El hero usa solo gradiente CSS. Agregar imagen de ciudad cyberpunk + overlay.
 ```css
 .hero { background-image: url('/images/hero-city.jpg'); }
 ```
 
-### 6. Dominio personalizado
+### 6. og-default.png diseñado
+El actual es generado con `scripts/generate-og-default.py` (Pillow, fuente mono de sistema
++ art de Chrome Hazard). Funciona, pero un asset diseñado con Bebas Neue quedaría mejor.
+
+### 7. Dominio personalizado
 Agregar dominio custom en Vercel dashboard si existe.
 
 ---
@@ -91,9 +87,6 @@ Elimina el edit manual de operators.ts. El video pasa a público en YouTube → 
 
 Ver plan detallado en `../.claude/plans/listo-entonces-hagamos-esto-imperative-book.md` (Workstream C2–5).
 
-### 8. Página de Facciones (`/factions`)
-Descripción + color + lista de operadores por facción.
-
 ### 9. Búsqueda de operadores
 Filtro client-side por nombre/facción sobre el grid.
 
@@ -105,5 +98,4 @@ Reemplazar el `<iframe>` actual por componentes Astro nativos. Mejor integració
 ## 📌 Próximo chat
 
 1. **Conectar GitHub auto-deploy** — 5 min en Vercel dashboard
-2. **Featured dinámico** — 1 línea de código
-3. **404 page** — rápido, impacto visual inmediato
+2. **Auditar dossiers 03–26** contra sus description.txt

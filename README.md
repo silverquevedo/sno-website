@@ -1,43 +1,31 @@
-# Astro Starter Kit: Minimal
+# SNO Website
+
+Public portal for the **Silver Night Operator** universe — a weekly cyberpunk
+synthwave channel. A grid of 28 operator cards unlocks as their YouTube mixes
+go live; each unlocked card opens a classified-style dossier with lore and music.
+
+Live at [silvernightoperator.com](https://silvernightoperator.com). Built with
+Astro (static output), deployed on Vercel.
+
+## Commands
 
 ```sh
-npm create astro@latest -- --template minimal
+npm install      # install dependencies
+npm run dev      # dev server at localhost:4321
+npm run build    # production build → dist/ (run before committing)
+npm run preview  # preview the production build
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## Where things live
 
-## 🚀 Project Structure
+| Path | Role |
+|---|---|
+| `src/data/operators.ts` | Single source of truth: all 28 operators + unlock state |
+| `src/components/OperatorCard.astro` | Card UI (locked / released / scheduled / unlocked) |
+| `src/pages/` | Home, operator grid, dossier wrapper, factions, 404 |
+| `public/albums/` | Album art + dossier HTML per operator (real directory, committed) |
+| `src/styles/global.css` | Design tokens — source of truth for the design system |
 
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
-
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
-
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
-
-Any static assets, like images, can be placed in the `public/` directory.
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+Full project context, card-state model, and the dossier workflow are documented
+in [`CLAUDE.md`](./CLAUDE.md). Product vision in [`PRODUCT.md`](./PRODUCT.md),
+design system in [`DESIGN.md`](./DESIGN.md), pending work in [`BACKLOG.md`](./BACKLOG.md).

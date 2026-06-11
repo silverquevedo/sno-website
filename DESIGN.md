@@ -4,16 +4,21 @@
 
 ```
 --bg:        #09090e   /* near-black, blue-tinted */
---bg-card:   #0d0d14   /* card background */
+--bg-lift:   #0d0d17   /* lifted surface (player, panels) */
+--bg-card:   #111119   /* card background */
+--surface:   #16161f   /* hover surface */
 --white:     #f0efe9   /* warm white */
 --body:      #d2d0c5   /* body text */
---dim:       #7e7c74   /* secondary text */
---dimmer:    #5a5855   /* tertiary text */
+--dim:       #9e9c94   /* secondary text (WCAG AA on --bg) */
+--dimmer:    #7a7870   /* tertiary text (WCAG AA on --bg) */
 --cyan:      #00c4ff   /* primary accent */
 --cyan-dim:  #004d63
 --gold:      #c9a84c   /* Unaligned faction / dossier accents */
---nav-h:     52px      /* fixed nav height */
+--nav-h:     56px      /* fixed nav height */
 ```
+
+> `src/styles/global.css` is the source of truth — it also defines the full
+> type/spacing/z-index/transition scales and opacity variants.
 
 ## Faction color map
 
@@ -59,6 +64,20 @@
 ### Navigation
 - Fixed top, blur backdrop
 - Logo + nav links + external links (Bandcamp, YouTube, Ko-fi)
+
+### Footer
+- Mono HUD strip: brand signature, "The signal continues.", external links
+- Hidden on dossier pages (full-viewport iframe) via `<Base footer={false}>`
+
+### Next Transmission strip (home)
+- Single mono HUD line between hero and Operational Context, links to /operators
+- Scheduled (`unlocksAt` set): operator number + name + live countdown
+- No date yet: operator number + green pulse dot + "Signal Detected · Decrypting"
+
+### Factions page (/factions)
+- Two-column grid of faction panels: accent top border, dot + name + count + grid link
+- Roster as mono archive rows: `01 · NAME · ACTIVE` (locked ops redacted as `████ · CLASSIFIED`)
+- Status colors: active green, scheduled cyan, classified gold
 
 ## Motion principles
 

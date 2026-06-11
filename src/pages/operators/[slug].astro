@@ -1,6 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
-import { OPERATORS, loreHtmlPath, FACTION_COLORS } from '../../data/operators';
+import { OPERATORS, loreHtmlPath, FACTION_COLORS, artUrl } from '../../data/operators';
+import { SITE_URL } from '../../data/site';
 
 export function getStaticPaths() {
   return OPERATORS
@@ -20,9 +21,28 @@ const next = idx < dossierOps.length - 1 ? dossierOps[idx + 1] : null;
 const paddedId = String(op.id).padStart(2, '0');
 const factionColor = FACTION_COLORS[op.faction] ?? 'var(--dim)';
 const youtubeId = op.youtube ?? null;
+
+const artAbsolute = new URL(artUrl(op), SITE_URL).href;
+const albumSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'MusicAlbum',
+  name: op.name,
+  byArtist: { '@type': 'MusicGroup', name: 'Silver Night Operator' },
+  image: artAbsolute,
+  url: `${SITE_URL}/operators/${op.slug}`,
+  genre: 'Cyberpunk Synthwave',
+  ...(youtubeId ? { sameAs: [`https://www.youtube.com/watch?v=${youtubeId}`] } : {}),
+};
 ---
 
-<Base title={`${op.name} — Silver Night Operator`} description={`Operator ${paddedId} · ${op.faction}`}>
+<Base
+  title={`${op.name} — Silver Night Operator`}
+  description={`Operator ${paddedId} · ${op.faction}`}
+  ogImage={artUrl(op)}
+  footer={false}
+>
+
+  <script type="application/ld+json" slot="head" is:inline set:html={JSON.stringify(albumSchema)} />
 
   <!-- back bar -->
   <div class="dossier-back">

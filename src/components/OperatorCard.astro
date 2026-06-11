@@ -1,13 +1,21 @@
 ---
 import type { Operator } from '../data/operators';
-import { FACTION_COLORS, artUrl, loreUrl } from '../data/operators';
+import { FACTION_COLORS, artUrl, loreUrl, cardState } from '../data/operators';
 
 export interface Props {
   op: Operator;
   index?: number;
+  /** true on the next operator to unlock — shows the INCOMING SIGNAL teaser on locked cards */
+  isNext?: boolean;
 }
 
-const { op, index = 0 } = Astro.props;
+const { op, index = 0, isNext = false } = Astro.props;
+
+const nextDate = op.unlocksAt
+  ? new Date(op.unlocksAt)
+      .toLocaleDateString('en-US', { month: 'short', day: 'numeric' })
+      .toUpperCase()
+  : null;
 
 const factionColor = FACTION_COLORS[op.faction] ?? '#9e9c94'; /* --dim token value */
 const art          = artUrl(op);
@@ -16,37 +24,48 @@ const delay        = (index % 12) * 35;
 const num          = String(op.id).padStart(2, '0');
 const altText      = `Operator ${num} — ${op.name}, ${op.faction}`;
 
-// Card states
-// 1. LOCKED    — released=false                              → CLASSIFIED badge
-// 2. RELEASED  — released=true, no dossier yet              → full art, no link
-// 3. SCHEDULED — released=true, slug+lore+unlocksAt         → countdown (client-side unlock)
-// 4. UNLOCKED  — released=true, slug+lore, no unlocksAt     → full card with dossier link
-const isScheduled = !!(op.released && op.slug && op.lore && op.unlocksAt);
-const isUnlocked  = !!(op.released && op.slug && op.lore && !op.unlocksAt);
-const isReleased  = !!(op.released && !op.slug && !op.lore);
-const isLocked    = !op.released;
+// Card state — locked / released / scheduled / unlocked (see operators.ts)
+const state  = cardState(op);
+const isLink = state === 'scheduled' || state === 'unlocked';
+const Tag    = isLink ? 'a' : 'div';
+
+const ariaLabel =
+  state === 'released'  ? op.name :
+  state === 'scheduled' ? `${op.name} — unlocks soon` :
+  undefined;
 ---
 
-{isLocked && (
-  <div
-    class="card locked"
-    data-faction={op.faction}
-    style={`animation-delay: ${delay}ms; --fc: ${factionColor}`}
-  >
-    <img class="card-art" src={art} alt={altText} loading="lazy" />
-    <div class="card-overlay"></div>
-    <div class="card-inner-glow"></div>
-    <div class="card-corners">
-      <span class="c-tl"></span><span class="c-tr"></span>
-      <span class="c-bl"></span><span class="c-br"></span>
-    </div>
-    <span class="card-num">{num}</span>
-    <span class="card-num-wm" aria-hidden="true">{num}</span>
-    <span class="card-faction-dot" style={`background: ${factionColor}; color: ${factionColor}`}></span>
-    <div class="card-body">
-      <div class="card-name">{op.name}</div>
-      <span class="card-faction-label" style={`color: ${factionColor}`}>{op.faction}</span>
-    </div>
+<Tag
+  class:list={['card', {
+    locked:    state === 'locked',
+    released:  state === 'released',
+    scheduled: state === 'scheduled',
+  }]}
+  data-faction={op.faction}
+  href={isLink ? (dossierUrl ?? '#') : undefined}
+  data-unlocks-at={state === 'scheduled' ? op.unlocksAt : undefined}
+  style={`animation-delay: ${delay}ms; --fc: ${factionColor}`}
+  aria-label={ariaLabel}
+>
+  <img class="card-art" src={art} alt={altText} loading="lazy" />
+  <div class="card-overlay"></div>
+  <div class="card-inner-glow"></div>
+  <div class="card-corners">
+    <span class="c-tl"></span><span class="c-tr"></span>
+    <span class="c-bl"></span><span class="c-br"></span>
+  </div>
+  <span class="card-num">{num}</span>
+  <span class="card-num-wm" aria-hidden="true">{num}</span>
+  <span class="card-faction-dot" style={`background: ${factionColor}; color: ${factionColor}`}></span>
+  <div class="card-body">
+    <div class="card-name">{op.name}</div>
+    <span class="card-faction-label" style={`color: ${factionColor}`}>{op.faction}</span>
+    {isLink && (
+      <div class="card-cta"><span class="card-cta-btn">View Operator</span></div>
+    )}
+  </div>
+
+  {state === 'locked' && (
     <div class="card-locked-badge">
       <div class="card-locked-inner">
         <svg class="lock-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true">
@@ -54,91 +73,21 @@ const isLocked    = !op.released;
           <path d="M5 7V5a3 3 0 016 0v2"/>
         </svg>
         <span class="lock-label">Classified</span>
+        {isNext && (
+          <span class="lock-next">Incoming Signal{nextDate ? ` · ${nextDate}` : ''}</span>
+        )}
       </div>
     </div>
-  </div>
-)}
+  )}
 
-{isReleased && (
-  <div
-    class="card released"
-    data-faction={op.faction}
-    style={`animation-delay: ${delay}ms; --fc: ${factionColor}`}
-    aria-label={op.name}
-  >
-    <img class="card-art" src={art} alt={altText} loading="lazy" />
-    <div class="card-overlay"></div>
-    <div class="card-inner-glow"></div>
-    <div class="card-corners">
-      <span class="c-tl"></span><span class="c-tr"></span>
-      <span class="c-bl"></span><span class="c-br"></span>
-    </div>
-    <span class="card-num">{num}</span>
-    <span class="card-num-wm" aria-hidden="true">{num}</span>
-    <span class="card-faction-dot" style={`background: ${factionColor}; color: ${factionColor}`}></span>
-    <div class="card-body">
-      <div class="card-name">{op.name}</div>
-      <span class="card-faction-label" style={`color: ${factionColor}`}>{op.faction}</span>
-    </div>
-  </div>
-)}
-
-{isScheduled && (
-  <a
-    class="card scheduled"
-    data-faction={op.faction}
-    href={dossierUrl ?? '#'}
-    data-unlocks-at={op.unlocksAt}
-    style={`animation-delay: ${delay}ms; --fc: ${factionColor}`}
-    aria-label={`${op.name} — unlocks soon`}
-  >
-    <img class="card-art" src={art} alt={altText} loading="lazy" />
-    <div class="card-overlay"></div>
-    <div class="card-inner-glow"></div>
-    <div class="card-corners">
-      <span class="c-tl"></span><span class="c-tr"></span>
-      <span class="c-bl"></span><span class="c-br"></span>
-    </div>
-    <span class="card-num">{num}</span>
-    <span class="card-num-wm" aria-hidden="true">{num}</span>
-    <span class="card-faction-dot" style={`background: ${factionColor}; color: ${factionColor}`}></span>
-    <div class="card-body">
-      <div class="card-name">{op.name}</div>
-      <span class="card-faction-label" style={`color: ${factionColor}`}>{op.faction}</span>
-      <div class="card-cta"><span class="card-cta-btn">View Operator</span></div>
-    </div>
-    <!-- Countdown overlay — hidden once unlocked -->
+  {/* Countdown overlay — hidden once unlocked (JS removes .scheduled) */}
+  {state === 'scheduled' && (
     <div class="card-countdown">
       <span class="countdown-label">Unlocks In</span>
       <span class="countdown-timer" data-target={op.unlocksAt}>--d --h --m --s</span>
     </div>
-  </a>
-)}
-
-{isUnlocked && (
-  <a
-    class="card"
-    data-faction={op.faction}
-    href={dossierUrl ?? '#'}
-    style={`animation-delay: ${delay}ms; --fc: ${factionColor}`}
-  >
-    <img class="card-art" src={art} alt={altText} loading="lazy" />
-    <div class="card-overlay"></div>
-    <div class="card-inner-glow"></div>
-    <div class="card-corners">
-      <span class="c-tl"></span><span class="c-tr"></span>
-      <span class="c-bl"></span><span class="c-br"></span>
-    </div>
-    <span class="card-num">{num}</span>
-    <span class="card-num-wm" aria-hidden="true">{num}</span>
-    <span class="card-faction-dot" style={`background: ${factionColor}; color: ${factionColor}`}></span>
-    <div class="card-body">
-      <div class="card-name">{op.name}</div>
-      <span class="card-faction-label" style={`color: ${factionColor}`}>{op.faction}</span>
-      <div class="card-cta"><span class="card-cta-btn">View Operator</span></div>
-    </div>
-  </a>
-)}
+  )}
+</Tag>
 
 <style>
 /* ─── Skeleton shimmer ───────────────────────────────────── */
@@ -369,6 +318,15 @@ const isLocked    = !op.released;
   color: rgba(255,255,255,0.65);
 }
 
+.lock-next {
+  font-family: var(--font-mono);
+  font-size: var(--text-micro);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--status-active) 70%, transparent);
+  text-align: center;
+}
+
 /* Dim the name/faction on locked cards */
 .card.locked .card-name { opacity: 0.25; }
 .card.locked .card-faction-label { opacity: 0.2; }
@@ -441,6 +399,8 @@ const isLocked    = !op.released;
 </style>
 
 <script>
+import { formatCountdown } from '../scripts/countdown';
+
 // ── Skeleton shimmer removal ─────────────────────────────
 document.querySelectorAll<HTMLElement>('.card').forEach(card => {
   const img = card.querySelector<HTMLImageElement>('.card-art');
@@ -454,18 +414,6 @@ document.querySelectorAll<HTMLElement>('.card').forEach(card => {
 });
 
 // ── Scheduled unlock countdown ───────────────────────────
-function pad(n: number) { return String(Math.floor(n)).padStart(2, '0'); }
-
-function formatCountdown(ms: number): string {
-  if (ms <= 0) return '00d 00h 00m 00s';
-  const s   = ms / 1000;
-  const d   = Math.floor(s / 86400);
-  const h   = Math.floor((s % 86400) / 3600);
-  const m   = Math.floor((s % 3600) / 60);
-  const sec = Math.floor(s % 60);
-  return `${pad(d)}d ${pad(h)}h ${pad(m)}m ${pad(sec)}s`;
-}
-
 function unlockCard(card: HTMLElement) {
   card.classList.add('unlocking');
 

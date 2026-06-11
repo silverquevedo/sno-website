@@ -1,6 +1,16 @@
 ---
 import Base from '../layouts/Base.astro';
-import { OPERATORS, FACTION_COLORS, FACTION_ORDER } from '../data/operators';
+import { OPERATORS, FACTION_COLORS, artUrl, nextTransmission } from '../data/operators';
+import { FACTIONS } from '../data/factions';
+
+const OP_COUNT = OPERATORS.length;
+
+const nextOp = nextTransmission();
+const NEXT = nextOp ? {
+  padded: String(nextOp.id).padStart(2, '0'),
+  name: nextOp.name,
+  unlocksAt: nextOp.unlocksAt,
+} : null;
 
 // 3 most recently released operators (highest IDs with dossier + slug)
 const INTEL_OPS = OPERATORS
@@ -11,27 +21,12 @@ const INTEL_OPS = OPERATORS
     padded: String(op.id).padStart(2, '0'),
     name: op.name,
     slug: op.slug!,
-    folder: op.folder,
+    art: artUrl(op),
     faction: op.faction,
     factionColor: FACTION_COLORS[op.faction] ?? '#9e9c94',
     status: op.faction === 'The Ghost Layer' ? 'GHOST' : 'ACTIVE',
   }));
 
-const FACTION_DESCS: Record<string, string> = {
-  'The Architecture':   'They build the rules. They control the flows. Invisible in power.',
-  'The Ritual Network': 'Operate where data becomes ritual. The bridge between the digital and the ancient.',
-  'South Bloc':         'Cultural resistance from the south. Stronger than any official map shows.',
-  'Iron North':         "Absolute discipline. Calculated cold. They don't negotiate.",
-  'The Ghost Layer':    "No official record. No fixed territory. They exist because no one can prove they don't.",
-  'Forbidden Zone':     'Banned on every official map. Active on every map that matters.',
-  'The Velocity':       "The city in motion. Chaos with direction. You can't keep up.",
-  'Unaligned':          'No faction. No network. Operate alone. The most dangerous or the most free. Depends on who you ask.',
-};
-const FACTIONS = FACTION_ORDER.map(name => ({
-  name,
-  desc: FACTION_DESCS[name] ?? '',
-  color: FACTION_COLORS[name] ?? 'var(--dim)',
-}));
 ---
 
 <Base
@@ -85,13 +80,36 @@ const FACTIONS = FACTION_ORDER.map(name => ({
   </div>
 </section>
 
+<!-- ═══ § 1.5 — NEXT TRANSMISSION ════════════════════════════ -->
+{NEXT && (
+  <a href="/operators" class="next-tx" aria-label={`Next transmission — Operator ${NEXT.padded}`}>
+    <span class="next-tx-arrow" aria-hidden="true">▸</span>
+    <span class="next-tx-label">Next Transmission</span>
+    <span class="next-tx-sep" aria-hidden="true">·</span>
+    <span class="next-tx-op">Operator {NEXT.padded}</span>
+    <span class="next-tx-sep" aria-hidden="true">·</span>
+    {NEXT.unlocksAt ? (
+      <>
+        <span class="next-tx-name">{NEXT.name}</span>
+        <span class="next-tx-sep" aria-hidden="true">·</span>
+        <span class="next-tx-timer" data-unlocks-at={NEXT.unlocksAt}>Unlocks in --d --h --m --s</span>
+      </>
+    ) : (
+      <>
+        <span class="next-tx-dot" aria-hidden="true"></span>
+        <span class="next-tx-status">Signal Detected · Decrypting</span>
+      </>
+    )}
+  </a>
+)}
+
 <!-- ═══ § 2 — OPERATIONAL CONTEXT ════════════════════════════ -->
 <section class="context" aria-labelledby="context-hdr">
   <div class="section-inner">
     <div class="context-label" id="context-hdr" aria-hidden="true">OPERATIONAL CONTEXT</div>
     <div class="context-layout">
       <div class="context-stat" aria-hidden="true">
-        <div class="context-count">28</div>
+        <div class="context-count">{OP_COUNT}</div>
         <div class="context-count-sub">Transmissions<br/>completed.</div>
       </div>
       <div class="context-body">
@@ -116,11 +134,18 @@ const FACTIONS = FACTION_ORDER.map(name => ({
 
     <div class="factions-grid" role="list">
       {FACTIONS.map(f => (
-        <div class="faction-card" style={`--accent: ${f.color}`} role="listitem">
+        <a
+          class="faction-card"
+          style={`--accent: ${f.color}`}
+          role="listitem"
+          href={`/operators?faction=${encodeURIComponent(f.name)}`}
+          aria-label={`${f.name} — view operators`}
+        >
           <span class="faction-dot" aria-hidden="true"></span>
           <div class="faction-name">{f.name}</div>
           <p class="faction-desc">{f.desc}</p>
-        </div>
+          <span class="faction-cta" aria-hidden="true">→ View operators</span>
+        </a>
       ))}
     </div>
   </div>
@@ -142,7 +167,7 @@ const FACTIONS = FACTION_ORDER.map(name => ({
 
           <div class="intel-art">
             <img
-              src={`/albums/${op.folder}/album.png`}
+              src={op.art}
               alt={`${op.name} operator album art`}
               loading="lazy"
               width="400"
@@ -229,6 +254,24 @@ const FACTIONS = FACTION_ORDER.map(name => ({
 </Base>
 
 <script>
+import { formatCountdown } from '../scripts/countdown';
+
+// ── Next Transmission countdown ──────────────────────────
+(() => {
+  const el = document.querySelector<HTMLElement>('.next-tx-timer');
+  const target = el?.dataset.unlocksAt ? new Date(el.dataset.unlocksAt).getTime() : null;
+  if (!el || !target) return;
+
+  function tick() {
+    const remaining = target! - Date.now();
+    el!.textContent = `Unlocks in ${formatCountdown(remaining)}`;
+    if (remaining <= 0) clearInterval(iv);
+  }
+
+  tick();
+  const iv = setInterval(tick, 1000);
+})();
+
 // ── Context body typewriter ──────────────────────────────
 (() => {
   const body = document.querySelector<HTMLElement>('.context-body');
@@ -579,6 +622,55 @@ const FACTIONS = FACTION_ORDER.map(name => ({
   outline-offset: 3px;
 }
 
+/* ─── §1.5 NEXT TRANSMISSION ────────────────────────────── */
+.next-tx {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: var(--space-3) var(--page-pad);
+  border-top: 1px solid var(--cyan-12);
+  background: var(--bg-lift);
+  color: var(--dim);
+  transition: background var(--t-base);
+}
+.next-tx:hover { background: var(--surface); }
+.next-tx:focus-visible {
+  outline: 2px solid var(--cyan);
+  outline-offset: -2px;
+}
+
+.next-tx-arrow { color: var(--magenta); }
+.next-tx-label { color: var(--cyan); }
+.next-tx-op    { color: var(--white); }
+.next-tx-name  { color: var(--white); }
+.next-tx-sep   { color: var(--dimmer); }
+
+.next-tx-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--status-active);
+  box-shadow: 0 0 5px var(--status-active), 0 0 10px var(--status-active);
+  animation: dot-pulse 2.2s ease-in-out infinite;
+  flex-shrink: 0;
+}
+
+.next-tx-status {
+  color: var(--status-active);
+  opacity: 0.85;
+}
+
+.next-tx-timer {
+  color: var(--cyan);
+  text-shadow: 0 0 10px var(--cyan-40);
+}
+
 /* ─── §2 OPERATIONAL CONTEXT ────────────────────────────── */
 .context {
   padding: 3.5rem 0 4.5rem;
@@ -697,11 +789,17 @@ const FACTIONS = FACTION_ORDER.map(name => ({
 }
 
 .faction-card {
+  display: block;
   background: var(--bg-card);
   padding: var(--space-6) var(--space-5) var(--space-6);
   position: relative;
   transition: background var(--t-base);
-  cursor: default;
+  text-decoration: none;
+}
+
+.faction-card:focus-visible {
+  outline: 2px solid var(--accent, var(--cyan));
+  outline-offset: -2px;
 }
 
 .faction-card::before {
@@ -746,6 +844,25 @@ const FACTIONS = FACTION_ORDER.map(name => ({
   font-weight: 400;
   color: var(--dim);
   line-height: 1.6;
+}
+
+.faction-cta {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent, var(--cyan));
+  margin-top: var(--space-3);
+  opacity: 0;
+  transform: translateY(3px);
+  transition: opacity var(--t-base), transform var(--t-base);
+}
+
+.faction-card:hover .faction-cta,
+.faction-card:focus-visible .faction-cta {
+  opacity: 0.85;
+  transform: translateY(0);
 }
 
 /* ─── §4 LATEST TRANSMISSIONS ───────────────────────────── */

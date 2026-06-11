@@ -1,7 +1,12 @@
 ---
 import Base from '../../layouts/Base.astro';
 import OperatorCard from '../../components/OperatorCard.astro';
-import { OPERATORS, FACTION_COLORS, FACTION_ORDER } from '../../data/operators';
+import { OPERATORS, FACTION_COLORS, FACTION_ORDER, nextTransmission } from '../../data/operators';
+
+// Locked card teaser — only when the next transmission is still locked
+// (scheduled ops already show their own countdown overlay)
+const nextOp = nextTransmission();
+const nextLockedId = nextOp && !nextOp.released ? nextOp.id : null;
 ---
 
 <Base title="Operators — Silver Night Operator" description="28 Operators. 8 Factions. One Megacity.">
@@ -11,6 +16,7 @@ import { OPERATORS, FACTION_COLORS, FACTION_ORDER } from '../../data/operators';
     <div class="ops-header-inner">
       <h1 class="ops-title">Operators</h1>
       <span class="ops-count" id="ops-count">{OPERATORS.length}</span>
+      <span class="ops-meta" aria-hidden="true">FIELD ARCHIVE · {FACTION_ORDER.length} FACTIONS · 1 MEGACITY</span>
     </div>
   </div>
 
@@ -35,7 +41,7 @@ import { OPERATORS, FACTION_COLORS, FACTION_ORDER } from '../../data/operators';
   <main class="operator-main">
     <div class="operator-grid" id="operator-grid">
       {OPERATORS.map((op, i) => (
-        <OperatorCard op={op} index={i} />
+        <OperatorCard op={op} index={i} isNext={op.id === nextLockedId} />
       ))}
     </div>
   </main>
@@ -51,6 +57,13 @@ if (savedY) {
 }
 
 let activeFaction: string | null = null;
+
+function syncUrl(faction: string | null) {
+  const url = faction
+    ? `${location.pathname}?faction=${encodeURIComponent(faction)}`
+    : location.pathname;
+  history.replaceState(null, '', url);
+}
 
 function filterCards(faction: string | null) {
   const cards = document.querySelectorAll<HTMLElement>('#operator-grid .card');
@@ -81,8 +94,21 @@ document.querySelectorAll<HTMLElement>('#chip-bar .chip').forEach(chip => {
     }
     filterCards(activeFaction);
     setActiveChip(activeFaction);
+    syncUrl(activeFaction);
   });
 });
+
+// Deep link: /operators?faction=The%20Architecture pre-applies the filter
+const requested = new URLSearchParams(location.search).get('faction');
+if (requested) {
+  const known = [...document.querySelectorAll<HTMLElement>('#chip-bar .chip')]
+    .some(chip => chip.dataset.faction === requested);
+  if (known) {
+    activeFaction = requested;
+    filterCards(activeFaction);
+    setActiveChip(activeFaction);
+  }
+}
 </script>
 
 <style>
@@ -118,6 +144,19 @@ document.querySelectorAll<HTMLElement>('#chip-bar .chip').forEach(chip => {
   background: rgba(0,196,255,0.08);
   border: 1px solid rgba(0,196,255,0.2);
   padding: 0.2rem 0.55rem;
+}
+
+.ops-meta {
+  margin-left: auto;
+  font-family: var(--font-mono);
+  font-size: var(--text-micro);
+  letter-spacing: 0.2em;
+  color: var(--dimmer);
+  white-space: nowrap;
+}
+
+@media (max-width: 640px) {
+  .ops-meta { display: none; }
 }
 
 /* ─── Chip bar ───────────────────────────────────────── */

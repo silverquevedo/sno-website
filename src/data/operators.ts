@@ -77,6 +77,27 @@ export const OPERATORS: Operator[] = [
   { id: 28, folder: '28 - Static Bloom',         name: 'Static Bloom',         faction: 'The Ghost Layer',    art: 'album.png',                      released: false, lore: 'Lore/28-static-bloom.html',          slug: '28-static-bloom',          unlocksAt: null, youtube: null },
 ];
 
+/** The four visual states an operator card can be in — see Operator.released docs above */
+export type CardState = 'locked' | 'released' | 'scheduled' | 'unlocked';
+
+export function cardState(op: Operator): CardState {
+  if (!op.released) return 'locked';
+  if (!op.slug || !op.lore) return 'released';
+  return op.unlocksAt ? 'scheduled' : 'unlocked';
+}
+
+/**
+ * The operator whose unlock is coming next: the soonest future unlocksAt wins,
+ * otherwise the lowest-id locked operator. Null once everything is unlocked.
+ */
+export function nextTransmission(now: Date = new Date()): Operator | null {
+  const scheduled = OPERATORS
+    .filter(op => op.unlocksAt && new Date(op.unlocksAt) > now)
+    .sort((a, b) => new Date(a.unlocksAt!).getTime() - new Date(b.unlocksAt!).getTime())[0];
+  if (scheduled) return scheduled;
+  return OPERATORS.filter(op => !op.released).sort((a, b) => a.id - b.id)[0] ?? null;
+}
+
 /** Returns the public-facing art URL for an operator */
 export function artUrl(op: Operator): string {
   return `/albums/${op.folder}/${op.art}`;
